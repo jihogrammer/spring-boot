@@ -20,20 +20,23 @@ class KeywordServiceTest {
     @Autowired
     KeywordService keywordService;
 
+    static final String keyword = "123";
+
     @BeforeEach
     void setUp() {
-        keywordRepository.save(new Keyword("foo", 1));
+        keywordRepository.save(new Keyword(keyword, 1));
     }
 
     @AfterEach
     void tearDown() {
-        keywordRepository.deleteById("foo");
+        keywordRepository.findById(keyword).ifPresent(System.out::println);
+        keywordRepository.deleteById(keyword);
     }
 
     @Test
     void testCountOf() {
         // given
-        String keyword = "foo";
+        String keyword = KeywordServiceTest.keyword;
         // when
         int count = keywordService.countOf(keyword);
         // then
