@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-@WebServlet(urlPatterns = "request-string")
+@WebServlet(urlPatterns = "/request-string")
 public class RequestBodyStringServlet extends HttpServlet {
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {

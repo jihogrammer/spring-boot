@@ -8,17 +8,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-@WebServlet(urlPatterns = RequestBodyJSONServlet.URI)
+@WebServlet(urlPatterns = "/request-json")
 @RequiredArgsConstructor
 public class RequestBodyJSONServlet extends HttpServlet {
-    public static final String URI = "/request-json";
-
     private final ObjectMapper objectMapper;
 
     @Override
