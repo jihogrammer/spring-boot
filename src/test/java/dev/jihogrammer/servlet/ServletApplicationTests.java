@@ -1,10 +1,10 @@
-package dev.jihogrammer.springboot;
+package dev.jihogrammer.servlet;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringbootApplicationTests {
+class ServletApplicationTests {
 
 	@Test
 	void contextLoads() {

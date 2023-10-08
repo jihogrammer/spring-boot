@@ -1,13 +1,13 @@
-package dev.jihogrammer.springboot;
+package dev.jihogrammer.servlet;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootApplication {
+public class ServletApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootApplication.class, args);
+		SpringApplication.run(ServletApplication.class, args);
 	}
 
 }
