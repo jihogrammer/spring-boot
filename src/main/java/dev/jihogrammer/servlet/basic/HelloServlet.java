@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
-@WebServlet(name = "helloServlet", urlPatterns = "/hello")
+@WebServlet(urlPatterns = "/hello")
 @Slf4j
 public class HelloServlet extends HttpServlet {
     @Override

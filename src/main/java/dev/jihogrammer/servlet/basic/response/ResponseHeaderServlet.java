@@ -6,18 +6,10 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import static jakarta.servlet.http.HttpServletResponse.SC_FOUND;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
-@WebServlet(urlPatterns = "/response-header-servlet")
-@Slf4j
+@WebServlet(urlPatterns = "/response-header")
 public class ResponseHeaderServlet extends HttpServlet {
     public static final String CUSTOM_HEADER_KEY = "Custom-Header";
     public static final String CUSTOM_COOKIE_NAME = "Custom-Cookie";
@@ -25,11 +17,6 @@ public class ResponseHeaderServlet extends HttpServlet {
 
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> headers = new HashMap<>();
-        request.getHeaderNames().asIterator().forEachRemaining(name -> headers.put(name, request.getHeader(name)));
-        String body = StreamUtils.copyToString(request.getInputStream(), UTF_8);
-        log.info("request in: headers={}, body={}", headers, body);
-
         // [status-line]
         response.setStatus(HttpServletResponse.SC_OK);
         // [response-header]

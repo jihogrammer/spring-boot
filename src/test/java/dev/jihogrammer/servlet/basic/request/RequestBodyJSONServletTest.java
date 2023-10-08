@@ -3,7 +3,6 @@ package dev.jihogrammer.servlet.basic.request;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.jihogrammer.servlet.basic.HelloData;
 import jakarta.servlet.ServletException;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -14,14 +13,8 @@ import java.io.IOException;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RequestBodyJSONServletTest {
-    static RequestBodyJSONServlet servlet;
-    static ObjectMapper objectMapper;
-
-    @BeforeAll
-    static void setUpClass() {
-        objectMapper = new ObjectMapper();
-        servlet = new RequestBodyJSONServlet(objectMapper);
-    }
+    static ObjectMapper objectMapper = new ObjectMapper();
+    static RequestBodyJSONServlet servlet = new RequestBodyJSONServlet(objectMapper);
 
     MockHttpServletRequest request;
     MockHttpServletResponse response;

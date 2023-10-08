@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 
-@WebServlet(name = "requestHeaderServlet", urlPatterns = "/request-header")
+@WebServlet(urlPatterns = "/request-header")
 @Slf4j
 public class RequestHeaderServlet extends HttpServlet {
     @Override
