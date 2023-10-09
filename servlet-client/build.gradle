@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group = 'dev.jihogrammer'
+version = '0.0.1-SNAPSHOT'
+
+bootJar.enabled = true
+jar.enabled = true
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation project(':members')
+}
+
+test {
+    useJUnitPlatform()
+}
+

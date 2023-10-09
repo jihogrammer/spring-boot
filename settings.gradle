@@ -1,1 +1,4 @@
-rootProject.name = 'servlet'
+rootProject.name = 'spring-boot'
+include 'servlet-client'
+include 'members'
+
