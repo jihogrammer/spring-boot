@@ -16,7 +16,9 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    providedCompile 'org.apache.tomcat.embed:tomcat-embed-jasper'
+//    providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
+//    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
     implementation 'jakarta.servlet:jakarta.servlet-api'
     implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api'
     implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl'

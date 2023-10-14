@@ -1,0 +1,14 @@
+#spring:
+#  mvc:
+#    view:
+#      prefix: /WEB-INF/
+#      suffix: .jsp
+
+#spring.mvc.view.prefix: /view/
+#spring.mvc.view.suffix: .jsp
+
+logging:
+  level:
+    jakarta.servlet.jsp: trace
+    org.apache.coyote.http11: debug
+    org.apache.catalina.util: debug
