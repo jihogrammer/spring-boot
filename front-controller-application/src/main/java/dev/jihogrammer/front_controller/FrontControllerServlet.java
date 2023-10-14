@@ -21,6 +21,8 @@ import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 @Slf4j
 public class FrontControllerServlet extends HttpServlet {
     public static final String URI_PREFIX = "/front-controller";
+    private static final String VIEW_PATH_PREFIX = "/WEB-INF/";
+    private static final String VIEW_PATH_SUFFIX = ".jsp";
 
     private final Map<String, Controller> controllerMap;
 
@@ -29,17 +31,9 @@ public class FrontControllerServlet extends HttpServlet {
 
         SingletonInMemoryMembers members = SingletonInMemoryMembers.getInstance();
 
-        View newFromView = new View("/WEB-INF/new-form.jsp");
-        Controller memberFormController = new MemberFormController(newFromView);
-        controllerMap.put(URI_PREFIX + "/members/new-form", memberFormController);
-
-        View saveView = new View("/WEB-INF/save-result.jsp");
-        Controller memberSaveController = new MemberSaveController(saveView, members);
-        controllerMap.put(URI_PREFIX + "/members/save", memberSaveController);
-
-        View membersView = new View("/WEB-INF/list.jsp");
-        MemberListController memberListController = new MemberListController(membersView, members);
-        controllerMap.put(URI_PREFIX + "/members", memberListController);
+        controllerMap.put(URI_PREFIX + "/members/new-form", new MemberFormController("new-form"));
+        controllerMap.put(URI_PREFIX + "/members/save", new MemberSaveController("save-result", members));
+        controllerMap.put(URI_PREFIX + "/members", new MemberListController("list", members));
     }
 
     @Override
@@ -56,6 +50,22 @@ public class FrontControllerServlet extends HttpServlet {
             throw new ServletException("404 Not Found.");
         }
 
-        controller.process(request, response).render(request, response);
+        Map<String, String> parametersMap = makeParametersMap(request);
+        ModelView modelView = controller.process(parametersMap);
+        View view = resolveViewName(modelView.viewName());
+
+        view.render(modelView.model(), request, response);
+    }
+
+    private Map<String, String> makeParametersMap(HttpServletRequest request) {
+        Map<String, String> parametersMap = new HashMap<>();
+        request.getParameterNames()
+                .asIterator()
+                .forEachRemaining(key -> parametersMap.put(key, request.getParameter(key)));
+        return parametersMap;
+    }
+
+    private View resolveViewName(final String viewName) {
+        return new View(VIEW_PATH_PREFIX + viewName + VIEW_PATH_SUFFIX);
     }
 }

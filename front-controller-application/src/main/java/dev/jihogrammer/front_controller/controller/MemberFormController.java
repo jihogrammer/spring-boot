@@ -1,19 +1,19 @@
 package dev.jihogrammer.front_controller.controller;
 
 import dev.jihogrammer.front_controller.Controller;
-import dev.jihogrammer.front_controller.View;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import dev.jihogrammer.front_controller.ModelView;
+
+import java.util.Map;
 
 public class MemberFormController implements Controller {
-    private final View view;
+    private final ModelView modelView;
 
-    public MemberFormController(final View view) {
-        this.view = view;
+    public MemberFormController(final String viewName) {
+        this.modelView = new ModelView(viewName);
     }
 
     @Override
-    public View process(final HttpServletRequest request, final HttpServletResponse response) {
-        return view;
+    public ModelView process(Map<String, String> parametersMap) {
+        return modelView;
     }
 }
