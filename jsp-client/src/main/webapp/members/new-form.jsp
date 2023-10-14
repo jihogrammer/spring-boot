@@ -6,8 +6,16 @@
 </head>
 <body>
 <form action="/members/save.jsp" method="post">
-    username: <input type="text" name="username" />
-    age: <input type="number" name="age" />
+    <table>
+        <tr>
+            <th>username</th>
+            <td><input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <th>age</th>
+            <td><input type="number" name="age"></td>
+        </tr>
+    </table>
     <input type="submit" />
 </form>
 </body>
