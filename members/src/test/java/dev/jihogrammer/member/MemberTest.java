@@ -1,5 +1,6 @@
 package dev.jihogrammer.member;
 
+import dev.jihogrammer.member.model.Member;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
