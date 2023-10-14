@@ -27,9 +27,19 @@ public class FrontControllerServlet extends HttpServlet {
     public FrontControllerServlet() {
         controllerMap = new HashMap<>();
 
-        controllerMap.put(URI_PREFIX + "/members/new-form", new MemberFormController());
-        controllerMap.put(URI_PREFIX + "/members/save", new MemberSaveController(SingletonInMemoryMembers.getInstance()));
-        controllerMap.put(URI_PREFIX + "/members", new MemberListController(SingletonInMemoryMembers.getInstance()));
+        SingletonInMemoryMembers members = SingletonInMemoryMembers.getInstance();
+
+        View newFromView = new View("/WEB-INF/new-form.jsp");
+        Controller memberFormController = new MemberFormController(newFromView);
+        controllerMap.put(URI_PREFIX + "/members/new-form", memberFormController);
+
+        View saveView = new View("/WEB-INF/save-result.jsp");
+        Controller memberSaveController = new MemberSaveController(saveView, members);
+        controllerMap.put(URI_PREFIX + "/members/save", memberSaveController);
+
+        View membersView = new View("/WEB-INF/list.jsp");
+        MemberListController memberListController = new MemberListController(membersView, members);
+        controllerMap.put(URI_PREFIX + "/members", memberListController);
     }
 
     @Override
@@ -46,6 +56,6 @@ public class FrontControllerServlet extends HttpServlet {
             throw new ServletException("404 Not Found.");
         }
 
-        controller.process(request, response);
+        controller.process(request, response).render(request, response);
     }
 }
