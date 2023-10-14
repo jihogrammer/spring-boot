@@ -1,19 +1,18 @@
 package dev.jihogrammer.front_controller.controller;
 
 import dev.jihogrammer.front_controller.Controller;
-import dev.jihogrammer.front_controller.ModelView;
 
 import java.util.Map;
 
 public class MemberFormController implements Controller {
-    private final ModelView modelView;
+    private final String viewName;
 
     public MemberFormController(final String viewName) {
-        this.modelView = new ModelView(viewName);
+        this.viewName = viewName;
     }
 
     @Override
-    public ModelView process(Map<String, String> parametersMap) {
-        return modelView;
+    public String process(Map<String, String> parametersMap, Map<String, Object> model) {
+        return viewName;
     }
 }

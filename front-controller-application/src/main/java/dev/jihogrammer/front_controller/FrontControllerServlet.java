@@ -51,10 +51,12 @@ public class FrontControllerServlet extends HttpServlet {
         }
 
         Map<String, String> parametersMap = makeParametersMap(request);
-        ModelView modelView = controller.process(parametersMap);
-        View view = resolveViewName(modelView.viewName());
+        Map<String, Object> model = new HashMap<>();
 
-        view.render(modelView.model(), request, response);
+        String viewName = controller.process(parametersMap, model);
+        View view = resolveViewName(viewName);
+
+        view.render(model, request, response);
     }
 
     private Map<String, String> makeParametersMap(HttpServletRequest request) {
