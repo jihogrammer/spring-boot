@@ -1,4 +1,5 @@
 rootProject.name = 'spring-boot'
 include 'servlet-client'
 include 'members'
+include 'jsp-client'
 
