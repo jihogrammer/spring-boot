@@ -1,5 +1,6 @@
 rootProject.name = 'spring-boot'
-include 'servlet-application'
 include 'members'
+include 'servlet-application'
 include 'jsp-application'
+include 'mvc-application'
 
