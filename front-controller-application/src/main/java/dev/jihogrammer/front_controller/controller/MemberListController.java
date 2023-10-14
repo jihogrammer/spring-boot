@@ -1,11 +1,11 @@
 package dev.jihogrammer.front_controller.controller;
 
-import dev.jihogrammer.front_controller.Controller;
+import dev.jihogrammer.front_controller.model.ViewNameController;
 import dev.jihogrammer.member.Members;
 
 import java.util.Map;
 
-public class MemberListController implements Controller {
+public class MemberListController implements ViewNameController {
     private static final String MEMBER_LIST_ATTRIBUTE_NAME = "members";
 
     private final String viewName;

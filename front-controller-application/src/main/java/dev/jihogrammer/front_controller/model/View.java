@@ -1,4 +1,4 @@
-package dev.jihogrammer.front_controller;
+package dev.jihogrammer.front_controller.model;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

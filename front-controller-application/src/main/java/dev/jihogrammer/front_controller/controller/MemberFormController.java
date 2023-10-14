@@ -1,10 +1,10 @@
 package dev.jihogrammer.front_controller.controller;
 
-import dev.jihogrammer.front_controller.Controller;
+import dev.jihogrammer.front_controller.model.ViewNameController;
 
 import java.util.Map;
 
-public class MemberFormController implements Controller {
+public class MemberFormController implements ViewNameController {
     private final String viewName;
 
     public MemberFormController(final String viewName) {

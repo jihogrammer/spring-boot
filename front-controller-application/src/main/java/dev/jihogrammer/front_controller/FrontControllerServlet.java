@@ -1,9 +1,17 @@
 package dev.jihogrammer.front_controller;
 
+import dev.jihogrammer.front_controller.adapter.ModelViewAdapter;
+import dev.jihogrammer.front_controller.adapter.ViewNameAdapter;
 import dev.jihogrammer.front_controller.controller.MemberFormController;
 import dev.jihogrammer.front_controller.controller.MemberListController;
 import dev.jihogrammer.front_controller.controller.MemberSaveController;
+import dev.jihogrammer.front_controller.model.Adapter;
+import dev.jihogrammer.front_controller.model.Controller;
+import dev.jihogrammer.front_controller.model.ModelView;
+import dev.jihogrammer.front_controller.model.View;
 import dev.jihogrammer.front_controller.repository.SingletonInMemoryMembers;
+import dev.jihogrammer.front_controller.utils.AdapterMapper;
+import dev.jihogrammer.front_controller.utils.ViewResolver;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,8 +20,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static jakarta.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 
@@ -24,16 +31,23 @@ public class FrontControllerServlet extends HttpServlet {
     private static final String VIEW_PATH_PREFIX = "/WEB-INF/";
     private static final String VIEW_PATH_SUFFIX = ".jsp";
 
+    private final ViewResolver viewResolver;
     private final Map<String, Controller> controllerMap;
+    private final AdapterMapper adapterMapper;
 
     public FrontControllerServlet() {
-        controllerMap = new HashMap<>();
+        this.viewResolver = new ViewResolver("/WEB-INF/", ".jsp");
 
+        this.controllerMap = new HashMap<>();
         SingletonInMemoryMembers members = SingletonInMemoryMembers.getInstance();
-
         controllerMap.put(URI_PREFIX + "/members/new-form", new MemberFormController("new-form"));
         controllerMap.put(URI_PREFIX + "/members/save", new MemberSaveController("save-result", members));
         controllerMap.put(URI_PREFIX + "/members", new MemberListController("list", members));
+
+        List<Adapter> adapters = new ArrayList<>();
+        adapters.add(new ModelViewAdapter());
+        adapters.add(new ViewNameAdapter());
+        this.adapterMapper = new AdapterMapper(adapters);
     }
 
     @Override
@@ -50,24 +64,10 @@ public class FrontControllerServlet extends HttpServlet {
             throw new ServletException("404 Not Found.");
         }
 
-        Map<String, String> parametersMap = makeParametersMap(request);
-        Map<String, Object> model = new HashMap<>();
+        Adapter adapter = adapterMapper.map(controller);
+        ModelView modelView = adapter.handle(request, response, controller);
 
-        String viewName = controller.process(parametersMap, model);
-        View view = resolveViewName(viewName);
-
-        view.render(model, request, response);
-    }
-
-    private Map<String, String> makeParametersMap(HttpServletRequest request) {
-        Map<String, String> parametersMap = new HashMap<>();
-        request.getParameterNames()
-                .asIterator()
-                .forEachRemaining(key -> parametersMap.put(key, request.getParameter(key)));
-        return parametersMap;
-    }
-
-    private View resolveViewName(final String viewName) {
-        return new View(VIEW_PATH_PREFIX + viewName + VIEW_PATH_SUFFIX);
+        View view = viewResolver.resolve(modelView.viewName());
+        view.render(modelView.model(), request, response);
     }
 }
