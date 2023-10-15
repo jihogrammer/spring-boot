@@ -1,5 +1,7 @@
 package dev.jihogrammer.spring_mvc;
 
+import dev.jihogrammer.member.Members;
+import dev.jihogrammer.spring_mvc.repository.SingletonInMemoryMembers;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -22,5 +24,10 @@ public class SpringMVCApplication {
     @Bean
     public ViewResolver internalResourceViewResolver() {
         return new InternalResourceViewResolver("/WEB-INF/", ".jsp");
+    }
+
+    @Bean
+    public Members members() {
+        return SingletonInMemoryMembers.getInstance();
     }
 }
