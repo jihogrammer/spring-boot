@@ -11,12 +11,13 @@ import java.io.IOException;
 
 @Component(value = "/legacy/controller")
 public class LegacyController implements Controller {
+    private static final String TARGET_VIEW_NAME = "index";
+
     @Override
     public ModelAndView handleRequest(
             @NonNull final HttpServletRequest request,
             @NonNull final HttpServletResponse response
-    ) throws IOException {
-        response.getWriter().write(this.getClass().getSimpleName());
-        return null;
+    ) {
+        return new ModelAndView(TARGET_VIEW_NAME);
     }
 }
