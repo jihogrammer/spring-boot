@@ -4,4 +4,5 @@ include 'servlet-application'
 include 'jsp-application'
 include 'servlet-mvc-application'
 include 'front-controller-application'
+include 'spring-mvc-application'
 
