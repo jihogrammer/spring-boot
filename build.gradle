@@ -7,13 +7,8 @@ plugins {
 group = 'dev.jihogrammer'
 version = '0.0.1-SNAPSHOT'
 
-java {
-	sourceCompatibility = '17'
-}
-
-repositories {
-	mavenCentral()
-}
+jar.enabled = false
+bootJar.enabled = false
 
 subprojects {
 	apply plugin: 'java'
@@ -35,5 +30,9 @@ subprojects {
 		annotationProcessor 'org.projectlombok:lombok'
 		testCompileOnly 'org.projectlombok:lombok'
 		testAnnotationProcessor 'org.projectlombok:lombok'
+	}
+
+	test {
+		useJUnitPlatform()
 	}
 }
