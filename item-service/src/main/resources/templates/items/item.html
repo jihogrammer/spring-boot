@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>item save</title>
+</head>
+<body>
+<h1>Item</h1>
+
+<h4><a href="/">main</a></h4>
+
+<h4 th:if="${param.status}">Success</h4>
+
+<form action="" method="POST">
+    <table>
+        <tr>
+            <th>ID</th>
+            <td><input name="id" type="number" readonly th:value="${item.id.value}"></td>
+        </tr>
+        <tr>
+            <th>NAME</th>
+            <td><input name="name" type="text" readonly th:value="${item.name}"></td>
+        </tr>
+        <tr>
+            <th>PRICE</th>
+            <td><input name="price" type="number" readonly th:value="${item.price}"></td>
+        </tr>
+        <tr>
+            <th>QUANTITY</th>
+            <td><input name="quantity" type="number" readonly th:value="${item.quantity}"></td>
+        </tr>
+    </table>
+</form>
+<button th:onclick="|location.href='/items/update/${item.id.value}'|">update</button>
+</body>
+</html>
