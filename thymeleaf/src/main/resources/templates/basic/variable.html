@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>variable - Thymeleaf</title>
+  <link rel="stylesheet" href="/css/default.css">
+</head>
+<body>
+<table>
+  <caption>Variable - Spring EL</caption>
+  <thead>
+  <tr>
+    <th>SYNTAX</th>
+    <th>RESULT</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <th colspan="2">[Object] userA</th>
+  </tr>
+  <tr>
+    <th><code th:inline="none">[[${userA.name}]]</code></th>
+    <td>[[${userA.name}]]</td>
+  </tr>
+  <tr>
+    <th><code th:inline="none">[[${userA['name']}]]</code></th>
+    <td>[[${userA['name']}]]</td>
+  </tr>
+  <tr>
+    <th><code th:inline="none">[[${userA.getName()}]]</code></th>
+    <td>[[${userA.getName()}]]</td>
+  </tr>
+  <tr>
+    <th colspan="2">[List] users</th>
+  </tr>
+  <tr>
+    <th><code th:inline="none">[[${users[0].name}]]</code></th>
+    <td>[[${users[0].name}]]</td>
+  </tr>
+  <tr>
+    <th><code th:inline="none">[[${users[0].age}]]</code></th>
+    <td>[[${users[0].age}]]</td>
+  </tr>
+  <tr>
+    <th colspan="2">[Map] userMap</th>
+  </tr>
+  <tr>
+    <th><code th:inline="none">[[${userMap['userB'].name}]]</code></th>
+    <td>[[${userMap['userB'].name}]]</td>
+  </tr>
+  <tr>
+    <th><code th:inline="none">[[${userMap['userB'].age}]]</code></th>
+    <td>[[${userMap['userB'].age}]]</td>
+  </tr>
+  </tbody>
+</table>
+
+<table>
+  <caption>Local Variable - th:with</caption>
+  <thead>
+  <tr>
+    <th>SYNTAX</th>
+    <th>RESULT</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <th><code th:inline="none">&lt;p th:with="user=${userA}"&gt;[[${user.name}]]&lt;/p&gt;</code></th>
+    <td th:with="user=${userA}">[[${user.name}]]</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

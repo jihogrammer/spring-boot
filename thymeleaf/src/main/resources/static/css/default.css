@@ -1,0 +1,24 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  padding: 1rem;
+}
+table {
+  border-collapse: collapse;
+}
+caption {
+  padding: 1rem;
+}
+th {
+  background-color: #CCC;
+}
+thead > tr > th {
+  color: white;
+  background-color: #111;
+}
+th, td {
+  border: 1px solid;
+  padding: 1rem;
+}
