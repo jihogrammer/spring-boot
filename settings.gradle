@@ -8,4 +8,5 @@ include 'spring-mvc-application'
 include 'about-spring-mvc'
 include 'item-service'
 include 'items'
+include 'thymeleaf'
 
