@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html
+  lang="kr"
+  xmlns:th="http://www.thymeleaf.org"
+  th:fragment="_(title, contents)"
+>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/default.css}">
+  <title th:replace="${title}">title</title>
+  <style>
+    body {
+      background-color: #CFC;
+    }
+    #main {
+      margin: 1rem 0;
+      padding: 1rem;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+<h1>Layout Title</h1>
+<th:block th:replace="${contents}">contents</th:block>
+<footer>Layout Footer</footer>
+</body>
+</html>
