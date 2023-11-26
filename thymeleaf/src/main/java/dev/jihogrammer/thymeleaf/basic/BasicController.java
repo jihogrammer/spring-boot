@@ -93,4 +93,13 @@ public class BasicController {
     public String attribute() {
         return "/basic/attribute";
     }
+
+    @GetMapping("/each")
+    public String each(final Model model) {
+        model.addAttribute("users", List.of(
+            new User("userA", 10),
+            new User("userB", 20),
+            new User("userC", 30)));
+        return "/basic/each";
+    }
 }
