@@ -102,4 +102,13 @@ public class BasicController {
             new User("userC", 30)));
         return "/basic/each";
     }
+
+    @GetMapping("/condition")
+    public String condition(final Model model) {
+        model.addAttribute("users", List.of(
+            new User("userA", 10),
+            new User("userB", 20),
+            new User("userC", 30)));
+        return "/basic/condition";
+    }
 }

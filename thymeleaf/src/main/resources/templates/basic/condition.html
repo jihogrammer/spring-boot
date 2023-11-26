@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>condition - Thymeleaf</title>
+  <link rel="stylesheet" href="/css/default.css">
+</head>
+<body>
+<div>
+  <table>
+    <caption>Condition - if/unless</caption>
+    <thead>
+    <tr>
+      <th>count</th>
+      <th>name</th>
+      <th>age</th>
+      <th>result</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, stat : ${users}">
+      <td th:text="${stat.count}">count</td>
+      <td th:text="${user.name}">name</td>
+      <td th:text="${user.age}">age</td>
+      <td>
+        <table>
+          <tr>
+            <th><code>th:if=${user.age lt 20}</code></th>
+            <td>
+              <span th:if="${user.age lt 20}">미성년자</span>
+              <span th:unless="${user.age lt 20}">성인</span>
+            </td>
+          </tr>
+          <tr>
+            <th><code>th:unless=${user.age ge 20}</code></th>
+            <td>
+              <span th:unless="${user.age ge 20}">미성년자</span>
+              <span th:if="${user.age ge 20}">성인</span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <table>
+    <caption>Condition - switch/case</caption>
+    <thead>
+    <tr>
+      <th>count</th>
+      <th>name</th>
+      <th>age</th>
+      <th>result</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, stat : ${users}">
+      <td th:text="${stat.count}">count</td>
+      <td th:text="${user.name}">name</td>
+      <td th:text="${user.age}">age</td>
+      <td th:switch="${user.age}">
+        <span th:case="10">10살</span>
+        <span th:case="20">20살</span>
+        <span th:case="*">기타</span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
