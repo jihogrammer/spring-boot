@@ -111,4 +111,10 @@ public class BasicController {
             new User("userC", 30)));
         return "/basic/condition";
     }
+
+    @GetMapping("/comment")
+    public String comment(final Model model) {
+        model.addAttribute("data", "comments");
+        return "/basic/comment";
+    }
 }
