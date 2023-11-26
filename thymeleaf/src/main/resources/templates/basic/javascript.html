@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>javascript - Thymeleaf</title>
+  <link rel="stylesheet" href="/css/default.css">
+</head>
+<body>
+<h1>javascript</h1>
+
+<h2 id="resultA">resultA</h2>
+<h2 id="resultB">resultB</h2>
+<h2>iteration</h2>
+<ul>
+  <li id="1"></li>
+  <li id="2"></li>
+  <li id="3"></li>
+</ul>
+
+<script>
+  (() => {
+    const name = /*[[${userA.name}]]*/ "[[${userA.name}]]";
+    const age = [[${userA.age}]];
+    console.log("userA", {name, age});
+
+    const user = {
+      name: "[[${userA.name}]]",
+      age: [[${userA.age}]]
+    };
+    document.getElementById("resultA").innerText = "Hello " + user.name + "(" + user.age + ")!";
+  })();
+</script>
+
+<script th:inline="javascript">
+  (() => {
+    const name = /*[[${userB.name}]]*/ "expect thymeleaf data";
+    const age = [[${userB.age}]];
+    console.log("userB", {name, age});
+
+    const user = [[${userB}]];
+    document.getElementById("resultB").innerText = "Hello " + user.name + "(" + user.age + ")!";
+  })();
+</script>
+
+<script th:inline="javascript">
+  [# th:each="user, stat : ${users}"]
+  (() => {
+    const user = [[${user}]];
+    console.log("user[[${stat.count}]]", user);
+    document.getElementById([[${stat.count}]]).innerText = JSON.stringify(user);
+  })();
+  [/]
+</script>
+</body>
+</html>

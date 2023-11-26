@@ -126,4 +126,15 @@ public class BasicController {
             new User("userC", 30)));
         return "/basic/block";
     }
+
+    @GetMapping("/javascript")
+    public String javascript(final Model model) {
+        model.addAttribute("userA", new User("userA", 10));
+        model.addAttribute("userB", new User("userB", 20));
+        model.addAttribute("users", List.of(
+            new User("userA", 10),
+            new User("userB", 20),
+            new User("userC", 30)));
+        return "/basic/javascript";
+    }
 }
