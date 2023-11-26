@@ -68,4 +68,24 @@ public class BasicController {
         model.addAttribute("locale", locale);
         return "/basic/objects";
     }
+
+    @GetMapping("/link")
+    public String link(final Model model) {
+        model.addAttribute("a", "a");
+        model.addAttribute("b", "b");
+        return "/basic/link";
+    }
+
+    @GetMapping("/literal")
+    public String literal(final Model model) {
+        model.addAttribute("data", "spring");
+        return "/basic/literal";
+    }
+
+    @GetMapping("/operation")
+    public String operation(final Model model) {
+        model.addAttribute("stringData", "spring");
+        model.addAttribute("nullData", null);
+        return "/basic/operation";
+    }
 }

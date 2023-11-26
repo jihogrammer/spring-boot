@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>literal - Thymeleaf</title>
+  <link rel="stylesheet" href="/css/default.css">
+</head>
+<body>
+<div>
+  <table>
+    <caption>OPERATION</caption>
+    <thead>
+    <tr>
+      <th>SYNTAX</th>
+      <th>RESULT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th><code>&lt;p th:text="2 + 3"&gt;&lt;/p&gt;</code></th>
+      <td th:text="2 + 3">integer</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="6 % 2 == 0"&gt;&lt;/p&gt;</code></th>
+      <td th:text="6 % 2 == 0">boolean</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="7 % 2 == 0 ? '홀' : '짝'"&gt;&lt;/p&gt;</code></th>
+      <td th:text="7 % 2 == 0 ? '홀' : '짝'">홀짝</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${stringData}?:'Elvis'"&gt;&lt;/p&gt;</code></th>
+      <td th:text="${stringData}?:'Elvis'"></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${nullData}?:'Elvis'"&gt;&lt;/p&gt;</code></th>
+      <td th:text="${nullData}?:'Elvis'"></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${stringData}?:_"&gt;NO-OP&lt;/p&gt;</code></th>
+      <td th:text="${stringData}?:_">NO-OP</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${nullData}?:_"&gt;NO-OP&lt;/p&gt;</code></th>
+      <td th:text="${nullData}?:_">NO-OP</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
