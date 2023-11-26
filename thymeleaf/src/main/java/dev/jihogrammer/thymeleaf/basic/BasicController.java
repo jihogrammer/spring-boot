@@ -88,4 +88,9 @@ public class BasicController {
         model.addAttribute("nullData", null);
         return "/basic/operation";
     }
+
+    @GetMapping("/attribute")
+    public String attribute() {
+        return "/basic/attribute";
+    }
 }
