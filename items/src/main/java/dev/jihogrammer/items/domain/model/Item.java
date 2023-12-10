@@ -1,21 +1,29 @@
-package dev.jihogrammer.items.domain;
+package dev.jihogrammer.items.domain.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import dev.jihogrammer.items.vo.ItemId;
+import dev.jihogrammer.items.vo.ItemName;
+import dev.jihogrammer.items.vo.ItemPrice;
+import dev.jihogrammer.items.vo.ItemQuantity;
 
-@Getter
-@Setter
-public class Item {
-    private ItemId id;
-    private String name;
-    private Integer price;
-    private Integer quantity;
+public record Item(ItemId id, ItemName name, ItemPrice price, ItemQuantity quantity) {
+    public ItemName name() {
+        if (this.name == null) {
+            return new ItemName(null);
+        }
+        return this.name;
+    }
 
-    public Item() {}
+    public ItemPrice price() {
+        if (this.price == null) {
+            return new ItemPrice(null);
+        }
+        return this.price;
+    }
 
-    public Item(String name, Integer price, Integer quantity) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
+    public ItemQuantity quantity() {
+        if (this.quantity == null) {
+            return new ItemQuantity(null);
+        }
+        return this.quantity;
     }
 }

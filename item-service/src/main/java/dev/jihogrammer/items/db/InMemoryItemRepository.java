@@ -1,11 +1,12 @@
 package dev.jihogrammer.items.db;
 
-import dev.jihogrammer.items.domain.Item;
-import dev.jihogrammer.items.domain.ItemId;
-import dev.jihogrammer.items.domain.ItemUpdateSource;
 import dev.jihogrammer.items.domain.Items;
+import dev.jihogrammer.items.domain.model.Item;
+import dev.jihogrammer.items.domain.model.ItemSaveCommand;
+import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
+import dev.jihogrammer.items.vo.ItemId;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -19,9 +20,9 @@ public class InMemoryItemRepository implements Items {
     }
 
     @Override
-    public Item save(final Item item) {
-        item.setId(new ItemId(sequence.addAndGet(1)));
-        store.put(item.getId(), item);
+    public Item save(final ItemSaveCommand command) {
+        Item item = ItemFactory.makeFromSaveCommand(sequence.addAndGet(1), command);
+        store.put(item.id(), item);
         return item;
     }
 
@@ -31,19 +32,15 @@ public class InMemoryItemRepository implements Items {
     }
 
     @Override
-    public Iterable<Item> findAll() {
-        return new ArrayList<>(store.values());
+    public Collection<Item> findAll() {
+        return store.values().stream().toList();
     }
 
     @Override
-    public Item update(final ItemUpdateSource source) {
-        Item item = store.get(source.itemId());
-
-        item.setName(source.name());
-        item.setPrice(source.price());
-        item.setQuantity(source.quantity());
-
-        return item;
+    public Item update(final ItemUpdateCommand command) {
+        ItemId itemId = new ItemId(command.getId());
+        store.put(itemId, ItemFactory.makeFromUpdateCommand(command));
+        return store.get(itemId);
     }
 
     public void clearStore() {

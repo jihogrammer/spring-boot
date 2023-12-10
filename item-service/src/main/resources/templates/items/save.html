@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>item save</title>
@@ -9,19 +9,31 @@
 
 <h6><a href="/">main</a></h6>
 
-<form method="POST">
+<form method="POST" th:object="${item}">
     <table>
         <tr>
             <th>NAME</th>
-            <td><input name="name" type="text"></td>
+            <td>
+              <label>
+                <input id="name" th:field="${item.name}" type="text">
+              </label>
+            </td>
         </tr>
         <tr>
             <th>PRICE</th>
-            <td><input name="price" type="number"></td>
+            <td>
+              <label>
+                <input id="price" th:field="*{price}" type="number">
+              </label>
+            </td>
         </tr>
         <tr>
             <th>QUANTITY</th>
-            <td><input name="quantity" type="number"></td>
+            <td>
+              <label>
+                <input id="quantity" th:field="*{quantity}" type="number">
+              </label>
+            </td>
         </tr>
         <tr>
             <th><input type="submit"></th>

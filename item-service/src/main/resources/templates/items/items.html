@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>items</title>
@@ -20,7 +20,7 @@
     </thead>
     <tbody>
         <tr th:each="item : ${items}">
-            <td><a th:href="|/items/${item.id.value}|" th:text="${item.id.value}">ID</a></td>
+            <td><a th:href="|/items/${item.id}|" th:text="${item.id}">ID</a></td>
             <td th:text="${item.name}">NAME</td>
             <td th:text="${item.price}">PRICE</td>
             <td th:text="${item.quantity}">QUANTITY</td>

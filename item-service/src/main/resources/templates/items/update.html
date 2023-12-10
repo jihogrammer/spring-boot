@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>item update</title>
@@ -9,29 +9,45 @@
 
 <h6><a href="/">main</a></h6>
 
-<form th:action="|/items/update/${item.id.value}|" method="POST">
-    <table>
-        <tr>
-            <th>ID</th>
-            <td><input name="id" type="text" readonly th:value="${item.id.value}"></td>
-        </tr>
-        <tr>
-            <th>NAME</th>
-            <td><input name="name" type="text" th:value="${item.name}"></td>
-        </tr>
-        <tr>
-            <th>PRICE</th>
-            <td><input name="price" type="number" th:value="${item.price}"></td>
-        </tr>
-        <tr>
-            <th>QUANTITY</th>
-            <td><input name="quantity" type="number" th:value="${item.quantity}"></td>
-        </tr>
-        <tr>
-            <th><input type="submit" value="update"></th>
-            <th><button onclick="@{|location.href='/items/${items.id.value}'|}">cancel</button></th>
-        </tr>
-    </table>
+<form method="POST" th:action="|/items/update/${item.id}|" th:object="${item}">
+  <table>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{id}" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{name}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{price}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{quantity}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th><input type="submit" value="update"></th>
+      <th><button onclick="@{|location.href='/items/*{id}'|}">cancel</button></th>
+    </tr>
+  </table>
 </form>
 </body>
 </html>

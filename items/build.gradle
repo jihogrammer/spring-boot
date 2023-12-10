@@ -8,4 +8,6 @@ version = '0.0.1-SNAPSHOT'
 jar.enabled = true
 bootJar.enabled = false
 
-dependencies {}
+dependencies {
+    implementation(project(':common'))
+}
