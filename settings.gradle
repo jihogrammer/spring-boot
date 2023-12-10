@@ -9,4 +9,5 @@ include 'about-spring-mvc'
 include 'item-service'
 include 'items'
 include 'thymeleaf'
+include 'common'
 

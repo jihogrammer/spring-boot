@@ -1,0 +1,9 @@
+plugins {
+    id 'java'
+}
+
+group = 'dev.jihogrammer'
+version = '0.0.1-SNAPSHOT'
+
+jar.enabled = true
+bootJar.enabled = false
