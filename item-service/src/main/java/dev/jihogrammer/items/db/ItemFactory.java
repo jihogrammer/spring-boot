@@ -14,7 +14,8 @@ public final class ItemFactory {
             new ItemId(id),
             new ItemName(command.getName()),
             new ItemPrice(command.getPrice()),
-            new ItemQuantity(command.getQuantity()));
+            new ItemQuantity(command.getQuantity()),
+            null, null, null, null);
     }
 
     public static Item makeFromUpdateCommand(final ItemUpdateCommand command) {
@@ -22,6 +23,7 @@ public final class ItemFactory {
             new ItemId(command.getId()),
             new ItemName(command.getName()),
             new ItemPrice(command.getPrice()),
-            new ItemQuantity(command.getQuantity()));
+            new ItemQuantity(command.getQuantity()),
+            null, null, null, null);
     }
 }

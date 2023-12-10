@@ -1,11 +1,19 @@
 package dev.jihogrammer.items.domain.model;
 
-import dev.jihogrammer.items.vo.ItemId;
-import dev.jihogrammer.items.vo.ItemName;
-import dev.jihogrammer.items.vo.ItemPrice;
-import dev.jihogrammer.items.vo.ItemQuantity;
+import dev.jihogrammer.items.vo.*;
 
-public record Item(ItemId id, ItemName name, ItemPrice price, ItemQuantity quantity) {
+import java.util.Set;
+
+public record Item(
+    ItemId id,
+    ItemName name,
+    ItemPrice price,
+    ItemQuantity quantity,
+    Boolean open,
+    Set<String> regions,
+    ItemType itemType,
+    DeliveryCode deliveryCode
+) {
     public ItemName name() {
         if (this.name == null) {
             return new ItemName(null);
