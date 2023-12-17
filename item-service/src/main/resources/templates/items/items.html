@@ -19,6 +19,7 @@
       <th>OPEN</th>
       <th>REGIONS</th>
       <th>ITEM TYPE</th>
+      <th>DELIVERY CODE</th>
     </tr>
   </thead>
   <tbody>
@@ -30,6 +31,7 @@
       <td th:text="${item.open}">OPEN</td>
       <td><span th:text="${#strings.listJoin(item.regions, ', ')}">REGIONS</span></td>
       <td th:text="${item.itemType}">ITEM TYPE</td>
+      <td th:text="${item.deliveryCode}">DELIVERY CODE</td>
     </tr>
   </tbody>
 </table>

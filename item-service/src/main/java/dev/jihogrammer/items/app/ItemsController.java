@@ -9,6 +9,7 @@ import dev.jihogrammer.items.model.in.ItemUpdateSource;
 import dev.jihogrammer.items.model.in.ItemUpdateSourceMapper;
 import dev.jihogrammer.items.model.out.ItemView;
 import dev.jihogrammer.items.model.out.ItemViewMapper;
+import dev.jihogrammer.items.vo.DeliveryCode;
 import dev.jihogrammer.items.vo.ItemId;
 import dev.jihogrammer.items.vo.ItemType;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +19,20 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
+import static dev.jihogrammer.items.vo.DeliveryCode.Type.*;
 
 @Controller
 @RequestMapping("/items")
 @RequiredArgsConstructor
 public class ItemsController {
     private static final Map<String, String> REGIONS = MapUtils.immutableLinkedHashMap("SEOUL", "서울", "BUSAN", "부산", "JEJU", "제주");
+    private static final List<DeliveryCode> DELIVERY_CODES = List.of(
+        new DeliveryCode(FAST.name(), FAST.description()),
+        new DeliveryCode(NORMAL.name(), NORMAL.description()),
+        new DeliveryCode(SLOW.name(), SLOW.description()));
 
     private final Items items;
 
@@ -39,6 +47,11 @@ public class ItemsController {
     @ModelAttribute("itemTypes")
     public ItemType[] itemTypes() {
         return ItemType.values();
+    }
+
+    @ModelAttribute("deliveryCodes")
+    public List<DeliveryCode> deliveryCodes() {
+        return DELIVERY_CODES;
     }
 
     @GetMapping

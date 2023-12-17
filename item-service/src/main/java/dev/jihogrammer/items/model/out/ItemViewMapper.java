@@ -13,7 +13,8 @@ public final class ItemViewMapper {
             item.quantity().value(),
             item.open(),
             item.regions(),
-            item.itemType());
+            item.itemType(),
+            item.deliveryCode());
     }
 
     public static Collection<ItemView> mapToView(final Collection<Item> items) {

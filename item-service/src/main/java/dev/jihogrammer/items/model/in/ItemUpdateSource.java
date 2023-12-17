@@ -16,4 +16,5 @@ public class ItemUpdateSource {
     private Boolean open;
     private Set<String> regions;
     private ItemType itemType;
+    private String deliveryCode;
 }

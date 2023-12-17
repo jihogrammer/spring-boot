@@ -50,8 +50,7 @@
       <td>
         <label>
           <input type="checkbox" th:field="*{open}" disabled> open
-          <!-- thymeleaf 사용하지 않을 경우에는 체크박스를 히든 필드를 활용하여 처리한다. -->
-          <!-- <input type="hidden" name="_open" value="on"> -->
+          <!-- thymeleaf th:field 사용하지 않을 경우에는 체크박스를 히든 필드를 활용하여 처리한다. -->
         </label>
       </td>
     </tr>
@@ -70,6 +69,22 @@
         <label th:each="itemType : ${itemTypes}">
           <input type="radio" th:field="*{itemType}" th:value="${itemType.name()}" disabled>
           [[${itemType.description()}]]
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>DELIVERY CODE</th>
+      <td>
+        <label>
+          [[*{deliveryCode}]]
+          <select th:field="*{deliveryCode}">
+            <option value="">=== 배송 방식 선택 ===</option>
+            <option
+              th:each="deliveryCode : ${deliveryCodes}"
+              th:value="${deliveryCode.code}"
+              th:text="${deliveryCode.displayName}">
+            </option>
+          </select>
         </label>
       </td>
     </tr>

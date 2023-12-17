@@ -2,6 +2,7 @@ package dev.jihogrammer.items.model.in;
 
 import dev.jihogrammer.items.domain.model.Item;
 import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
+import dev.jihogrammer.items.vo.DeliveryCode;
 
 public final class ItemUpdateSourceMapper {
     public static ItemUpdateSource mapToUpdateSource(final Item item) {
@@ -12,7 +13,8 @@ public final class ItemUpdateSourceMapper {
             item.quantity().value(),
             item.open(),
             item.regions(),
-            item.itemType());
+            item.itemType(),
+            item.deliveryCode());
     }
 
     public static ItemUpdateCommand mapToUpdateCommand(final ItemUpdateSource itemUpdateSource) {
@@ -23,6 +25,7 @@ public final class ItemUpdateSourceMapper {
             itemUpdateSource.getQuantity(),
             itemUpdateSource.getOpen(),
             itemUpdateSource.getRegions(),
-            itemUpdateSource.getItemType());
+            itemUpdateSource.getItemType(),
+            itemUpdateSource.getDeliveryCode());
     }
 }

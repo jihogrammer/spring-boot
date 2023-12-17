@@ -12,7 +12,7 @@ public record Item(
     Boolean open,
     Set<String> regions,
     ItemType itemType,
-    DeliveryCode deliveryCode
+    String deliveryCode
 ) {
     public ItemName name() {
         if (this.name == null) {
