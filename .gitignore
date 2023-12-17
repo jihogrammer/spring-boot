@@ -1,5 +1,7 @@
 .gradle
 build
 out
+!**/src/main/java/**/out
+!**/src/test/java/**/out
 
 .idea
