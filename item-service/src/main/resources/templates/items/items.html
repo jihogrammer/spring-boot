@@ -17,6 +17,7 @@
       <th>PRICE</th>
       <th>QUANTITY</th>
       <th>OPEN</th>
+      <th>REGIONS</th>
     </tr>
   </thead>
   <tbody>
@@ -26,6 +27,7 @@
       <td th:text="${item.price}">PRICE</td>
       <td th:text="${item.quantity}">QUANTITY</td>
       <td th:text="${item.open}">OPEN</td>
+      <td><span th:text="${#strings.listJoin(item.regions, ', ')}"></span></td>
     </tr>
   </tbody>
 </table>

@@ -15,7 +15,8 @@
       <th>ID</th>
       <td>
         <label>
-          <input type="text" th:field="*{id}" readonly>
+          <input type="text" th:field="*{id}" readonly disabled>
+          <input type="hidden" th:field="*{id}">
         </label>
       </td>
     </tr>
@@ -50,6 +51,15 @@
           <input type="checkbox" th:field="*{open}"> open
           <!-- thymeleaf 사용하지 않을 경우에는 체크박스를 히든 필드를 활용하여 처리한다. -->
           <!-- <input type="hidden" name="_open" value="on"> -->
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>REGIONS</th>
+      <td>
+        <label th:each="region : ${regions}">
+          <input type="checkbox" th:field="*{regions}" th:value="${region.key}">
+          [[${region.value}]]
         </label>
       </td>
     </tr>

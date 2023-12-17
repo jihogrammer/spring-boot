@@ -55,6 +55,15 @@
         </label>
       </td>
     </tr>
+    <tr>
+      <th>REGIONS</th>
+      <td>
+        <label th:each="region : ${regions}">
+          <input type="checkbox" th:field="*{regions}" th:value="${region.key}" disabled>
+          [[${region.value}]]
+        </label>
+      </td>
+    </tr>
   </table>
 </form>
 <button th:onclick="|location.href='/items/update/${item.id}'|">update</button>

@@ -5,13 +5,13 @@ import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
 
 public final class ItemUpdateSourceMapper {
     public static ItemUpdateSource mapToUpdateSource(final Item item) {
-        ItemUpdateSource itemUpdateSource = new ItemUpdateSource();
-        itemUpdateSource.setId(item.id().value());
-        itemUpdateSource.setName(item.name().value());
-        itemUpdateSource.setPrice(item.price().value());
-        itemUpdateSource.setQuantity(item.quantity().value());
-        itemUpdateSource.setOpen(item.open());
-        return itemUpdateSource;
+        return new ItemUpdateSource(
+            item.id().value(),
+            item.name().value(),
+            item.price().value(),
+            item.quantity().value(),
+            item.open(),
+            item.regions());
     }
 
     public static ItemUpdateCommand mapToUpdateCommand(final ItemUpdateSource itemUpdateSource) {
@@ -19,6 +19,8 @@ public final class ItemUpdateSourceMapper {
             itemUpdateSource.getId(),
             itemUpdateSource.getName(),
             itemUpdateSource.getPrice(),
-            itemUpdateSource.getQuantity());
+            itemUpdateSource.getQuantity(),
+            itemUpdateSource.getOpen(),
+            itemUpdateSource.getRegions());
     }
 }

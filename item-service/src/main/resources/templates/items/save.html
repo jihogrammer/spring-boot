@@ -46,6 +46,15 @@
       </td>
     </tr>
     <tr>
+      <th>REGIONS</th>
+      <td>
+        <label th:each="region : ${regions}">
+          <input type="checkbox" th:field="*{regions}" th:value="${region.key}">
+          [[${region.value}]]
+        </label>
+      </td>
+    </tr>
+    <tr>
       <th><input type="submit"></th>
       <td><input type="button" value="cancel" onclick="location.href='/'"></td>
     </tr>
