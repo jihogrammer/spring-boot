@@ -10,6 +10,7 @@ public final class ItemUpdateSourceMapper {
         itemUpdateSource.setName(item.name().value());
         itemUpdateSource.setPrice(item.price().value());
         itemUpdateSource.setQuantity(item.quantity().value());
+        itemUpdateSource.setOpen(item.open());
         return itemUpdateSource;
     }
 

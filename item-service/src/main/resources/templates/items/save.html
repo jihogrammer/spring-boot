@@ -10,36 +10,46 @@
 <h6><a href="/">main</a></h6>
 
 <form method="POST" th:object="${item}">
-    <table>
-        <tr>
-            <th>NAME</th>
-            <td>
-              <label>
-                <input id="name" th:field="${item.name}" type="text">
-              </label>
-            </td>
-        </tr>
-        <tr>
-            <th>PRICE</th>
-            <td>
-              <label>
-                <input id="price" th:field="*{price}" type="number">
-              </label>
-            </td>
-        </tr>
-        <tr>
-            <th>QUANTITY</th>
-            <td>
-              <label>
-                <input id="quantity" th:field="*{quantity}" type="number">
-              </label>
-            </td>
-        </tr>
-        <tr>
-            <th><input type="submit"></th>
-            <td><input type="button" value="cancel" onclick="location.href='/'"></td>
-        </tr>
-    </table>
+  <table>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{name}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{price}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{quantity}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>OPEN</th>
+      <td>
+        <label>
+          <input type="checkbox" th:field="*{open}"> open
+          <!-- thymeleaf 사용하지 않을 경우에는 체크박스를 히든 필드를 활용하여 처리한다. -->
+          <!-- <input type="hidden" name="_open" value="on"> -->
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th><input type="submit"></th>
+      <td><input type="button" value="cancel" onclick="location.href='/'"></td>
+    </tr>
+  </table>
 </form>
 </body>
 </html>

@@ -15,7 +15,8 @@ public final class ItemFactory {
             new ItemName(command.getName()),
             new ItemPrice(command.getPrice()),
             new ItemQuantity(command.getQuantity()),
-            null, null, null, null);
+            command.getOpen(),
+            null, null, null);
     }
 
     public static Item makeFromUpdateCommand(final ItemUpdateCommand command) {

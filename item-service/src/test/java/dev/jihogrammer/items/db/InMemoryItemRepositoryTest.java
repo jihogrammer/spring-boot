@@ -23,7 +23,7 @@ class InMemoryItemRepositoryTest {
     @Test
     void save() {
         // given
-        ItemSaveCommand command = new ItemSaveCommand("item", 10_000, 10);
+        ItemSaveCommand command = new ItemSaveCommand("item", 10_000, 10, null);
         // when
         Item savedItem = items.save(command);
         // then
@@ -34,8 +34,8 @@ class InMemoryItemRepositoryTest {
     @Test
     void findAll() {
         // given
-        Item savedItemA = items.save(new ItemSaveCommand("item-A", 1_000, 10));
-        Item savedItemB = items.save(new ItemSaveCommand("item-B", 2_000, 20));
+        Item savedItemA = items.save(new ItemSaveCommand("item-A", 1_000, 10, true));
+        Item savedItemB = items.save(new ItemSaveCommand("item-B", 2_000, 20, false));
         // when
         Iterable<Item> actual = items.findAll();
         // then
@@ -46,7 +46,7 @@ class InMemoryItemRepositoryTest {
     @Test
     void update() {
         // given
-        Item savedItem = items.save(new ItemSaveCommand("item", 1_000, 10));
+        Item savedItem = items.save(new ItemSaveCommand("item", 1_000, 10, true));
         ItemUpdateCommand command = new ItemUpdateCommand(savedItem.id().value(), "updated", 2_000, 20);
         // when
         Item updatedItem = items.update(command);

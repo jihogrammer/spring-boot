@@ -10,22 +10,24 @@
 <h6><a href="/">main</a></h6>
 
 <table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>PRICE</th>
-            <th>QUANTITY</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="item : ${items}">
-            <td><a th:href="|/items/${item.id}|" th:text="${item.id}">ID</a></td>
-            <td th:text="${item.name}">NAME</td>
-            <td th:text="${item.price}">PRICE</td>
-            <td th:text="${item.quantity}">QUANTITY</td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>PRICE</th>
+      <th>QUANTITY</th>
+      <th>OPEN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="item : ${items}">
+      <td><a th:href="|/items/${item.id}|" th:text="${item.id}">ID</a></td>
+      <td th:text="${item.name}">NAME</td>
+      <td th:text="${item.price}">PRICE</td>
+      <td th:text="${item.quantity}">QUANTITY</td>
+      <td th:text="${item.open}">OPEN</td>
+    </tr>
+  </tbody>
 </table>
 </body>
 </html>

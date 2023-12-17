@@ -11,4 +11,5 @@ public class ItemSaveCommand {
     private String name;
     private Integer price;
     private Integer quantity;
+    private Boolean open;
 }
