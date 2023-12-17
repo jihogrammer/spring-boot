@@ -6,14 +6,14 @@ import java.util.Collection;
 
 public final class ItemViewMapper {
     public static ItemView mapToView(final Item item) {
-        ItemView itemView = new ItemView();
-        itemView.setId(item.id().value());
-        itemView.setName(item.name().value());
-        itemView.setPrice(item.price().value());
-        itemView.setQuantity(item.quantity().value());
-        itemView.setOpen(item.open());
-        itemView.setRegions(item.regions());
-        return itemView;
+        return new ItemView(
+            item.id().value(),
+            item.name().value(),
+            item.price().value(),
+            item.quantity().value(),
+            item.open(),
+            item.regions(),
+            item.itemType());
     }
 
     public static Collection<ItemView> mapToView(final Collection<Item> items) {

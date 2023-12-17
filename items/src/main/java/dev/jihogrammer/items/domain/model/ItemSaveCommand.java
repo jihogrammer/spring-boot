@@ -1,5 +1,6 @@
 package dev.jihogrammer.items.domain.model;
 
+import dev.jihogrammer.items.vo.ItemType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,5 @@ public class ItemSaveCommand {
     private Integer quantity;
     private Boolean open;
     private Set<String> regions;
+    private ItemType itemType;
 }

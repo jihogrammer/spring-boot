@@ -18,6 +18,7 @@
       <th>QUANTITY</th>
       <th>OPEN</th>
       <th>REGIONS</th>
+      <th>ITEM TYPE</th>
     </tr>
   </thead>
   <tbody>
@@ -27,7 +28,8 @@
       <td th:text="${item.price}">PRICE</td>
       <td th:text="${item.quantity}">QUANTITY</td>
       <td th:text="${item.open}">OPEN</td>
-      <td><span th:text="${#strings.listJoin(item.regions, ', ')}"></span></td>
+      <td><span th:text="${#strings.listJoin(item.regions, ', ')}">REGIONS</span></td>
+      <td th:text="${item.itemType}">ITEM TYPE</td>
     </tr>
   </tbody>
 </table>

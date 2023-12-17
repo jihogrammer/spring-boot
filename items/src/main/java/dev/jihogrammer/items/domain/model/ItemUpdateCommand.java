@@ -1,5 +1,6 @@
 package dev.jihogrammer.items.domain.model;
 
+import dev.jihogrammer.items.vo.ItemType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -16,4 +17,5 @@ public class ItemUpdateCommand {
     private Integer quantity;
     private Boolean open;
     private Set<String> regions;
+    private ItemType itemType;
 }

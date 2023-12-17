@@ -64,6 +64,15 @@
         </label>
       </td>
     </tr>
+    <tr>
+      <th>ITEM TYPE</th>
+      <td>
+        <label th:each="itemType : ${itemTypes}">
+          <input type="radio" th:field="*{itemType}" th:value="${itemType.name()}" disabled>
+          [[${itemType.description()}]]
+        </label>
+      </td>
+    </tr>
   </table>
 </form>
 <button th:onclick="|location.href='/items/update/${item.id}'|">update</button>

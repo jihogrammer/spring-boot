@@ -10,6 +10,7 @@ import dev.jihogrammer.items.model.in.ItemUpdateSourceMapper;
 import dev.jihogrammer.items.model.out.ItemView;
 import dev.jihogrammer.items.model.out.ItemViewMapper;
 import dev.jihogrammer.items.vo.ItemId;
+import dev.jihogrammer.items.vo.ItemType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,11 @@ public class ItemsController {
         return REGIONS;
     }
 
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes() {
+        return ItemType.values();
+    }
+
     @GetMapping
     public String items(final Model model) {
         model.addAttribute("items", ItemViewMapper.mapToView(items.findAll()));
@@ -43,8 +49,7 @@ public class ItemsController {
 
     @GetMapping("/{itemId}")
     public String item(@PathVariable final long itemId, final Model model) {
-        ItemView itemView = ItemViewMapper.mapToView(items.findById(new ItemId(itemId)));
-        model.addAttribute("item", itemView);
+        model.addAttribute("item", ItemViewMapper.mapToView(items.findById(new ItemId(itemId))));
         return "/items/item";
     }
 
@@ -64,15 +69,13 @@ public class ItemsController {
 
     @GetMapping("/update/{itemId}")
     public String updateForm(@PathVariable("itemId") final long value, final Model model) {
-        ItemUpdateSource itemUpdateSource = ItemUpdateSourceMapper.mapToUpdateSource(items.findById(new ItemId(value)));
-        model.addAttribute("item", itemUpdateSource);
+        model.addAttribute("item", ItemUpdateSourceMapper.mapToUpdateSource(items.findById(new ItemId(value))));
         return "/items/update";
     }
 
     @PostMapping("/update/{itemId}")
     public String updateItem(final ItemUpdateSource itemUpdateSource, final RedirectAttributes redirectAttributes) {
-        ItemUpdateCommand command = ItemUpdateSourceMapper.mapToUpdateCommand(itemUpdateSource);
-        Item item = items.update(command);
+        Item item = items.update(ItemUpdateSourceMapper.mapToUpdateCommand(itemUpdateSource));
         redirectAttributes.addAttribute("itemId", item.id().value());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/items/{itemId}";

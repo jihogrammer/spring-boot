@@ -1,5 +1,6 @@
 package dev.jihogrammer.items.model.in;
 
+import dev.jihogrammer.items.vo.ItemType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -14,4 +15,5 @@ public class ItemUpdateSource {
     private Integer quantity;
     private Boolean open;
     private Set<String> regions;
+    private ItemType itemType;
 }

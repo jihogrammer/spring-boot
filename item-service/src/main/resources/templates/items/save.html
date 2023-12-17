@@ -55,6 +55,15 @@
       </td>
     </tr>
     <tr>
+      <th>ITEM TYPE</th>
+      <td>
+        <label th:each="itemType : ${itemTypes}">
+          <input type="radio" th:field="*{itemType}" th:value="${itemType.name()}">
+          [[${itemType.description()}]]
+        </label>
+      </td>
+    </tr>
+    <tr>
       <th><input type="submit"></th>
       <td><input type="button" value="cancel" onclick="location.href='/'"></td>
     </tr>

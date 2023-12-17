@@ -17,7 +17,8 @@ public final class ItemFactory {
             new ItemQuantity(command.getQuantity()),
             command.getOpen(),
             command.getRegions(),
-            null, null);
+            command.getItemType(),
+            null);
     }
 
     public static Item makeFromUpdateCommand(final ItemUpdateCommand command) {
@@ -28,6 +29,7 @@ public final class ItemFactory {
             new ItemQuantity(command.getQuantity()),
             command.getOpen(),
             command.getRegions(),
-            null, null);
+            command.getItemType(),
+            null);
     }
 }

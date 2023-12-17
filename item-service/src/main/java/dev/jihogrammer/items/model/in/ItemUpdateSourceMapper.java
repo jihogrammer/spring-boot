@@ -11,7 +11,8 @@ public final class ItemUpdateSourceMapper {
             item.price().value(),
             item.quantity().value(),
             item.open(),
-            item.regions());
+            item.regions(),
+            item.itemType());
     }
 
     public static ItemUpdateCommand mapToUpdateCommand(final ItemUpdateSource itemUpdateSource) {
@@ -21,6 +22,7 @@ public final class ItemUpdateSourceMapper {
             itemUpdateSource.getPrice(),
             itemUpdateSource.getQuantity(),
             itemUpdateSource.getOpen(),
-            itemUpdateSource.getRegions());
+            itemUpdateSource.getRegions(),
+            itemUpdateSource.getItemType());
     }
 }
