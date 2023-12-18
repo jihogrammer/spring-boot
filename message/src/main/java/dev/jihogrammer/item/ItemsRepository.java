@@ -1,6 +1,5 @@
 package dev.jihogrammer.item;
 
-import dev.jihogrammer.common.utils.RandomUtils;
 import dev.jihogrammer.items.domain.Items;
 import dev.jihogrammer.items.domain.model.Item;
 import dev.jihogrammer.items.domain.model.ItemSaveCommand;
@@ -12,7 +11,6 @@ import dev.jihogrammer.items.vo.ItemQuantity;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,7 +24,6 @@ public class ItemsRepository implements Items {
         this.store = new ConcurrentHashMap<>();
         this.sequence = new AtomicLong();
     }
-
 
     @Override
     public Item save(final ItemSaveCommand command) {
@@ -43,9 +40,6 @@ public class ItemsRepository implements Items {
 
     @Override
     public Collection<Item> findAll() {
-        if (this.store.isEmpty()) {
-            return List.of(generateRandomItem(), generateRandomItem(), generateRandomItem());
-        }
         return this.store.values();
     }
 
@@ -83,23 +77,5 @@ public class ItemsRepository implements Items {
 
     private ItemId generateItemId() {
         return new ItemId(this.sequence.addAndGet(1));
-    }
-
-    private Item generateRandomItem() {
-        ItemId itemId  = new ItemId(RandomUtils.randomLong());
-
-        while (this.store.containsKey(itemId)) {
-            itemId = new ItemId(RandomUtils.randomLong());
-        }
-
-        return new Item(
-            itemId,
-            new ItemName(RandomUtils.randomString()),
-            new ItemPrice(RandomUtils.randomInt()),
-            new ItemQuantity(RandomUtils.randomInt()),
-            null,
-            null,
-            null,
-            null);
     }
 }

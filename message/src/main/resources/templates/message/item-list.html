@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>item list - message</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>NAME</th>
+    <th>PRICE</th>
+    <th>QUANTITY</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="item : ${items}">
+    <td><a th:href="|/message/items/${item.id}|" th:text="${item.id}">ID</a></td>
+    <td th:text="${item.name}">NAME</td>
+    <td th:text="${item.price}">PRICE</td>
+    <td th:text="${item.quantity}">QUANTITY</td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <input type="button" value="register" onclick="location.href='/message/items/register'">
+</div>
+</body>
+</html>

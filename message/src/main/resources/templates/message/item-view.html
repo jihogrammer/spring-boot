@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>item view - message</title>
+</head>
+<body>
+<form action="" th:object="${item}">
+  <table>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{id}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{name}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{price}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{quantity}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th><input type="button" value="update" th:onclick="|location.href='/message/items/update/*{id}'|"></th>
+      <th><input type="button" value="cancel" onclick="location.href='/message/items'"></th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
