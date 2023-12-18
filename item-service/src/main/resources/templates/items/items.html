@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>items</title>
@@ -10,22 +10,30 @@
 <h6><a href="/">main</a></h6>
 
 <table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>PRICE</th>
-            <th>QUANTITY</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr th:each="item : ${items}">
-            <td><a th:href="|/items/${item.id.value}|" th:text="${item.id.value}">ID</a></td>
-            <td th:text="${item.name}">NAME</td>
-            <td th:text="${item.price}">PRICE</td>
-            <td th:text="${item.quantity}">QUANTITY</td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>PRICE</th>
+      <th>QUANTITY</th>
+      <th>OPEN</th>
+      <th>REGIONS</th>
+      <th>ITEM TYPE</th>
+      <th>DELIVERY CODE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="item : ${items}">
+      <td><a th:href="|/items/${item.id}|" th:text="${item.id}">ID</a></td>
+      <td th:text="${item.name}">NAME</td>
+      <td th:text="${item.price}">PRICE</td>
+      <td th:text="${item.quantity}">QUANTITY</td>
+      <td th:text="${item.open}">OPEN</td>
+      <td><span th:text="${#strings.listJoin(item.regions, ', ')}">REGIONS</span></td>
+      <td th:text="${item.itemType}">ITEM TYPE</td>
+      <td th:text="${item.deliveryCode}">DELIVERY CODE</td>
+    </tr>
+  </tbody>
 </table>
 </body>
 </html>

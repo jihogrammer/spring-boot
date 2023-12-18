@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>item save</title>
@@ -11,26 +11,85 @@
 
 <h4 th:if="${param.status}">Success</h4>
 
-<form action="" method="POST">
-    <table>
-        <tr>
-            <th>ID</th>
-            <td><input name="id" type="number" readonly th:value="${item.id.value}"></td>
-        </tr>
-        <tr>
-            <th>NAME</th>
-            <td><input name="name" type="text" readonly th:value="${item.name}"></td>
-        </tr>
-        <tr>
-            <th>PRICE</th>
-            <td><input name="price" type="number" readonly th:value="${item.price}"></td>
-        </tr>
-        <tr>
-            <th>QUANTITY</th>
-            <td><input name="quantity" type="number" readonly th:value="${item.quantity}"></td>
-        </tr>
-    </table>
+<form action="" method="POST" th:object="${item}">
+  <table>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input name="id" type="number" readonly th:value="*{id}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input id="name" th:field="*{name}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input id="price" th:field="*{price}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input id="quantity" th:field="*{quantity}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>OPEN</th>
+      <td>
+        <label>
+          <input type="checkbox" th:field="*{open}" disabled> open
+          <!-- thymeleaf th:field 사용하지 않을 경우에는 체크박스를 히든 필드를 활용하여 처리한다. -->
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>REGIONS</th>
+      <td>
+        <label th:each="region : ${regions}">
+          <input type="checkbox" th:field="*{regions}" th:value="${region.key}" disabled>
+          [[${region.value}]]
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>ITEM TYPE</th>
+      <td>
+        <label th:each="itemType : ${itemTypes}">
+          <input type="radio" th:field="*{itemType}" th:value="${itemType.name()}" disabled>
+          [[${itemType.description()}]]
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>DELIVERY CODE</th>
+      <td>
+        <label>
+          [[*{deliveryCode}]]
+          <select th:field="*{deliveryCode}">
+            <option value="">=== 배송 방식 선택 ===</option>
+            <option
+              th:each="deliveryCode : ${deliveryCodes}"
+              th:value="${deliveryCode.code}"
+              th:text="${deliveryCode.displayName}">
+            </option>
+          </select>
+        </label>
+      </td>
+    </tr>
+  </table>
 </form>
-<button th:onclick="|location.href='/items/update/${item.id.value}'|">update</button>
+<button th:onclick="|location.href='/items/update/${item.id}'|">update</button>
 </body>
 </html>

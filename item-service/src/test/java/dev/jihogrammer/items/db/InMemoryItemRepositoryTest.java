@@ -1,8 +1,9 @@
 package dev.jihogrammer.items.db;
 
-import dev.jihogrammer.items.domain.Item;
-import dev.jihogrammer.items.domain.ItemUpdateSource;
 import dev.jihogrammer.items.domain.Items;
+import dev.jihogrammer.items.domain.model.Item;
+import dev.jihogrammer.items.domain.model.ItemSaveCommand;
+import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,24 +23,19 @@ class InMemoryItemRepositoryTest {
     @Test
     void save() {
         // given
-        Item item = new Item("item", 10000, 10);
+        ItemSaveCommand command = new ItemSaveCommand("item", 10_000, 10, null, null, null, null);
         // when
-        Item savedItem = items.save(item);
+        Item savedItem = items.save(command);
         // then
-        Item actual = items.findById(savedItem.getId());
+        Item actual = items.findById(savedItem.id());
         assertThat(actual).isEqualTo(savedItem);
-        assertThat(actual.getName()).isEqualTo(item.getName());
-        assertThat(actual.getPrice()).isEqualTo(item.getPrice());
-        assertThat(actual.getQuantity()).isEqualTo(item.getQuantity());
     }
 
     @Test
     void findAll() {
         // given
-        Item itemA = new Item("item-A", 1000, 10);
-        Item itemB = new Item("item-B", 2000, 20);
-        Item savedItemA = items.save(itemA);
-        Item savedItemB = items.save(itemB);
+        Item savedItemA = items.save(new ItemSaveCommand("item-A", 1_000, 10, true, null, null, null));
+        Item savedItemB = items.save(new ItemSaveCommand("item-B", 2_000, 20, false, null, null, null));
         // when
         Iterable<Item> actual = items.findAll();
         // then
@@ -50,15 +46,11 @@ class InMemoryItemRepositoryTest {
     @Test
     void update() {
         // given
-        Item item = new Item("item", 1000, 10);
-        Item savedItem = items.save(item);
-        ItemUpdateSource source = new ItemUpdateSource(savedItem.getId(), "updated", 2000, 20);
+        Item savedItem = items.save(new ItemSaveCommand("item", 1_000, 10, true, null, null, null));
+        ItemUpdateCommand command = new ItemUpdateCommand(savedItem.id().value(), "updated", 2_000, 20, null, null, null, null);
         // when
-        items.update(source);
+        Item updatedItem = items.update(command);
         // then
-        Item actual = items.findById(savedItem.getId());
-        assertThat(actual.getName()).isEqualTo(source.name());
-        assertThat(actual.getPrice()).isEqualTo(source.price());
-        assertThat(actual.getQuantity()).isEqualTo(source.quantity());
+        assertThat(items.findById(savedItem.id())).isEqualTo(updatedItem);
     }
 }

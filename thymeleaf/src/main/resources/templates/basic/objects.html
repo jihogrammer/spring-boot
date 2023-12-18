@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>objects - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<div>
+  <table>
+    <caption>Objects</caption>
+    <thead>
+    <tr>
+      <th>OBJECTS</th>
+      <th>RESULT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th colspan="2">
+        Expression Basic Objects
+        - <a href="https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html#expression-basic-objects">docs</a>
+      </th>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${#ctx.request}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${#ctx.request}">#ctx.request value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${#vars.response}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${#vars.response}">#vars.response value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${#locale.country}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${#locale.country}">#locale.country value</p></td>
+    </tr>
+    <tr>
+      <th colspan="2">Spring Basic Objects</th>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${session}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${session}">session value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${request}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${request}">request value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${response}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${response}">response value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${session}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${session}">session value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${servletContext}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${servletContext}">servletContext value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${locale}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${locale}">locale value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${param.data}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${param.data}">param.data value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${session.sessionData}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${session.sessionData}">session.sessionData value</p></td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${@helloComponent.hello('Bean')}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${@helloComponent.hello('Bean')}">@helloComponent.hello('Bean') value</p></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

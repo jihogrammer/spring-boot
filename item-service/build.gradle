@@ -9,7 +9,8 @@ jar.enabled = true
 bootJar.enabled = true
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation project(':items')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
+    implementation(project(':common'))
+    implementation(project(':items'))
 }

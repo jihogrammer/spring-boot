@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Configuration
-public class ApplicationConfiguration {
+public class ItemConfiguration {
     @Bean
     public Items items() {
         return new InMemoryItemRepository(new ConcurrentHashMap<>(), new AtomicLong());

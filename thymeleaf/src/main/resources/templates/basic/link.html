@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>link - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<div>
+  <table>
+    <caption>LINK</caption>
+    <thead>
+    <tr>
+      <th>SYNTAX</th>
+      <th>RESULT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th><code>&lt;a th:href="@{/hello}"&gt;&lt;/a&gt;</code></th>
+      <td><a th:href="@{/hello}">/hello</a></td>
+    </tr>
+    <tr>
+      <th><code>&lt;a th:href="@{/hello(paramA=a, paramB=b)}"&gt;&lt;/a&gt;</code></th>
+      <td><a th:href="@{/hello(paramA=a, paramB=b)}">/hello?paramA=a&paramB=b</a></td>
+    </tr>
+    <tr>
+      <th><code>&lt;a th:href="@{/hello/{pathA}/{pathB}(pathA=a, pathB=b)}"&gt;&lt;/a&gt;</code></th>
+      <td><a th:href="@{/hello/{pathA}/{pathB}(pathA=a, pathB=b)}">/hello/a/b</a></td>
+    </tr>
+    <tr>
+      <th><code>&lt;a th:href="@{/hello/{path}(path=a, param=b)}"&gt;&lt;/a&gt;</code></th>
+      <td><a th:href="@{/hello/{path}(path=a, param=b)}">/hello/a?param=b</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
