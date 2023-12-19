@@ -10,4 +10,5 @@ include 'item-service'
 include 'items'
 include 'thymeleaf'
 include 'common'
+include 'message'
 

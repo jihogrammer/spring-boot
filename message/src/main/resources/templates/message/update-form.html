@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="|#{page.update-item} - message|">UPDATE PRODUCT</title>
+</head>
+<body>
+<form method="post" th:action="|/message/items/update|" th:object="${item}">
+  <table>
+    <tr>
+      <th th:text="#{label.item.id}">ID</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{id}" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th th:text="#{label.item.name}">NAME</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{name}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th th:text="#{label.item.price}">PRICE</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{price}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th th:text="#{label.item.quantity}">QUANTITY</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{quantity}">
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th><input type="submit" th:value="#{button.update}"></th>
+      <th><input type="button" th:value="#{button.cancel}" th:onclick="|location.href='/message/items/*{id}'|"></th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="|#{page.item} - message|">PRODUCT DETAIL</title>
+</head>
+<body>
+<form action="" th:object="${item}">
+  <table>
+    <tr>
+      <th th:text="#{label.item.id}">ID</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{id}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th th:text="#{label.item.name}">NAME</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{name}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th th:text="#{label.item.price}">PRICE</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{price}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th th:text="#{label.item.quantity}">QUANTITY</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{quantity}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th><input type="button" th:value="#{button.update}" th:onclick="|location.href='/message/items/update/*{id}'|"></th>
+      <th><input type="button" th:value="#{button.cancel}" onclick="location.href='/message/items'"></th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
