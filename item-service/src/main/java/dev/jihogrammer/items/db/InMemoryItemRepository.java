@@ -1,10 +1,10 @@
 package dev.jihogrammer.items.db;
 
-import dev.jihogrammer.items.domain.Items;
-import dev.jihogrammer.items.domain.model.Item;
-import dev.jihogrammer.items.domain.model.ItemSaveCommand;
-import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
-import dev.jihogrammer.items.vo.ItemId;
+import dev.jihogrammer.items.Items;
+import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.model.in.ItemSaveCommand;
+import dev.jihogrammer.items.model.in.ItemUpdateCommand;
+import dev.jihogrammer.items.model.vo.ItemId;
 
 import java.util.Collection;
 import java.util.Map;

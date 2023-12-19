@@ -1,16 +1,15 @@
-package dev.jihogrammer.items.domain.model;
+package dev.jihogrammer.items.model.in;
 
-import dev.jihogrammer.items.vo.ItemType;
+import dev.jihogrammer.items.model.vo.ItemType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ItemSaveCommand {
+public class ItemUpdateCommand {
+    private final Long id;
     private String name;
     private Integer price;
     private Integer quantity;

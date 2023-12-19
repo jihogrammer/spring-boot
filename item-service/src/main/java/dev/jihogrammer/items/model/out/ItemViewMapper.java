@@ -1,6 +1,6 @@
 package dev.jihogrammer.items.model.out;
 
-import dev.jihogrammer.items.domain.model.Item;
+import dev.jihogrammer.items.Item;
 
 import java.util.Collection;
 

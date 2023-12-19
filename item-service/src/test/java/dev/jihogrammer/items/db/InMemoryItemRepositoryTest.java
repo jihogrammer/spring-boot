@@ -1,9 +1,9 @@
 package dev.jihogrammer.items.db;
 
-import dev.jihogrammer.items.domain.Items;
-import dev.jihogrammer.items.domain.model.Item;
-import dev.jihogrammer.items.domain.model.ItemSaveCommand;
-import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
+import dev.jihogrammer.items.Items;
+import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.model.in.ItemSaveCommand;
+import dev.jihogrammer.items.model.in.ItemUpdateCommand;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
