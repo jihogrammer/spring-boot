@@ -2,16 +2,16 @@
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>item list - message</title>
+  <title th:text="|#{page.item-list} - message|">PRODUCT LIST</title>
 </head>
 <body>
 <table>
   <thead>
   <tr>
-    <th>ID</th>
-    <th>NAME</th>
-    <th>PRICE</th>
-    <th>QUANTITY</th>
+    <th th:text="#{label.item.id}">ID</th>
+    <th th:text="#{label.item.name}">NAME</th>
+    <th th:text="#{label.item.price}">PRICE</th>
+    <th th:text="#{label.item.quantity}">QUANTITY</th>
   </tr>
   </thead>
   <tbody>
@@ -24,7 +24,7 @@
   </tbody>
 </table>
 <div>
-  <input type="button" value="register" onclick="location.href='/message/items/register'">
+  <input type="button" th:value="#{button.register}" onclick="location.href='/message/items/register'">
 </div>
 </body>
 </html>
