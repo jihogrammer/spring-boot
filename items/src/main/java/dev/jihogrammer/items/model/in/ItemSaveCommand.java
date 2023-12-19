@@ -4,16 +4,19 @@ import dev.jihogrammer.items.model.vo.ItemType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 public class ItemSaveCommand {
-    private String name;
-    private Integer price;
-    private Integer quantity;
+    public static final ItemSaveCommand EMPTY_COMMAND = new ItemSaveCommand(null, null, null);
+
+    private final String name;
+    private final Integer price;
+    private final Integer quantity;
     private Boolean open;
     private Set<String> regions;
     private ItemType itemType;

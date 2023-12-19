@@ -63,7 +63,7 @@ public class ItemsController {
 
     @GetMapping("/save")
     public String saveForm(final Model model) {
-        model.addAttribute("item", new ItemSaveCommand());
+        model.addAttribute("item", ItemSaveCommand.EMPTY_COMMAND);
         return "/items/save";
     }
 
