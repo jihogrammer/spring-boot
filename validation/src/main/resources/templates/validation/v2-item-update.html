@@ -7,13 +7,18 @@
     .error {
       color: red;
     }
+    .error-input {
+      border: red 2px solid;
+    }
   </style>
 </head>
 <body>
 <h1>Validation Version 2 - Item Update</h1>
 <h6><a href="/">main</a></h6>
-<p th:if="${errors?.containsKey('global')}" th:text="${errors.get('global')}" class="error">GLOBAL ERROR</p>
 <form method="post" th:action="|/validation/v2/items/update/${item.id}|" th:object="${item}">
+  <div th:if="${#fields.hasGlobalErrors()}">
+    <p th:each="error : ${#fields.globalErrors()}" th:text="${error}" class="error">A GLOBAL ERROR</p>
+  </div>
   <table>
     <tr>
       <th>ID</th>
@@ -27,8 +32,8 @@
       <th>NAME</th>
       <td>
         <label>
-          <input type="text" th:field="*{name}">
-          <span th:if="${errors?.containsKey('name')}" th:text="${errors.get('name')}" class="error">FIELD ERROR</span>
+          <input type="text" th:field="*{name}" th:errorclass="error-input">
+          <span th:errors="*{name}" class="error">FIELD ERROR</span>
         </label>
       </td>
     </tr>
@@ -36,8 +41,8 @@
       <th>PRICE</th>
       <td>
         <label>
-          <input type="number" th:field="*{price}">
-          <span th:if="${errors?.containsKey('price')}" th:text="${errors.get('price')}" class="error">FIELD ERROR</span>
+          <input type="number" th:field="*{price}" th:errorclass="error-input">
+          <span th:errors="*{price}" class="error">FIELD ERROR</span>
         </label>
       </td>
     </tr>
@@ -45,8 +50,8 @@
       <th>QUANTITY</th>
       <td>
         <label>
-          <input type="number" th:field="*{quantity}">
-          <span th:if="${errors?.containsKey('quantity')}" th:text="${errors.get('quantity')}" class="error">FIELD ERROR</span>
+          <input type="number" th:field="*{quantity}" th:errorclass="error-input">
+          <span th:errors="*{quantity}" class="error">FIELD ERROR</span>
         </label>
       </td>
     </tr>
