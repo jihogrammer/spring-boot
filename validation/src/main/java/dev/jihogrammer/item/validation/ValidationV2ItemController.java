@@ -45,13 +45,11 @@ public class ValidationV2ItemController {
         @ModelAttribute("item") final ItemRegisterHttpRequest request,
         // must be placed immediately after @ModelAttribute
         final BindingResult bindingResult,
-        final Model model,
         final RedirectAttributes redirectAttributes
     ) {
         validateRequest(request, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("item", request);
             return "/validation/v2-item-register";
         } else {
             ItemView itemView = this.service.register(request.mapToCommand());
@@ -71,13 +69,11 @@ public class ValidationV2ItemController {
         @ModelAttribute("item") final ItemUpdateHttpRequest request,
         // must be placed immediately after @ModelAttribute
         final BindingResult bindingResult,
-        final Model model,
         final RedirectAttributes redirectAttributes
     ) {
         validateRequest(request, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("item", request);
             return "/validation/v2-item-update";
         } else {
             ItemView itemView = this.service.update(request.mapToCommand());
@@ -86,40 +82,53 @@ public class ValidationV2ItemController {
         }
     }
 
-
-    private void validateRequest(final ItemRegisterHttpRequest request, final BindingResult bindingResult) {
+    private void validateFields(final String name, final Integer price, final Integer quantity, final BindingResult bindingResult) {
         // single field validation
-        if (request.getName() == null || request.getName().isEmpty()) {
-            bindingResult.addError(new FieldError("item", "name", "이름은 꼭 입력해주세요."));
+        if (name == null || name.isEmpty()) {
+            bindingResult.addError(new FieldError(
+                "item",
+                "name",
+                name,
+                false,
+                null,
+                null,
+                "이름은 꼭 입력해주세요."));
         }
-        if (request.getPrice() == null || (1_000 > request.getPrice() || request.getPrice() > 1_000_000)) {
-            bindingResult.addError(new FieldError("item", "price", "가격은 1,000 ~ 1,000,000 원 사이의 값으로 정해주세요."));
+        if (price == null || 1_000 > price || price > 1_000_000) {
+            bindingResult.addError(new FieldError(
+                "item",
+                "price",
+                price,
+                false,
+                null,
+                null,
+                "가격은 1,000 ~ 1,000,000 원 사이의 값으로 정해주세요."));
         }
-        if (request.getQuantity() == null || (1 > request.getQuantity() || request.getQuantity() > 10_000)) {
-            bindingResult.addError(new FieldError("item", "quantity", "수량은 0 ~ 9,999 개까지 입력해주세요."));
+        if (quantity == null || 1 > quantity || quantity > 10_000) {
+            bindingResult.addError(new FieldError(
+                "item",
+                "quantity",
+                quantity,
+                false,
+                null,
+                null,
+                "수량은 0 ~ 9,999 개까지 입력해주세요."));
         }
-
         // complex fields validation
-        if (request.getPrice() != null && request.getQuantity() != null && (request.getPrice() * request.getQuantity() < 10_000)) {
-            bindingResult.addError(new ObjectError("item", "(가격 * 수량 >= 10_000) 조건이 만족시켜주세요(현재: " + (request.getPrice() * request.getQuantity()) + ")."));
+        if (price != null && quantity != null && (price * quantity < 10_000)) {
+            bindingResult.addError(new ObjectError(
+                "item",
+                null,
+                null,
+                "(가격 * 수량 >= 10_000) 조건이 만족시켜주세요(현재: " + (price * quantity) + ")."));
         }
     }
 
-    private void validateRequest(final ItemUpdateHttpRequest request, final BindingResult bindingResult) {
-        // single field validation
-        if (request.getName() == null || request.getName().isEmpty()) {
-            bindingResult.addError(new FieldError("item", "name", "이름은 꼭 입력해주세요."));
-        }
-        if (request.getPrice() == null || (1_000 > request.getPrice() || request.getPrice() > 1_000_000)) {
-            bindingResult.addError(new FieldError("item", "price", "가격은 1,000 ~ 1,000,000 원 사이의 값으로 정해주세요."));
-        }
-        if (request.getQuantity() == null || (1 > request.getQuantity() || request.getQuantity() > 10_000)) {
-            bindingResult.addError(new FieldError("item", "quantity", "수량은 0 ~ 9,999 개까지 입력해주세요."));
-        }
+    private void validateRequest(final ItemRegisterHttpRequest request, final BindingResult bindingResult) {
+        validateFields(request.getName(), request.getPrice(), request.getQuantity(), bindingResult);
+    }
 
-        // complex fields validation
-        if (request.getPrice() != null && request.getQuantity() != null && (request.getPrice() * request.getQuantity() < 10_000)) {
-            bindingResult.addError(new ObjectError("item", "(가격 * 수량 >= 10_000) 조건이 만족시켜주세요(현재: " + (request.getPrice() * request.getQuantity()) + ")."));
-        }
+    private void validateRequest(final ItemUpdateHttpRequest request, final BindingResult bindingResult) {
+        validateFields(request.getName(), request.getPrice(), request.getQuantity(), bindingResult);
     }
 }
