@@ -3,10 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>REGISTER ITEM</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
 </head>
 <body>
 <h1>Validation Version 1 - Item Register</h1>
 <h6><a href="/">main</a></h6>
+<p th:if="${errors?.containsKey('global')}" th:text="${errors.get('global')}" class="error">GLOBAL ERROR</p>
 <form method="post" th:action="|/validation/v1/items/register|" th:object="${item}">
   <table>
     <tr>
@@ -14,6 +20,7 @@
       <td>
         <label>
           <input type="text" th:field="*{name}">
+          <span th:if="${errors?.containsKey('name')}" th:text="${errors.get('name')}" class="error">FIELD ERROR</span>
         </label>
       </td>
     </tr>
@@ -22,6 +29,7 @@
       <td>
         <label>
           <input type="number" th:field="*{price}">
+          <span th:if="${errors?.containsKey('price')}" th:text="${errors.get('price')}" class="error">FIELD ERROR</span>
         </label>
       </td>
     </tr>
@@ -30,6 +38,7 @@
       <td>
         <label>
           <input type="number" th:field="*{quantity}">
+          <span th:if="${errors?.containsKey('quantity')}" th:text="${errors.get('quantity')}" class="error">FIELD ERROR</span>
         </label>
       </td>
     </tr>
