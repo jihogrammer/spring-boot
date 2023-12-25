@@ -85,42 +85,17 @@ public class ValidationV2ItemController {
     private void validateFields(final String name, final Integer price, final Integer quantity, final BindingResult bindingResult) {
         // single field validation
         if (name == null || name.isEmpty()) {
-            bindingResult.addError(new FieldError(
-                "item",
-                "name",
-                name,
-                false,
-                new String[] {"item.name.required"},
-                null,
-                null));
+            bindingResult.rejectValue("name", "required");
         }
         if (price == null || 1_000 > price || price > 1_000_000) {
-            bindingResult.addError(new FieldError(
-                "item",
-                "price",
-                price,
-                false,
-                new String[] {"item.price.range"},
-                new Object[] {1_000, 1_000_000},
-                null));
+            bindingResult.rejectValue("price", "range", new Object[] {1_000, 1_000_000}, null);
         }
         if (quantity == null || 1 > quantity || quantity > 10_000) {
-            bindingResult.addError(new FieldError(
-                "item",
-                "quantity",
-                quantity,
-                false,
-                new String[] {"item.quantity.range"},
-                new Object[] {1, 9_999},
-                null));
+            bindingResult.rejectValue("quantity", "range", new Object[] {1, 9_999}, null);
         }
         // complex fields validation
         if (price != null && quantity != null && (price * quantity < 10_000)) {
-            bindingResult.addError(new ObjectError(
-                "item",
-                new String[] {"item.total-max-price"},
-                new Object[] {10_000, price * quantity},
-                null));
+            bindingResult.reject("total-max-price", new Object[] {10_000, price * quantity}, null);
         }
     }
 
