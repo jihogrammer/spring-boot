@@ -90,9 +90,9 @@ public class ValidationV2ItemController {
                 "name",
                 name,
                 false,
+                new String[] {"item.name.required"},
                 null,
-                null,
-                "이름은 꼭 입력해주세요."));
+                null));
         }
         if (price == null || 1_000 > price || price > 1_000_000) {
             bindingResult.addError(new FieldError(
@@ -100,9 +100,9 @@ public class ValidationV2ItemController {
                 "price",
                 price,
                 false,
-                null,
-                null,
-                "가격은 1,000 ~ 1,000,000 원 사이의 값으로 정해주세요."));
+                new String[] {"item.price.range"},
+                new Object[] {1_000, 1_000_000},
+                null));
         }
         if (quantity == null || 1 > quantity || quantity > 10_000) {
             bindingResult.addError(new FieldError(
@@ -110,17 +110,17 @@ public class ValidationV2ItemController {
                 "quantity",
                 quantity,
                 false,
-                null,
-                null,
-                "수량은 0 ~ 9,999 개까지 입력해주세요."));
+                new String[] {"item.quantity.range"},
+                new Object[] {1, 9_999},
+                null));
         }
         // complex fields validation
         if (price != null && quantity != null && (price * quantity < 10_000)) {
             bindingResult.addError(new ObjectError(
                 "item",
-                null,
-                null,
-                "(가격 * 수량 >= 10_000) 조건이 만족시켜주세요(현재: " + (price * quantity) + ")."));
+                new String[] {"item.total-max-price"},
+                new Object[] {10_000, price * quantity},
+                null));
         }
     }
 
