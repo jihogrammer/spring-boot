@@ -1,26 +1,25 @@
-package dev.jihogrammer.item.validation;
+package dev.jihogrammer.item.controlller;
 
 import dev.jihogrammer.item.ItemService;
 import dev.jihogrammer.item.model.in.ItemRegisterHttpRequest;
 import dev.jihogrammer.item.model.in.ItemUpdateHttpRequest;
 import dev.jihogrammer.item.model.out.ItemView;
+import dev.jihogrammer.item.validation.ItemRegisterHttpRequestValidator;
+import dev.jihogrammer.item.validation.ItemUpdateHttpRequestValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/validation/v2/items")
 @RequiredArgsConstructor
 public class ValidationV2ItemController {
     private final ItemService service;
+    private final ItemRegisterHttpRequestValidator itemRegisterHttpRequestValidator;
+    private final ItemUpdateHttpRequestValidator itemUpdateHttpRequestValidator;
 
     @GetMapping
     public String itemListView(final Model model) {
@@ -47,7 +46,7 @@ public class ValidationV2ItemController {
         final BindingResult bindingResult,
         final RedirectAttributes redirectAttributes
     ) {
-        validateRequest(request, bindingResult);
+        itemRegisterHttpRequestValidator.validate(request, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "/validation/v2-item-register";
@@ -71,7 +70,7 @@ public class ValidationV2ItemController {
         final BindingResult bindingResult,
         final RedirectAttributes redirectAttributes
     ) {
-        validateRequest(request, bindingResult);
+        itemUpdateHttpRequestValidator.validate(request, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "/validation/v2-item-update";
@@ -80,30 +79,5 @@ public class ValidationV2ItemController {
             redirectAttributes.addAttribute("itemId", itemView.id());
             return "redirect:/validation/v2/items/{itemId}";
         }
-    }
-
-    private void validateFields(final String name, final Integer price, final Integer quantity, final BindingResult bindingResult) {
-        // single field validation
-        if (name == null || name.isEmpty()) {
-            bindingResult.rejectValue("name", "required");
-        }
-        if (price == null || 1_000 > price || price > 1_000_000) {
-            bindingResult.rejectValue("price", "range", new Object[] {1_000, 1_000_000}, null);
-        }
-        if (quantity == null || 1 > quantity || quantity > 10_000) {
-            bindingResult.rejectValue("quantity", "range", new Object[] {1, 9_999}, null);
-        }
-        // complex fields validation
-        if (price != null && quantity != null && (price * quantity < 10_000)) {
-            bindingResult.reject("total-max-price", new Object[] {10_000, price * quantity}, null);
-        }
-    }
-
-    private void validateRequest(final ItemRegisterHttpRequest request, final BindingResult bindingResult) {
-        validateFields(request.getName(), request.getPrice(), request.getQuantity(), bindingResult);
-    }
-
-    private void validateRequest(final ItemUpdateHttpRequest request, final BindingResult bindingResult) {
-        validateFields(request.getName(), request.getPrice(), request.getQuantity(), bindingResult);
     }
 }

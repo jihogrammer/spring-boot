@@ -1,4 +1,4 @@
-package dev.jihogrammer.item.validation;
+package dev.jihogrammer.item.controlller;
 
 import dev.jihogrammer.item.ItemService;
 import dev.jihogrammer.item.model.in.ItemRegisterHttpRequest;
