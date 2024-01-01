@@ -25,17 +25,10 @@ public class ValidationV2ItemUpdateController {
         webDataBinder.addValidators(itemUpdateHttpRequestValidator);
     }
 
-    @GetMapping("/update/{itemId}")
-    public String itemUpdateView(final Model model, @PathVariable final Long itemId) {
-        model.addAttribute("item", ItemUpdateHttpRequest.of(this.service.findById(itemId)));
-        return "/validation/v2-item-update";
-    }
-
     @PostMapping("/update/{itemId}")
     public String updateItem(
         @Validated @ModelAttribute("item") final ItemUpdateHttpRequest request,
-        // must be placed immediately after @ModelAttribute
-        final BindingResult bindingResult,
+        final BindingResult bindingResult, // must be placed immediately after @ModelAttribute
         final RedirectAttributes redirectAttributes
     ) {
         if (bindingResult.hasErrors()) {
