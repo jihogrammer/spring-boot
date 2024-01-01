@@ -1,8 +1,6 @@
 package dev.jihogrammer.item.model.in;
 
 import dev.jihogrammer.items.model.in.ItemSaveCommand;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -16,8 +14,7 @@ public class ItemRegisterHttpRequest {
     @Range(min = 1_000, max = 1_000_000)
     private Integer price;
     @NotNull
-    @Min(1)
-    @Max(9999)
+    @Range(min = 1, max = 9999)
     private Integer quantity;
 
     public ItemSaveCommand mapToCommand() {

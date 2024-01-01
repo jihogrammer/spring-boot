@@ -3,14 +3,13 @@ package dev.jihogrammer.item.controlller;
 import dev.jihogrammer.item.ItemService;
 import dev.jihogrammer.item.model.in.ItemUpdateHttpRequest;
 import dev.jihogrammer.item.model.out.ItemView;
-import dev.jihogrammer.item.validation.ItemUpdateHttpRequestValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -18,18 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class ValidationV3ItemUpdateController {
     private final ItemService service;
-    private final ItemUpdateHttpRequestValidator itemUpdateHttpRequestValidator;
-
-    @InitBinder
-    public void init(final WebDataBinder webDataBinder) {
-        webDataBinder.addValidators(itemUpdateHttpRequestValidator);
-    }
-
-    @GetMapping("/update/{itemId}")
-    public String itemUpdateView(@PathVariable final Long itemId, final Model model) {
-        model.addAttribute("item", ItemUpdateHttpRequest.of(this.service.findById(itemId)));
-        return "/validation/v3-item-update";
-    }
 
     @PostMapping("/update/{itemId}")
     public String updateItem(
