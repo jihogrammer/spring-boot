@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>UPDATE ITEM</title>
+  <style>
+    .error {
+      color: red;
+    }
+    .error-input {
+      border: red 2px solid;
+    }
+  </style>
+</head>
+<body>
+<h1>Validation version 3 - Item Update</h1>
+<h6><a href="/">main</a></h6>
+<form method="post" th:action="|/validation/v3/items/update/${item.id}|" th:object="${item}">
+  <div th:if="${#fields.hasGlobalErrors()}">
+    <p th:each="error : ${#fields.globalErrors()}" th:text="${error}" class="error">A GLOBAL ERROR</p>
+  </div>
+  <table>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{id}" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{name}" th:errorclass="error-input">
+          <span th:errors="*{name}" class="error">FIELD ERROR</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{price}" th:errorclass="error-input">
+          <span th:errors="*{price}" class="error">FIELD ERROR</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{quantity}" th:errorclass="error-input">
+          <span th:errors="*{quantity}" class="error">FIELD ERROR</span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th><input type="submit" value="update"></th>
+      <th><input type="button" value="cancel" onclick="location.href='/validation/v3/items'"></th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
