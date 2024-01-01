@@ -27,7 +27,7 @@ public class ValidationV2ItemUpdateController {
 
     @GetMapping("/update/{itemId}")
     public String itemUpdateView(final Model model, @PathVariable final Long itemId) {
-        model.addAttribute("item", this.service.findById(itemId));
+        model.addAttribute("item", ItemUpdateHttpRequest.of(this.service.findById(itemId)));
         return "/validation/v2-item-update";
     }
 
