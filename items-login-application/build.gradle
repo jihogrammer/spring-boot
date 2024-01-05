@@ -10,6 +10,7 @@ bootJar.enabled = true
 
 dependencies {
     implementation(project(':items'))
+    implementation(project(':domain-member'))
     implementation(project(':common'))
 
     implementation('org.springframework.boot:spring-boot-starter-web')
