@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header > h1 {
+  margin: 1rem;
+  text-align: center;
+}
+
+main > table {
+  margin: auto;
+}
+
+main > table td > button {
+  margin: 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+}

@@ -12,4 +12,5 @@ include 'thymeleaf'
 include 'common'
 include 'message'
 include 'validation'
+include 'items-login-application'
 

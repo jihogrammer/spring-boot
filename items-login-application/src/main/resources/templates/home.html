@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home :: Item Login Application</title>
+  <link th:href="@{/main.css}" rel="stylesheet">
+</head>
+
+<body>
+<header>
+  <h1>Home</h1>
+</header>
+
+<main>
+  <table>
+    <tbody>
+    <tr>
+      <td>
+        <button th:onclick="|location.href=@{/members/register}|">Sign Up</button>
+      </td>
+      <td>
+        <button th:onclick="|location.href=@{/members/login}|">Sign In</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>
