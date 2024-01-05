@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ITEM DETAIL</title>
+</head>
+<body>
+<h1>Validation Version 2 - Item Detail</h1>
+<h6><a href="/">main</a></h6>
+<form action="" th:object="${item}">
+  <table>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input type="number" th:value="*{id}" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{name}" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{price}" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{quantity}" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th><input type="button" value="update" th:onclick="|location.href='/validation/v2/items/update/*{id}'|"></th>
+      <th><input type="button" value="cancel" onclick="location.href='/validation/v2/items'"></th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

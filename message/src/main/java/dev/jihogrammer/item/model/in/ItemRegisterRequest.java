@@ -1,6 +1,6 @@
 package dev.jihogrammer.item.model.in;
 
-import dev.jihogrammer.items.domain.model.ItemSaveCommand;
+import dev.jihogrammer.items.model.in.ItemSaveCommand;
 import lombok.Data;
 
 @Data

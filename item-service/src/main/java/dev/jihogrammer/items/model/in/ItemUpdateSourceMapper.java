@@ -1,8 +1,6 @@
 package dev.jihogrammer.items.model.in;
 
-import dev.jihogrammer.items.domain.model.Item;
-import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
-import dev.jihogrammer.items.vo.DeliveryCode;
+import dev.jihogrammer.items.Item;
 
 public final class ItemUpdateSourceMapper {
     public static ItemUpdateSource mapToUpdateSource(final Item item) {

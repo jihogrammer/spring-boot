@@ -1,7 +1,6 @@
 package dev.jihogrammer.item.model.out;
 
-import dev.jihogrammer.items.domain.model.Item;
-import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
+import dev.jihogrammer.items.Item;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

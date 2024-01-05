@@ -1,4 +1,4 @@
-package dev.jihogrammer.items.vo;
+package dev.jihogrammer.items.model.vo;
 
 public enum ItemType {
     BOOK("도서"), FOOD("음식"), ETC("기타");

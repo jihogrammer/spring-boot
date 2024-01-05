@@ -4,7 +4,7 @@ import dev.jihogrammer.item.model.in.ItemRegisterRequest;
 import dev.jihogrammer.item.model.in.ItemUpdateRequest;
 import dev.jihogrammer.item.model.out.ItemUpdateModel;
 import dev.jihogrammer.item.model.out.ItemView;
-import dev.jihogrammer.items.domain.model.Item;
+import dev.jihogrammer.items.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

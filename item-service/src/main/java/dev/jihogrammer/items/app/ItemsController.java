@@ -1,28 +1,23 @@
 package dev.jihogrammer.items.app;
 
 import dev.jihogrammer.common.utils.MapUtils;
-import dev.jihogrammer.items.domain.Items;
-import dev.jihogrammer.items.domain.model.Item;
-import dev.jihogrammer.items.domain.model.ItemSaveCommand;
-import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
+import dev.jihogrammer.items.Items;
+import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.model.in.ItemSaveCommand;
 import dev.jihogrammer.items.model.in.ItemUpdateSource;
 import dev.jihogrammer.items.model.in.ItemUpdateSourceMapper;
-import dev.jihogrammer.items.model.out.ItemView;
 import dev.jihogrammer.items.model.out.ItemViewMapper;
-import dev.jihogrammer.items.vo.DeliveryCode;
-import dev.jihogrammer.items.vo.ItemId;
-import dev.jihogrammer.items.vo.ItemType;
+import dev.jihogrammer.items.model.vo.DeliveryCode;
+import dev.jihogrammer.items.model.vo.ItemId;
+import dev.jihogrammer.items.model.vo.ItemType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static dev.jihogrammer.items.vo.DeliveryCode.Type.*;
 
 @Controller
 @RequestMapping("/items")
@@ -30,9 +25,9 @@ import static dev.jihogrammer.items.vo.DeliveryCode.Type.*;
 public class ItemsController {
     private static final Map<String, String> REGIONS = MapUtils.immutableLinkedHashMap("SEOUL", "서울", "BUSAN", "부산", "JEJU", "제주");
     private static final List<DeliveryCode> DELIVERY_CODES = List.of(
-        new DeliveryCode(FAST.name(), FAST.description()),
-        new DeliveryCode(NORMAL.name(), NORMAL.description()),
-        new DeliveryCode(SLOW.name(), SLOW.description()));
+        new DeliveryCode("FAST", "빠른 배송"),
+        new DeliveryCode("NORMAL", "일반 배송"),
+        new DeliveryCode("SLOW", "느린 배송"));
 
     private final Items items;
 
@@ -68,7 +63,7 @@ public class ItemsController {
 
     @GetMapping("/save")
     public String saveForm(final Model model) {
-        model.addAttribute("item", new ItemSaveCommand());
+        model.addAttribute("item", ItemSaveCommand.EMPTY_COMMAND);
         return "/items/save";
     }
 

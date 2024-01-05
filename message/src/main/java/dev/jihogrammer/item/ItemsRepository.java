@@ -1,13 +1,13 @@
 package dev.jihogrammer.item;
 
-import dev.jihogrammer.items.domain.Items;
-import dev.jihogrammer.items.domain.model.Item;
-import dev.jihogrammer.items.domain.model.ItemSaveCommand;
-import dev.jihogrammer.items.domain.model.ItemUpdateCommand;
-import dev.jihogrammer.items.vo.ItemId;
-import dev.jihogrammer.items.vo.ItemName;
-import dev.jihogrammer.items.vo.ItemPrice;
-import dev.jihogrammer.items.vo.ItemQuantity;
+import dev.jihogrammer.items.Items;
+import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.model.in.ItemSaveCommand;
+import dev.jihogrammer.items.model.in.ItemUpdateCommand;
+import dev.jihogrammer.items.model.vo.ItemId;
+import dev.jihogrammer.items.model.vo.ItemName;
+import dev.jihogrammer.items.model.vo.ItemPrice;
+import dev.jihogrammer.items.model.vo.ItemQuantity;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

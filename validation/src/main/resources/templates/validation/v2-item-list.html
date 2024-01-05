@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ITEM LIST</title>
+</head>
+<body>
+<h1>Validation Version 2 - Item List</h1>
+<h6><a href="/">main</a></h6>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>NAME</th>
+    <th>PRICE</th>
+    <th>QUANTITY</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="item : ${items}">
+    <td><a th:href="|/validation/v2/items/${item.id}|" th:text="${item.id}">ID</a></td>
+    <td th:text="${item.name}">NAME</td>
+    <td th:text="${item.price}">PRICE</td>
+    <td th:text="${item.quantity}">QUANTITY</td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <input type="button" value="register" onclick="location.href='/validation/v2/items/register'">
+</div>
+</body>
+</html>

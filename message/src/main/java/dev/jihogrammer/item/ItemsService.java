@@ -2,15 +2,13 @@ package dev.jihogrammer.item;
 
 import dev.jihogrammer.item.model.in.ItemRegisterRequest;
 import dev.jihogrammer.item.model.in.ItemUpdateRequest;
-import dev.jihogrammer.item.model.out.ItemView;
-import dev.jihogrammer.items.domain.Items;
-import dev.jihogrammer.items.domain.model.Item;
-import dev.jihogrammer.items.vo.ItemId;
+import dev.jihogrammer.items.Items;
+import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.model.vo.ItemId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
