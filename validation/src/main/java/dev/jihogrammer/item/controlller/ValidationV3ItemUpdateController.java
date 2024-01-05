@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ValidationV3ItemUpdateController {
     private final ItemService service;
 
-    @PostMapping("/update/{itemId}")
+    @PostMapping("/update/{itemId}") // TODO path variable 값으로 들어오는 ID 사용이 옳다만, 사용하고 있지 않음.
     public String updateItem(
         @Validated @ModelAttribute("item") final ItemUpdateHttpRequest request,
         final BindingResult bindingResult, // must be placed immediately after @ModelAttribute
