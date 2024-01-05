@@ -13,4 +13,5 @@ include 'common'
 include 'message'
 include 'validation'
 include 'items-login-application'
+include 'domain-member'
 
