@@ -1,4 +1,4 @@
-package dev.jihogrammer.item.login.home;
+package dev.jihogrammer.item.login.web.home;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

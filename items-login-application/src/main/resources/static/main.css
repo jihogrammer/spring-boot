@@ -8,12 +8,31 @@ header > h1 {
   text-align: center;
 }
 
-main > table {
+main table {
   margin: auto;
 }
 
-main > table td > button {
+main table td > button {
   margin: 1rem;
   padding: 1rem;
   font-size: 1rem;
+}
+
+.error {
+  color: red;
+  border-color: red;
+}
+
+th, td {
+  padding: 0.7rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.button-group > * {
+  display: block;
+  padding: 0.7rem;
 }

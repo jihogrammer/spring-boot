@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 public interface Members {
-    Member register(MemberRegisterCommand command);
+    Member save(MemberRegisterCommand command);
     Collection<Member> findAll();
     Optional<Member> findById(MemberId memberId);
     Optional<Member> findByUsername(String username);

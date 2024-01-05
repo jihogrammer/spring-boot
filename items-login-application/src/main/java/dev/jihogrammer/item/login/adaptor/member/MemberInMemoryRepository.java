@@ -1,4 +1,4 @@
-package dev.jihogrammer.item.login.member;
+package dev.jihogrammer.item.login.adaptor.member;
 
 import dev.jihogrammer.common.utils.LongValueSequenceGenerator;
 import dev.jihogrammer.member.Member;
@@ -21,7 +21,7 @@ public class MemberInMemoryRepository implements Members {
     }
 
     @Override
-    public Member register(final MemberRegisterCommand command) {
+    public Member save(final MemberRegisterCommand command) {
         MemberId memberId = new MemberId(this.generator.next());
         Member member = Member.MemberFactory.makeMember(memberId, command);
         this.store.put(memberId, member);

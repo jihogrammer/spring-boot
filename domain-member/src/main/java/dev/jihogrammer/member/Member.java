@@ -3,7 +3,7 @@ package dev.jihogrammer.member;
 import dev.jihogrammer.member.model.in.MemberRegisterCommand;
 import dev.jihogrammer.member.model.vo.MemberId;
 
-import static dev.jihogrammer.common.utils.StringUtils.hasText;
+import static dev.jihogrammer.common.utils.StringUtils.isBlank;
 import static java.util.Objects.isNull;
 
 public class Member {
@@ -45,19 +45,27 @@ public class Member {
         return memberId.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return "Member{" +
+            "memberId=" + memberId +
+            ", username='" + username + '\'' +
+            '}';
+    }
+
     public static final class MemberFactory {
         public static Member makeMember(final MemberId memberId, final MemberRegisterCommand command) throws IllegalArgumentException {
             if (isNull(memberId)) {
                 throw new IllegalArgumentException("member id is null");
             }
-            if (hasText(command.getUsername())) {
+            if (isBlank(command.username())) {
                 throw new IllegalArgumentException("member username is blank");
             }
-            if (hasText(command.getPassword())) {
+            if (isBlank(command.password())) {
                 throw new IllegalArgumentException("member password is blank");
             }
 
-            return new Member(memberId, command.getUsername(), command.getPassword());
+            return new Member(memberId, command.username(), command.password());
         }
     }
 }

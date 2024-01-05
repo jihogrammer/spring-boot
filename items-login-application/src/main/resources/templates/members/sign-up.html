@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up :: Item Login Application</title>
+  <link th:href="@{/main.css}" rel="stylesheet">
+</head>
+
+<body>
+<header>
+  <h1>Sign Up</h1>
+</header>
+
+<main>
+  <form th:action method="post" th:object="${member}">
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <p th:each="error : ${#fields.globalErrors()}" th:text="error"></p>
+    </div>
+    <table>
+      <tbody>
+      <tr>
+        <th>Username</th>
+        <td>
+          <label>
+            <input type="text" th:field="*{username}" th:errorclass="error">
+            <p class="error" th:errors="*{username}"></p>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <th>Password</th>
+        <td>
+          <label>
+            <input type="password" th:field="*{password}" th:errorclass="error">
+            <p class="error" th:errors="*{password}"></p>
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div class="button-group">
+            <input type="button" value="cancel">
+            <input type="submit" value="Sign Up">
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</main>
+</body>
+</html>
