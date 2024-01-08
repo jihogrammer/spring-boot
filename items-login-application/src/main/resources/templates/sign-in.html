@@ -1,51 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
   <meta charset="UTF-8">
   <title>Sign Up :: Item Login Application</title>
   <link th:href="@{/main.css}" rel="stylesheet">
 </head>
-
 <body>
 <header>
-  <h1>Sign Up</h1>
+  <h1>Sign In</h1>
 </header>
-
 <main>
-  <form th:action method="post" th:object="${member}">
-    <div th:if="${#fields.hasGlobalErrors()}">
-      <p th:each="error : ${#fields.globalErrors()}" th:text="error"></p>
-    </div>
+  <form th:action method="post" th:object="${payload}">
     <table>
-      <tbody>
+      <tr th:if="${#fields.hasGlobalErrors()}">
+        <td colspan="2">
+          <p th:each="error : ${#fields.globalErrors()}" th:text="${error}"></p>
+        </td>
+      </tr>
       <tr>
         <th>Username</th>
         <td>
           <label>
-            <input type="text" th:field="*{username}" th:errorclass="error">
-            <p class="error" th:errors="*{username}"></p>
+            <input type="text" th:field="*{username}">
           </label>
+          <p class="error" th:errors="*{username}"></p>
         </td>
       </tr>
       <tr>
         <th>Password</th>
         <td>
           <label>
-            <input type="password" th:field="*{password}" th:errorclass="error">
-            <p class="error" th:errors="*{password}"></p>
+            <input type="password" th:field="*{password}">
           </label>
+          <p class="error" th:errors="*{password}"></p>
         </td>
       </tr>
       <tr>
         <td colspan="2">
           <div class="button-group">
-            <input type="button" value="cancel">
-            <input type="submit" value="Sign Up">
+            <input type="button" value="cancel" onclick="location.href='/'">
+            <input type="submit" value="Sign In">
           </div>
         </td>
       </tr>
-      </tbody>
     </table>
   </form>
 </main>

@@ -1,4 +1,4 @@
-package dev.jihogrammer.item.login.web.member.model;
+package dev.jihogrammer.item.login.web.signin.model;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;

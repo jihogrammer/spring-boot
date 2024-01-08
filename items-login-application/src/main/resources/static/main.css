@@ -8,6 +8,11 @@ header > h1 {
   text-align: center;
 }
 
+header > h3 {
+  margin: 1rem;
+  text-align: center;
+}
+
 main table {
   margin: auto;
 }

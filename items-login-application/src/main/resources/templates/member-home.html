@@ -10,6 +10,7 @@
 <body>
 <header>
   <h1>Home</h1>
+  <h3>Hello <span th:text="${member.username}"></span></h3>
 </header>
 
 <main>
@@ -17,10 +18,10 @@
     <tbody>
     <tr>
       <td>
-        <button th:onclick="|location.href='@{/sign-up}'|">Sign Up</button>
+        <button th:onclick="|location.href='@{/items}'|">Items</button>
       </td>
       <td>
-        <button th:onclick="|location.href='@{/sign-in}'|">Sign In</button>
+        <button th:onclick="|location.href='@{/logout}'|">Logout</button>
       </td>
     </tr>
     </tbody>
