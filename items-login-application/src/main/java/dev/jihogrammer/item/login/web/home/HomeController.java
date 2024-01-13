@@ -1,40 +1,36 @@
 package dev.jihogrammer.item.login.web.home;
 
+import dev.jihogrammer.item.login.web.session.SessionManager;
 import dev.jihogrammer.member.Member;
 import dev.jihogrammer.member.model.vo.MemberId;
 import dev.jihogrammer.member.port.out.Members;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
 
-import static java.util.Objects.isNull;
-
 @Controller
 public class HomeController {
-    private final Members members;
+    private final SessionManager sessionManager;
 
-    public HomeController(final Members members) {
-        this.members = members;
+    public HomeController(final SessionManager sessionManager) {
+        this.sessionManager = sessionManager;
     }
 
     @GetMapping("/")
     public String homePage(
-        @CookieValue(name = "member-id", required = false) final Long memberId,
+        final HttpServletRequest httpServletRequest,
         final Model model
     ) {
-        if (isNull(memberId)) {
+        Optional<Member> loggedInMember = this.sessionManager.findMemberByHttpServletRequest(httpServletRequest);
+
+        if (loggedInMember.isPresent()) {
+            model.addAttribute("member", loggedInMember.get());
+            return "member-home";
+        } else {
             return "home";
         }
-
-        Optional<Member> loggedInMember = members.findById(new MemberId(memberId));
-        if (loggedInMember.isEmpty()) {
-            return "home";
-        }
-
-        model.addAttribute("member", loggedInMember.get());
-        return "member-home";
     }
 }

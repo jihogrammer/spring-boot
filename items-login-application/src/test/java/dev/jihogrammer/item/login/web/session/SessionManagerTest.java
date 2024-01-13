@@ -3,10 +3,11 @@ package dev.jihogrammer.item.login.web.session;
 import dev.jihogrammer.member.Member;
 import dev.jihogrammer.member.model.in.MemberRegisterCommand;
 import dev.jihogrammer.member.model.vo.MemberId;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+
+import java.util.Optional;
 
 import static dev.jihogrammer.member.Member.MemberFactory.makeMember;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,11 +24,12 @@ class SessionManagerTest {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setCookies(response.getCookies());
 
-        Object actualMember = sessionManager.findByServletRequest(request);
-        assertThat(actualMember).isEqualTo(member);
+        Optional<Member> optionalActualMember = sessionManager.findMemberByHttpServletRequest(request);
+        assertThat(optionalActualMember.isPresent()).isTrue();
+        assertThat(optionalActualMember.get()).isEqualTo(member);
 
         sessionManager.expire(request);
-        Object expiredMember = sessionManager.findByServletRequest(request);
-        assertThat(expiredMember).isNull();
+        Optional<Member> optionalExpiredMember = sessionManager.findMemberByHttpServletRequest(request);
+        assertThat(optionalExpiredMember.isEmpty()).isTrue();
     }
 }

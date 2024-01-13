@@ -1,14 +1,17 @@
 package dev.jihogrammer.item.login.web.session;
 
+import dev.jihogrammer.member.Member;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import static java.util.Objects.isNull;
 
+@Component
 public class SessionManager {
     public static final String MEMBER_COOKIE_NAME = "sessionId";
     private final Map<String, Object> store;
@@ -23,9 +26,9 @@ public class SessionManager {
         response.addCookie(new Cookie(MEMBER_COOKIE_NAME, sessionId));
     }
 
-    public Object findByServletRequest(final HttpServletRequest request) {
+    public Optional<Member> findMemberByHttpServletRequest(final HttpServletRequest request) {
         return findCookie(request.getCookies(), MEMBER_COOKIE_NAME)
-                .map(cookie -> this.store.get(cookie.getValue())).orElse(null);
+                .map(cookie -> (Member) this.store.get(cookie.getValue()));
     }
 
     public void expire(final HttpServletRequest request) {

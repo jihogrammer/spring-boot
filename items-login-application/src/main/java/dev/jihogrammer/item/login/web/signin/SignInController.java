@@ -1,9 +1,11 @@
 package dev.jihogrammer.item.login.web.signin;
 
+import dev.jihogrammer.item.login.web.session.SessionManager;
 import dev.jihogrammer.item.login.web.signin.model.MemberLoginHttpRequest;
 import dev.jihogrammer.member.Member;
 import dev.jihogrammer.member.port.in.MemberLoginUsage;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -22,9 +24,11 @@ import static java.util.Objects.requireNonNull;
 @Slf4j
 public class SignInController {
     private final MemberLoginUsage memberLoginUsage;
+    private final SessionManager sessionManager;
 
-    public SignInController(final MemberLoginUsage memberLoginUsage) {
+    public SignInController(final MemberLoginUsage memberLoginUsage, final SessionManager sessionManager) {
         this.memberLoginUsage = requireNonNull(memberLoginUsage);
+        this.sessionManager = requireNonNull(sessionManager);
     }
 
     @GetMapping("/sign-in")
@@ -45,13 +49,12 @@ public class SignInController {
         }
 
         try {
-            Member member = memberLoginUsage.login(httpRequest.getUsername(), httpRequest.getPassword());
-            Cookie loginSessionCookie = new Cookie("member-id", String.valueOf(member.memberId().value()));
-            httpServletResponse.addCookie(loginSessionCookie);
+            Member member = this.memberLoginUsage.login(httpRequest.getUsername(), httpRequest.getPassword());
+            this.sessionManager.createSession(member, httpServletResponse);
 
             model.addAttribute("member", member);
 
-            log.info("{}, {}", member, loginSessionCookie);
+            log.info("login succeed - {}", member);
 
             return "redirect:/";
         } catch (NoSuchElementException e) {
@@ -61,10 +64,8 @@ public class SignInController {
     }
 
     @GetMapping("/logout")
-    public String logout(final HttpServletResponse httpServletResponse) {
-        Cookie loginSessionCookie = new Cookie("member-id", null);
-        loginSessionCookie.setMaxAge(0);
-        httpServletResponse.addCookie(loginSessionCookie);
+    public String logout(final HttpServletRequest httpServletRequest) {
+        this.sessionManager.expire(httpServletRequest);
         return "redirect:/";
     }
 }
