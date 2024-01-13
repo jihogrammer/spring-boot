@@ -48,7 +48,7 @@ public class SignInController {
             Member member = this.memberLoginUsage.login(memberLoginHttpRequest.getUsername(), memberLoginHttpRequest.getPassword());
             httpServletRequest.getSession().setAttribute(SessionConstant.LOGGED_IN_MEMBER, member);
 
-            log.info("login succeed - {}", member);
+            log.info("sign-in succeed - {}", member);
 
             return "redirect:/";
         } catch (NoSuchElementException e) {
