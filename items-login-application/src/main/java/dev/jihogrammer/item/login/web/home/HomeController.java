@@ -1,36 +1,35 @@
 package dev.jihogrammer.item.login.web.home;
 
-import dev.jihogrammer.item.login.web.session.SessionManager;
+import dev.jihogrammer.item.login.web.SessionConstant;
 import dev.jihogrammer.member.Member;
-import dev.jihogrammer.member.model.vo.MemberId;
-import dev.jihogrammer.member.port.out.Members;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Optional;
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 
 @Controller
 public class HomeController {
-    private final SessionManager sessionManager;
-
-    public HomeController(final SessionManager sessionManager) {
-        this.sessionManager = sessionManager;
-    }
-
     @GetMapping("/")
     public String homePage(
         final HttpServletRequest httpServletRequest,
         final Model model
     ) {
-        Optional<Member> loggedInMember = this.sessionManager.findMemberByHttpServletRequest(httpServletRequest);
+        HttpSession httpSession = httpServletRequest.getSession(false);
 
-        if (loggedInMember.isPresent()) {
-            model.addAttribute("member", loggedInMember.get());
-            return "member-home";
-        } else {
+        if (isNull(httpSession)) {
             return "home";
         }
+
+        Object member = httpSession.getAttribute(SessionConstant.LOGGED_IN_MEMBER);
+        if (nonNull(member) && Member.class.isAssignableFrom(member.getClass())) {
+            model.addAttribute("member", member);
+            return "member-home";
+        }
+
+        return "home";
     }
 }

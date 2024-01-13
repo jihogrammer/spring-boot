@@ -1,22 +1,21 @@
 package dev.jihogrammer.item.login.web.signin;
 
-import dev.jihogrammer.item.login.web.session.SessionManager;
+import dev.jihogrammer.item.login.web.SessionConstant;
 import dev.jihogrammer.item.login.web.signin.model.MemberLoginHttpRequest;
 import dev.jihogrammer.member.Member;
 import dev.jihogrammer.member.port.in.MemberLoginUsage;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
@@ -24,11 +23,9 @@ import static java.util.Objects.requireNonNull;
 @Slf4j
 public class SignInController {
     private final MemberLoginUsage memberLoginUsage;
-    private final SessionManager sessionManager;
 
-    public SignInController(final MemberLoginUsage memberLoginUsage, final SessionManager sessionManager) {
+    public SignInController(final MemberLoginUsage memberLoginUsage) {
         this.memberLoginUsage = requireNonNull(memberLoginUsage);
-        this.sessionManager = requireNonNull(sessionManager);
     }
 
     @GetMapping("/sign-in")
@@ -38,10 +35,9 @@ public class SignInController {
 
     @PostMapping("/sign-in")
     public String login(
-        @Valid @ModelAttribute("payload") final MemberLoginHttpRequest httpRequest,
-        final BindingResult bindingResult,
-        final HttpServletResponse httpServletResponse,
-        final Model model
+        final HttpServletRequest httpServletRequest,
+        @Valid @ModelAttribute("payload") final MemberLoginHttpRequest memberLoginHttpRequest,
+        final BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> log.error("{}", error));
@@ -49,10 +45,8 @@ public class SignInController {
         }
 
         try {
-            Member member = this.memberLoginUsage.login(httpRequest.getUsername(), httpRequest.getPassword());
-            this.sessionManager.createSession(member, httpServletResponse);
-
-            model.addAttribute("member", member);
+            Member member = this.memberLoginUsage.login(memberLoginHttpRequest.getUsername(), memberLoginHttpRequest.getPassword());
+            httpServletRequest.getSession().setAttribute(SessionConstant.LOGGED_IN_MEMBER, member);
 
             log.info("login succeed - {}", member);
 
@@ -65,7 +59,7 @@ public class SignInController {
 
     @GetMapping("/logout")
     public String logout(final HttpServletRequest httpServletRequest) {
-        this.sessionManager.expire(httpServletRequest);
+        Optional.ofNullable(httpServletRequest.getSession(false)).ifPresent(HttpSession::invalidate);
         return "redirect:/";
     }
 }
