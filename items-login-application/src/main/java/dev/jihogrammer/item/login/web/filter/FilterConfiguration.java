@@ -17,4 +17,15 @@ public class FilterConfiguration {
 
         return filterRegistrationBean;
     }
+
+    @Bean
+    public FilterRegistrationBean<Filter> signInCheckFilter() {
+        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+
+        filterRegistrationBean.setFilter(new SignInCheckFilter());
+        filterRegistrationBean.setOrder(2);
+        filterRegistrationBean.addUrlPatterns("/*");
+
+        return filterRegistrationBean;
+    }
 }

@@ -10,9 +10,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -36,6 +34,7 @@ public class SignInController {
     @PostMapping("/sign-in")
     public String login(
         final HttpServletRequest httpServletRequest,
+        @RequestParam(defaultValue = "/") final String redirectUrl,
         @Valid @ModelAttribute("payload") final MemberLoginHttpRequest memberLoginHttpRequest,
         final BindingResult bindingResult
     ) {
@@ -50,7 +49,7 @@ public class SignInController {
 
             log.info("sign-in succeed - {}", member);
 
-            return "redirect:/";
+            return "redirect:" + redirectUrl;
         } catch (NoSuchElementException e) {
             bindingResult.reject("login-fail", "check your username or password");
             return "/sign-in";
