@@ -1,4 +1,4 @@
-package dev.jihogrammer.exception;
+package dev.jihogrammer.exception.servlet;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.IOException;
 
+/**
+ * WAS(tomcat)까지 예외를 전파
+ */
 @Controller
 @Slf4j
-public class ExceptionController {
+public class ServletExceptionController {
     @RequestMapping("/exception/example")
     public void errorExample() {
         log.error("errorExample");
