@@ -34,7 +34,7 @@ public class SignInController {
     @PostMapping("/sign-in")
     public String login(
         final HttpServletRequest httpServletRequest,
-        @RequestParam(defaultValue = "/") final String redirectUrl,
+        @RequestParam(defaultValue = "/") final String redirectUri,
         @Valid @ModelAttribute("payload") final MemberLoginHttpRequest memberLoginHttpRequest,
         final BindingResult bindingResult
     ) {
@@ -49,7 +49,7 @@ public class SignInController {
 
             log.info("sign-in succeed - {}", member);
 
-            return "redirect:" + redirectUrl;
+            return "redirect:" + redirectUri;
         } catch (NoSuchElementException e) {
             bindingResult.reject("login-fail", "check your username or password");
             return "/sign-in";

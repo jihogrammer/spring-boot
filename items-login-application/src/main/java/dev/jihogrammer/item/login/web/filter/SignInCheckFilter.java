@@ -27,7 +27,7 @@ public class SignInCheckFilter implements Filter {
                 log.info("start check member");
                 HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
                 if (isNotAuthMember(httpSession)) {
-                    ((HttpServletResponse) response).sendRedirect("/sign-in?redirectUrl=" + requestURI);
+                    ((HttpServletResponse) response).sendRedirect("/sign-in?redirectUri=" + requestURI);
                     return;
                 }
             }
