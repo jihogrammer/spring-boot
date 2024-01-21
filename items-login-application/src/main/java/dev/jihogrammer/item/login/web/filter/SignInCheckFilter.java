@@ -3,13 +3,12 @@ package dev.jihogrammer.item.login.web.filter;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.PatternMatchUtils;
 
 import java.io.IOException;
 
-import static dev.jihogrammer.item.login.web.session.SessionChecker.isNotAuthMember;
+import static dev.jihogrammer.item.login.web.session.SessionHandler.isNotAuthMember;
 
 @Slf4j
 public class SignInCheckFilter implements Filter {
@@ -25,8 +24,7 @@ public class SignInCheckFilter implements Filter {
             String requestURI = ((HttpServletRequest) request).getRequestURI();
             if (shouldCheckMember(requestURI)) {
                 log.info("start check member");
-                HttpSession httpSession = ((HttpServletRequest) request).getSession(false);
-                if (isNotAuthMember(httpSession)) {
+                if (isNotAuthMember(((HttpServletRequest) request))) {
                     ((HttpServletResponse) response).sendRedirect("/sign-in?redirectUri=" + requestURI);
                     return;
                 }

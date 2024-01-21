@@ -1,7 +1,6 @@
 package dev.jihogrammer.item.login.web.interceptor;
 
-import dev.jihogrammer.item.login.web.session.SessionChecker;
-import dev.jihogrammer.item.login.web.transaction.TransactionHandler;
+import dev.jihogrammer.item.login.web.session.SessionHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +20,7 @@ public class SignInCheckInterceptor implements HandlerInterceptor {
         @NonNull final HttpServletResponse response,
         @NonNull final Object handler
     ) throws IOException {
-        if (SessionChecker.isNotAuthMember(request.getSession())) {
+        if (SessionHandler.isNotAuthMember(request)) {
             log.info("[{}][{}] it is not auth transaction", transactionId(request), service(request));
             response.sendRedirect("/sign-in?redirectUri=" + request.getRequestURI());
             return false;

@@ -1,6 +1,6 @@
 package dev.jihogrammer.item.login.web.signin;
 
-import dev.jihogrammer.item.login.web.SessionConstant;
+import dev.jihogrammer.item.login.web.session.SessionHandler;
 import dev.jihogrammer.item.login.web.signin.model.MemberLoginHttpRequest;
 import dev.jihogrammer.member.Member;
 import dev.jihogrammer.member.port.in.MemberLoginUsage;
@@ -10,7 +10,10 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -45,7 +48,7 @@ public class SignInController {
 
         try {
             Member member = this.memberLoginUsage.login(memberLoginHttpRequest.getUsername(), memberLoginHttpRequest.getPassword());
-            httpServletRequest.getSession().setAttribute(SessionConstant.LOGGED_IN_MEMBER, member);
+            SessionHandler.registerMemberSession(httpServletRequest, member);
 
             log.info("sign-in succeed - {}", member);
 
