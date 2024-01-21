@@ -2,26 +2,28 @@ package dev.jihogrammer.exception.error;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+/**
+ * WebServerCustomizer 설정은 스프링 내부 기본 설정을 따르게 되면서 더 이상 필요 없어짐
+ * @see dev.jihogrammer.exception.config.WebServerCustomizer
+ */
+//@Controller
 @Slf4j
 public class ErrorPageController {
     public static final String ERROR_URI_404 = "/error/404";
     public static final String ERROR_URI_500 = "/error/500";
 
     @RequestMapping(ERROR_URI_404)
-    public String errorPage404(final HttpServletRequest request, final HttpServletResponse response) {
+    public String errorPage404(final HttpServletRequest request) {
         log.error("error page 404");
         logErrorDetail(request);
         return "/error-page/404";
     }
 
     @RequestMapping(ERROR_URI_500)
-    public String errorPage500(final HttpServletRequest request, final HttpServletResponse response) {
+    public String errorPage500(final HttpServletRequest request) {
         log.error("error page 500");
         logErrorDetail(request);
         return "/error-page/500";

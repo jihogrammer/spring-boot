@@ -6,14 +6,13 @@ import org.springframework.boot.web.server.ConfigurableWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 /**
  * Error Page View HTML 파일 경로를 입력하는 게 아니라, Controller 경로를 입력하는 것이다.
  * @see ServletExceptionController
  * @see ErrorPageController
  */
-@Component
+// @Component
 public class WebServerCustomizer implements WebServerFactoryCustomizer<ConfigurableWebServerFactory> {
     @Override
     public void customize(final ConfigurableWebServerFactory factory) {
