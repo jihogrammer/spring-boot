@@ -3,6 +3,7 @@ package dev.jihogrammer.exception.config;
 import dev.jihogrammer.exception.error.ErrorPageController;
 import dev.jihogrammer.exception.filter.LoggingFilter;
 import dev.jihogrammer.exception.interceptor.ElapsedLoggingInterceptor;
+import dev.jihogrammer.exception.resolver.MyHandlerExceptionResolver;
 import dev.jihogrammer.exception.servlet.ServletExceptionController;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
@@ -14,11 +15,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.List;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+    @Override
+    public void addInterceptors(@NonNull final InterceptorRegistry registry) {
+        registry.addInterceptor(new ElapsedLoggingInterceptor())
+            .order(1)
+            .addPathPatterns("/**")
+            .excludePathPatterns("/**.css", "/*.ico", "/error", "/error-page/**");
+    }
+
+    @Override
+    public void extendHandlerExceptionResolvers(@NonNull final List<HandlerExceptionResolver> resolvers) {
+        resolvers.add(new MyHandlerExceptionResolver());
+    }
+
     @Bean
     public FilterRegistrationBean<Filter> loggingFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
@@ -32,14 +49,6 @@ public class WebConfig implements WebMvcConfigurer {
         filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);
 
         return filterRegistrationBean;
-    }
-
-    @Override
-    public void addInterceptors(@NonNull final InterceptorRegistry registry) {
-        registry.addInterceptor(new ElapsedLoggingInterceptor())
-            .order(1)
-            .addPathPatterns("/**")
-            .excludePathPatterns("/**.css", "/*.ico", "/error", "/error-page/**");
     }
 
     /**

@@ -15,6 +15,9 @@ public class ApiExceptionController {
         if ("ex".equals(id)) {
             throw new RuntimeException("exception id");
         }
+        if ("bad".equals(id)) {
+            throw new IllegalArgumentException("bad request id");
+        }
         return new Member(id, "hello " + id);
     }
 
