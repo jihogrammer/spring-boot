@@ -1,7 +1,7 @@
 package dev.jihogrammer.exception.resolver;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.jihogrammer.exception.UserException;
+import dev.jihogrammer.exception.model.UserException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
