@@ -4,6 +4,7 @@ import dev.jihogrammer.exception.error.ErrorPageController;
 import dev.jihogrammer.exception.filter.LoggingFilter;
 import dev.jihogrammer.exception.interceptor.ElapsedLoggingInterceptor;
 import dev.jihogrammer.exception.resolver.MyHandlerExceptionResolver;
+import dev.jihogrammer.exception.resolver.UserHandlerExceptionResolver;
 import dev.jihogrammer.exception.servlet.ServletExceptionController;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
@@ -34,6 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void extendHandlerExceptionResolvers(@NonNull final List<HandlerExceptionResolver> resolvers) {
         resolvers.add(new MyHandlerExceptionResolver());
+        resolvers.add(new UserHandlerExceptionResolver());
     }
 
     @Bean

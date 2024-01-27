@@ -1,5 +1,6 @@
 package dev.jihogrammer.exception.api;
 
+import dev.jihogrammer.exception.UserException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,9 @@ public class ApiExceptionController {
         }
         if ("bad".equals(id)) {
             throw new IllegalArgumentException("bad request id");
+        }
+        if ("user-ex".equals(id)) {
+            throw new UserException("user exception");
         }
         return new Member(id, "hello " + id);
     }
