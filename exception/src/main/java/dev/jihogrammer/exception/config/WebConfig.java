@@ -1,12 +1,18 @@
 package dev.jihogrammer.exception.config;
 
+import dev.jihogrammer.exception.error.ErrorPageController;
 import dev.jihogrammer.exception.filter.LoggingFilter;
 import dev.jihogrammer.exception.interceptor.ElapsedLoggingInterceptor;
+import dev.jihogrammer.exception.servlet.ServletExceptionController;
 import jakarta.servlet.DispatcherType;
 import jakarta.servlet.Filter;
+import org.springframework.boot.web.server.ConfigurableWebServerFactory;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -34,5 +40,18 @@ public class WebConfig implements WebMvcConfigurer {
             .order(1)
             .addPathPatterns("/**")
             .excludePathPatterns("/**.css", "/*.ico", "/error", "/error-page/**");
+    }
+
+    /**
+     * Error Page View HTML 파일 경로를 입력하는 게 아니라, Controller 경로를 입력하는 것이다.
+     * @see ServletExceptionController
+     * @see ErrorPageController
+     */
+//    @Bean
+    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
+        return factory -> factory.addErrorPages(
+            new ErrorPage(HttpStatus.NOT_FOUND, ErrorPageController.ERROR_404_URI),
+            new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, ErrorPageController.ERROR_500_URI),
+            new ErrorPage(RuntimeException.class, ErrorPageController.ERROR_500_URI));
     }
 }
