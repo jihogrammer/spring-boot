@@ -28,29 +28,6 @@ public class ApiExceptionHandlerController {
         return new Member(id, "hello " + id);
     }
 
-    /**
-     * @see ExceptionHandlerExceptionResolver
-     */
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ErrorResponse handleException(final IllegalArgumentException e) {
-        log.error("{}", e.getMessage(), e);
-        return new ErrorResponse("bad", e.getMessage());
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<ErrorResponse> handleException(final UserException e) {
-        log.error("{}", e.getMessage(), e);
-        return new ResponseEntity<>(new ErrorResponse("user-exception", e.getMessage()), HttpStatus.BAD_REQUEST);
-    }
-
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler
-    public ErrorResponse handleException(final Exception e) {
-        log.error("{}", e.getMessage(), e);
-        return new ErrorResponse("exception", e.getMessage());
-    }
-
     @Data
     @AllArgsConstructor
     public static class Member {
