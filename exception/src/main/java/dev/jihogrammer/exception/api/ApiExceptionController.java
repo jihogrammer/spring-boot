@@ -2,15 +2,21 @@ package dev.jihogrammer.exception.api;
 
 import dev.jihogrammer.exception.model.BadRequestException;
 import dev.jihogrammer.exception.model.UserException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
+import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
 @RestController
 @Slf4j
@@ -39,6 +45,18 @@ public class ApiExceptionController {
     public void responseStatusException() {
         // see /resources/messages.properties
         throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "error.bad", new UserException());
+    }
+
+    /**
+     * @see DefaultHandlerExceptionResolver#doResolveException
+     * @see DefaultHandlerExceptionResolver#handleTypeMismatch
+     * @see TypeMismatchException
+     * @see DefaultHandlerExceptionResolver#handleMissingServletRequestParameter
+     * @see MissingServletRequestParameterException
+     */
+    @GetMapping("/api/default-handler-exception")
+    public String defaultHandlerException(@RequestParam int param) {
+        return "ok";
     }
 
     @Data
