@@ -8,7 +8,7 @@ class ConverterUnitTest {
     @Test
     void stringToInteger() {
         // given
-        StringToIntegerConverter converter = new StringToIntegerConverter();
+        IntegerFromStringConverter converter = new IntegerFromStringConverter();
         String source = "10";
         // when
         Integer actual = converter.convert(source);

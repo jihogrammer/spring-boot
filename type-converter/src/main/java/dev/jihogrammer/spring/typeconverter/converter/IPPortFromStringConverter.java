@@ -8,11 +8,11 @@ import org.springframework.lang.NonNull;
 import static dev.jihogrammer.spring.typeconverter.model.InternetProtocolAndPort.DELIMITER_COLON;
 
 @Slf4j
-public class StringToIPAndPortConverter implements Converter<String, InternetProtocolAndPort> {
+public class IPPortFromStringConverter implements Converter<String, InternetProtocolAndPort> {
     @Override
     @NonNull
     public InternetProtocolAndPort convert(@NonNull final String source) {
-        log.info("source = {}", source);
+        log.info("converting String to InternetProtocolAndPort. source = {}", source);
 
         PairSplitHelper helper = new PairSplitHelper(source, DELIMITER_COLON);
         String ip = helper.left();

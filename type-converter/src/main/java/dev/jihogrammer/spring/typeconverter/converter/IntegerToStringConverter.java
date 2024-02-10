@@ -8,7 +8,8 @@ import org.springframework.lang.NonNull;
 public class IntegerToStringConverter implements Converter<Integer, String> {
     @Override
     public String convert(@NonNull final Integer source) {
-        log.info("source = {}", source);
+        log.info("converting Integer to String. source = {}", source);
+
         return String.valueOf(source);
     }
 }

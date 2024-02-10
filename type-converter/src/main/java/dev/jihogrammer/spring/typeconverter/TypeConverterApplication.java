@@ -2,12 +2,14 @@ package dev.jihogrammer.spring.typeconverter;
 
 import dev.jihogrammer.spring.typeconverter.model.InternetProtocolAndPort;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
 public class TypeConverterApplication {
@@ -37,6 +39,36 @@ public class TypeConverterApplication {
             log.info("ip: {}", ipPort.ip());
             log.info("port: {}", ipPort.port());
             return "ok";
+        }
+    }
+
+    @Controller
+    @Slf4j
+    public static class ConverterController {
+        @GetMapping("/converter-view")
+        public String converterView(final Model model) {
+            model.addAttribute("number", 123);
+            model.addAttribute("ipPort", new InternetProtocolAndPort("127.0.0.1", 8080));
+            return "/converter-view";
+        }
+
+        @GetMapping("/converter-edit")
+        public String edit(final Model model) {
+            model.addAttribute("form", new Form(new InternetProtocolAndPort("8.8.8.8", 80)));
+            return "/converter-edit";
+        }
+
+        @PostMapping("/converter-edit")
+        public String submit(final Model model, @ModelAttribute final Form form) {
+            log.info("submitted. form = {}", form);
+            model.addAttribute("ipPort", form.getIpPort());
+            return "/converter-view";
+        }
+
+        @Data
+        @AllArgsConstructor
+        public static class Form {
+            private InternetProtocolAndPort ipPort;
         }
     }
 }

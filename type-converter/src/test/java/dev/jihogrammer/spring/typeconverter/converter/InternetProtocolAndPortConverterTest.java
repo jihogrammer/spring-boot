@@ -9,7 +9,7 @@ class InternetProtocolAndPortConverterTest {
     @Test
     void stringToIPPort() {
         // given
-        StringToIPAndPortConverter converter = new StringToIPAndPortConverter();
+        IPPortFromStringConverter converter = new IPPortFromStringConverter();
         String source = "127.0.0.1:8080";
         // when
         InternetProtocolAndPort actual = converter.convert(source);

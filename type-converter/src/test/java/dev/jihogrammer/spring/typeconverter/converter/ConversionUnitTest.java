@@ -14,8 +14,8 @@ public class ConversionUnitTest {
     static void setUpClass() {
         conversionService = new DefaultConversionService();
         conversionService.addConverter(new IntegerToStringConverter());
-        conversionService.addConverter(new StringToIntegerConverter());
-        conversionService.addConverter(new StringToIPAndPortConverter());
+        conversionService.addConverter(new IntegerFromStringConverter());
+        conversionService.addConverter(new IPPortFromStringConverter());
     }
 
     @Test

@@ -5,10 +5,11 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 
 @Slf4j
-public class StringToIntegerConverter implements Converter<String, Integer> {
+public class IntegerFromStringConverter implements Converter<String, Integer> {
     @Override
     public Integer convert(@NonNull final String source) {
-        log.info("source = {}", source);
+        log.info("converting String to Integer. source = {}", source);
+
         return Integer.valueOf(source);
     }
 }

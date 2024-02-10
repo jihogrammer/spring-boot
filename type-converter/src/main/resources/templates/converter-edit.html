@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Converter Edit</title>
+</head>
+
+<body>
+<header>
+  <h1>Converter Edit</h1>
+</header>
+
+<main>
+  <form method="post" th:object="${form}">
+    <!-- th:field => 내부적으로 conversion 수행 -->
+    <p><label>th:field <input type="text" th:field="*{ipPort}"></label></p>
+    <!-- th:value => 별도 동작 없이 단순 toString -->
+    <p><label>th:value <input type="text" th:value="*{ipPort}"></label></p>
+    <input type="submit">
+  </form>
+</main>
+</body>
+
+</html>
