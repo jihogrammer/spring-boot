@@ -1,5 +1,6 @@
 package dev.jihogrammer.spring.typeconverter;
 
+import dev.jihogrammer.spring.typeconverter.model.InternetProtocolAndPort;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
@@ -28,6 +29,13 @@ public class TypeConverterApplication {
         @GetMapping("/hello-v2")
         public String helloV2(@RequestParam final Integer data) {
             log.info("data = {}", data);
+            return "ok";
+        }
+
+        @GetMapping("/ip-port")
+        public String ipPort(@RequestParam final InternetProtocolAndPort ipPort) {
+            log.info("ip: {}", ipPort.ip());
+            log.info("port: {}", ipPort.port());
             return "ok";
         }
     }
