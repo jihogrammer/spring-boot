@@ -23,8 +23,8 @@ public class FileStorageApplication {
 
         @Getter
         public enum Page {
-            SERVLET_UPLOAD_V1("servlet upload v1", "/servlet/upload/v1"),
-            SERVLET_UPLOAD_V2("servlet upload v2", "/servlet/upload/v2"),
+            SERVLET_UPLOAD_V1("servlet upload v1", "/servlet/v1/upload"),
+            SERVLET_UPLOAD_V2("servlet upload v2", "/servlet/v2/upload"),
             SPRING_UPLOAD("spring upload", "/spring/upload"),
             ITEM_UPLOAD("item upload", "/items/upload");
 
