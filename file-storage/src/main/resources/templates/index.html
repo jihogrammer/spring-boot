@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>File Storage</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>File Storage</h1>
+<ul>
+  <li th:each="page : ${pages}">
+    <a th:href="|${page.uri}|" th:text="${page.name}">PAGE NAME</a>
+  </li>
+</ul>
+</body>
+
+</html>
