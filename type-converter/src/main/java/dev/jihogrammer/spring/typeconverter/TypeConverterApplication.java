@@ -47,7 +47,7 @@ public class TypeConverterApplication {
     public static class ConverterController {
         @GetMapping("/converter-view")
         public String converterView(final Model model) {
-            model.addAttribute("number", 123);
+            model.addAttribute("number", 123456789);
             model.addAttribute("ipPort", new InternetProtocolAndPort("127.0.0.1", 8080));
             return "/converter-view";
         }
