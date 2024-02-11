@@ -15,4 +15,5 @@ include 'validation'
 include 'items-login-application'
 include 'domain-member'
 include 'exception'
+include 'type-converter'
 

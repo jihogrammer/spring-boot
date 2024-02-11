@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formatter View</title>
+</head>
+
+<body>
+<header>
+  <h1>Formatter View</h1>
+</header>
+
+<main th:object="${form}">
+  <!-- ${} => 단순 변수 표현식 및 toString() -->
+  <!-- ${{}} => 중괄호 2쌍으로 감쌀 경우 Conversion 수행 -->
+  <p>${number}: <span th:text="*{number}"></span></p>
+  <p>${{number}}: <span th:text="*{{number}}"></span></p>
+  <p>${localDateTime}: <span th:text="*{localDateTime}"></span></p>
+  <p>${{localDateTime}}: <span th:text="*{{localDateTime}}"></span></p>
+</main>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Converter View</title>
+</head>
+
+<body>
+<header>
+  <h1>Converter View</h1>
+</header>
+
+<main>
+  <!-- ${} => 단순 변수 표현식 및 toString() -->
+  <!-- ${{}} => 중괄호 2쌍으로 감쌀 경우 Conversion 수행 -->
+  <div th:if="${number}">
+    <p>${number}: <span th:text="${number}"></span></p>
+    <p>${{number}}: <span th:text="${{number}}"></span></p>
+  </div>
+  <p>${ipPort}: <span th:text="${ipPort}"></span></p>
+  <p>${{ipPort}}: <span th:text="${{ipPort}}"></span></p>
+</main>
+</body>
+
+</html>
