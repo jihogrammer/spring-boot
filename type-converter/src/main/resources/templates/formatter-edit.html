@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Formatter Edit</title>
+</head>
+
+<body>
+<header>
+  <h1>Formatter Edit</h1>
+</header>
+
+<main>
+  <form method="post" th:object="${form}">
+    <p><label>number: <input type="text" th:field="*{number}"></label></p>
+    <p><label>localDateTime: <input type="text" th:field="*{localDateTime}"></label></p>
+    <input type="submit">
+  </form>
+</main>
+</body>
+
+</html>

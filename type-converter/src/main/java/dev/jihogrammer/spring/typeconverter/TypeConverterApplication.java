@@ -7,9 +7,14 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
 public class TypeConverterApplication {
@@ -69,6 +74,31 @@ public class TypeConverterApplication {
         @AllArgsConstructor
         public static class Form {
             private InternetProtocolAndPort ipPort;
+        }
+    }
+
+    @Controller
+    public static class FormatterController {
+        @GetMapping("/formatter-edit")
+        public String edit(final Model model) {
+            model.addAttribute("form", new Form(123456, LocalDateTime.now()));
+            return "/formatter-edit";
+        }
+
+        @PostMapping("/formatter-edit")
+        public String submit(@ModelAttribute Form form) {
+            System.out.println("form = " + form);
+            return "/formatter-view";
+        }
+
+        @Data
+        @AllArgsConstructor
+        public static class Form {
+            @NumberFormat(pattern = "###,###")
+            private Integer number;
+
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            private LocalDateTime localDateTime;
         }
     }
 }
