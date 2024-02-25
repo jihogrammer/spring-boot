@@ -1,0 +1,10 @@
+logging.level:
+  org.apache.coyote.http11: debug
+
+spring:
+  servlet:
+    multipart:
+      enabled: true # default true
+
+file:
+  dir: files/

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>File Storage</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>Item View</h1>
+
+<main th:object="${item}">
+  <h2>#<span th:text="*{id}"></span> <span th:text="*{itemName}"></span></h2>
+
+  <div th:if="*{userFile}">
+    <h3 th:text="*{userFile.userDefinedFileName}"></h3>
+    <a th:href="|/items/file/*{id}|">download</a>
+  </div>
+
+  <div th:if="*{imageFiles}">
+    <div>
+      <a
+        th:each="imageFile : *{imageFiles}"
+        th:href="|/items/images/${imageFile.storedFileName}|"
+        target="_blank"
+      >
+        <img
+          alt="a image file"
+          src=""
+          th:src="|/items/images/${imageFile.storedFileName}|"
+          style="width: 90vw"
+        >
+      </a>
+    </div>
+  </div>
+
+</main>
+</body>
+
+</html>

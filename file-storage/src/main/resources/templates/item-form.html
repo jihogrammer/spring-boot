@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <title>File Storage</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>File Storage Form</h1>
+
+<form th:action method="post" enctype="multipart/form-data">
+  <div>
+    <label>
+      itemName
+      <input type="text" name="itemName">
+    </label>
+  </div>
+  <div>
+    <label>
+      file
+      <input type="file" name="userFile">
+    </label>
+  </div>
+  <div>
+    <label>
+      image files
+      <input type="file" multiple="multiple" name="userImageFiles">
+    </label>
+  </div>
+  <div>
+    <input type="submit">
+  </div>
+</form>
+</body>
+
+</html>
