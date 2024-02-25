@@ -26,7 +26,7 @@ public class FileStorageApplication {
             SERVLET_UPLOAD_V1("servlet upload v1", "/servlet/v1/upload"),
             SERVLET_UPLOAD_V2("servlet upload v2", "/servlet/v2/upload"),
             SPRING_UPLOAD("spring upload", "/spring/upload"),
-            ITEM_UPLOAD("item upload", "/items/upload");
+            ITEM_UPLOAD("item register", "/items/register");
 
             private final String name;
             private final String uri;
