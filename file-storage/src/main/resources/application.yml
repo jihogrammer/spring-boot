@@ -5,3 +5,6 @@ spring:
   servlet:
     multipart:
       enabled: true # default true
+
+file:
+  dir: files/
