@@ -2,8 +2,8 @@ package dev.jihogrammer.item.login.web.signup;
 
 import dev.jihogrammer.item.login.web.signup.model.MemberRegisterHttpRequest;
 import dev.jihogrammer.member.Member;
-import dev.jihogrammer.member.model.in.MemberRegisterCommand;
-import dev.jihogrammer.member.port.in.MemberRegisterUsage;
+import dev.jihogrammer.member.port.in.MemberRegisterCommand;
+import dev.jihogrammer.member.port.out.Members;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import static java.util.Objects.requireNonNull;
-
 @Controller
 @Slf4j
 public class SignUpController {
-    private final MemberRegisterUsage memberRegisterUsage;
+    private final Members members;
 
-    public SignUpController(final MemberRegisterUsage memberRegisterUsage) {
-        this.memberRegisterUsage = requireNonNull(memberRegisterUsage);
+    public SignUpController(final Members members) {
+        this.members = members;
     }
 
     @GetMapping("/sign-up")
@@ -37,8 +35,10 @@ public class SignUpController {
             return "/sign-up";
         }
 
-        MemberRegisterCommand command = MemberRegisterHttpRequest.toCommand(httpRequest);
-        Member registeredMember = this.memberRegisterUsage.register(command);
+        Member registeredMember = this.members.register(MemberRegisterCommand.builder()
+            .name(httpRequest.getUsername())
+            .password(httpRequest.getPassword())
+            .build());
 
         log.info("sign-up succeed: {}", registeredMember);
 

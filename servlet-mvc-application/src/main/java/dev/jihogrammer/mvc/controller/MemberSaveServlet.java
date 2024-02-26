@@ -1,8 +1,9 @@
 package dev.jihogrammer.mvc.controller;
 
-import dev.jihogrammer.member.Members;
-import dev.jihogrammer.member.model.Member;
-import dev.jihogrammer.mvc.repository.SingletonInMemoryMembers;
+import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.port.in.MemberRegisterCommand;
+import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,15 +21,14 @@ public class MemberSaveServlet extends HttpServlet {
     private static final String NEW_MEMBER_ATTRIBUTE_NAME = "newMember";
     private static final String TARGET_JSP_PATH = "/WEB-INF/save-result.jsp";
 
-    private final Members members = SingletonInMemoryMembers.getInstance();
+    private final Members members = SingletonInMemoryMemberRepository.getInstance();
 
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter(MEMBER_USERNAME_PARAMETER_NAME);
         int age = Integer.parseInt(request.getParameter(MEMBER_AGE_PARAMETER_NAME));
-        Member member = new Member(username, age);
 
-        Member newMember = members.save(member);
+        Member newMember = members.register(MemberRegisterCommand.builder().name(username).age(age).build());
         request.setAttribute(NEW_MEMBER_ATTRIBUTE_NAME, newMember);
 
         request.getRequestDispatcher(TARGET_JSP_PATH).forward(request, response);

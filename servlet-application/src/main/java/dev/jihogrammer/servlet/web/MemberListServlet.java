@@ -1,8 +1,8 @@
 package dev.jihogrammer.servlet.web;
 
-import dev.jihogrammer.member.Members;
-import dev.jihogrammer.member.model.Member;
-import dev.jihogrammer.servlet.SingletonMemoryMembers;
+import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,16 +15,16 @@ import java.io.IOException;
 public class MemberListServlet extends HttpServlet {
     private static final String TABLE_FORMAT = "<table><thead><tr><th>ID</th><th>Username</th><th>Age</th></tr></thead><tbody>%s</tbody></table>";
 
-    private final Members repository = SingletonMemoryMembers.getInstance();
+    private final Members repository = SingletonInMemoryMemberRepository.getInstance();
 
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         StringBuilder sb = new StringBuilder();
         for (Member member : repository.findAll()) {
             sb.append("<tr>")
-                    .append("<td>").append(member.getId()).append("</td>")
-                    .append("<td>").append(member.getUsername()).append("</td>")
-                    .append("<td>").append(member.getAge()).append("</td>")
+                    .append("<td>").append(member.id()).append("</td>")
+                    .append("<td>").append(member.name()).append("</td>")
+                    .append("<td>").append(member.age()).append("</td>")
                     .append("</tr>");
         }
 

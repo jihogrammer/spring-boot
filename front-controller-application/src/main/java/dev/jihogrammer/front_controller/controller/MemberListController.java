@@ -1,7 +1,7 @@
 package dev.jihogrammer.front_controller.controller;
 
 import dev.jihogrammer.front_controller.model.ViewNameController;
-import dev.jihogrammer.member.Members;
+import dev.jihogrammer.member.port.out.Members;
 
 import java.util.Map;
 

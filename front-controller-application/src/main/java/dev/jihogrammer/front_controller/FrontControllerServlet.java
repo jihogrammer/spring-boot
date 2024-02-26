@@ -9,9 +9,10 @@ import dev.jihogrammer.front_controller.model.Adapter;
 import dev.jihogrammer.front_controller.model.Controller;
 import dev.jihogrammer.front_controller.model.ModelView;
 import dev.jihogrammer.front_controller.model.View;
-import dev.jihogrammer.front_controller.repository.SingletonInMemoryMembers;
 import dev.jihogrammer.front_controller.utils.AdapterMapper;
 import dev.jihogrammer.front_controller.utils.ViewResolver;
+import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,10 +37,10 @@ public class FrontControllerServlet extends HttpServlet {
     private final AdapterMapper adapterMapper;
 
     public FrontControllerServlet() {
-        this.viewResolver = new ViewResolver("/WEB-INF/", ".jsp");
+        this.viewResolver = new ViewResolver(VIEW_PATH_PREFIX, VIEW_PATH_SUFFIX);
 
         this.controllerMap = new HashMap<>();
-        SingletonInMemoryMembers members = SingletonInMemoryMembers.getInstance();
+        Members members = SingletonInMemoryMemberRepository.getInstance();
         controllerMap.put(URI_PREFIX + "/members/new-form", new MemberFormController("new-form"));
         controllerMap.put(URI_PREFIX + "/members/save", new MemberSaveController("save-result", members));
         controllerMap.put(URI_PREFIX + "/members", new MemberListController("list", members));

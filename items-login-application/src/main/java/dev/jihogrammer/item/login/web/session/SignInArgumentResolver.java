@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.NonNull;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -24,7 +23,7 @@ public class SignInArgumentResolver implements HandlerMethodArgumentResolver {
     @Override
     public Object resolveArgument(
         @NonNull final MethodParameter parameter,
-        @Nullable final ModelAndViewContainer mavContainer,
+        final ModelAndViewContainer mavContainer,
         @NonNull final NativeWebRequest webRequest,
         final WebDataBinderFactory binderFactory
     ) {

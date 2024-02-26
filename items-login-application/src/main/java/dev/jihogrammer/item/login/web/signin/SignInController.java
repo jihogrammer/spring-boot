@@ -37,8 +37,8 @@ public class SignInController {
     @PostMapping("/sign-in")
     public String login(
         final HttpServletRequest httpServletRequest,
-        @RequestParam(defaultValue = "/") final String redirectUri,
-        @Valid @ModelAttribute("payload") final MemberLoginHttpRequest memberLoginHttpRequest,
+        @RequestParam(name = "redirectUri", defaultValue = "/") final String redirectUri,
+        @Valid @ModelAttribute(name = "payload") final MemberLoginHttpRequest memberLoginHttpRequest,
         final BindingResult bindingResult
     ) {
         if (bindingResult.hasErrors()) {

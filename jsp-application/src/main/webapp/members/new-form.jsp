@@ -9,7 +9,7 @@
     <table>
         <tr>
             <th>username</th>
-            <td><input type="text" name="username"></td>
+            <td><input type="text" name="name"></td>
         </tr>
         <tr>
             <th>age</th>
@@ -20,3 +20,5 @@
 </form>
 </body>
 </html>
+
+<a href="/">home</a>

@@ -1,8 +1,7 @@
 package dev.jihogrammer.mvc.controller;
 
-import dev.jihogrammer.member.Members;
-import dev.jihogrammer.member.model.Member;
-import dev.jihogrammer.mvc.repository.SingletonInMemoryMembers;
+import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +17,7 @@ public class MemberListServlet extends HttpServlet {
     private static final String MEMBER_LIST_ATTRIBUTE_NAME = "members";
     private static final String TARGET_JSP_PATH = "/WEB-INF/list.jsp";
 
-    private final Members members = SingletonInMemoryMembers.getInstance();
+    private final Members members = SingletonInMemoryMemberRepository.getInstance();
 
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {

@@ -1,7 +1,8 @@
 package dev.jihogrammer.spring_mvc.controller;
 
-import dev.jihogrammer.member.Members;
-import dev.jihogrammer.member.model.Member;
+import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.port.in.MemberRegisterCommand;
+import dev.jihogrammer.member.port.out.Members;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +30,7 @@ public class MemberController {
             @RequestParam("age") final int age,
             final Model model
     ) {
-        Member member = new Member(username, age);
-        Member newMember = members.save(member);
+        Member newMember = members.register(MemberRegisterCommand.builder().name(username).age(age).build());
         model.addAttribute("newMember", newMember);
 
         return "save-result";

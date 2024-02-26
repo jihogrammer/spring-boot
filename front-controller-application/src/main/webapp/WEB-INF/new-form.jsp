@@ -18,5 +18,8 @@
     </table>
     <input type="submit" />
 </form>
+
+<a href="/">home</a>
+
 </body>
 </html>

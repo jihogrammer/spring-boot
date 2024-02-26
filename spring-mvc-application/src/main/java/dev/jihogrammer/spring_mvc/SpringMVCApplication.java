@@ -1,7 +1,7 @@
 package dev.jihogrammer.spring_mvc;
 
-import dev.jihogrammer.member.Members;
-import dev.jihogrammer.spring_mvc.repository.SingletonInMemoryMembers;
+import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +28,6 @@ public class SpringMVCApplication {
 
     @Bean
     public Members members() {
-        return SingletonInMemoryMembers.getInstance();
+        return SingletonInMemoryMemberRepository.getInstance();
     }
 }

@@ -5,8 +5,11 @@ import lombok.Data;
 
 @Data
 public class MemberLoginHttpRequest {
+
     @NotEmpty
     private String username;
+
     @NotEmpty
     private String password;
+
 }

@@ -12,10 +12,12 @@
     <tbody>
     <c:forEach var="member" items="${members}">
         <tr>
-            <td>${member.id}</td>
-            <td>${member.username}</td>
-            <td>${member.age}</td>
+            <td>${member.id().value()}</td>
+            <td>${member.name()}</td>
+            <td>${member.age()}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
+
+<a href="/">home</a>
