@@ -4,6 +4,7 @@ import dev.jihogrammer.member.Member;
 import dev.jihogrammer.member.model.MemberId;
 import dev.jihogrammer.member.port.in.MemberRegisterCommand;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -41,7 +42,7 @@ public class SingletonInMemoryMemberRepository implements Members {
     }
 
     @Override
-    public Iterable<Member> findAll() {
+    public Collection<Member> findAll() {
         return store.values();
     }
 

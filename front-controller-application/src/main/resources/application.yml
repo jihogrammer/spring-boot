@@ -1,3 +1,30 @@
 logging:
   level:
+    dev.jihogrammer.front_controller: debug
     org.apache.coyote.http11: debug
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+
+service:
+  sign-up-form:
+    uri: /members/new-form
+    view: new-form
+
+  sign-up:
+    uri: /members/save
+    view: save-result
+    parameters:
+      name: username
+      age: age
+    model:
+      member: newMember
+
+  members:
+    uri: /members
+    view: list
+    model:
+      members: members

@@ -12,7 +12,7 @@
     <tbody>
     <c:forEach var="member" items="${members}">
         <tr>
-            <td>${member.id().value()}</td>
+            <td>${member.id()}</td>
             <td>${member.name()}</td>
             <td>${member.age()}</td>
         </tr>

@@ -1,24 +1,33 @@
 package dev.jihogrammer.front_controller.controller;
 
 import dev.jihogrammer.front_controller.model.ViewNameController;
-import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.front_controller.service.MemberService;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
+@RequiredArgsConstructor
 public class MemberListController implements ViewNameController {
-    private static final String MEMBER_LIST_ATTRIBUTE_NAME = "members";
+
+    private final String uri;
 
     private final String viewName;
-    private final Members members;
 
-    public MemberListController(final String viewName, final Members members) {
-        this.viewName = viewName;
-        this.members = members;
+    private final MemberService service;
+
+    @Override
+    public String uri() {
+        return this.uri;
     }
 
     @Override
-    public String process(Map<String, String> parametersMap, Map<String, Object> model) {
-        model.put(MEMBER_LIST_ATTRIBUTE_NAME, members.findAll());
-        return viewName;
+    public String view() {
+        return this.viewName;
+    }
+
+    @Override
+    public String process(final Map<String, Object> model) {
+        this.service.fetchMembers(model);
+        return this.viewName;
     }
 }

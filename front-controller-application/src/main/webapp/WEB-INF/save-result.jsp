@@ -4,7 +4,7 @@
 <table>
     <tr>
         <th>ID</th>
-        <td>${newMember.id().value()}</td>
+        <td>${newMember.id()}</td>
     </tr>
     <tr>
         <th>Username</th>

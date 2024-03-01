@@ -1,17 +1,20 @@
 package dev.jihogrammer.front_controller.utils;
 
 import dev.jihogrammer.front_controller.model.View;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
+@RequiredArgsConstructor
 public class ViewResolver {
+
     private final String viewPathPrefix;
+
     private final String viewPathSuffix;
 
-    public ViewResolver(final String viewPathPrefix, final String viewPathSuffix) {
-        this.viewPathPrefix = viewPathPrefix;
-        this.viewPathSuffix = viewPathSuffix;
-    }
-
     public View resolve(final String viewName) {
-        return new View(viewPathPrefix + viewName + viewPathSuffix);
+        String viewPath = this.viewPathPrefix + viewName + this.viewPathSuffix;
+        log.debug("resolve view path: {}", viewPath);
+        return new View(viewPath);
     }
 }

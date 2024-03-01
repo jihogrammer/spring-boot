@@ -4,6 +4,7 @@ import dev.jihogrammer.member.Member;
 import dev.jihogrammer.member.model.MemberId;
 import dev.jihogrammer.member.port.in.MemberRegisterCommand;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface Members {
@@ -12,7 +13,7 @@ public interface Members {
 
     Member findById(MemberId id);
 
-    Iterable<Member> findAll();
+    Collection<Member> findAll();
 
     Optional<Member> findByUsername(String name);
 

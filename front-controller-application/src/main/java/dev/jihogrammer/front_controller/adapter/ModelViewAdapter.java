@@ -7,10 +7,6 @@ import dev.jihogrammer.front_controller.model.ModelViewController;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import java.util.Map;
-
-import static dev.jihogrammer.front_controller.utils.ParameterMapper.makeParametersMap;
-
 public class ModelViewAdapter implements Adapter {
     @Override
     public boolean supports(Controller controller) {
@@ -23,7 +19,6 @@ public class ModelViewAdapter implements Adapter {
             final HttpServletResponse response,
             final Controller controller
     ) {
-        Map<String, String> parametersMap = makeParametersMap(request);
-        return ((ModelViewController) controller).process(parametersMap);
+        return ((ModelViewController) controller).process(request);
     }
 }
