@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>hello-servlet</title>
+</head>
+<body>
+
+<h1>Hello Servlet</h1>
+
+<ul>
+  <li><a href="/members/sign-up">sign-up</a></li>
+  <li><a href="/members">members</a></li>
+</ul>
+
+<div>
+  <hr>
+  <h4>Hello</h4>
+  <form id="hello-request">
+    <label><input id="hello-request-name" type="text"></label>
+    <input type="submit" value="request">
+  </form>
+  <table>
+    <tr>
+      <th>request</th>
+      <td><code id="hello-request-uri"></code></td>
+    </tr>
+    <tr>
+      <th>response</th>
+      <td><code id="hello-response-body"></code></td>
+    </tr>
+  </table>
+  <script>
+    document.getElementById("hello-request").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("hello-request-name").value;
+      const requestURI = "/hello?name=" + name;
+      fetch(requestURI)
+        .then(response => response.text())
+        .then(body => {
+          console.log(body);
+          document.getElementById("hello-request-uri").innerText = "GET " + requestURI;
+          document.getElementById("hello-response-body").innerText = body;
+        })
+        .catch(e => console.error("failed to request", e))
+        .finally(() => {
+          document.getElementById("hello-request-name").value = "";
+        });
+    });
+  </script>
+</div>
+
+<div>
+  <hr>
+  <h4>Request JSON</h4>
+  <form id="json-request">
+    <label><input id="json-request-name" type="text" placeholder="name"></label>
+    <label><input id="json-request-age" type="number" placeholder="age"></label>
+    <input type="submit" value="request">
+  </form>
+  <table>
+    <tr>
+      <th>request</th>
+      <td>
+        <code id="json-request-uri"></code><br>
+        <pre><code id="json-request-body"></code></pre>
+      </td>
+    </tr>
+    <tr>
+      <th>response</th>
+      <td><code id="json-response-body"></code></td>
+    </tr>
+  </table>
+  <script>
+    document.getElementById("json-request").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("json-request-name").value;
+      const age = document.getElementById("json-request-age").value;
+      const requestURI = "/request-json";
+      const requestBody = {"name": name, "age": age};
+      fetch(requestURI, {
+        method: "POST",
+        body: JSON.stringify({"name": name, "age": age})
+      })
+        .then(response => response.text())
+        .then(body => {
+          console.log(body);
+          document.getElementById("json-request-uri").innerText = "POST " + requestURI;
+          document.getElementById("json-request-body").innerText = JSON.stringify(requestBody, null, 2);
+          document.getElementById("json-response-body").innerText = body;
+        })
+        .catch(e => console.error("failed to request", e))
+        .finally(() => {
+          document.getElementById("json-request-name").value = "";
+          document.getElementById("json-request-age").value = "";
+        });
+    });
+  </script>
+</div>
+
+<div>
+  <hr>
+  <h4>Request String</h4>
+  <form id="string-request">
+    <label><input id="string-request-string" type="text" placeholder="string"></label>
+    <input type="submit" value="request">
+  </form>
+  <table>
+    <tr>
+      <th>request</th>
+      <td>
+        <code id="string-request-uri"></code><br>
+        <pre><code id="string-request-body"></code></pre>
+      </td>
+    </tr>
+    <tr>
+      <th>response</th>
+      <td><code id="string-response-body"></code></td>
+    </tr>
+  </table>
+  <script>
+    document.getElementById("string-request").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const string = document.getElementById("string-request-string").value;
+      const requestURI = "/request-string";
+      fetch(requestURI, {
+        method: "POST",
+        body: string
+      })
+        .then(response => response.text())
+        .then(body => {
+          console.log(body);
+          document.getElementById("string-request-uri").innerText = "POST " + requestURI;
+          document.getElementById("string-request-body").innerText = string;
+          document.getElementById("string-response-body").innerText = body;
+        })
+        .catch(e => console.error("failed to request", e))
+        .finally(() => {
+          document.getElementById("string-request-string").value = "";
+        });
+    });
+  </script>
+</div>
+
+<div>
+  <hr>
+  <h4>Request Header</h4>
+  <form id="header-request">
+    <input type="submit" value="request">
+  </form>
+  <table>
+    <tr>
+      <th>request</th>
+      <td>
+        <code id="header-request-uri"></code><br>
+      </td>
+    </tr>
+    <tr>
+      <th>response</th>
+      <td><pre><code id="header-response-body"></code></pre></td>
+    </tr>
+  </table>
+  <script>
+    document.getElementById("header-request").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const requestURI = "/request-header";
+      fetch(requestURI)
+        .then(response => response.text())
+        .then(body => {
+          console.log(body);
+          document.getElementById("header-request-uri").innerText = "GET " + requestURI;
+          document.getElementById("header-response-body").innerText = JSON.stringify(JSON.parse(body), null, 2);
+        })
+        .catch(e => console.error("failed to request", e));;
+    });
+  </script>
+</div>
+
+</body>
+</html>

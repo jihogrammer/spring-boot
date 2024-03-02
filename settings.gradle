@@ -1,21 +1,24 @@
 rootProject.name = 'spring-boot'
-include 'members'
-include 'servlet-application'
-include 'jsp-application'
-include 'servlet-mvc-application'
-include 'front-controller-application'
-include 'spring-mvc-application'
-include 'item-service'
-include 'items'
-include 'thymeleaf'
-include 'common'
-include 'message'
-include 'validation'
-include 'items-login-application'
-include 'domain-member'
-include 'exception'
-include 'type-converter'
-include 'file-storage'
-include 'jdbc'
-include 'basic'
 
+include('members')
+include('item-service')
+include('items')
+include('thymeleaf')
+include('common')
+include('message')
+include('validation')
+include('items-login-application')
+include('domain-member')
+include('exception')
+include('type-converter')
+include('file-storage')
+include('jdbc')
+include('basic')
+
+// the-development-of-the-spring-web
+['web-1-servlet', 'web-2-jsp', 'web-3-servlet-mvc', 'front-controller', 'mvc'].forEach {
+    module -> {
+        include(':' + module)
+        project(':' + module).projectDir = file('./the-development-of-the-spring-web/' + module)
+    }
+}
