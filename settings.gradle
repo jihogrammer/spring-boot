@@ -16,7 +16,7 @@ include('jdbc')
 include('basic')
 
 // the-development-of-the-spring-web
-['web-1-servlet', 'web-2-jsp', 'web-3-servlet-mvc', 'front-controller', 'mvc'].forEach {
+['web-1-servlet', 'web-2-jsp', 'web-3-servlet-mvc', 'web-4-spring-mvc', 'front-controller'].forEach {
     module -> {
         include(':' + module)
         project(':' + module).projectDir = file('./the-development-of-the-spring-web/' + module)

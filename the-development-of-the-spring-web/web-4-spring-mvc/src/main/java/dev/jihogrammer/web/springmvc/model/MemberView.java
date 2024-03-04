@@ -1,4 +1,4 @@
-package dev.jihogrammer.servlet.mvc.model;
+package dev.jihogrammer.web.springmvc.model;
 
 import dev.jihogrammer.member.Member;
 import lombok.Getter;

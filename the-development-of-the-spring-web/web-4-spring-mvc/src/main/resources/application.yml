@@ -1,0 +1,26 @@
+logging:
+  level:
+    org.apache.coyote.http11: debug
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+
+page:
+  index: index
+  form: new-form
+  save: save-result
+  list: list
+
+service:
+  legacy:
+    home:
+      get-view-name: index
+  member:
+    sign-up:
+      get-view-name: sign-up-form
+      post-view-name: sign-up-result
+    members:
+      get-view-name: members
