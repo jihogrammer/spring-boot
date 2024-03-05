@@ -1,9 +1,9 @@
 package dev.jihogrammer.web.servletmvc;
 
+import dev.jihogrammer.member.port.in.MemberService;
 import dev.jihogrammer.member.port.out.Members;
 import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
-import dev.jihogrammer.web.servletmvc.service.MemberService;
-import dev.jihogrammer.web.servletmvc.utils.ViewResolver;
+import dev.jihogrammer.web.servletmvc.view.ViewResolver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,11 +26,22 @@ public class ServletMVCApplication extends SpringBootServletInitializer {
     }
 
     @Bean
-    public ViewResolver viewResolver(
+    public ViewResolver signUpViewResolver(
         @Value("${spring.mvc.view.prefix}") final String prefix,
-        @Value("${spring.mvc.view.suffix}") final String suffix
+        @Value("${spring.mvc.view.suffix}") final String suffix,
+        @Value("${service.sign-up.get-view}") final String getViewName,
+        @Value("${service.sign-up.post-view}") final String postViewName
     ) {
-        return new ViewResolver(prefix, suffix);
+        return new ViewResolver(prefix, suffix, getViewName, postViewName);
+    }
+
+    @Bean
+    public ViewResolver membersViewResolver(
+        @Value("${spring.mvc.view.prefix}") final String prefix,
+        @Value("${spring.mvc.view.suffix}") final String suffix,
+        @Value("${service.members.view}") final String getViewName
+    ) {
+        return new ViewResolver(prefix, suffix, getViewName, null);
     }
 
     @Bean

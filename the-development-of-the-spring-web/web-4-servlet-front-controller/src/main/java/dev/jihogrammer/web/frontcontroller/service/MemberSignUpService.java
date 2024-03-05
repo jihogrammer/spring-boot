@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.frontcontroller.service;
 
 import dev.jihogrammer.web.frontcontroller.model.MemberView;
-import dev.jihogrammer.member.port.in.MemberRegisterCommand;
+import dev.jihogrammer.member.port.in.MemberSignUpCommand;
 import dev.jihogrammer.member.port.out.Members;
 import lombok.RequiredArgsConstructor;
 
@@ -15,8 +15,8 @@ public class MemberSignUpService {
     private final String memberModelKey;
 
     public Map<String, Object> register(final String name, final int age) {
-        var command = MemberRegisterCommand.builder().name(name).age(age).build();
-        var member = this.members.register(command);
+        var command = MemberSignUpCommand.builder().name(name).age(age).build();
+        var member = this.members.save(command);
         return Map.of(this.memberModelKey, new MemberView(member));
     }
 

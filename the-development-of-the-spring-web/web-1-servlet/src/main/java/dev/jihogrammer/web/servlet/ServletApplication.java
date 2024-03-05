@@ -1,5 +1,6 @@
 package dev.jihogrammer.web.servlet;
 
+import dev.jihogrammer.member.port.in.MemberService;
 import dev.jihogrammer.member.port.out.Members;
 import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +26,11 @@ public class ServletApplication extends SpringBootServletInitializer {
     @Bean
     public Members members() {
         return SingletonInMemoryMemberRepository.getInstance();
+    }
+
+    @Bean
+    public MemberService memberService(final Members members) {
+        return new MemberService(members);
     }
 
 }

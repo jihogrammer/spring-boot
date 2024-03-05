@@ -1,14 +1,18 @@
 package dev.jihogrammer.web.servlet.member;
 
-import dev.jihogrammer.member.port.in.MemberRegisterCommand;
-import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.member.port.in.MemberService;
+import dev.jihogrammer.member.port.in.MemberSignInUsage;
+import dev.jihogrammer.member.port.in.MemberSignUpCommand;
+import dev.jihogrammer.member.port.in.MemberSignUpUsage;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @RequiredArgsConstructor
 @WebServlet(urlPatterns = "/members/sign-up")
@@ -18,12 +22,12 @@ public class MemberSignUpServlet extends HttpServlet {
 
     private static final String AGE_PARAMETER_NAME = "age";
 
-    private final Members members;
+    private final MemberSignUpUsage memberService;
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
-        response.setCharacterEncoding("utf-8");
+        response.setContentType(MediaType.TEXT_HTML_VALUE);
+        response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
         response.getOutputStream().write("""
                 <form method="post">
                     username: <input type="text" name="name">
@@ -38,13 +42,13 @@ public class MemberSignUpServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         var name = request.getParameter(NAME_PARAMETER_NAME);
         var age = Integer.parseInt(request.getParameter(AGE_PARAMETER_NAME));
-        var newMember = this.members.register(MemberRegisterCommand.builder()
+        var newMember = this.memberService.signUp(MemberSignUpCommand.builder()
             .name(name)
             .age(age)
             .build());
 
-        response.setContentType("text/html");
-        response.setCharacterEncoding("utf-8");
+        response.setContentType(MediaType.TEXT_HTML_VALUE);
+        response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
         response.getOutputStream().write("""
                 <h1>Hello, %s!</h1>
                 <table>

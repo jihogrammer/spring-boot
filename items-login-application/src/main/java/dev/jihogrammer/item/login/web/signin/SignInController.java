@@ -1,12 +1,14 @@
 package dev.jihogrammer.item.login.web.signin;
 
+import dev.jihogrammer.item.login.LoginApplication;
 import dev.jihogrammer.item.login.web.session.SessionHandler;
 import dev.jihogrammer.item.login.web.signin.model.MemberLoginHttpRequest;
 import dev.jihogrammer.member.Member;
-import dev.jihogrammer.member.port.in.MemberLoginUsage;
+import dev.jihogrammer.member.port.in.MemberSignInUsage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,18 +20,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static java.util.Objects.requireNonNull;
-
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class SignInController {
-    private final MemberLoginUsage memberLoginUsage;
 
-    public SignInController(final MemberLoginUsage memberLoginUsage) {
-        this.memberLoginUsage = requireNonNull(memberLoginUsage);
-    }
+    /**
+     * @see LoginApplication#memberService()
+     */
+    private final MemberSignInUsage memberService;
 
     @GetMapping("/sign-in")
+    @SuppressWarnings("unused")
     public String loginView(@ModelAttribute("payload") final MemberLoginHttpRequest httpRequest) {
         return "/sign-in";
     }
@@ -47,7 +49,7 @@ public class SignInController {
         }
 
         try {
-            Member member = this.memberLoginUsage.login(memberLoginHttpRequest.getUsername(), memberLoginHttpRequest.getPassword());
+            Member member = this.memberService.signIn(memberLoginHttpRequest.getUsername(), memberLoginHttpRequest.getPassword());
             SessionHandler.registerMemberSession(httpServletRequest, member);
 
             log.info("sign-in succeed - {}", member);
@@ -64,4 +66,5 @@ public class SignInController {
         Optional.ofNullable(httpServletRequest.getSession(false)).ifPresent(HttpSession::invalidate);
         return "redirect:/";
     }
+
 }

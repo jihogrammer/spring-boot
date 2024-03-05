@@ -3,7 +3,6 @@ rootProject.name = 'spring-boot'
 include('item-service')
 include('items')
 include('thymeleaf')
-include('common')
 include('message')
 include('validation')
 include('items-login-application')

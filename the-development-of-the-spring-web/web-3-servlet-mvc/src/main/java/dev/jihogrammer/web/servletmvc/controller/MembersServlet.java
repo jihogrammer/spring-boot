@@ -1,18 +1,22 @@
 package dev.jihogrammer.web.servletmvc.controller;
 
-import dev.jihogrammer.web.servletmvc.utils.ViewResolver;
-import dev.jihogrammer.web.servletmvc.service.MemberService;
+import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.web.servletmvc.ServletMVCApplication;
+import dev.jihogrammer.web.servletmvc.model.web.response.MemberView;
+import dev.jihogrammer.web.servletmvc.view.ViewResolver;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 
+@SuppressWarnings("unused")
 @Slf4j
+@RequiredArgsConstructor
 @WebServlet(urlPatterns = MembersServlet.URL)
 public class MembersServlet extends HttpServlet {
 
@@ -20,28 +24,25 @@ public class MembersServlet extends HttpServlet {
 
     private static final String MEMBER_LIST_ATTRIBUTE_NAME = "members";
 
-    private final String viewName;
+    /**
+     * @see ServletMVCApplication#membersViewResolver
+     */
+    private final ViewResolver membersViewResolver;
 
-    private final ViewResolver viewResolver;
-
-    private final MemberService service;
-
-    public MembersServlet(
-        @Value("${service.members.view}") final String viewName,
-        final ViewResolver viewResolver,
-        final MemberService service
-    ) {
-        log.info("viewName = {}", viewName);
-        this.viewName = viewName;
-        this.viewResolver = viewResolver;
-        this.service = service;
-    }
+    /**
+     * @see ServletMVCApplication#members
+     */
+    private final Members members;
 
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        log.info("REQUEST {}", URL);
-        request.setAttribute(MEMBER_LIST_ATTRIBUTE_NAME, this.service.findAll());
-        request.getRequestDispatcher(this.viewResolver.resolve(this.viewName)).forward(request, response);
+        log.info("REQUEST {} {}", request.getMethod(), URL);
+
+        var foundMembers = MemberView.of(this.members.findAll());
+        log.info("found members {}", foundMembers);
+
+        request.setAttribute(MEMBER_LIST_ATTRIBUTE_NAME, foundMembers);
+        request.getRequestDispatcher(this.membersViewResolver.resolveGetView()).forward(request, response);
     }
 
 }

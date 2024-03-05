@@ -1,8 +1,7 @@
 package dev.jihogrammer.items.app;
 
-import dev.jihogrammer.common.utils.MapUtils;
-import dev.jihogrammer.items.Items;
 import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.Items;
 import dev.jihogrammer.items.model.in.ItemSaveCommand;
 import dev.jihogrammer.items.model.in.ItemUpdateSource;
 import dev.jihogrammer.items.model.in.ItemUpdateSourceMapper;
@@ -23,7 +22,7 @@ import java.util.Map;
 @RequestMapping("/items")
 @RequiredArgsConstructor
 public class ItemsController {
-    private static final Map<String, String> REGIONS = MapUtils.immutableLinkedHashMap("SEOUL", "서울", "BUSAN", "부산", "JEJU", "제주");
+    private static final Map<String, String> REGIONS = Map.of("SEOUL", "서울", "BUSAN", "부산", "JEJU", "제주");
     private static final List<DeliveryCode> DELIVERY_CODES = List.of(
         new DeliveryCode("FAST", "빠른 배송"),
         new DeliveryCode("NORMAL", "일반 배송"),

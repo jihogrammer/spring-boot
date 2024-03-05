@@ -1,9 +1,11 @@
 package dev.jihogrammer.item.login.web.signup;
 
+import dev.jihogrammer.item.login.LoginApplication;
 import dev.jihogrammer.item.login.web.signup.model.MemberRegisterHttpRequest;
 import dev.jihogrammer.member.Member;
-import dev.jihogrammer.member.port.in.MemberRegisterCommand;
-import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.member.port.in.MemberSignUpCommand;
+import dev.jihogrammer.member.port.in.MemberSignUpUsage;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,12 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @Slf4j
+@RequiredArgsConstructor
 public class SignUpController {
-    private final Members members;
 
-    public SignUpController(final Members members) {
-        this.members = members;
-    }
+    /**
+     * @see LoginApplication#memberService()
+     */
+    private final MemberSignUpUsage memberService;
 
     @GetMapping("/sign-up")
     public String signUpView(@ModelAttribute("member") final MemberRegisterHttpRequest httpRequest) {
@@ -35,7 +38,7 @@ public class SignUpController {
             return "/sign-up";
         }
 
-        Member registeredMember = this.members.register(MemberRegisterCommand.builder()
+        Member registeredMember = this.memberService.signUp(MemberSignUpCommand.builder()
             .name(httpRequest.getUsername())
             .password(httpRequest.getPassword())
             .build());
@@ -44,4 +47,5 @@ public class SignUpController {
 
         return "redirect:/";
     }
+
 }
