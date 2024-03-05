@@ -1,6 +1,5 @@
 rootProject.name = 'spring-boot'
 
-include('members')
 include('item-service')
 include('items')
 include('thymeleaf')
@@ -14,6 +13,14 @@ include('type-converter')
 include('file-storage')
 include('jdbc')
 include('basic')
+
+// domain
+['members'].forEach {
+    module -> {
+        include(':' + module)
+        project(':' + module).projectDir = file('./domain/' + module)
+    }
+}
 
 // the-development-of-the-spring-web
 ['web-1-servlet', 'web-2-jsp', 'web-3-servlet-mvc', 'web-4-servlet-front-controller', 'web-5-spring-mvc'].forEach {
