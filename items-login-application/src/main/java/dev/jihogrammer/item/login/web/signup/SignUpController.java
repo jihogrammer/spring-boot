@@ -3,7 +3,7 @@ package dev.jihogrammer.item.login.web.signup;
 import dev.jihogrammer.item.login.LoginApplication;
 import dev.jihogrammer.item.login.web.signup.model.MemberRegisterHttpRequest;
 import dev.jihogrammer.member.Member;
-import dev.jihogrammer.member.port.in.MemberSignUpCommand;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
 import dev.jihogrammer.member.port.in.MemberSignUpUsage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

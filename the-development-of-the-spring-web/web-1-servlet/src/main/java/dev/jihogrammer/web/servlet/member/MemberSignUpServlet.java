@@ -1,8 +1,6 @@
 package dev.jihogrammer.web.servlet.member;
 
-import dev.jihogrammer.member.port.in.MemberService;
-import dev.jihogrammer.member.port.in.MemberSignInUsage;
-import dev.jihogrammer.member.port.in.MemberSignUpCommand;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
 import dev.jihogrammer.member.port.in.MemberSignUpUsage;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

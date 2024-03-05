@@ -1,6 +1,6 @@
 package dev.jihogrammer.member.port.out;
 
-import dev.jihogrammer.member.port.in.MemberSignUpCommand;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.frontcontroller.service;
 
 import dev.jihogrammer.web.frontcontroller.model.MemberView;
-import dev.jihogrammer.member.port.in.MemberSignUpCommand;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
 import dev.jihogrammer.member.port.out.Members;
 import lombok.RequiredArgsConstructor;
 

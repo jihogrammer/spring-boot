@@ -1,4 +1,4 @@
-package dev.jihogrammer.member.port.in;
+package dev.jihogrammer.member.model;
 
 public record MemberSignUpCommand(String name, String password, Integer age) {
 

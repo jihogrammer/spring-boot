@@ -2,7 +2,7 @@ package dev.jihogrammer.member.port.out;
 
 import dev.jihogrammer.member.Member;
 import dev.jihogrammer.member.model.MemberId;
-import dev.jihogrammer.member.port.in.MemberSignUpCommand;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
 
 import java.util.Collection;
 import java.util.Optional;

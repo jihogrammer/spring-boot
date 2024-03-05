@@ -1,5 +1,6 @@
 package dev.jihogrammer.member.port.in;
 
+import dev.jihogrammer.member.model.MemberSignUpCommand;
 import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

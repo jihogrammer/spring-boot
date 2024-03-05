@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.servletmvc.controller;
 
 import dev.jihogrammer.member.port.in.MemberService;
-import dev.jihogrammer.member.port.in.MemberSignUpCommand;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
 import dev.jihogrammer.web.servletmvc.ServletMVCApplication;
 import dev.jihogrammer.web.servletmvc.model.web.response.MemberView;
 import dev.jihogrammer.web.servletmvc.view.ViewResolver;
