@@ -1,7 +1,6 @@
 rootProject.name = 'spring-boot'
 
 include('item-service')
-include('items')
 include('thymeleaf')
 include('message')
 include('validation')
@@ -14,7 +13,7 @@ include('jdbc')
 include('basic')
 
 // domain
-['members'].forEach {
+['members', 'items'].forEach {
     module -> {
         include(':' + module)
         project(':' + module).projectDir = file('./domain/' + module)
