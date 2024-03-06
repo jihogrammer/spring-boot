@@ -15,8 +15,8 @@ public class ItemView {
     public static ItemView of(final Item item) {
         return new ItemView(
             item.id().value(),
-            item.name().value(),
-            item.price().value(),
-            item.quantity().value());
+            item.name(),
+            item.price(),
+            item.quantity());
     }
 }

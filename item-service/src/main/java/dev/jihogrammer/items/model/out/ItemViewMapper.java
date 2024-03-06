@@ -8,9 +8,9 @@ public final class ItemViewMapper {
     public static ItemView mapToView(final Item item) {
         return new ItemView(
             item.id().value(),
-            item.name().value(),
-            item.price().value(),
-            item.quantity().value(),
+            item.name(),
+            item.price(),
+            item.quantity(),
             item.open(),
             item.regions(),
             item.itemType(),

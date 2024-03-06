@@ -2,7 +2,7 @@ package dev.jihogrammer.item;
 
 import dev.jihogrammer.item.model.in.ItemRegisterRequest;
 import dev.jihogrammer.item.model.in.ItemUpdateRequest;
-import dev.jihogrammer.items.Items;
+import dev.jihogrammer.items.port.out.Items;
 import dev.jihogrammer.items.Item;
 import dev.jihogrammer.items.model.vo.ItemId;
 import lombok.RequiredArgsConstructor;

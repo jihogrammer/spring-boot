@@ -1,6 +1,6 @@
 package dev.jihogrammer.item.model.in;
 
-import dev.jihogrammer.items.model.in.ItemUpdateCommand;
+import dev.jihogrammer.items.port.out.ItemUpdateCommand;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -21,6 +21,11 @@ public class ItemUpdateHttpRequest {
 
     // TODO consider 과연 도메인 객체로 변환의 책임이 HttpRequest 클래스에 있는가?
     public ItemUpdateCommand mapToCommand() {
-        return new ItemUpdateCommand(this.id, this.name, this.price, this.quantity);
+        return ItemUpdateCommand.builder()
+            .id(this.id)
+            .name(this.name)
+            .price(this.price)
+            .quantity(this.quantity)
+            .build();
     }
 }

@@ -1,14 +1,14 @@
 package dev.jihogrammer.items.app;
 
 import dev.jihogrammer.items.Item;
-import dev.jihogrammer.items.Items;
-import dev.jihogrammer.items.model.in.ItemSaveCommand;
 import dev.jihogrammer.items.model.in.ItemUpdateSource;
 import dev.jihogrammer.items.model.in.ItemUpdateSourceMapper;
 import dev.jihogrammer.items.model.out.ItemViewMapper;
 import dev.jihogrammer.items.model.vo.DeliveryCode;
 import dev.jihogrammer.items.model.vo.ItemId;
 import dev.jihogrammer.items.model.vo.ItemType;
+import dev.jihogrammer.items.port.out.ItemRegisterCommand;
+import dev.jihogrammer.items.port.out.Items;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,19 +56,21 @@ public class ItemsController {
 
     @GetMapping("/{itemId}")
     public String item(@PathVariable final long itemId, final Model model) {
-        model.addAttribute("item", ItemViewMapper.mapToView(items.findById(new ItemId(itemId))));
+        var item = items.findById(new ItemId(itemId));
+
+        model.addAttribute("item", ItemViewMapper.mapToView(item));
         return "/items/item";
     }
 
     @GetMapping("/save")
     public String saveForm(final Model model) {
-        model.addAttribute("item", ItemSaveCommand.EMPTY_COMMAND);
+        model.addAttribute("item", ItemRegisterCommand.builder().build());
         return "/items/save";
     }
 
     @PostMapping("/save")
-    public String saveItem(final ItemSaveCommand command, final RedirectAttributes redirectAttributes) {
-        Item item = items.save(command);
+    public String saveItem(final ItemRegisterCommand command, final RedirectAttributes redirectAttributes) {
+        var item = items.save(command);
         redirectAttributes.addAttribute("itemId", item.id().value());
         redirectAttributes.addAttribute("status", true);
         return "redirect:/items/{itemId}";
@@ -76,7 +78,9 @@ public class ItemsController {
 
     @GetMapping("/update/{itemId}")
     public String updateForm(@PathVariable("itemId") final long value, final Model model) {
-        model.addAttribute("item", ItemUpdateSourceMapper.mapToUpdateSource(items.findById(new ItemId(value))));
+        var item = items.findById(new ItemId(value));
+
+        model.addAttribute("item", ItemUpdateSourceMapper.mapToUpdateSource(item));
         return "/items/update";
     }
 

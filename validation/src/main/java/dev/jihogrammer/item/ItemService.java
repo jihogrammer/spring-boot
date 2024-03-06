@@ -1,10 +1,10 @@
 package dev.jihogrammer.item;
 
 import dev.jihogrammer.item.model.out.ItemView;
-import dev.jihogrammer.items.Items;
-import dev.jihogrammer.items.model.in.ItemSaveCommand;
-import dev.jihogrammer.items.model.in.ItemUpdateCommand;
 import dev.jihogrammer.items.model.vo.ItemId;
+import dev.jihogrammer.items.port.out.ItemRegisterCommand;
+import dev.jihogrammer.items.port.out.ItemUpdateCommand;
+import dev.jihogrammer.items.port.out.Items;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +23,7 @@ public class ItemService {
         return ItemView.of(this.items.findById(new ItemId(itemId)));
     }
 
-    public ItemView register(final ItemSaveCommand command) {
+    public ItemView register(final ItemRegisterCommand command) {
         return ItemView.of(this.items.save(command));
     }
 

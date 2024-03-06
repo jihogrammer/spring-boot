@@ -13,6 +13,6 @@ public class ItemUpdateModel {
     private Integer quantity;
 
     public static ItemUpdateModel of(final Item item) {
-        return new ItemUpdateModel(item.id().value(), item.name().value(), item.price().value(), item.quantity().value());
+        return new ItemUpdateModel(item.id().value(), item.name(), item.price(), item.quantity());
     }
 }

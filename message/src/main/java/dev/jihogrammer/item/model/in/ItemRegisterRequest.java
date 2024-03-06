@@ -1,6 +1,6 @@
 package dev.jihogrammer.item.model.in;
 
-import dev.jihogrammer.items.model.in.ItemSaveCommand;
+import dev.jihogrammer.items.port.out.ItemRegisterCommand;
 import lombok.Data;
 
 @Data
@@ -9,7 +9,11 @@ public class ItemRegisterRequest {
     private Integer price;
     private Integer quantity;
 
-    public ItemSaveCommand mapToItemSaveCommand() {
-        return new ItemSaveCommand(this.name, this.price, this.quantity, null, null, null, null);
+    public ItemRegisterCommand mapToItemSaveCommand() {
+        return ItemRegisterCommand.builder()
+            .name(this.name)
+            .price(this.price)
+            .quantity(this.quantity)
+            .build();
     }
 }

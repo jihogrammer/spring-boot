@@ -1,55 +1,55 @@
 package dev.jihogrammer.items;
 
-import dev.jihogrammer.items.model.vo.ItemId;
-import dev.jihogrammer.items.model.vo.ItemName;
-import dev.jihogrammer.items.model.vo.ItemPrice;
-import dev.jihogrammer.items.model.vo.ItemQuantity;
-import dev.jihogrammer.items.model.vo.ItemType;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.experimental.Accessors;
+import dev.jihogrammer.items.port.out.ItemUpdateCommand;
+import dev.jihogrammer.items.model.vo.*;
+import dev.jihogrammer.items.port.out.ItemRegisterCommand;
 
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
+import static java.util.Objects.isNull;
 
-@Getter
-@Accessors(fluent = true)
-@EqualsAndHashCode
-public class Item {
-    private final ItemId id;
-    private final ItemName name;
-    private final ItemPrice price;
-    private final ItemQuantity quantity;
-    private Boolean open;
-    private Set<String> regions;
-    private ItemType itemType;
-    private String deliveryCode;
+public record Item(
+    ItemId id,
+    String name,
+    Integer price,
+    Integer quantity,
+    Boolean open,
+    Set<String> regions,
+    ItemType itemType,
+    String deliveryCode
+) {
 
-    public Item(final ItemId id, final ItemName name, final ItemPrice price, final ItemQuantity quantity) {
-        this.id = requireNonNull(id);
-        this.name = requireNonNull(name);
-        this.price = requireNonNull(price);
-        this.quantity = requireNonNull(quantity);
+    public Item {
+        if (isNull(id)) {
+            throw new IllegalArgumentException("item id is null");
+        }
+        if (isNull(name) || name.isBlank()) {
+            throw new IllegalArgumentException("item name is blank");
+        }
     }
 
-    public Item(
-        final ItemId id,
-        final ItemName name,
-        final ItemPrice price,
-        final ItemQuantity quantity,
-        final Boolean open,
-        final Set<String> regions,
-        final ItemType itemType,
-        final String deliveryCode
-    ) {
-        this.id = requireNonNull(id);
-        this.name = requireNonNull(name);
-        this.price = requireNonNull(price);
-        this.quantity = requireNonNull(quantity);
-        this.open = open;
-        this.regions = regions;
-        this.itemType = itemType;
-        this.deliveryCode = deliveryCode;
+    public static Item of(final ItemId itemId, final ItemRegisterCommand command) {
+        return new Item(
+            itemId,
+            command.name(),
+            command.price(),
+            command.quantity(),
+            command.isOpen(),
+            command.regions(),
+            command.itemType(),
+            command.deliveryCode());
     }
+
+    public static Item of(final ItemUpdateCommand command) {
+        return new Item(
+            new ItemId(command.id()),
+            command.name(),
+            command.price(),
+            command.quantity(),
+            command.open(),
+            command.regions(),
+            command.itemType(),
+            command.deliveryCode());
+    }
+
 }

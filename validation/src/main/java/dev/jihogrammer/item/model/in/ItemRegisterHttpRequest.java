@@ -1,6 +1,6 @@
 package dev.jihogrammer.item.model.in;
 
-import dev.jihogrammer.items.model.in.ItemSaveCommand;
+import dev.jihogrammer.items.port.out.ItemRegisterCommand;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -17,7 +17,11 @@ public class ItemRegisterHttpRequest {
     @Range(min = 1, max = 9_999)
     private Integer quantity;
 
-    public ItemSaveCommand mapToCommand() {
-        return new ItemSaveCommand(this.name, this.price, this.quantity);
+    public ItemRegisterCommand mapToCommand() {
+        return ItemRegisterCommand.builder()
+            .name(this.name)
+            .price(this.price)
+            .quantity(this.quantity)
+            .build();
     }
 }
