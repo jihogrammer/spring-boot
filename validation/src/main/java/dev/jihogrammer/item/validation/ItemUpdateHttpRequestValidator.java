@@ -15,10 +15,10 @@ public class ItemUpdateHttpRequestValidator implements Validator {
 
     @Override
     public void validate(@NonNull final Object target, @NonNull final Errors errors) {
-        ItemUpdateHttpRequest request = (ItemUpdateHttpRequest) target;
-        String name = request.getName();
-        Integer price = request.getPrice();
-        Integer quantity = request.getQuantity();
+        var request = (ItemUpdateHttpRequest) target;
+        var name = request.getName();
+        var price = request.getPrice();
+        var quantity = request.getQuantity();
 
         // single field validation
         if (name == null || name.isEmpty()) {

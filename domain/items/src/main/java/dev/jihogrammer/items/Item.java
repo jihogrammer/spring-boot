@@ -1,8 +1,7 @@
 package dev.jihogrammer.items;
 
-import dev.jihogrammer.items.port.out.ItemUpdateCommand;
-import dev.jihogrammer.items.model.vo.*;
-import dev.jihogrammer.items.port.out.ItemRegisterCommand;
+import dev.jihogrammer.items.model.ItemId;
+import dev.jihogrammer.items.model.ItemType;
 
 import java.util.Set;
 
@@ -26,30 +25,6 @@ public record Item(
         if (isNull(name) || name.isBlank()) {
             throw new IllegalArgumentException("item name is blank");
         }
-    }
-
-    public static Item of(final ItemId itemId, final ItemRegisterCommand command) {
-        return new Item(
-            itemId,
-            command.name(),
-            command.price(),
-            command.quantity(),
-            command.isOpen(),
-            command.regions(),
-            command.itemType(),
-            command.deliveryCode());
-    }
-
-    public static Item of(final ItemUpdateCommand command) {
-        return new Item(
-            new ItemId(command.id()),
-            command.name(),
-            command.price(),
-            command.quantity(),
-            command.open(),
-            command.regions(),
-            command.itemType(),
-            command.deliveryCode());
     }
 
 }

@@ -1,8 +1,7 @@
 package dev.jihogrammer.item.controlller;
 
-import dev.jihogrammer.item.ItemService;
 import dev.jihogrammer.item.model.in.ItemRegisterHttpRequest;
-import dev.jihogrammer.item.model.out.ItemView;
+import dev.jihogrammer.items.port.in.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,20 +15,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/validation/v3/items")
 @RequiredArgsConstructor
 public class ValidationV3ItemRegisterController {
+
     private final ItemService service;
 
     @PostMapping("/register")
     public String registerItem(
         @Validated @ModelAttribute("item") final ItemRegisterHttpRequest request,
-        final BindingResult bindingResult, // must be placed immediately after @ModelAttribute
+        final BindingResult requestBindingResult,
         final RedirectAttributes redirectAttributes
     ) {
-        if (bindingResult.hasErrors()) {
+        if (requestBindingResult.hasErrors()) {
             return "/validation/v3-item-register";
         } else {
-            ItemView itemView = this.service.register(request.mapToCommand());
-            redirectAttributes.addAttribute("itemId", itemView.id());
+            var command = request.mapToCommand();
+            var item = this.service.register(command);
+
+            redirectAttributes.addAttribute("itemId", item.id().value());
+
             return "redirect:/validation/v3/items/{itemId}";
         }
     }
+
 }

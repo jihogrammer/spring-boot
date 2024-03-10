@@ -1,22 +1,18 @@
 package dev.jihogrammer.item.model.out;
 
-import dev.jihogrammer.items.Item;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 
-@Data
-@AllArgsConstructor
+@Getter
+@Builder
 public class ItemView {
-    private Long id;
-    private String name;
-    private Integer price;
-    private Integer quantity;
 
-    public static ItemView of(final Item item) {
-        return new ItemView(
-            item.id().value(),
-            item.name(),
-            item.price(),
-            item.quantity());
-    }
+    private final Long id;
+
+    private final String name;
+
+    private final Integer price;
+
+    private final Integer quantity;
+
 }

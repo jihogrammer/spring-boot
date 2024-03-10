@@ -1,9 +1,8 @@
 package dev.jihogrammer.item.controlller;
 
-import dev.jihogrammer.item.ItemService;
 import dev.jihogrammer.item.model.in.ItemRegisterHttpRequest;
 import dev.jihogrammer.item.model.in.ItemUpdateHttpRequest;
-import dev.jihogrammer.item.model.out.ItemView;
+import dev.jihogrammer.items.port.in.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,30 +23,42 @@ public class ValidationV1ItemController {
 
     @GetMapping
     public String itemListView(final Model model) {
-        model.addAttribute("items", this.service.findAll());
+        var items = this.service.findAll();
+
+        model.addAttribute("items", items);
+
         return "/validation/v1-item-list";
     }
 
     @GetMapping("/{itemId}")
     public String itemDetailView(final Model model, @PathVariable Long itemId) {
-        model.addAttribute("item", this.service.findById(itemId));
+        var item = this.service.findById(itemId);
+
+        model.addAttribute("item", item);
+
         return "/validation/v1-item-detail";
     }
 
     @GetMapping("/register")
     public String itemRegisterView(final Model model) {
-        model.addAttribute("item", new ItemRegisterHttpRequest());
+        var blankRequest = new ItemRegisterHttpRequest();
+
+        model.addAttribute("item", blankRequest);
+
         return "/validation/v1-item-register";
     }
 
     @PostMapping("/register")
     public String registerItem(final Model model, final ItemRegisterHttpRequest request, final RedirectAttributes redirectAttributes) {
-        Map<String, String> errorMap = validateRequest(request);
+        var errorMap = validateRequest(request);
 
         // validated case
         if (errorMap.isEmpty()) {
-            ItemView itemView = this.service.register(request.mapToCommand());
-            redirectAttributes.addAttribute("itemId", itemView.id());
+            var command = request.mapToCommand();
+            var item = this.service.register(command);
+
+            redirectAttributes.addAttribute("itemId", item.id().value());
+
             return "redirect:/validation/v1/items/{itemId}";
         }
         // not validated case
@@ -60,18 +71,27 @@ public class ValidationV1ItemController {
 
     @GetMapping("/update/{itemId}")
     public String itemUpdateView(final Model model, @PathVariable final Long itemId) {
-        model.addAttribute("item", this.service.findById(itemId));
+        var item = this.service.findById(itemId);
+
+        model.addAttribute("item", item);
+
         return "/validation/v1-item-update";
     }
 
-    @PostMapping("/update/{itemId}")
-    public String updateItem(final ItemUpdateHttpRequest request, final RedirectAttributes redirectAttributes, final Model model) {
-        Map<String, String> errorMap = validateRequest(request);
+    @PostMapping("/update")
+    public String updateItem(
+            final ItemUpdateHttpRequest request,
+            final RedirectAttributes redirectAttributes,
+            final Model model
+    ) {
+        var errorMap = validateRequest(request);
 
         // validated case
         if (errorMap.isEmpty()) {
-            ItemView itemView = this.service.update(request.mapToCommand());
-            redirectAttributes.addAttribute("itemId", itemView.id());
+            var item = this.service.update(request.mapToCommand());
+
+            redirectAttributes.addAttribute("itemId", item.id().value());
+
             return "redirect:/validation/v1/items/{itemId}";
         }
         // not validated case
@@ -106,7 +126,7 @@ public class ValidationV1ItemController {
     }
 
     private Map<String, String> validateRequest(final ItemUpdateHttpRequest request) {
-        final Map<String, String> errorMap = new HashMap<>();
+        var errorMap = new HashMap<String, String>();
 
         // single field validation
         if (request.getName() == null || request.getName().isEmpty()) {

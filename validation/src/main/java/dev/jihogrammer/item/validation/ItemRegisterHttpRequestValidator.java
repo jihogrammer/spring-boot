@@ -8,6 +8,7 @@ import org.springframework.validation.Validator;
 
 @Component
 public class ItemRegisterHttpRequestValidator implements Validator {
+
     @Override
     public boolean supports(@NonNull final Class<?> clazz) {
         return ItemRegisterHttpRequest.class.isAssignableFrom(clazz);
@@ -15,10 +16,10 @@ public class ItemRegisterHttpRequestValidator implements Validator {
 
     @Override
     public void validate(@NonNull final Object target, @NonNull final Errors errors) {
-        ItemRegisterHttpRequest request = (ItemRegisterHttpRequest) target;
-        String name = request.getName();
-        Integer price = request.getPrice();
-        Integer quantity = request.getQuantity();
+        var request = (ItemRegisterHttpRequest) target;
+        var name = request.getName();
+        var price = request.getPrice();
+        var quantity = request.getQuantity();
 
         // single field validation
         if (name == null || name.isEmpty()) {
@@ -36,4 +37,5 @@ public class ItemRegisterHttpRequestValidator implements Validator {
             errors.reject("total-max-price", new Object[] {10_000, price * quantity}, null);
         }
     }
+
 }

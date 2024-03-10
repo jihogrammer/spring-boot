@@ -1,8 +1,7 @@
 package dev.jihogrammer.item.controlller;
 
-import dev.jihogrammer.item.ItemService;
 import dev.jihogrammer.item.model.in.ItemUpdateHttpRequest;
-import dev.jihogrammer.item.model.out.ItemView;
+import dev.jihogrammer.items.port.in.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,20 +15,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/validation/v3/items")
 @RequiredArgsConstructor
 public class ValidationV3ItemUpdateController {
+
     private final ItemService service;
 
-    @PostMapping("/update/{itemId}") // TODO path variable 값으로 들어오는 ID 사용이 옳다만, 사용하고 있지 않음.
+    @PostMapping("/update")
     public String updateItem(
-        @Validated @ModelAttribute("item") final ItemUpdateHttpRequest request,
-        final BindingResult bindingResult, // must be placed immediately after @ModelAttribute
-        final RedirectAttributes redirectAttributes
+            @Validated @ModelAttribute("item") final ItemUpdateHttpRequest request,
+            final BindingResult bindingResult,
+            final RedirectAttributes redirectAttributes
     ) {
         if (bindingResult.hasErrors()) {
             return "/validation/v3-item-update";
         } else {
-            ItemView itemView = this.service.update(request.mapToCommand());
-            redirectAttributes.addAttribute("itemId", itemView.id());
+            var command = request.mapToCommand();
+            var item = this.service.update(command);
+
+            redirectAttributes.addAttribute("itemId", item.id().value());
+
             return "redirect:/validation/v3/items/{itemId}";
         }
     }
+
 }

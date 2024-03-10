@@ -1,14 +1,15 @@
-package dev.jihogrammer.items.port.out;
+package dev.jihogrammer.items.port.in;
 
-import dev.jihogrammer.items.model.vo.ItemType;
+import dev.jihogrammer.items.model.ItemType;
 
 import java.util.Set;
 
-public record ItemRegisterCommand(
+public record ItemUpdateCommand(
+    Long id,
     String name,
     Integer price,
     Integer quantity,
-    Boolean isOpen,
+    Boolean open,
     Set<String> regions,
     ItemType itemType,
     String deliveryCode
@@ -19,6 +20,8 @@ public record ItemRegisterCommand(
     }
 
     public static class Builder {
+
+        private Long id;
 
         private String name;
 
@@ -35,6 +38,11 @@ public record ItemRegisterCommand(
         private String deliveryCode;
 
         private Builder() {}
+
+        public Builder id(final Long id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder name(final String name) {
             this.name = name;
@@ -71,8 +79,9 @@ public record ItemRegisterCommand(
             return this;
         }
 
-        public ItemRegisterCommand build() {
-            return new ItemRegisterCommand(
+        public ItemUpdateCommand build() {
+            return new ItemUpdateCommand(
+                this.id,
                 this.name,
                 this.price,
                 this.quantity,

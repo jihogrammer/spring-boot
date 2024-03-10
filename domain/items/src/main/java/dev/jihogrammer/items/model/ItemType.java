@@ -1,7 +1,10 @@
-package dev.jihogrammer.items.model.vo;
+package dev.jihogrammer.items.model;
 
 public enum ItemType {
-    BOOK("도서"), FOOD("음식"), ETC("기타");
+
+    BOOK("도서"),
+    FOOD("음식"),
+    ETC("기타");
 
     private final String description;
 
@@ -12,4 +15,5 @@ public enum ItemType {
     public String description() {
         return this.description;
     }
+
 }

@@ -1,11 +1,12 @@
-package dev.jihogrammer.items.port.out;
+package dev.jihogrammer.items.port.in;
 
-import dev.jihogrammer.items.model.vo.ItemType;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import dev.jihogrammer.items.model.ItemType;
 
 import java.util.Set;
 
-public record ItemUpdateCommand(
-    Long id,
+@JsonDeserialize(builder = ItemRegisterCommand.Builder.class)
+public record ItemRegisterCommand(
     String name,
     Integer price,
     Integer quantity,
@@ -19,9 +20,8 @@ public record ItemUpdateCommand(
         return new Builder();
     }
 
+    @SuppressWarnings("unused")
     public static class Builder {
-
-        private Long id;
 
         private String name;
 
@@ -29,7 +29,7 @@ public record ItemUpdateCommand(
 
         private Integer quantity;
 
-        private Boolean isOpen;
+        private Boolean open;
 
         private Set<String> regions;
 
@@ -38,11 +38,6 @@ public record ItemUpdateCommand(
         private String deliveryCode;
 
         private Builder() {}
-
-        public Builder id(final Long id) {
-            this.id = id;
-            return this;
-        }
 
         public Builder name(final String name) {
             this.name = name;
@@ -59,8 +54,8 @@ public record ItemUpdateCommand(
             return this;
         }
 
-        public Builder isOpen(final Boolean isOpen) {
-            this.isOpen = isOpen;
+        public Builder open(final Boolean open) {
+            this.open = open;
             return this;
         }
 
@@ -79,13 +74,12 @@ public record ItemUpdateCommand(
             return this;
         }
 
-        public ItemUpdateCommand build() {
-            return new ItemUpdateCommand(
-                this.id,
+        public ItemRegisterCommand build() {
+            return new ItemRegisterCommand(
                 this.name,
                 this.price,
                 this.quantity,
-                this.isOpen,
+                this.open,
                 this.regions,
                 this.itemType,
                 this.deliveryCode);

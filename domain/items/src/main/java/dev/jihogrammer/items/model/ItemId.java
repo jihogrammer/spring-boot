@@ -1,4 +1,4 @@
-package dev.jihogrammer.items.model.vo;
+package dev.jihogrammer.items.model;
 
 public record ItemId(long value) {
 

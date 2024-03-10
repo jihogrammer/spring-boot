@@ -1,4 +1,4 @@
-package dev.jihogrammer.item;
+package dev.jihogrammer.items;
 
 import dev.jihogrammer.items.port.in.ItemService;
 import dev.jihogrammer.items.port.out.InMemoryItemRepository;
@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Bean;
 
 @SuppressWarnings("unused")
 @SpringBootApplication
-public class ItemValidationApplication {
+public class ItemsApplication {
 
     public static void main(final String[] args) {
-        SpringApplication.run(ItemValidationApplication.class, args);
+        SpringApplication.run(ItemsApplication.class, args);
     }
 
     @Bean

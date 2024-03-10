@@ -1,7 +1,7 @@
 package dev.jihogrammer.item.controlller;
 
-import dev.jihogrammer.item.ItemService;
 import dev.jihogrammer.item.model.in.ItemRegisterHttpRequest;
+import dev.jihogrammer.items.port.in.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/validation/v3/items")
 @RequiredArgsConstructor
 public class ValidationV3ItemViewController {
+
     private final ItemService service;
 
     @GetMapping
@@ -38,4 +39,5 @@ public class ValidationV3ItemViewController {
         model.addAttribute("item", this.service.findById(itemId));
         return "/validation/v3-item-update";
     }
+
 }
