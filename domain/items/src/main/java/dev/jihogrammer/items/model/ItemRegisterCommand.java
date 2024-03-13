@@ -1,7 +1,6 @@
-package dev.jihogrammer.items.port.in;
+package dev.jihogrammer.items.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import dev.jihogrammer.items.model.ItemType;
 
 import java.util.Set;
 

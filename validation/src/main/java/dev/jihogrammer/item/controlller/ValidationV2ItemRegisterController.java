@@ -1,9 +1,7 @@
 package dev.jihogrammer.item.controlller;
 
 import dev.jihogrammer.item.model.in.ItemRegisterHttpRequest;
-import dev.jihogrammer.item.model.out.ItemView;
 import dev.jihogrammer.item.validation.ItemRegisterHttpRequestValidator;
-import dev.jihogrammer.items.port.in.ItemRegisterCommand;
 import dev.jihogrammer.items.port.in.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

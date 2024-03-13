@@ -5,7 +5,7 @@ import dev.jihogrammer.items.model.out.ItemView;
 import dev.jihogrammer.items.model.DeliveryCode;
 import dev.jihogrammer.items.model.ItemType;
 import dev.jihogrammer.items.port.in.ItemService;
-import dev.jihogrammer.items.port.in.ItemRegisterCommand;
+import dev.jihogrammer.items.model.ItemRegisterCommand;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

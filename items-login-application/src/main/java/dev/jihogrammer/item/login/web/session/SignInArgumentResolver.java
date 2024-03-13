@@ -1,6 +1,6 @@
 package dev.jihogrammer.item.login.web.session;
 
-import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.model.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;

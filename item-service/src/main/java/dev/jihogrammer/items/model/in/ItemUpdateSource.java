@@ -1,8 +1,8 @@
 package dev.jihogrammer.items.model.in;
 
-import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.model.Item;
 import dev.jihogrammer.items.model.ItemType;
-import dev.jihogrammer.items.port.in.ItemUpdateCommand;
+import dev.jihogrammer.items.model.ItemUpdateCommand;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

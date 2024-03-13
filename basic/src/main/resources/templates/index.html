@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>literal - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<h1>Basic Home</h1>
+<ul>
+  <li th:each="uri : ${uris}">
+    <a th:href="|${uriPrefix}${uri}|" th:text="${uri}"></a>
+  </li>
+</ul>
+</body>
+</html>

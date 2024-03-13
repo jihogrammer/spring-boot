@@ -2,7 +2,7 @@ package dev.jihogrammer.item.login.web.home;
 
 import dev.jihogrammer.item.login.session.SessionInfoLoggingService;
 import dev.jihogrammer.item.login.web.session.SignIn;
-import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.model.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

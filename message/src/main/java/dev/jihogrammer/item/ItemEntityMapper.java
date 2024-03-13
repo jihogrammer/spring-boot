@@ -3,9 +3,9 @@ package dev.jihogrammer.item;
 import dev.jihogrammer.item.model.in.ItemRegisterRequest;
 import dev.jihogrammer.item.model.in.ItemUpdateRequest;
 import dev.jihogrammer.item.model.out.ItemView;
-import dev.jihogrammer.items.Item;
-import dev.jihogrammer.items.port.in.ItemRegisterCommand;
-import dev.jihogrammer.items.port.in.ItemUpdateCommand;
+import dev.jihogrammer.items.model.Item;
+import dev.jihogrammer.items.model.ItemRegisterCommand;
+import dev.jihogrammer.items.model.ItemUpdateCommand;
 
 import java.util.Collection;
 

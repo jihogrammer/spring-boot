@@ -1,6 +1,4 @@
-package dev.jihogrammer.items.port.in;
-
-import dev.jihogrammer.items.model.ItemType;
+package dev.jihogrammer.items.model;
 
 import java.util.Set;
 

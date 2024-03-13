@@ -1,4 +1,4 @@
-package dev.jihogrammer.member;
+package dev.jihogrammer.member.model;
 
 import dev.jihogrammer.member.model.MemberId;
 

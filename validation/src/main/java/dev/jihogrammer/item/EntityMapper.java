@@ -1,7 +1,7 @@
 package dev.jihogrammer.item;
 
 import dev.jihogrammer.item.model.out.ItemView;
-import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.model.Item;
 
 import java.util.Collection;
 

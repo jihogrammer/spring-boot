@@ -1,6 +1,6 @@
 package dev.jihogrammer.web.springmvc.model;
 
-import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.model.Member;
 import lombok.Getter;
 
 @Getter

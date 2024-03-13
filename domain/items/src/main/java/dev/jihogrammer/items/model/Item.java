@@ -1,4 +1,4 @@
-package dev.jihogrammer.items;
+package dev.jihogrammer.items.model;
 
 import dev.jihogrammer.items.model.ItemId;
 import dev.jihogrammer.items.model.ItemType;

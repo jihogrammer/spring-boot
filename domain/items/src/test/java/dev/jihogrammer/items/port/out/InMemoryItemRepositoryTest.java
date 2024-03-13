@@ -1,6 +1,6 @@
 package dev.jihogrammer.items.port.out;
 
-import dev.jihogrammer.items.Item;
+import dev.jihogrammer.items.model.Item;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 

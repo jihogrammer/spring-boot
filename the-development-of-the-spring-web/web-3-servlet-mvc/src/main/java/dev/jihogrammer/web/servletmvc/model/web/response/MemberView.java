@@ -1,6 +1,6 @@
 package dev.jihogrammer.web.servletmvc.model.web.response;
 
-import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.model.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

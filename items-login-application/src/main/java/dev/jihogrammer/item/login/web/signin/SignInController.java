@@ -3,7 +3,7 @@ package dev.jihogrammer.item.login.web.signin;
 import dev.jihogrammer.item.login.LoginApplication;
 import dev.jihogrammer.item.login.web.session.SessionHandler;
 import dev.jihogrammer.item.login.web.signin.model.MemberLoginHttpRequest;
-import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.model.Member;
 import dev.jihogrammer.member.port.in.MemberSignInUsage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
