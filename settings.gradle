@@ -1,5 +1,6 @@
 rootProject.name = 'spring-boot'
 
+include("common")
 include('item-service')
 include('message')
 include('validation')
