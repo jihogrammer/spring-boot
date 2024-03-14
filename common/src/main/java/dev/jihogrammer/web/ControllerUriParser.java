@@ -22,41 +22,42 @@ public final class ControllerUriParser {
 
     public static Collection<String> parseGetUris(final Class<?> controllerClass) {
         var uriPrefix = parseUriPrefix(controllerClass);
-        var valuesStream = Stream.concat(requestMappingValueStream(controllerClass, RequestMethod.GET), getMappingValueStream(controllerClass));
+        var valuesStream = Stream.concat(
+                requestMappingValuesStream(controllerClass, RequestMethod.GET),
+                getMappingValuesStream(controllerClass));
 
         return parseUris(uriPrefix, valuesStream);
     }
 
     public static Collection<String> parsePostUris(final Class<?> controllerClass) {
         var uriPrefix = parseUriPrefix(controllerClass);
-        var valuesStream = Stream.concat(requestMappingValueStream(controllerClass, RequestMethod.POST), postMappingValueStream(controllerClass));
+        var valuesStream = Stream.concat(
+                requestMappingValuesStream(controllerClass, RequestMethod.POST),
+                postMappingValuesStream(controllerClass));
 
         return parseUris(uriPrefix, valuesStream);
     }
 
     private static Collection<String> parseUris(final String uriPrefix, final Stream<String[]> valuesStream) {
         return valuesStream
-                .map(values -> {
-                    if (values.length == 0) {
-                        return new String[] {uriPrefix};
-                    }
-                    return Arrays.stream(values).map(value -> uriPrefix + value).toArray(String[]::new);
-                })
-                .flatMap(Arrays::stream)
+                .flatMap(values -> values.length == 0
+                        ? Stream.of(uriPrefix)
+                        : Arrays.stream(values).map(value -> uriPrefix + value))
+                .distinct()
                 .toList();
     }
 
-    private static Stream<String[]> requestMappingValueStream(final Class<?> controllerClass, final RequestMethod requestMethod) {
+    private static Stream<String[]> requestMappingValuesStream(final Class<?> controllerClass, final RequestMethod requestMethod) {
         return parseAnnotationStreamInMethods(controllerClass, RequestMapping.class)
                 .filter(annotation -> annotation.method().length == 0 || Arrays.stream(annotation.method()).anyMatch(method -> method == requestMethod))
                 .map(RequestMapping::value);
     }
 
-    private static Stream<String[]> getMappingValueStream(final Class<?> controllerClass) {
+    private static Stream<String[]> getMappingValuesStream(final Class<?> controllerClass) {
         return parseAnnotationStreamInMethods(controllerClass, GetMapping.class).map(GetMapping::value);
     }
 
-    private static Stream<String[]> postMappingValueStream(final Class<?> controllerClass) {
+    private static Stream<String[]> postMappingValuesStream(final Class<?> controllerClass) {
         return parseAnnotationStreamInMethods(controllerClass, PostMapping.class).map(PostMapping::value);
     }
 
