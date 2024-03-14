@@ -1,29 +1,30 @@
-rootProject.name = 'spring-boot'
+rootProject.name = "spring-boot"
 
 include("common")
-include('item-service')
-include('message')
-include('validation')
-include('items-login-application')
-include('domain-member')
-include('exception')
-include('type-converter')
-include('file-storage')
-include('jdbc')
-include('basic')
+include("message")
+include("validation")
+include("items-login-application")
+include("exception")
+include("type-converter")
+include("file-storage")
+include("jdbc")
+include("basic")
 
-// domain
-['members', 'items'].forEach {
-    module -> {
-        include(':' + module)
-        project(':' + module).projectDir = file('./domain/' + module)
+def registerModules(String baseDir, ArrayList<String> modules) {
+    if (file(baseDir).isDirectory()) {
+        modules.forEach {
+            module -> {
+                include(':' + module)
+                project(':' + module).projectDir = file(baseDir + module)
+            }
+        }
+    } else {
+        throw new IllegalArgumentException("check path - " + baseDir)
     }
 }
 
-// the-development-of-the-spring-web
-['web-1-servlet', 'web-2-jsp', 'web-3-servlet-mvc', 'web-4-servlet-front-controller', 'web-5-spring-mvc'].forEach {
-    module -> {
-        include(':' + module)
-        project(':' + module).projectDir = file('./the-development-of-the-spring-web/' + module)
-    }
-}
+var domainModules = ['members', 'items'];
+registerModules("./domain/", domainModules)
+
+var webModules = ['web-1-servlet', 'web-2-jsp', 'web-3-servlet-mvc', 'web-4-servlet-front-controller', 'web-5-spring-mvc'];
+registerModules("./the-development-of-the-spring-web/", webModules)

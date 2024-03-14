@@ -1,11 +1,11 @@
-package dev.jihogrammer.items;
+package dev.jihogrammer.spring.basic.controller;
 
-import dev.jihogrammer.items.model.in.ItemUpdateSource;
-import dev.jihogrammer.items.model.out.ItemView;
 import dev.jihogrammer.items.model.DeliveryCode;
 import dev.jihogrammer.items.model.ItemType;
 import dev.jihogrammer.items.port.in.ItemService;
 import dev.jihogrammer.items.model.ItemRegisterCommand;
+import dev.jihogrammer.spring.basic.entity.ItemUpdateSource;
+import dev.jihogrammer.spring.basic.entity.ItemViewModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -55,7 +55,7 @@ public class ItemsController {
         log.info("REQUEST GET /items");
 
         var items = this.itemService.findAll();
-        var itemViews = ItemView.of(items);
+        var itemViews = ItemViewModel.of(items);
 
         model.addAttribute("items", itemViews);
 
@@ -67,7 +67,7 @@ public class ItemsController {
         log.info("REQUEST GET /items/{}", itemIdValue);
 
         var item = this.itemService.findById(itemIdValue);
-        var itemView = ItemView.of(item);
+        var itemView = ItemViewModel.of(item);
 
         model.addAttribute("item", itemView);
 

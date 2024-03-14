@@ -1,4 +1,4 @@
-package dev.jihogrammer.items.model.in;
+package dev.jihogrammer.spring.basic.entity;
 
 import dev.jihogrammer.items.model.Item;
 import dev.jihogrammer.items.model.ItemType;

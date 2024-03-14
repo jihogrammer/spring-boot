@@ -10,18 +10,12 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 @Controller
-@SuppressWarnings("unused")
 public class HomeController {
 
     @RequestMapping
     public String home(final Model model) {
-        var uriPrefix = Arrays.stream(BasicController.class.getAnnotation(RequestMapping.class).value())
-                .findFirst()
-                .orElseThrow();
-        var uris = Stream.concat(fetchRequestMappingValueStream(), fetchGetMappingValueStream()).toList();
-
-        model.addAttribute("uriPrefix", uriPrefix);
-        model.addAttribute("uris", uris);
+        model.addAttribute("basicUriPrefix", BasicController.class.getAnnotation(RequestMapping.class).value()[0]);
+        model.addAttribute("basicUris", Stream.concat(fetchRequestMappingValueStream(), fetchGetMappingValueStream()).toList());
 
         return "/index";
     }
