@@ -8,23 +8,17 @@ include("exception")
 include("type-converter")
 include("file-storage")
 include("jdbc")
-include("basic")
+include("temp")
 
-def registerModules(String baseDir, ArrayList<String> modules) {
-    if (file(baseDir).isDirectory()) {
-        modules.forEach {
-            module -> {
-                include(':' + module)
-                project(':' + module).projectDir = file(baseDir + module)
-            }
-        }
-    } else {
-        throw new IllegalArgumentException("check path - " + baseDir)
-    }
-}
+include(":domain:members")
+include(":domain:items")
 
-var domainModules = ['members', 'items'];
-registerModules("./domain/", domainModules)
+include(":basic:_gateway")
+include(":basic:http")
+include(":basic:thymeleaf")
 
-var webModules = ['web-1-servlet', 'web-2-jsp', 'web-3-servlet-mvc', 'web-4-servlet-front-controller', 'web-5-spring-mvc'];
-registerModules("./the-development-of-the-spring-web/", webModules)
+include(":web:1-servlet")
+include(":web:2-jsp")
+include(":web:3-servlet-mvc")
+include(":web:4-front-controller")
+include(":web:5-spring-mvc")

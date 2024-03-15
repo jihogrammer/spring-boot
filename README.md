@@ -2,5 +2,4 @@
 
 ## TODO
 
-* migration JDK 17 to 21
-* remove `SuppressWarnings("unused")` using Test
+- remove temp module

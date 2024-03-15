@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>fragmentMain - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+  <style>
+    h1, h2 {
+      margin: 1rem 0;
+    }
+    div {
+      border: 3px solid blue;
+    }
+    footer {
+      border: 3px solid red;
+    }
+  </style>
+</head>
+<body>
+<h1>Fragment - footer</h1>
+
+<div>div color</div>
+<footer>footer color</footer>
+
+<article>
+  <h2>insert</h2>
+  <p><code>&lt;div th:insert="~{/thymeleaf/fragments/footer::default}"&gt;&lt;/div&gt;</code></p>
+  <div th:insert="~{/thymeleaf/fragments/footers::default}">insert default</div>
+</article>
+<article>
+  <h2>replace</h2>
+  <p><code>&lt;div th:replace="~{/thymeleaf/fragments/footer::default}"&gt;&lt;/div&gt;</code></p>
+  <div th:replace="~{/thymeleaf/fragments/footers::default}">insert default</div>
+</article>
+<article>
+  <h2>replace - short</h2>
+  <p><code>&lt;div th:replace="/thymeleaf/fragments/footer::default"&gt;&lt;/div&gt;</code></p>
+  <div th:replace="/thymeleaf/fragments/footers::default">insert default</div>
+</article>
+<article>
+  <h2>replace - parameters</h2>
+  <p><code>&lt;div th:replace="/thymeleaf/fragments/footer::params('hello', 'world')"&gt;&lt;/div&gt;</code></p>
+  <div th:replace="/thymeleaf/fragments/footers::params('hello', 'world')">insert default</div>
+</article>
+</body>
+</html>
