@@ -1,6 +1,5 @@
 buildscript {
     ext {
-        springVersion = "6.1.4"
         junitVersion = "5.10.2"
         assertjVersion = "3.25.3"
     }
@@ -18,10 +17,6 @@ repositories {
 }
 
 dependencies {
-    // spring-boot
-    implementation("org.springframework:spring-context:${springVersion}")
-    implementation("org.springframework:spring-web:${springVersion}")
-
     // test
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
     testImplementation("org.assertj:assertj-core:${assertjVersion}")

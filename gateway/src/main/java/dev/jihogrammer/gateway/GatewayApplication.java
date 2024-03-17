@@ -1,15 +1,13 @@
-package dev.jihogrammer.spring.basic;
+package dev.jihogrammer.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BasicApplication {
-
-    public static final String APP_NAME = "Basic Application";
+public class GatewayApplication {
 
     public static void main(final String[] args) {
-        SpringApplication.run(BasicApplication.class, args);
+        SpringApplication.run(GatewayApplication.class, args);
     }
 
 }

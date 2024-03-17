@@ -1,4 +1,4 @@
-package dev.jihogrammer.web;
+package dev.jihogrammer.gateway.util;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ControllerUriParserTest {
+class ControllerUriCollectorTest {
 
     @Test
     void parseUriPrefix() {
@@ -17,7 +17,7 @@ class ControllerUriParserTest {
         var controllerClass = FooController.class;
 
         // when
-        var uriPrefix = ControllerUriParser.parseUriPrefix(controllerClass);
+        var uriPrefix = ControllerUriCollector.parseUriPrefix(controllerClass);
 
         // then
         assertThat(uriPrefix).isEqualTo("/foo");
@@ -29,7 +29,7 @@ class ControllerUriParserTest {
         var controllerClass = FooController.class;
 
         // when
-        var uris = ControllerUriParser.parseGetUris(controllerClass);
+        var uris = ControllerUriCollector.parseUris(controllerClass, RequestMethod.GET);
 
         // then
         assertThat(uris).contains("/foo", "/foo/bar", "/foo/get");
@@ -41,7 +41,7 @@ class ControllerUriParserTest {
         var controllerClass = FooController.class;
 
         // when
-        var uris = ControllerUriParser.parsePostUris(controllerClass);
+        var uris = ControllerUriCollector.parseUris(controllerClass, RequestMethod.POST);
 
         // then
         assertThat(uris).contains("/foo", "/foo/bar", "/foo/post");

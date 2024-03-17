@@ -1,5 +1,7 @@
 rootProject.name = "spring-boot"
 
+include("gateway")
+
 include("common")
 include("message")
 include("validation")
@@ -13,7 +15,6 @@ include("temp")
 include(":domain:members")
 include(":domain:items")
 
-include(":basic:_gateway")
 include(":basic:http")
 include(":basic:thymeleaf")
 
