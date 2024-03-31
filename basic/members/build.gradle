@@ -29,16 +29,29 @@ dependencies {
 
     implementation(project(":common"))
     implementation(project(":domain:members"))
+    implementation(project(":web:core"))
     implementation(project(":web:session"))
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 }
 
-tasks.register('http') {
+tasks.register('sign-up') {
     exec {
         executable "curl"
-        args "-i", "POST", "http://localhost:8080/members/sign-up",
+        args "-i", "--no-progress-meter",
+                "-X", "POST", "http://localhost:8080/members/sign-up",
+                "-H", "Connection: close",
+                "-H", "Content-Type: application/x-www-form-urlencoded",
+                "-d", "username=jihogrammer&password=1234"
+    }
+}
+
+tasks.register('sign-in') {
+    exec {
+        executable "curl"
+        args "-i", "--no-progress-meter",
+                "-X", "POST", "http://localhost:8080/members/sign-in",
                 "-H", "Connection: close",
                 "-H", "Content-Type: application/x-www-form-urlencoded",
                 "-d", "username=jihogrammer&password=1234"

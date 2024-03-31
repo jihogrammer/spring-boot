@@ -2,7 +2,7 @@ package dev.jihogrammer.members.application.home;
 
 import dev.jihogrammer.domain.members.model.Member;
 import dev.jihogrammer.members.application.signin.SignIn;
-import lombok.extern.slf4j.Slf4j;
+import dev.jihogrammer.web.core.ConditionalController;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,12 +12,7 @@ import static java.util.Objects.isNull;
 
 @Controller
 @ConditionalOnProperty(name = "service.members.home.enabled")
-@Slf4j
-public class HomeController {
-
-    public HomeController() {
-        log.trace("Member Home Controller is initialized.");
-    }
+public class HomeController implements ConditionalController {
 
     @GetMapping
     public String home(@SignIn final Member member, final Model model) {

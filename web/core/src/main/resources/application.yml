@@ -1,0 +1,8 @@
+service:
+  core:
+    memory:
+      enabled: true
+
+logging:
+  level:
+    dev.jihogrammer.web.core: TRACE

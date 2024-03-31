@@ -22,8 +22,8 @@ public class SignInCheckInterceptor implements HandlerInterceptor {
             @NonNull final Object handler
     ) throws Exception {
         if (this.memberSession.isNotAuthed()) {
-            log.info("This session is not authed.");
-            response.sendRedirect("/sign-in?redirectURI=" + request.getRequestURI());
+            log.debug("This session is not authed.");
+            response.sendRedirect("/members/sign-in?redirectURI=" + request.getRequestURI());
             return false;
         }
         return true;
