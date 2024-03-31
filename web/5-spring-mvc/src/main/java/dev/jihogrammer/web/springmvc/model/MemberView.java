@@ -1,6 +1,6 @@
 package dev.jihogrammer.web.springmvc.model;
 
-import dev.jihogrammer.member.model.Member;
+import dev.jihogrammer.domain.members.model.Member;
 import lombok.Getter;
 
 @Getter
@@ -14,7 +14,7 @@ public class MemberView {
 
     public MemberView(final Member member) {
         this.id = member.id().value();
-        this.name = member.name();
+        this.name = member.username();
         this.age = member.age();
     }
 

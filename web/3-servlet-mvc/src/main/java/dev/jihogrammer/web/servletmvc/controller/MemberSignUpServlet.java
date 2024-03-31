@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.servletmvc.controller;
 
-import dev.jihogrammer.member.port.in.MemberService;
-import dev.jihogrammer.member.model.MemberSignUpCommand;
+import dev.jihogrammer.domain.members.port.in.MemberService;
+import dev.jihogrammer.domain.members.model.SignUpCommand;
 import dev.jihogrammer.web.servletmvc.ServletMVCApplication;
 import dev.jihogrammer.web.servletmvc.model.web.response.MemberView;
 import dev.jihogrammer.web.servletmvc.view.ViewResolver;
@@ -23,7 +23,7 @@ public class MemberSignUpServlet extends HttpServlet {
 
     public static final String URL = "/members/sign-up";
 
-    private static final String MEMBER_NAME_PARAMETER_NAME = "name";
+    private static final String MEMBER_NAME_PARAMETER_NAME = "username";
 
     private static final String MEMBER_AGE_PARAMETER_NAME = "age";
 
@@ -49,9 +49,9 @@ public class MemberSignUpServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         var name = request.getParameter(MEMBER_NAME_PARAMETER_NAME);
         var age = Integer.parseInt(request.getParameter(MEMBER_AGE_PARAMETER_NAME));
-        log.info("REQUEST {} {}, name=[{}], age=[{}]", request.getMethod(), URL, name, age);
+        log.info("REQUEST {} {}, username=[{}], age=[{}]", request.getMethod(), URL, name, age);
 
-        var command = MemberSignUpCommand.builder().name(name).age(age).build();
+        var command = SignUpCommand.builder().name(name).age(age).build();
         var signedUpMember = MemberView.of(this.memberService.signUp(command));
         log.info("singed up member [{}]", signedUpMember);
 

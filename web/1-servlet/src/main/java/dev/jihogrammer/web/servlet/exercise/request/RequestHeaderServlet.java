@@ -67,7 +67,7 @@ public class RequestHeaderServlet extends HttpServlet {
     private Map<String, ?> utilities(final HttpServletRequest request) {
         return Map.of(
             "server", cleanMap(Map.of(
-                "name", Optional.ofNullable(request.getServerName()),
+                "username", Optional.ofNullable(request.getServerName()),
                 "port", Optional.of(request.getServerPort()))),
             "locale", request.getLocales(),
             "cookie", request.getCookies(),
@@ -84,7 +84,7 @@ public class RequestHeaderServlet extends HttpServlet {
                 "address", Optional.ofNullable(request.getRemoteAddr()),
                 "port", Optional.of(request.getRemotePort()))),
             "local", cleanMap(Map.of(
-                "name", Optional.ofNullable(request.getLocalName()),
+                "username", Optional.ofNullable(request.getLocalName()),
                 "address", Optional.ofNullable(request.getLocalAddr()),
                 "port", Optional.of(request.getLocalPort()))));
     }

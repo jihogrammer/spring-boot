@@ -1,6 +1,6 @@
 package dev.jihogrammer.web.servletmvc.controller;
 
-import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.domain.members.port.out.Members;
 import dev.jihogrammer.web.servletmvc.ServletMVCApplication;
 import dev.jihogrammer.web.servletmvc.model.web.response.MemberView;
 import dev.jihogrammer.web.servletmvc.view.ViewResolver;

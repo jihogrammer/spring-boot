@@ -11,7 +11,7 @@ public class SignUpRequestParameterParser {
     private final String ageParameterKey;
 
     public SignUpRequestParameterParser(final String nameParameterKey, final String ageParameterKey) {
-        log.info("parameters: name={}, age={}", nameParameterKey, ageParameterKey);
+        log.info("parameters: username={}, age={}", nameParameterKey, ageParameterKey);
         this.nameParameterKey = nameParameterKey;
         this.ageParameterKey = ageParameterKey;
     }

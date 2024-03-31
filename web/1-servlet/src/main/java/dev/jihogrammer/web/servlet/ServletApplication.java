@@ -1,8 +1,8 @@
 package dev.jihogrammer.web.servlet;
 
-import dev.jihogrammer.member.port.in.MemberService;
-import dev.jihogrammer.member.port.out.Members;
-import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
+import dev.jihogrammer.domain.members.port.in.MemberService;
+import dev.jihogrammer.domain.members.port.out.Members;
+import dev.jihogrammer.domain.members.intrastructure.adaptor.out.SingletonInMemoryMemberRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

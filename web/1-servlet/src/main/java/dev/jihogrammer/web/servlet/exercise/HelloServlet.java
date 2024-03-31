@@ -22,8 +22,8 @@ public class HelloServlet extends HttpServlet {
         log.info("request: {}", request);
         log.info("response: {}", response);
 
-        String username = request.getParameter("name");
-        log.info("name: {}", username);
+        String username = request.getParameter("username");
+        log.info("username: {}", username);
 
         response.setContentType(MediaType.TEXT_PLAIN_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());

@@ -8,7 +8,7 @@ public abstract class ModelViewController implements Controller {
 
     @Override
     public String toString() {
-        return "name=" + getClass().getSimpleName() + ", uri=" + uri() + ", view=" + view();
+        return "username=" + getClass().getSimpleName() + ", uri=" + uri() + ", view=" + view();
     }
 
 }

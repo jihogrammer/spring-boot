@@ -1,5 +1,6 @@
 rootProject.name = "spring-boot"
 
+include("web-core")
 include("gateway")
 
 include("common")
@@ -10,13 +11,15 @@ include("exception")
 include("type-converter")
 include("file-storage")
 include("jdbc")
-include("temp")
 
 include(":domain:members")
 include(":domain:items")
+include(":web:session")
 
 include(":basic:http")
 include(":basic:thymeleaf")
+include(":basic:items")
+include(":basic:members")
 
 include(":web:1-servlet")
 include(":web:2-jsp")

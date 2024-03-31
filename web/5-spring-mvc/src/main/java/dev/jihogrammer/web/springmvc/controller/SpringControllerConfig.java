@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.springmvc.controller;
 
-import dev.jihogrammer.member.model.MemberSignUpCommand;
-import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.domain.members.model.SignUpCommand;
+import dev.jihogrammer.domain.members.port.out.Members;
 import dev.jihogrammer.web.springmvc.model.MemberView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,9 +39,9 @@ public class SpringControllerConfig {
 
         public SpringMemberController(
             final Members members,
-            @Value("${service.member.sign-up.get-view-name}") final String signUpGetViewName,
-            @Value("${service.member.sign-up.post-view-name}") final String signUpPostViewName,
-            @Value("${service.member.members.get-view-name}") final String membersGetViewName
+            @Value("${service.member.sign-up.get-view-username}") final String signUpGetViewName,
+            @Value("${service.member.sign-up.post-view-username}") final String signUpPostViewName,
+            @Value("${service.member.members.get-view-username}") final String membersGetViewName
         ) {
             this.members = members;
             this.signUpGetViewName = signUpGetViewName;
@@ -58,13 +58,13 @@ public class SpringControllerConfig {
 
         @PostMapping(URI.SPRING_MEMBER_SIGN_UP)
         public String signUp(
-            @RequestParam("name") final String name,
+            @RequestParam("username") final String name,
             @RequestParam("age") final int age,
             final Model model
         ) {
-            log.info("REQUEST SPRING SIGN-UP - name={}, age={}", name, age);
+            log.info("REQUEST SPRING SIGN-UP - username={}, age={}", name, age);
 
-            var command = MemberSignUpCommand.builder().name(name).age(age).build();
+            var command = SignUpCommand.builder().name(name).age(age).build();
             var registeredMember = this.members.save(command);
             var newMember = new MemberView(registeredMember);
 

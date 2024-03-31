@@ -1,6 +1,6 @@
 package dev.jihogrammer.web.servlet.member;
 
-import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.domain.members.port.out.Members;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -39,7 +39,7 @@ public class MemberListServlet extends HttpServlet {
             sb
                 .append("<tr>")
                     .append("<td>").append(member.id().value()).append("</td>")
-                    .append("<td>").append(member.name()).append("</td>")
+                    .append("<td>").append(member.username()).append("</td>")
                     .append("<td>").append(member.age()).append("</td>")
                 .append("</tr>");
         }

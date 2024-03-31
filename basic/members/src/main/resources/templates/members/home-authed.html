@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home :: Members</title>
+</head>
+
+<body>
+<header>
+  <h1>Members Home</h1>
+  <h3>Hello <span th:text="${member.username}"></span></h3>
+</header>
+
+<main>
+  <table>
+    <tbody>
+    <tr>
+      <td>
+        <button th:onclick="|location.href='@{/members/admin}'|">Admin</button>
+      </td>
+      <td>
+        <button th:onclick="|location.href='@{/members/logout}'|">Logout</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

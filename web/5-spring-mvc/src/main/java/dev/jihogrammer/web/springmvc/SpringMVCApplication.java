@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.springmvc;
 
-import dev.jihogrammer.member.port.out.Members;
-import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
+import dev.jihogrammer.domain.members.port.out.Members;
+import dev.jihogrammer.domain.members.intrastructure.adaptor.out.SingletonInMemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

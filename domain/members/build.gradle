@@ -2,7 +2,7 @@ plugins {
     id 'java-library'
 }
 
-group = 'dev.jihogrammer'
+group = 'dev.jihogrammer.domain'
 version = '0.0.1'
 
 java {

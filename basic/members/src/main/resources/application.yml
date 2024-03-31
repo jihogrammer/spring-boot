@@ -1,0 +1,13 @@
+service:
+  members:
+    home:
+      enabled: true
+    admin:
+      enabled: true
+
+logging:
+  level:
+    dev.jihogrammer.members: TRACE
+    org.apache.coyote.http11: TRACE
+  pattern:
+    console: "%magenta([%d{yyyy:mm:dd HH:MM:ss}]) - %highlight([%5.5level]) - %green([%30.30logger{30}]) - %msg%n"

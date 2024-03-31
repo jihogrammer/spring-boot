@@ -24,7 +24,7 @@ public class LegacyControllerConfig {
 
         private final String viewName;
 
-        public HomeController(@Value("${service.legacy.home.get-view-name}") final String viewName) {
+        public HomeController(@Value("${service.legacy.home.get-view-username}") final String viewName) {
             this.viewName = viewName;
         }
 

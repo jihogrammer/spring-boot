@@ -1,7 +1,9 @@
 package dev.jihogrammer.web.servlet.member;
 
-import dev.jihogrammer.member.model.MemberSignUpCommand;
-import dev.jihogrammer.member.port.in.MemberSignUpUsage;
+import dev.jihogrammer.domain.members.exception.MemberException;
+import dev.jihogrammer.domain.members.model.Member;
+import dev.jihogrammer.domain.members.model.SignUpCommand;
+import dev.jihogrammer.domain.members.port.in.SignUpUsage;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,11 +18,11 @@ import java.nio.charset.StandardCharsets;
 @WebServlet(urlPatterns = "/members/sign-up")
 public class MemberSignUpServlet extends HttpServlet {
 
-    private static final String NAME_PARAMETER_NAME = "name";
+    private static final String NAME_PARAMETER_NAME = "username";
 
     private static final String AGE_PARAMETER_NAME = "age";
 
-    private final MemberSignUpUsage memberService;
+    private final SignUpUsage memberService;
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
@@ -28,8 +30,8 @@ public class MemberSignUpServlet extends HttpServlet {
         response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
         response.getOutputStream().write("""
                 <form method="post">
-                    username: <input type="text" name="name">
-                         age: <input type="number" name="age">
+                    username: <input type="text" username="username">
+                         age: <input type="number" username="age">
                     <input type="submit" >
                 </form>
                 <a href="/">home</a>
@@ -40,10 +42,15 @@ public class MemberSignUpServlet extends HttpServlet {
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         var name = request.getParameter(NAME_PARAMETER_NAME);
         var age = Integer.parseInt(request.getParameter(AGE_PARAMETER_NAME));
-        var newMember = this.memberService.signUp(MemberSignUpCommand.builder()
-            .name(name)
-            .age(age)
-            .build());
+        Member newMember = null;
+        try {
+            newMember = this.memberService.signUp(SignUpCommand.builder()
+                .name(name)
+                .age(age)
+                .build());
+        } catch (MemberException e) {
+            throw new RuntimeException(e);
+        }
 
         response.setContentType(MediaType.TEXT_HTML_VALUE);
         response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
@@ -65,6 +72,6 @@ public class MemberSignUpServlet extends HttpServlet {
                 </table>
                 <a href="/members">members</a>
                 <a href="/">home</a>
-                """.formatted(newMember.name(), newMember.id().value(), newMember.name(), newMember.age()).getBytes());
+                """.formatted(newMember.username(), newMember.id().value(), newMember.username(), newMember.age()).getBytes());
     }
 }

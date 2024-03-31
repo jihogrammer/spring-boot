@@ -13,8 +13,8 @@ import dev.jihogrammer.web.frontcontroller.utils.AdapterMapper;
 import dev.jihogrammer.web.frontcontroller.utils.ControllerResolver;
 import dev.jihogrammer.web.frontcontroller.utils.SignUpRequestParameterParser;
 import dev.jihogrammer.web.frontcontroller.utils.ViewResolver;
-import dev.jihogrammer.member.port.out.Members;
-import dev.jihogrammer.member.port.out.SingletonInMemoryMemberRepository;
+import dev.jihogrammer.domain.members.port.out.Members;
+import dev.jihogrammer.domain.members.intrastructure.adaptor.out.SingletonInMemoryMemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -64,7 +64,7 @@ public class FrontControllerApplication extends SpringBootServletInitializer {
             final Members members,
             @Value("${service.sign-up.uri}") final String signUpURI,
             @Value("${service.sign-up.view}") final String signUpView,
-            @Value("${service.sign-up.parameters.name}") final String nameKey,
+            @Value("${service.sign-up.parameters.username}") final String nameKey,
             @Value("${service.sign-up.parameters.age}") final String ageKey,
             @Value("${service.sign-up.model.member}") final String memberKey
     ) {

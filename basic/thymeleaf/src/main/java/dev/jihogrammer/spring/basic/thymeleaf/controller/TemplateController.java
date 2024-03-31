@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/template")
+@RequestMapping("/thymeleaf/template")
 public class TemplateController {
 
     @GetMapping("/fragment")

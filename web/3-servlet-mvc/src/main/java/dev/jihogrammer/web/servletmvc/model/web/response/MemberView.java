@@ -1,6 +1,6 @@
 package dev.jihogrammer.web.servletmvc.model.web.response;
 
-import dev.jihogrammer.member.model.Member;
+import dev.jihogrammer.domain.members.model.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +19,7 @@ public class MemberView {
     public Integer age;
 
     public static MemberView of(final Member member) {
-        return new MemberView(member.id().value(), member.name(), member.age());
+        return new MemberView(member.id().value(), member.username(), member.age());
     }
 
     public static Collection<MemberView> of(final Collection<Member> members) {
