@@ -1,14 +1,7 @@
 rootProject.name = "spring-boot"
 
 include("gateway")
-
 include("common")
-include("message")
-include("validation")
-include("exception")
-include("type-converter")
-include("file-storage")
-include("jdbc")
 
 include(":domain:members")
 include(":domain:items")
@@ -25,3 +18,11 @@ include(":web:2-jsp")
 include(":web:3-servlet-mvc")
 include(":web:4-front-controller")
 include(":web:5-spring-mvc")
+
+include(":advanced:message")
+include(":advanced:exception")
+include(":advanced:file-storage")
+include(":advanced:validation")
+include(":advanced:type-converter")
+
+include(":data:jdbc")
