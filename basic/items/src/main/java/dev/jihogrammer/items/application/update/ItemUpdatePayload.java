@@ -1,29 +1,35 @@
-package dev.jihogrammer.basic.items.dto;
+package dev.jihogrammer.items.application.update;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import dev.jihogrammer.items.model.Item;
 import dev.jihogrammer.items.model.ItemType;
 import dev.jihogrammer.items.model.ItemUpdateCommand;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-@Builder(builderClassName = "Builder")
-@JsonDeserialize(builder = ItemUpdateModel.Builder.class)
-public record ItemUpdateModel(
-        Long id,
-        String name,
-        Integer price,
-        Integer quantity,
-        Boolean open,
-        Set<String> regions,
-        ItemType itemType,
-        String deliveryCode
-) {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class ItemUpdatePayload {
 
-    public static ItemUpdateModel of(final Item item) {
-        return new ItemUpdateModel(
-                item.id().value(),
+    private String name;
+
+    private Integer price;
+
+    private Integer quantity;
+
+    private Boolean open;
+
+    private Set<String> regions;
+
+    private ItemType itemType;
+
+    private String deliveryCode;
+
+    public static ItemUpdatePayload of(final Item item) {
+        return new ItemUpdatePayload(
                 item.name(),
                 item.price(),
                 item.quantity(),
@@ -33,9 +39,9 @@ public record ItemUpdateModel(
                 item.deliveryCode());
     }
 
-    public ItemUpdateCommand toCommand() {
+    public ItemUpdateCommand toCommand(final Long id) {
         return new ItemUpdateCommand(
-                this.id,
+                id,
                 this.name,
                 this.price,
                 this.quantity,

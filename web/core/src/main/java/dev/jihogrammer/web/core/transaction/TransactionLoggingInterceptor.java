@@ -34,6 +34,8 @@ public class TransactionLoggingInterceptor implements HandlerInterceptor {
             MDC.put(this.transactionKey, transactionId);
         }
 
+        response.setHeader(this.transactionHeaderName, MDC.get(this.transactionKey));
+
         return true;
     }
 

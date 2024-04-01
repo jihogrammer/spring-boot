@@ -41,14 +41,10 @@ public class InMemoryItemRepository implements Items {
 
     private static class ItemIdGenerator {
 
-        private static final AtomicLong SEQUENCE;
-
-        static {
-            SEQUENCE = new AtomicLong();
-        }
+        private static final AtomicLong SEQUENCE = new AtomicLong();
 
         public static ItemId next() {
-            return new ItemId(SEQUENCE.addAndGet(1));
+            return new ItemId(SEQUENCE.incrementAndGet());
         }
 
     }

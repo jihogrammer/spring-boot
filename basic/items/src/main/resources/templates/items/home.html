@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Home :: Items</title>
+</head>
+
+<body>
+<header>
+  <h1>Items Home</h1>
+</header>
+
+<main>
+  <table>
+    <tbody>
+    <tr>
+      <td>
+        <button th:onclick="|location.href='@{/items/register}'|">Register</button>
+      </td>
+      <td>
+        <button th:onclick="|location.href='@{/items}'|">Items</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main>
+</body>
+</html>

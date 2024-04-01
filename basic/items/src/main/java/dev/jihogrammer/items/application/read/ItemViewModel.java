@@ -1,4 +1,4 @@
-package dev.jihogrammer.basic.items.dto;
+package dev.jihogrammer.items.application.read;
 
 import dev.jihogrammer.items.model.Item;
 import dev.jihogrammer.items.model.ItemType;

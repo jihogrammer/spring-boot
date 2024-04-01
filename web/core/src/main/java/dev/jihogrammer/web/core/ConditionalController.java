@@ -6,11 +6,14 @@ import org.slf4j.LoggerFactory;
 
 public interface ConditionalController {
 
-    Logger log = LoggerFactory.getLogger(ConditionalController.class);
+    private Logger log() {
+        return LoggerFactory.getLogger(ConditionalController.class);
+    }
 
     @PostConstruct
     default void init() {
-        log.trace("{} is initialized.", this.getClass().getName());
+        var logger = this.log();
+        logger.trace("{} is initialized.", this.getClass().getName());
     }
 
 }

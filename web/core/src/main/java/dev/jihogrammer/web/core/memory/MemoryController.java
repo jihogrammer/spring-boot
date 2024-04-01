@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@MemoryCondition
 public class MemoryController implements ConditionalController {
 
     private final MemoryAgent memoryAgent;

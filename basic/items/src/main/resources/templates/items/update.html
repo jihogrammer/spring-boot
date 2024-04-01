@@ -2,21 +2,20 @@
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>item update</title>
+    <title>Update :: Items</title>
 </head>
 <body>
 <h1>Item Update</h1>
 
-<h6><a href="/">main</a></h6>
+<h4><a href="/">main</a></h4>
 
-<form method="POST" th:action="|/items/update/${item.id}|" th:object="${item}">
+<form method="POST" th:action="|/items/update/${itemId}|" th:object="${itemUpdatePayload}">
   <table>
     <tr>
       <th>ID</th>
       <td>
         <label>
-          <input type="text" th:field="*{id}" readonly disabled>
-          <input type="hidden" th:field="*{id}">
+          <input type="text" th:value="${itemId}" readonly disabled>
         </label>
       </td>
     </tr>

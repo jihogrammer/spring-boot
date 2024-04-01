@@ -2,14 +2,14 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>item save</title>
+    <title>Register :: Items</title>
 </head>
 <body>
 <h1>Item Save</h1>
 
-<h6><a href="/">main</a></h6>
+<h4><a href="/">main</a></h4>
 
-<form method="POST" th:object="${item}">
+<form method="POST" th:object="${itemRegisterPayload}">
   <table>
     <tr>
       <th>NAME</th>
