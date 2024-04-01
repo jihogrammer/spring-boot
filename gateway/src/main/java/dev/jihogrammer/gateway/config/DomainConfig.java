@@ -1,6 +1,6 @@
 package dev.jihogrammer.gateway.config;
 
-import dev.jihogrammer.domain.members.intrastructure.adaptor.out.SingletonInMemoryMemberRepository;
+import dev.jihogrammer.domain.members.port.out.InMemoryMemberRepository;
 import dev.jihogrammer.domain.members.port.out.Members;
 import dev.jihogrammer.items.port.in.ItemService;
 import dev.jihogrammer.items.port.out.InMemoryItemRepository;
@@ -13,7 +13,7 @@ public class DomainConfig {
 
     @Bean
     public Members members() {
-        return SingletonInMemoryMemberRepository.getInstance();
+        return new InMemoryMemberRepository();
     }
 
     @Bean

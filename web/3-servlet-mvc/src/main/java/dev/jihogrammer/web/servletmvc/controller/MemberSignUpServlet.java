@@ -1,7 +1,8 @@
 package dev.jihogrammer.web.servletmvc.controller;
 
-import dev.jihogrammer.domain.members.port.in.MemberService;
+import dev.jihogrammer.domain.members.exception.MemberException;
 import dev.jihogrammer.domain.members.model.SignUpCommand;
+import dev.jihogrammer.domain.members.port.in.SignUpUsage;
 import dev.jihogrammer.web.servletmvc.ServletMVCApplication;
 import dev.jihogrammer.web.servletmvc.model.web.response.MemberView;
 import dev.jihogrammer.web.servletmvc.view.ViewResolver;
@@ -34,10 +35,7 @@ public class MemberSignUpServlet extends HttpServlet {
      */
     private final ViewResolver signUpViewResolver;
 
-    /**
-     * @see ServletMVCApplication#memberService
-     */
-    private final MemberService memberService;
+    private final SignUpUsage signUpUsage;
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
@@ -51,12 +49,16 @@ public class MemberSignUpServlet extends HttpServlet {
         var age = Integer.parseInt(request.getParameter(MEMBER_AGE_PARAMETER_NAME));
         log.info("REQUEST {} {}, username=[{}], age=[{}]", request.getMethod(), URL, name, age);
 
-        var command = SignUpCommand.builder().name(name).age(age).build();
-        var signedUpMember = MemberView.of(this.memberService.signUp(command));
-        log.info("singed up member [{}]", signedUpMember);
+        try {
+            var command = SignUpCommand.builder().name(name).age(age).build();
+            var signedUpMember = MemberView.of(this.signUpUsage.signUp(command));
+            log.info("singed up member [{}]", signedUpMember);
 
-        request.setAttribute(NEW_MEMBER_ATTRIBUTE_NAME, signedUpMember);
-        request.getRequestDispatcher(this.signUpViewResolver.resolvePostView()).forward(request, response);
+            request.setAttribute(NEW_MEMBER_ATTRIBUTE_NAME, signedUpMember);
+            request.getRequestDispatcher(this.signUpViewResolver.resolvePostView()).forward(request, response);
+        } catch (final MemberException e) {
+            log.error("Failed to sign up.", e);
+        }
     }
 
 }

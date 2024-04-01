@@ -1,8 +1,11 @@
 package dev.jihogrammer.web.servletmvc;
 
-import dev.jihogrammer.domain.members.port.in.MemberService;
+import dev.jihogrammer.domain.members.port.in.SignInInteractor;
+import dev.jihogrammer.domain.members.port.in.SignInUsage;
+import dev.jihogrammer.domain.members.port.in.SignUpInteractor;
+import dev.jihogrammer.domain.members.port.in.SignUpUsage;
+import dev.jihogrammer.domain.members.port.out.InMemoryMemberRepository;
 import dev.jihogrammer.domain.members.port.out.Members;
-import dev.jihogrammer.domain.members.intrastructure.adaptor.out.SingletonInMemoryMemberRepository;
 import dev.jihogrammer.web.servletmvc.view.ViewResolver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -46,12 +49,17 @@ public class ServletMVCApplication extends SpringBootServletInitializer {
 
     @Bean
     public Members members() {
-        return SingletonInMemoryMemberRepository.getInstance();
+        return new InMemoryMemberRepository();
     }
 
     @Bean
-    public MemberService memberService(final Members members) {
-        return new MemberService(members);
+    public SignUpUsage signUpUsage(final Members members) {
+        return new SignUpInteractor(members);
+    }
+
+    @Bean
+    public SignInUsage signInUsage(final Members members) {
+        return new SignInInteractor(members);
     }
 
 }

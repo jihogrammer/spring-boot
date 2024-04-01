@@ -1,5 +1,7 @@
 package dev.jihogrammer.web.frontcontroller;
 
+import dev.jihogrammer.domain.members.port.out.InMemoryMemberRepository;
+import dev.jihogrammer.domain.members.port.out.Members;
 import dev.jihogrammer.web.frontcontroller.adapter.ModelViewAdapter;
 import dev.jihogrammer.web.frontcontroller.adapter.ViewNameAdapter;
 import dev.jihogrammer.web.frontcontroller.controller.MemberFormController;
@@ -13,8 +15,6 @@ import dev.jihogrammer.web.frontcontroller.utils.AdapterMapper;
 import dev.jihogrammer.web.frontcontroller.utils.ControllerResolver;
 import dev.jihogrammer.web.frontcontroller.utils.SignUpRequestParameterParser;
 import dev.jihogrammer.web.frontcontroller.utils.ViewResolver;
-import dev.jihogrammer.domain.members.port.out.Members;
-import dev.jihogrammer.domain.members.intrastructure.adaptor.out.SingletonInMemoryMemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -47,7 +47,7 @@ public class FrontControllerApplication extends SpringBootServletInitializer {
 
     @Bean
     public Members members() {
-        return SingletonInMemoryMemberRepository.getInstance();
+        return new InMemoryMemberRepository();
     }
 
     @Bean

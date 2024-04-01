@@ -1,27 +1,26 @@
-package dev.jihogrammer.members.port.out;
+package dev.jihogrammer.domain.members.port.out;
 
 import dev.jihogrammer.domain.members.model.SignUpCommand;
+import dev.jihogrammer.domain.members.port.out.InMemoryMemberRepository;
 import dev.jihogrammer.domain.members.port.out.Members;
-import dev.jihogrammer.domain.members.intrastructure.adaptor.out.SingletonInMemoryMemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SingletonInMemoryMemberRepositoryTest {
+class InMemoryMemberRepositoryTest {
 
     Members members;
 
     @BeforeEach
     void setUp() {
-        this.members = SingletonInMemoryMemberRepository.getInstance();
-        ((SingletonInMemoryMemberRepository) this.members).clear();
+        this.members = new InMemoryMemberRepository();
     }
 
     @Test
     void register() {
         // given
-        var command = SignUpCommand.builder().name("hello").build();
+        var command = SignUpCommand.builder().name("hello").password("world").build();
 
         // when
         var member = this.members.save(command);
@@ -33,7 +32,7 @@ class SingletonInMemoryMemberRepositoryTest {
     @Test
     void findById() {
         // given
-        var member = this.members.save(SignUpCommand.builder().name("hello").build());
+        var member = this.members.save(SignUpCommand.builder().name("hello").password("world").build());
 
         // when
         var foundMember = this.members.findById(member.id());
@@ -45,9 +44,9 @@ class SingletonInMemoryMemberRepositoryTest {
     @Test
     void findAll() {
         // given
-        var member1 = this.members.save(SignUpCommand.builder().name("hello").build());
-        var member2 = this.members.save(SignUpCommand.builder().name("world").build());
-        var member3 = this.members.save(SignUpCommand.builder().name("jihogrammer").build());
+        var member1 = this.members.save(SignUpCommand.builder().name("hello").password("world").build());
+        var member2 = this.members.save(SignUpCommand.builder().name("dev").password("jihogrammer").build());
+        var member3 = this.members.save(SignUpCommand.builder().name("domain").password("members").build());
 
         // when
         var foundMembers = this.members.findAll();
@@ -59,11 +58,11 @@ class SingletonInMemoryMemberRepositoryTest {
     @Test
     void findByName() {
         // given
-        var name = "jihogrammer";
-        var expectedMember = this.members.save(SignUpCommand.builder().name(name).build());
+        var command = SignUpCommand.builder().name("dev").password("jihogrammer").build();
+        var expectedMember = this.members.save(command);
 
         // when
-        var optionalMember = this.members.findByUsername(name);
+        var optionalMember = this.members.findByUsername(command.username());
 
         // then
         assertThat(optionalMember).isPresent();
