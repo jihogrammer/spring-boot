@@ -1,6 +1,5 @@
 package dev.jihogrammer.members.application.signin;
 
-import dev.jihogrammer.domain.members.model.Member;
 import dev.jihogrammer.web.session.port.in.Session;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -13,7 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @RequiredArgsConstructor
 public class SignInCheckInterceptor implements HandlerInterceptor {
 
-    private final Session<Member> memberSession;
+    private final Session<SignedInMember> memberSession;
 
     @Override
     public boolean preHandle(

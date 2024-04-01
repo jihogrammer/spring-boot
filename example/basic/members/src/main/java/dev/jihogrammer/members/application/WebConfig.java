@@ -1,8 +1,8 @@
 package dev.jihogrammer.members.application;
 
-import dev.jihogrammer.domain.members.model.Member;
 import dev.jihogrammer.members.application.signin.SignInArgumentResolver;
 import dev.jihogrammer.members.application.signin.SignInCheckInterceptor;
+import dev.jihogrammer.members.application.signin.SignedInMember;
 import dev.jihogrammer.web.session.port.in.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import java.util.List;
 public class WebConfig implements WebMvcConfigurer {
 
     @Bean
-    public Session<Member> memberSession() {
+    public Session<SignedInMember> memberSession() {
         return new Session<>("signed-in-member");
     }
 

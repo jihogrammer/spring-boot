@@ -1,6 +1,5 @@
 package dev.jihogrammer.members.application.signin;
 
-import dev.jihogrammer.domain.members.model.Member;
 import dev.jihogrammer.web.session.port.in.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
@@ -13,12 +12,12 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 @RequiredArgsConstructor
 public class SignInArgumentResolver implements HandlerMethodArgumentResolver {
 
-    private final Session<Member> memberSession;
+    private final Session<SignedInMember> memberSession;
 
     @Override
     public boolean supportsParameter(final MethodParameter parameter) {
         boolean hasAnnotation = parameter.hasParameterAnnotation(SignIn.class);
-        boolean hasParameter = Member.class.isAssignableFrom(parameter.getParameterType());
+        boolean hasParameter = SignedInMember.class.isAssignableFrom(parameter.getParameterType());
         return hasAnnotation && hasParameter;
     }
 

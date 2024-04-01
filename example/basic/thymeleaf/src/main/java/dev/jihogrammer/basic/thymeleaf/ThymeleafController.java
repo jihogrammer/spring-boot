@@ -1,6 +1,6 @@
-package dev.jihogrammer.spring.basic.thymeleaf.controller;
+package dev.jihogrammer.basic.thymeleaf;
 
-import dev.jihogrammer.spring.basic.thymeleaf.entity.UserData;
+import dev.jihogrammer.basic.thymeleaf.UserData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

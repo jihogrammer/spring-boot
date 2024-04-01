@@ -7,6 +7,10 @@
 <body>
 <h1 th:text="${title}"></h1>
 
+<h3 th:unless="${member == null}">
+  Hello, <span th:text="${member.username}"></span>!
+</h3>
+
 <ul>
   <li th:each="uri : ${uris}">
     <a th:href="|${uri}|" th:text="${uri}"></a>

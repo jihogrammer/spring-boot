@@ -1,15 +1,11 @@
-package dev.jihogrammer.spring.basic.http.controller;
+package dev.jihogrammer.basic.http;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
 import java.util.Map;
@@ -17,10 +13,9 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/http")
-@Slf4j
 public class HttpController {
 
-    @RequestMapping
+    @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> basic(
             final HttpServletRequest request,

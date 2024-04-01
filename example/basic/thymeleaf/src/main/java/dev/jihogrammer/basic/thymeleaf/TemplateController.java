@@ -1,4 +1,4 @@
-package dev.jihogrammer.spring.basic.thymeleaf.controller;
+package dev.jihogrammer.basic.thymeleaf;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

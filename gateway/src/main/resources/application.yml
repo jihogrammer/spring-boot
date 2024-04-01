@@ -4,8 +4,10 @@ spring:
 
 gateway:
   service: >
+    dev.jihogrammer.basic.http,
+    dev.jihogrammer.basic.thymeleaf,
+    dev.jihogrammer.members,
     dev.jihogrammer.items,
-    dev.jihogrammer.members
 
 logging:
   level:

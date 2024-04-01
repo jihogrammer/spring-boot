@@ -1,4 +1,4 @@
-package dev.jihogrammer.spring.basic.http;
+package dev.jihogrammer.basic.http;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

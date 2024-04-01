@@ -1,4 +1,4 @@
-package dev.jihogrammer.spring.basic.thymeleaf.entity;
+package dev.jihogrammer.basic.thymeleaf;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;

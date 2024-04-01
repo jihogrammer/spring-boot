@@ -1,7 +1,6 @@
 package dev.jihogrammer.members.application.signin;
 
 import dev.jihogrammer.domain.members.exception.MemberException;
-import dev.jihogrammer.domain.members.model.Member;
 import dev.jihogrammer.domain.members.port.in.SignInUsage;
 import dev.jihogrammer.web.session.port.in.Session;
 import jakarta.validation.Valid;
@@ -21,7 +20,7 @@ public class SignInController {
 
     private final SignInUsage signInUsage;
 
-    private final Session<Member> session;
+    private final Session<SignedInMember> session;
 
     @GetMapping("/sign-in")
     public String signIn(@ModelAttribute(SIGN_IN_MODEL_ATTR_NAME) final SignInPayload signInPayload) {
@@ -41,7 +40,8 @@ public class SignInController {
 
         try {
             var member = this.signInUsage.signIn(signInPayload.toCommand());
-            this.session.flush(member);
+            var signedInMember = SignedInMember.of(member);
+            this.session.flush(signedInMember);
             return "redirect:" + redirectURI;
         } catch (final MemberException e) {
             log.error("Failed to sign-in.", e);
