@@ -1,28 +1,27 @@
 rootProject.name = "spring-boot"
 
 include("gateway")
-include("common")
 
 include(":domain:members")
 include(":domain:items")
 include(":web:session")
 include(":web:core")
 
-include(":basic:http")
-include(":basic:thymeleaf")
-include(":basic:items")
-include(":basic:members")
+include(":example:basic:http")
+include(":example:basic:thymeleaf")
+include(":example:basic:items")
+include(":example:basic:members")
 
-include(":web:1-servlet")
-include(":web:2-jsp")
-include(":web:3-servlet-mvc")
-include(":web:4-front-controller")
-include(":web:5-spring-mvc")
+include(":example:web:1-servlet")
+include(":example:web:2-jsp")
+include(":example:web:3-servlet-mvc")
+include(":example:web:4-front-controller")
+include(":example:web:5-spring-mvc")
 
-include(":advanced:message")
-include(":advanced:exception")
-include(":advanced:file-storage")
-include(":advanced:validation")
-include(":advanced:type-converter")
+include(":example:advanced:message")
+include(":example:advanced:exception")
+include(":example:advanced:file-storage")
+include(":example:advanced:validation")
+include(":example:advanced:type-converter")
 
-include(":data:jdbc")
+include(":example:data:jdbc")

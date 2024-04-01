@@ -1,16 +1,18 @@
 package dev.jihogrammer.web.session.port.in;
 
 import jakarta.servlet.http.HttpSession;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
 public class Session<T> {
 
     private final String name;
+
+    public Session(final String name) {
+        this.name = name;
+    }
 
     @SuppressWarnings("unchecked")
     public Optional<T> fetch() {
@@ -36,8 +38,6 @@ public class Session<T> {
     public void invalidate() {
         this.httpSession(false).ifPresent(HttpSession::invalidate);
     }
-
-
 
     private Optional<HttpSession> httpSession(final boolean create) {
         return Optional.ofNullable(RequestContextHolder.getRequestAttributes())

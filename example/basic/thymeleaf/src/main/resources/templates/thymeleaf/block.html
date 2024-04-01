@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>block - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<div>
+  <table>
+    <caption>TH:BLOCK</caption>
+    <thead>
+    <tr>
+      <th>NO</th>
+      <th>NAME</th>
+      <th>AGE</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="user : ${users}">
+      <tr>
+        <th rowspan="2" th:text="${userStat.count}">count</th>
+        <td th:text="${user.name}">name</td>
+        <td th:text="${user.age}">age</td>
+      </tr>
+      <tr>
+        <td colspan="2">Hello, [[${user.name}]](<span th:text="${user.age}"></span>)!</td>
+      </tr>
+    </th:block>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

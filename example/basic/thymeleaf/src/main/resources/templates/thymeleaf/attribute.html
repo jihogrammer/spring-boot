@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>attribute - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<form>
+  <table>
+    <caption>Attribute - append</caption>
+    <thead>
+    <tr>
+      <th>SYNTAX</th>
+      <th>RESULT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th>
+        <label for="attrappend">
+          <code>&lt;input type="text" class="text" th:attrappend="class=' large'"&gt;</code>
+        </label>
+      </th>
+      <td>
+        <input id="attrappend" type="text" class="text" th:attrappend="class=' large'">
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label for="attrprepend">
+          <code>&lt;input type="text" class="text" th:attrprepend="class='large '"&gt;</code>
+        </label>
+      </th>
+      <td>
+        <input id="attrprepend" type="text" class="text" th:attrprepend="class='large '">
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label for="classappend">
+          <code>&lt;input type="text" class="text" th:classappend="large"&gt;</code>
+        </label>
+      </th>
+      <td>
+        <input id="classappend" type="text" class="text" th:classappend="large">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table>
+    <caption>Attribute - checked</caption>
+    <thead>
+    <tr>
+      <th>SYNTAX</th>
+      <th>RESULT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th>
+        <label for="checkbox1">
+          <code>&lt;input type="text" class="text" th:classappend="large"&gt;</code>
+        </label>
+      </th>
+      <td>
+        <input id="checkbox1" type="checkbox" name="active" th:checked="true">
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <label for="checkbox2">
+          <code>&lt;input type="text" class="text" th:classappend="large"&gt;</code>
+        </label>
+      </th>
+      <td>
+        <input id="checkbox2" type="checkbox" name="active" th:checked="false">
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</form>
+
+<script>
+  ["attrappend", "attrprepend", "classappend"].forEach(id => {
+    const element = document.getElementById(id);
+    element.value = element.classList.value;
+  });
+</script>
+</body>
+</html>

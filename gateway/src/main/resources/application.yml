@@ -2,9 +2,14 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+gateway:
+  service: >
+    dev.jihogrammer.items,
+    dev.jihogrammer.members
+
 logging:
   level:
 #    org.apache.coyote.http11: TRACE
-    dev.jihogrammer: DEBUG
+    dev.jihogrammer: TRACE
   pattern:
-    console: "%magenta([%d{yyyy:mm:dd HH:MM:ss}]) %highlight([%5.5level]) [%15.15t] %green([%30.30logger{30}]) [%X{transaction.id}] - %msg%n"
+    console: "%magenta([%d{HH:MM:ss}]) %highlight([%5.5level]) [%t] %green([%25.25logger{25}]) [%X{transaction.id}] - %msg%n"

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>each - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<div>
+  <table>
+    <caption>Each</caption>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Stat</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user, stat : ${users}">
+      <td th:text="${user.name}">name</td>
+      <td th:text="${user.age}">age</td>
+      <td>
+        <ul>
+          <li th:text="|index: ${stat.index}|"></li>
+          <li th:text="|count: ${stat.count}|"></li>
+          <li th:text="|size: ${stat.size}|"></li>
+          <li th:text="|even: ${stat.even}|"></li>
+          <li th:text="|odd: ${stat.odd}|"></li>
+          <li th:text="|first: ${stat.first}|"></li>
+          <li th:text="|last: ${stat.last}|"></li>
+          <li th:text="|current: ${stat.current}|"></li>
+        </ul>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

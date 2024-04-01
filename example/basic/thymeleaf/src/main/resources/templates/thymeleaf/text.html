@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>text - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<div>
+  <table>
+    <caption>TEXT</caption>
+    <thead>
+    <tr>
+      <th>SYNTAX</th>
+      <th>RESULT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th colspan="2"><code>data: [[${data}]]</code></th>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="${data}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:text="${data}">data 값</p></td>
+    </tr>
+    <tr>
+      <th><code th:inline="none">[[${data}]]</code></th>
+      <td>[[${data}]]</td>
+    </tr>
+    <tr>
+      <th colspan="2"><code>unescapedData: [[${unescapedData}]]</code></th>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:utext="${unescaped-data}"&gt;&lt;/p&gt;</code></th>
+      <td><p th:utext="${unescapedData}">unescapedData 값</p></td>
+    </tr>
+    <tr>
+      <th><code th:inline="none">[[${unescapedData}]]</code></th>
+      <td>[(${unescapedData})]</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

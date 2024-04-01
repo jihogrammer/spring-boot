@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<footer th:fragment="default">default footer</footer>
+
+<footer th:fragment="params(param1, param2)">
+  <p>
+    params footer -
+    param1: <span th:text="${param1}">param1</span>,
+    param2: <span th:text="${param2}">param2</span>
+  </p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>literal - Thymeleaf</title>
+  <link rel="stylesheet" th:href="@{/css/default.css}">
+</head>
+<body>
+<div>
+  <table>
+    <caption>LITERAL</caption>
+    <thead>
+    <tr>
+      <th>SYNTAX</th>
+      <th>RESULT</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th><code>&lt;p th:text="hello"&gt;&lt;/p&gt;</code></th>
+      <td th:text="hello">공백없이 이어지는 값일 경우 허용</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="'hello'"&gt;&lt;/p&gt;</code></th>
+      <td th:text="'hello'">literal value</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="'hello world!'"&gt;&lt;/p&gt;</code></th>
+      <td th:text="'hello world!'">literal value</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="'hello' + ' ' + 'world!'"&gt;&lt;/p&gt;</code></th>
+      <td th:text="'hello' + ' ' + 'world!'">literal value</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="'hello' + ' ' + ${data}"&gt;&lt;/p&gt;</code></th>
+      <td th:text="'hello' + ' ' + ${data}">literal value</td>
+    </tr>
+    <tr>
+      <th><code>&lt;p th:text="|hello ${data}|"&gt;&lt;/p&gt;</code></th>
+      <td th:text="|hello ${data}|">literal value</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
