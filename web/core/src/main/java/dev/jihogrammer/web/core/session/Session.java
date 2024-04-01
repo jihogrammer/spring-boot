@@ -1,4 +1,4 @@
-package dev.jihogrammer.web.session.port.in;
+package dev.jihogrammer.web.core.session;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.context.request.RequestContextHolder;

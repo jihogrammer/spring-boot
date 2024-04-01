@@ -1,6 +1,6 @@
 package dev.jihogrammer.members.application.signin;
 
-import dev.jihogrammer.web.session.port.in.Session;
+import dev.jihogrammer.web.core.session.Session;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

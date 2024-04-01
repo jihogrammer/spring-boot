@@ -3,7 +3,7 @@ package dev.jihogrammer.members.application;
 import dev.jihogrammer.members.application.signin.SignInArgumentResolver;
 import dev.jihogrammer.members.application.signin.SignInCheckInterceptor;
 import dev.jihogrammer.members.application.signin.SignedInMember;
-import dev.jihogrammer.web.session.port.in.Session;
+import dev.jihogrammer.web.core.session.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

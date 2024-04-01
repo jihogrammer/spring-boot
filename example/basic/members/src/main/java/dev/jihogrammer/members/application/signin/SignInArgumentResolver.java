@@ -1,6 +1,6 @@
 package dev.jihogrammer.members.application.signin;
 
-import dev.jihogrammer.web.session.port.in.Session;
+import dev.jihogrammer.web.core.session.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.lang.NonNull;

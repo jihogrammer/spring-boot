@@ -29,7 +29,6 @@ dependencies {
 
     implementation(project(":domain:members"))
     implementation(project(":web:core"))
-    implementation(project(":web:session"))
 
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")

@@ -2,7 +2,7 @@ package dev.jihogrammer.members.application.signin;
 
 import dev.jihogrammer.domain.members.exception.MemberException;
 import dev.jihogrammer.domain.members.port.in.SignInUsage;
-import dev.jihogrammer.web.session.port.in.Session;
+import dev.jihogrammer.web.core.session.Session;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
