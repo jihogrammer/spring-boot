@@ -2,7 +2,7 @@ package dev.jihogrammer.item.controlller;
 
 import dev.jihogrammer.item.model.in.ItemUpdateHttpRequest;
 import dev.jihogrammer.item.validation.ItemUpdateHttpRequestValidator;
-import dev.jihogrammer.items.port.in.ItemService;
+import dev.jihogrammer.items.port.in.ItemUpdateUsage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,7 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/validation/v2/items")
 @RequiredArgsConstructor
 public class ValidationV2ItemUpdateController {
-    private final ItemService service;
+
+    private final ItemUpdateUsage itemUpdateUsage;
+
     private final ItemUpdateHttpRequestValidator itemUpdateHttpRequestValidator;
 
     @InitBinder
@@ -36,11 +38,12 @@ public class ValidationV2ItemUpdateController {
             return "/validation/v2-item-update";
         } else {
             var command = request.mapToCommand();
-            var item = this.service.update(command);
+            var item = this.itemUpdateUsage.update(command);
 
             redirectAttributes.addAttribute("itemId", item.id().value());
 
             return "redirect:/validation/v2/items/{itemId}";
         }
     }
+
 }

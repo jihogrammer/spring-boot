@@ -2,8 +2,12 @@ package dev.jihogrammer.item.controlller;
 
 import dev.jihogrammer.item.model.in.ItemRegisterHttpRequest;
 import dev.jihogrammer.item.model.in.ItemUpdateHttpRequest;
-import dev.jihogrammer.items.port.in.ItemService;
+import dev.jihogrammer.items.exception.ItemException;
+import dev.jihogrammer.items.port.in.ItemReadUsage;
+import dev.jihogrammer.items.port.in.ItemRegisterUsage;
+import dev.jihogrammer.items.port.in.ItemUpdateUsage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,12 +22,18 @@ import java.util.Map;
 @Controller
 @RequestMapping("/validation/v1/items")
 @RequiredArgsConstructor
+@Slf4j
 public class ValidationV1ItemController {
-    private final ItemService service;
+
+    private final ItemReadUsage itemReadUsage;
+
+    private final ItemRegisterUsage itemRegisterUsage;
+
+    private final ItemUpdateUsage itemUpdateUsage;
 
     @GetMapping
     public String itemListView(final Model model) {
-        var items = this.service.findAll();
+        var items = this.itemReadUsage.findAll();
 
         model.addAttribute("items", items);
 
@@ -32,11 +42,16 @@ public class ValidationV1ItemController {
 
     @GetMapping("/{itemId}")
     public String itemDetailView(final Model model, @PathVariable Long itemId) {
-        var item = this.service.findById(itemId);
+        try {
+            var item = this.itemReadUsage.findById(itemId);
 
-        model.addAttribute("item", item);
+            model.addAttribute("item", item);
 
-        return "/validation/v1-item-detail";
+            return "/validation/v1-item-detail";
+        } catch (final ItemException e) {
+            log.error("Failed to read the item.", e);
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @GetMapping("/register")
@@ -55,7 +70,7 @@ public class ValidationV1ItemController {
         // validated case
         if (errorMap.isEmpty()) {
             var command = request.mapToCommand();
-            var item = this.service.register(command);
+            var item = this.itemRegisterUsage.register(command);
 
             redirectAttributes.addAttribute("itemId", item.id().value());
 
@@ -71,11 +86,16 @@ public class ValidationV1ItemController {
 
     @GetMapping("/update/{itemId}")
     public String itemUpdateView(final Model model, @PathVariable final Long itemId) {
-        var item = this.service.findById(itemId);
+        try {
+            var item = this.itemReadUsage.findById(itemId);
 
-        model.addAttribute("item", item);
+            model.addAttribute("item", item);
 
-        return "/validation/v1-item-update";
+            return "/validation/v1-item-update";
+        } catch (final ItemException e) {
+            log.error("Failed to find the item.", e);
+            throw new IllegalArgumentException(e);
+        }
     }
 
     @PostMapping("/update")
@@ -88,7 +108,7 @@ public class ValidationV1ItemController {
 
         // validated case
         if (errorMap.isEmpty()) {
-            var item = this.service.update(request.mapToCommand());
+            var item = this.itemUpdateUsage.update(request.mapToCommand());
 
             redirectAttributes.addAttribute("itemId", item.id().value());
 
@@ -146,4 +166,5 @@ public class ValidationV1ItemController {
 
         return errorMap;
     }
+
 }

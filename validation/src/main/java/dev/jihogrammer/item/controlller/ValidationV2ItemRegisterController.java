@@ -2,7 +2,7 @@ package dev.jihogrammer.item.controlller;
 
 import dev.jihogrammer.item.model.in.ItemRegisterHttpRequest;
 import dev.jihogrammer.item.validation.ItemRegisterHttpRequestValidator;
-import dev.jihogrammer.items.port.in.ItemService;
+import dev.jihogrammer.items.port.in.ItemRegisterUsage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class ValidationV2ItemRegisterController {
 
-    private final ItemService service;
+    private final ItemRegisterUsage itemRegisterUsage;
 
     private final ItemRegisterHttpRequestValidator itemRegisterHttpRequestValidator;
 
@@ -39,7 +39,7 @@ public class ValidationV2ItemRegisterController {
             return "/validation/v2-item-register";
         } else {
             var command = request.mapToCommand();
-            var item = this.service.register(command);
+            var item = this.itemRegisterUsage.register(command);
 
             redirectAttributes.addAttribute("itemId", item.id().value());
 
