@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RequiredArgsConstructor
-public class InMemoryMemberRepository implements Members {
+class InMemoryMemberRepository implements Members {
 
     private final Map<MemberId, Member> members;
 

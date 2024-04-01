@@ -15,8 +15,8 @@ logging:
     org.apache.coyote.http11: TRACE
   pattern:
     console:
-      "
-      %magenta([%d{yyyy:mm:dd HH:MM:ss}])
+      # %d{yyyy:mm:dd'T'HH:MM:ss.SSSZ}
+      "%magenta([%d{HH:MM:ss}])
       %highlight([%5.5level])
-      %green([%30.30logger{30}])
+      %green([%25.25logger{25}])
       %cyan([%X{transaction.id}]) - %msg%n"
