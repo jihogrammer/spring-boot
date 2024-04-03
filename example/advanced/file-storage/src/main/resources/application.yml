@@ -1,6 +1,3 @@
-logging.level:
-  org.apache.coyote.http11: debug
-
 spring:
   servlet:
     multipart:
@@ -8,3 +5,24 @@ spring:
 
 file:
   dir: files/
+
+service:
+  core:
+    memory:
+      enabled: true
+    transaction:
+      dispatcher-type: request
+#      dispatcher-type: request,error
+    elapsed:
+      excludes: /,/error
+#      excludes: /,/error
+
+logging:
+  level:
+    dev.jihogrammer: TRACE
+#    org.apache.coyote.http11: TRACE
+  pattern:
+    console: "%magenta([%d{HH:MM:ss}]) %highlight([%5p]) %green([%20.20logger{20}]) %blue([%t]) %cyan([%0.10X{transaction.id}]) - %m%n"
+#    console: "%magenta([%d{HH:MM:ss}]) %highlight([%5p]) %green([%20.20logger{20}]) %blue([%t]) %cyan([%0.10X{transaction.id}]) - %m (%class{0}:%L\\)%n"
+#    console: "%magenta([%d{HH:MM:ss}]) %highlight([%5p]) %green([%20.20logger{20}]) %blue([%t]) %cyan([%X{transaction.id}]) - %m (%class{0}:%L\\)%replace( [%X{elapsed} ms]){' \\[\\sms\\]',''}%n"
+#    console: "%magenta([%d{HH:MM:ss}]) %highlight([%5.5level]) %green([%25.25logger{25}]) %blue([%t]) %cyan([%X{transaction.id}]) [%X{elapsed}] %-5p %class{0}.%method:%L - %m%n"

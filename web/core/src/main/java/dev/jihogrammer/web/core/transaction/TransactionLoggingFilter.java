@@ -28,7 +28,8 @@ public class TransactionLoggingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String transactionId = ((HttpServletRequest) request).getHeader(this.txHeaderName);
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        String transactionId = httpServletRequest.getHeader(this.txHeaderName);
 
         if (isNull(transactionId) || transactionId.isBlank()) {
             MDC.put(this.txMDCKey, UUID.randomUUID().toString());
@@ -38,7 +39,12 @@ public class TransactionLoggingFilter implements Filter {
 
         ((HttpServletResponse) response).setHeader(this.txHeaderName, MDC.get(this.txMDCKey));
 
-        chain.doFilter(request, response);
+        try {
+            log.info("[{} {}] IN", httpServletRequest.getMethod(), httpServletRequest.getRequestURI());
+            chain.doFilter(request, response);
+        } finally {
+            log.info("[{} {}] OUT", httpServletRequest.getMethod(), httpServletRequest.getRequestURI());
+        }
     }
 
 }

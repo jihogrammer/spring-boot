@@ -1,5 +1,6 @@
 package dev.jihogrammer.spring.filestorage;
 
+import dev.jihogrammer.web.core.WebCoreApplication;
 import lombok.Getter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,13 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
-public class FileStorageApplication {
+public class FileStorageApplication extends WebCoreApplication {
+
     public static void main(final String[] args) {
         SpringApplication.run(FileStorageApplication.class, args);
     }
 
     @Controller
     public static class HomeController {
+
         @GetMapping
         public String home(final Model model) {
             model.addAttribute("pages", Page.values());
@@ -36,5 +39,7 @@ public class FileStorageApplication {
                 this.uri = uri;
             }
         }
+
     }
+
 }

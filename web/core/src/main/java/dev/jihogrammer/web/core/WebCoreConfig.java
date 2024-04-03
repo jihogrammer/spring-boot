@@ -14,26 +14,30 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.stream.Collectors;
 
 @Configuration
 public class WebCoreConfig implements WebMvcConfigurer {
 
-    @Value("${service.core.elapsed.excludes:/}")
+    @Value("${service.core.elapsed.excludes:}")
     String[] elapsedExcludes;
 
     @Bean
     public FilterRegistrationBean<Filter> transactionFilter(
         @Value("${service.core.transaction.header-name:transaction-id}") final String txHeaderName,
-        @Value("${service.core.transaction.key-name:transaction.id}") final String txMDCKey
+        @Value("${service.core.transaction.key-name:transaction.id}") final String txMDCKey,
+        @Value("${service.core.transaction.dispatcher-type:request}") final String[] dispatcherTypes
     ) {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
 
         filterRegistrationBean.setFilter(new TransactionLoggingFilter(txHeaderName, txMDCKey));
         filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         filterRegistrationBean.addUrlPatterns("/*");
-
-        // TODO consider about dispatcher type - REQUEST(default), ERROR, and etc.
-        // filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);
+        filterRegistrationBean.setDispatcherTypes(Arrays.stream(dispatcherTypes)
+                .map(String::toUpperCase)
+                .map(DispatcherType::valueOf)
+                .collect(Collectors.toCollection(() -> EnumSet.noneOf(DispatcherType.class))));
 
         return filterRegistrationBean;
     }
