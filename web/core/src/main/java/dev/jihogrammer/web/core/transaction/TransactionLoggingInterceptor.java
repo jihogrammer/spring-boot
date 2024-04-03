@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import static java.util.Objects.isNull;
 
+@Deprecated(since = "0.0.2")
 @RequiredArgsConstructor
 @Slf4j
 public class TransactionLoggingInterceptor implements HandlerInterceptor {
