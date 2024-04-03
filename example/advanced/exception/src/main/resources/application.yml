@@ -1,0 +1,19 @@
+server:
+  error:
+    whitelabel:
+      enabled: false
+    include-exception: true
+    include-stacktrace: always
+    include-message: always
+    include-binding-errors: always
+
+service:
+  core:
+    memory:
+      enabled: true
+
+logging:
+  level:
+    dev.jihogrammer: TRACE
+  pattern:
+    console: "%magenta([%d{HH:MM:ss}]) %highlight([%5.5level]) %green([%25.25logger{25}]) %blue([%t]) %cyan([%X{transaction.id}]) - %msg%n"

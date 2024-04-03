@@ -24,7 +24,9 @@ import static jakarta.servlet.RequestDispatcher.*;
 @Controller
 @Slf4j
 public class ErrorPageController {
+
     public static final String ERROR_404_URI = "/error/404";
+
     public static final String ERROR_500_URI = "/error/500";
 
     @RequestMapping(ERROR_404_URI)
@@ -63,4 +65,5 @@ public class ErrorPageController {
         log.info("ERROR_STATUS_CODE: {}", request.getAttribute(ERROR_STATUS_CODE));
         log.info("dispatcherType: {}", request.getDispatcherType());
     }
+
 }

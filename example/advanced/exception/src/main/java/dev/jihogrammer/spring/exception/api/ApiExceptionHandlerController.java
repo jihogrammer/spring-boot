@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v2")
 @Slf4j
 public class ApiExceptionHandlerController {
+
     @GetMapping("/api/members/{id}")
     public Member findMember(@PathVariable("id") String id) {
         if ("ex".equals(id)) {
@@ -30,4 +31,5 @@ public class ApiExceptionHandlerController {
         private String id;
         private String name;
     }
+
 }

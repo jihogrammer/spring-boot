@@ -11,12 +11,12 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
 public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
-    private static final String UTF_8 = "utf-8";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -40,7 +40,7 @@ public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
                     result.put("message", ex.getMessage());
 
                     response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-                    response.setCharacterEncoding(UTF_8);
+                    response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
                     response.getWriter().print(objectMapper.writeValueAsString(result));
 
                     return new ModelAndView();
@@ -51,4 +51,5 @@ public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
         }
         return null;
     }
+
 }

@@ -22,7 +22,7 @@ public class TransactionLoggingFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        log.trace("{} initialized. txHeaderName=[{}]; txMDCKey=[{}]",
+        log.trace("{} initialized; txHeaderName=[{}]; txMDCKey=[{}];",
             getClass().getSimpleName(), this.txHeaderName, this.txMDCKey);
     }
 

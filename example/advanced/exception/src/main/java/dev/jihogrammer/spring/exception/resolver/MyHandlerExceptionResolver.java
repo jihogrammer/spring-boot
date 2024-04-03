@@ -11,6 +11,7 @@ import java.io.IOException;
 
 @Slf4j
 public class MyHandlerExceptionResolver implements HandlerExceptionResolver {
+
     @Override
     public ModelAndView resolveException(
         @NonNull final HttpServletRequest request,
@@ -29,4 +30,5 @@ public class MyHandlerExceptionResolver implements HandlerExceptionResolver {
         }
         return null;
     }
+
 }

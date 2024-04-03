@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExc
 @Slf4j
 @RestControllerAdvice
 public class ExceptionControllerAdvice {
+
     /**
      * @see ExceptionHandlerExceptionResolver
      */
@@ -23,7 +24,7 @@ public class ExceptionControllerAdvice {
         return new ErrorResponse("bad", e.getMessage());
     }
 
-    @ExceptionHandler
+    @ExceptionHandler(UserException.class)
     public ResponseEntity<ErrorResponse> handleException(final UserException e) {
         log.error("{}", e.getMessage(), e);
         return new ResponseEntity<>(new ErrorResponse("user-exception", e.getMessage()), HttpStatus.BAD_REQUEST);
@@ -35,4 +36,5 @@ public class ExceptionControllerAdvice {
         log.error("{}", e.getMessage(), e);
         return new ErrorResponse("exception", e.getMessage());
     }
+
 }

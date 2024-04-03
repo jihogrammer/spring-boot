@@ -1,5 +1,6 @@
 package dev.jihogrammer.spring.exception.servlet;
 
+import dev.jihogrammer.spring.exception.model.UserException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,17 @@ import java.io.IOException;
 @Controller
 @Slf4j
 public class ServletExceptionController {
+
     @RequestMapping("/exception/example")
     public void errorExample() {
         log.error("errorExample");
         throw new RuntimeException("error example");
+    }
+
+    @RequestMapping("/exception/user")
+    public void userException() {
+        log.error("errorExample");
+        throw new UserException("error.bad");
     }
 
     @RequestMapping("/exception/404")
@@ -30,4 +38,5 @@ public class ServletExceptionController {
         log.error("error500");
         response.sendError(500);
     }
+
 }

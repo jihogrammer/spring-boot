@@ -9,19 +9,19 @@ import java.util.UUID;
 
 @Slf4j
 public class LoggingFilter implements Filter {
+
     @Override
     public void doFilter(
         final ServletRequest request,
         final ServletResponse response,
         final FilterChain chain
     ) throws ServletException, IOException {
-        UUID uuid = UUID.randomUUID();
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
-        try {
-            log.info("REQ [{}][{}][{}]", uuid, request.getDispatcherType(), ((HttpServletRequest) request).getRequestURI());
-            chain.doFilter(request, response);
-        } finally {
-            log.info("RES [{}][{}][{}]", uuid, request.getDispatcherType(), ((HttpServletRequest) request).getRequestURI());
-        }
+        log.info("[{} {}] dispatcherType=[{}]",
+            httpServletRequest.getMethod(), httpServletRequest.getRequestURI(), request.getDispatcherType());
+
+        chain.doFilter(request, response);
     }
+
 }

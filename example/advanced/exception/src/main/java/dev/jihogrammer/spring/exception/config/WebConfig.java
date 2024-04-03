@@ -2,7 +2,6 @@ package dev.jihogrammer.spring.exception.config;
 
 import dev.jihogrammer.spring.exception.error.ErrorPageController;
 import dev.jihogrammer.spring.exception.filter.LoggingFilter;
-import dev.jihogrammer.spring.exception.interceptor.ElapsedLoggingInterceptor;
 import dev.jihogrammer.spring.exception.resolver.MyHandlerExceptionResolver;
 import dev.jihogrammer.spring.exception.resolver.UserHandlerExceptionResolver;
 import dev.jihogrammer.spring.exception.servlet.ServletExceptionController;
@@ -17,20 +16,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    @Override
-    public void addInterceptors(@NonNull final InterceptorRegistry registry) {
-        registry.addInterceptor(new ElapsedLoggingInterceptor())
-            .order(1)
-            .addPathPatterns("/**")
-            .excludePathPatterns("/**.css", "/*.ico", "/error", "/error-page/**");
-    }
 
     @Override
     public void extendHandlerExceptionResolvers(@NonNull final List<HandlerExceptionResolver> resolvers) {
@@ -65,4 +56,5 @@ public class WebConfig implements WebMvcConfigurer {
             new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR, ErrorPageController.ERROR_500_URI),
             new ErrorPage(RuntimeException.class, ErrorPageController.ERROR_500_URI));
     }
+
 }

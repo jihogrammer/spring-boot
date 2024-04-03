@@ -4,8 +4,10 @@ import dev.jihogrammer.spring.exception.model.BadRequestException;
 import dev.jihogrammer.spring.exception.model.UserException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +18,15 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.annotation.ResponseStatusExceptionResolver;
 import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
+import java.util.Locale;
+
 @RestController
 @Slf4j
+@RequiredArgsConstructor
 public class ApiExceptionController {
+
+    private final MessageSource messageSource;
+
     @GetMapping("/api/members/{id}")
     public Member findMember(@PathVariable("id") String id) {
         if ("ex".equals(id)) {
@@ -42,7 +50,8 @@ public class ApiExceptionController {
     @GetMapping("/api/response-status-exception")
     public void responseStatusException() {
         // see /resources/messages.properties
-        throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, "error.bad", new UserException());
+        String message = this.messageSource.getMessage("error.bad", null, Locale.getDefault());
+        throw new ResponseStatusException(HttpStatus.BAD_GATEWAY, message, new UserException());
     }
 
     /**
@@ -53,7 +62,7 @@ public class ApiExceptionController {
      * @see MissingServletRequestParameterException
      */
     @GetMapping("/api/default-handler-exception")
-    public String defaultHandlerException(@RequestParam int param) {
+    public String defaultHandlerException(@RequestParam(name = "param") int param) {
         return "ok";
     }
 
@@ -63,4 +72,5 @@ public class ApiExceptionController {
         private String id;
         private String name;
     }
+
 }
