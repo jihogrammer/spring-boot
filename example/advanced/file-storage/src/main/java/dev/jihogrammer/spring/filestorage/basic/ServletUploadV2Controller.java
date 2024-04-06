@@ -1,10 +1,10 @@
-package dev.jihogrammer.spring.filestorage.controller;
+package dev.jihogrammer.spring.filestorage.basic;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
@@ -12,20 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @Controller
-@RequestMapping("/servlet/v2")
+@RequestMapping("/file-storage/servlet/v2")
+@RequiredArgsConstructor
 @Slf4j
 public class ServletUploadV2Controller {
 
-    private final String fileDir;
-
-    public ServletUploadV2Controller(@Value("${file.dir}") final String fileDir) {
-        this.fileDir = new File(fileDir).getAbsolutePath() + "/";
-    }
+    private final String fileRootDir;
 
     @GetMapping("/upload")
     public String view() {
@@ -54,7 +50,7 @@ public class ServletUploadV2Controller {
             log.info("body = {}", StreamUtils.copyToString(part.getInputStream(), StandardCharsets.UTF_8));
 
             if (StringUtils.hasText(part.getSubmittedFileName())) {
-                part.write(this.fileDir + part.getSubmittedFileName());
+                part.write(this.fileRootDir + part.getSubmittedFileName());
             }
         }
 

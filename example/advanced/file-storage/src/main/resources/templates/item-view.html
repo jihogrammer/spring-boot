@@ -13,21 +13,21 @@
   <h2>#<span th:text="*{id}"></span> <span th:text="*{itemName}"></span></h2>
 
   <div th:if="*{userFile}">
-    <h3 th:text="*{userFile.userDefinedFileName}"></h3>
-    <a th:href="|/items/file/*{id}|">download</a>
+    <h3 th:text="*{userFile.name}"></h3>
+    <a th:href="|/file-storage/items/files/*{id}|">download</a>
   </div>
 
   <div th:if="*{imageFiles}">
     <div>
       <a
         th:each="imageFile : *{imageFiles}"
-        th:href="|/items/images/${imageFile.storedFileName}|"
+        th:href="|/file-storage/items/images/${imageFile.storedName}|"
         target="_blank"
       >
         <img
           alt="a image file"
           src=""
-          th:src="|/items/images/${imageFile.storedFileName}|"
+          th:src="|/file-storage/items/images/${imageFile.storedName}|"
           style="width: 90vw"
         >
       </a>

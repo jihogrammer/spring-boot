@@ -1,12 +1,14 @@
 package dev.jihogrammer.files.model;
 
-public abstract class FileSaveCommand {
+public interface FileSaveCommand<T> {
 
-    public abstract String filename();
+    String filename();
 
-    public abstract boolean isEmpty();
+    T delegate();
 
-    public boolean isNotEmpty() {
+    boolean isEmpty();
+
+    default boolean isNotEmpty() {
         return !this.isEmpty();
     }
 

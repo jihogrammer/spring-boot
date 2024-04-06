@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-public interface FileSaveUsage {
+public interface FileSaveUsage<T> {
 
-    File save(FileSaveCommand command);
+    File<T> save(FileSaveCommand<T> command);
 
-    default Collection<File> save(Collection<FileSaveCommand> commands) {
-        var files = new ArrayList<File>();
+    default Collection<File<T>> save(Collection<FileSaveCommand<T>> commands) {
+        var files = new ArrayList<File<T>>();
 
         for (var command : commands) {
             if (command.isNotEmpty()) {

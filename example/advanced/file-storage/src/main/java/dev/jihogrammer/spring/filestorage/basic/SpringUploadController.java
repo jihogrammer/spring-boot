@@ -1,13 +1,9 @@
-package dev.jihogrammer.spring.filestorage.controller;
+package dev.jihogrammer.spring.filestorage.basic;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.Part;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StreamUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,18 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 @Controller
-@RequestMapping("/spring")
+@RequestMapping("/file-storage/spring")
+@RequiredArgsConstructor
 @Slf4j
 public class SpringUploadController {
 
-    private final String fileDir;
-
-    public SpringUploadController(@Value("${file.dir}") final String fileDir) {
-        this.fileDir = new File(fileDir).getAbsolutePath() + "/";
-    }
+    private final String fileRootDir;
 
     @GetMapping("/upload")
     public String view() {
@@ -36,8 +28,8 @@ public class SpringUploadController {
 
     @PostMapping("/upload")
     public String upload(
-        @RequestParam final String itemName,
-        @RequestParam final MultipartFile file,
+        @RequestParam("itemName") final String itemName,
+        @RequestParam("file") final MultipartFile file,
         final HttpServletRequest request
     ) {
         log.info("spring uploading. request = {}", request);
@@ -47,7 +39,7 @@ public class SpringUploadController {
         if (file.isEmpty()) {
             log.info("file is empty");
         } else {
-            String filePath = this.fileDir + file.getOriginalFilename();
+            String filePath = this.fileRootDir + file.getOriginalFilename();
             log.info("filePath = {}", filePath);
 
             try {

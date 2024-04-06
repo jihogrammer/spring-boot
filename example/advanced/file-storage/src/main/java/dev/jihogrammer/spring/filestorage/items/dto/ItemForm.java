@@ -1,4 +1,4 @@
-package dev.jihogrammer.spring.filestorage.controller.dto;
+package dev.jihogrammer.spring.filestorage.items.dto;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;

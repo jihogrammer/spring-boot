@@ -7,6 +7,9 @@ file:
   dir: files/
 
 service:
+  file-storage:
+    home:
+      enabled: true
   core:
     memory:
       enabled: true

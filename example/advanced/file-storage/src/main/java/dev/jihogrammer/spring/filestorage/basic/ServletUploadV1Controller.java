@@ -1,4 +1,4 @@
-package dev.jihogrammer.spring.filestorage.controller;
+package dev.jihogrammer.spring.filestorage.basic;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
 
 @Controller
-@RequestMapping("/servlet/v1")
+@RequestMapping("/file-storage/servlet/v1")
 @Slf4j
 public class ServletUploadV1Controller {
+
     @GetMapping("/upload")
     public String view() {
         return "/upload-view";
@@ -29,4 +30,5 @@ public class ServletUploadV1Controller {
 
         return "/upload-view";
     }
+
 }
