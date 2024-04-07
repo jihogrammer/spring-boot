@@ -27,7 +27,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-aop")
 
-    implementation(project(":domain:members"))
+    implementation(project(":domain:member"))
     implementation(project(":web:core"))
 
     compileOnly("org.projectlombok:lombok")

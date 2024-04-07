@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.springmvc.controller;
 
-import dev.jihogrammer.domain.members.model.SignUpCommand;
-import dev.jihogrammer.domain.members.port.out.Members;
+import dev.jihogrammer.member.model.MemberSaveCommand;
+import dev.jihogrammer.member.port.out.Members;
 import dev.jihogrammer.web.springmvc.model.MemberView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,7 +64,7 @@ public class SpringControllerConfig {
         ) {
             log.info("REQUEST SPRING SIGN-UP - username={}, age={}", name, age);
 
-            var command = SignUpCommand.builder().name(name).age(age).build();
+            var command = MemberSaveCommand.builder().name(name).age(age).build();
             var registeredMember = this.members.save(command);
             var newMember = new MemberView(registeredMember);
 

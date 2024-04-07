@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.frontcontroller.service;
 
+import dev.jihogrammer.member.port.out.Members;
 import dev.jihogrammer.web.frontcontroller.model.MemberView;
-import dev.jihogrammer.domain.members.port.out.Members;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;

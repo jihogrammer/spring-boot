@@ -1,9 +1,9 @@
 package dev.jihogrammer.web.servlet.member;
 
-import dev.jihogrammer.domain.members.exception.MemberException;
-import dev.jihogrammer.domain.members.model.Member;
-import dev.jihogrammer.domain.members.model.SignUpCommand;
-import dev.jihogrammer.domain.members.port.in.SignUpUsage;
+import dev.jihogrammer.member.Member;
+import dev.jihogrammer.member.exception.MemberException;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
+import dev.jihogrammer.member.port.in.MemberSignUpUsage;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +22,7 @@ public class MemberSignUpServlet extends HttpServlet {
 
     private static final String AGE_PARAMETER_NAME = "age";
 
-    private final SignUpUsage memberService;
+    private final MemberSignUpUsage memberService;
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
@@ -44,7 +44,7 @@ public class MemberSignUpServlet extends HttpServlet {
         var age = Integer.parseInt(request.getParameter(AGE_PARAMETER_NAME));
         Member newMember = null;
         try {
-            newMember = this.memberService.signUp(SignUpCommand.builder()
+            newMember = this.memberService.signUp(MemberSignUpCommand.builder()
                 .name(name)
                 .age(age)
                 .build());
@@ -72,6 +72,6 @@ public class MemberSignUpServlet extends HttpServlet {
                 </table>
                 <a href="/members">members</a>
                 <a href="/">home</a>
-                """.formatted(newMember.username(), newMember.id().value(), newMember.username(), newMember.age()).getBytes());
+                """.formatted(newMember.name(), newMember.id().value(), newMember.name(), newMember.age()).getBytes());
     }
 }

@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.frontcontroller;
 
-import dev.jihogrammer.domain.members.port.out.InMemoryMemberRepository;
-import dev.jihogrammer.domain.members.port.out.Members;
+import dev.jihogrammer.member.adpator.out.InMemoryMemberRepository;
+import dev.jihogrammer.member.port.out.Members;
 import dev.jihogrammer.web.frontcontroller.adapter.ModelViewAdapter;
 import dev.jihogrammer.web.frontcontroller.adapter.ViewNameAdapter;
 import dev.jihogrammer.web.frontcontroller.controller.MemberFormController;

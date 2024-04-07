@@ -1,6 +1,6 @@
 package dev.jihogrammer.members.application.signin;
 
-import dev.jihogrammer.domain.members.model.Member;
+import dev.jihogrammer.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ public class SignedInMember {
     private String username;
 
     public static SignedInMember of(final Member member) {
-        return new SignedInMember(member.username());
+        return new SignedInMember(member.name());
     }
 
 }

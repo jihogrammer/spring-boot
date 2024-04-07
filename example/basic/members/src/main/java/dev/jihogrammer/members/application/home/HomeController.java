@@ -1,6 +1,6 @@
 package dev.jihogrammer.members.application.home;
 
-import dev.jihogrammer.domain.members.model.Member;
+import dev.jihogrammer.member.Member;
 import dev.jihogrammer.members.application.signin.SignIn;
 import dev.jihogrammer.web.core.ConditionalController;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

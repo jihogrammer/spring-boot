@@ -1,8 +1,8 @@
 package dev.jihogrammer.web.servletmvc.controller;
 
-import dev.jihogrammer.domain.members.exception.MemberException;
-import dev.jihogrammer.domain.members.model.SignUpCommand;
-import dev.jihogrammer.domain.members.port.in.SignUpUsage;
+import dev.jihogrammer.member.exception.MemberException;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
+import dev.jihogrammer.member.port.in.MemberSignUpUsage;
 import dev.jihogrammer.web.servletmvc.ServletMVCApplication;
 import dev.jihogrammer.web.servletmvc.model.web.response.MemberView;
 import dev.jihogrammer.web.servletmvc.view.ViewResolver;
@@ -35,7 +35,7 @@ public class MemberSignUpServlet extends HttpServlet {
      */
     private final ViewResolver signUpViewResolver;
 
-    private final SignUpUsage signUpUsage;
+    private final MemberSignUpUsage signUpUsage;
 
     @Override
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +50,7 @@ public class MemberSignUpServlet extends HttpServlet {
         log.info("REQUEST {} {}, username=[{}], age=[{}]", request.getMethod(), URL, name, age);
 
         try {
-            var command = SignUpCommand.builder().name(name).age(age).build();
+            var command = MemberSignUpCommand.builder().name(name).age(age).build();
             var signedUpMember = MemberView.of(this.signUpUsage.signUp(command));
             log.info("singed up member [{}]", signedUpMember);
 

@@ -1,6 +1,6 @@
 package dev.jihogrammer.members.application.signup;
 
-import dev.jihogrammer.domain.members.model.SignUpCommand;
+import dev.jihogrammer.member.model.MemberSignUpCommand;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
@@ -13,8 +13,8 @@ public class SignUpPayload {
     @NotEmpty
     private String password;
 
-    public SignUpCommand toCommand() {
-        return SignUpCommand.builder()
+    public MemberSignUpCommand toCommand() {
+        return MemberSignUpCommand.builder()
                 .name(this.username)
                 .password(this.password)
                 .build();

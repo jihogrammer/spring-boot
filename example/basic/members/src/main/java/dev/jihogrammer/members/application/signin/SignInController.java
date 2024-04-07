@@ -1,7 +1,7 @@
 package dev.jihogrammer.members.application.signin;
 
-import dev.jihogrammer.domain.members.exception.MemberException;
-import dev.jihogrammer.domain.members.port.in.SignInUsage;
+import dev.jihogrammer.member.exception.MemberException;
+import dev.jihogrammer.member.port.in.MemberSignInUsage;
 import dev.jihogrammer.web.core.session.Session;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class SignInController {
 
     private static final String SIGN_IN_MODEL_ATTR_NAME = "signInPayload";
 
-    private final SignInUsage signInUsage;
+    private final MemberSignInUsage signInUsage;
 
     private final Session<SignedInMember> session;
 

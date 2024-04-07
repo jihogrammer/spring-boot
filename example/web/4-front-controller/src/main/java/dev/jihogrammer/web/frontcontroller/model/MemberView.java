@@ -1,6 +1,6 @@
 package dev.jihogrammer.web.frontcontroller.model;
 
-import dev.jihogrammer.domain.members.model.Member;
+import dev.jihogrammer.member.Member;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
@@ -16,7 +16,7 @@ public class MemberView {
 
     public MemberView(final Member member) {
         this.id = member.id().value();
-        this.name = member.username();
+        this.name = member.name();
         this.age = member.age();
     }
 
