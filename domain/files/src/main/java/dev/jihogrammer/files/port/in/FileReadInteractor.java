@@ -2,11 +2,11 @@ package dev.jihogrammer.files.port.in;
 
 import dev.jihogrammer.files.port.out.Files;
 
-public class FileReadInteractor<T> implements FileReadUsage {
+public class FileReadInteractor implements FileReadUsage {
 
-    private final Files<T> files;
+    private final Files files;
 
-    public FileReadInteractor(final Files<T> files) {
+    public FileReadInteractor(final Files files) {
         this.files = files;
     }
 

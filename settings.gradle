@@ -5,6 +5,7 @@ include("gateway")
 include(":domain:members")
 include(":domain:items")
 include(":domain:files")
+include(":domain:file-item")
 include(":web:core")
 
 include(":example:basic:http")

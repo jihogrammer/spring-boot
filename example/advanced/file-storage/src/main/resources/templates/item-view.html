@@ -10,17 +10,17 @@
 <h1>Item View</h1>
 
 <main th:object="${item}">
-  <h2>#<span th:text="*{id}"></span> <span th:text="*{itemName}"></span></h2>
+  <h2>#<span th:text="*{id}"></span> <span th:text="*{name}"></span></h2>
 
-  <div th:if="*{userFile}">
-    <h3 th:text="*{userFile.name}"></h3>
+  <div th:if="*{mainFile}">
+    <h3 th:text="*{mainFile.name}"></h3>
     <a th:href="|/file-storage/items/files/*{id}|">download</a>
   </div>
 
-  <div th:if="*{imageFiles}">
+  <div th:if="*{subFiles}">
     <div>
       <a
-        th:each="imageFile : *{imageFiles}"
+        th:each="imageFile : *{subFiles}"
         th:href="|/file-storage/items/images/${imageFile.storedName}|"
         target="_blank"
       >

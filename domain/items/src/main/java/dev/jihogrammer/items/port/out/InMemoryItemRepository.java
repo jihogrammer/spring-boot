@@ -1,7 +1,8 @@
 package dev.jihogrammer.items.port.out;
 
-import dev.jihogrammer.items.model.Item;
+import dev.jihogrammer.items.Item;
 import dev.jihogrammer.items.model.ItemId;
+import dev.jihogrammer.items.model.ItemRegisterCommand;
 
 import java.util.Collection;
 import java.util.Map;
@@ -20,6 +21,23 @@ public class InMemoryItemRepository implements Items {
 
     @Override
     public Item save(final Item item) {
+        this.store.put(item.id(), item);
+
+        return item;
+    }
+
+    @Override
+    public Item save(final ItemRegisterCommand command) {
+        var item = new Item(
+            ItemIdGenerator.next(),
+            command.name(),
+            command.price(),
+            command.quantity(),
+            command.open(),
+            command.regions(),
+            command.itemType(),
+            command.deliveryCode());
+
         this.store.put(item.id(), item);
 
         return item;
