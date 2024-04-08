@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>PRODUCTS :: Validation</title>
+</head>
+<body>
+<h1>Validation - Products</h1>
+<h6><a href="/">main</a></h6>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>NAME</th>
+    <th>PRICE</th>
+    <th>QUANTITY</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="product : ${products}" th:object="${product}">
+    <td><a th:href="|/validation/${version}/products/*{id}|" th:text="*{id}">ID</a></td>
+    <td th:text="*{name}">NAME</td>
+    <td th:text="*{price}">PRICE</td>
+    <td th:text="*{quantity}">QUANTITY</td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <a th:href="|/validation/${version}/products/register|">
+    <button>register</button>
+  </a>
+</div>
+</body>
+</html>

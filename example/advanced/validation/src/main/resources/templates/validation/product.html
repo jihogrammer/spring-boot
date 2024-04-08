@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>PRODUCT :: Validation</title>
+</head>
+<body>
+<h1>Validation - Product</h1>
+<h6><a href="/">main</a></h6>
+<form action="" th:object="${product}">
+  <table>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input type="number" th:value="*{id}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input type="text" th:field="*{name}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{price}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input type="number" th:field="*{quantity}" disabled>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>
+        <a th:href="|/validation/${version}/products/update/*{id}|">
+          <input type="button" value="update">
+        </a>
+      </th>
+      <th>
+        <a th:href="|/validation/${version}/products|">
+          <input type="button" value="cancel">
+        </a>
+      </th>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
