@@ -1,11 +1,11 @@
-package dev.jihogrammer.item.model.out;
+package dev.jihogrammer.product.model;
 
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
-public class ItemView {
+public class ProductViewModel {
 
     private final Long id;
 

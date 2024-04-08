@@ -1,11 +1,9 @@
-package dev.jihogrammer.item.model.out;
+package dev.jihogrammer.product.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
-public class ItemUpdateModel {
+public class ProductUpdatePayload {
 
     private Long id;
 

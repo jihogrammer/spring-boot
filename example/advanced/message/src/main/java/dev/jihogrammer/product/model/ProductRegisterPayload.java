@@ -1,11 +1,9 @@
-package dev.jihogrammer.item.model.in;
+package dev.jihogrammer.product.model;
 
 import lombok.Data;
 
 @Data
-public class ItemUpdateRequest {
-
-    private Long id;
+public class ProductRegisterPayload {
 
     private String name;
 

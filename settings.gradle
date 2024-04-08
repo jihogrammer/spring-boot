@@ -3,6 +3,8 @@ rootProject.name = "spring-boot"
 include("gateway")
 
 include(":domain:member")
+include(":domain:product")
+
 include(":domain:items")
 include(":domain:files")
 include(":domain:file-item")

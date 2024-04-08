@@ -2,13 +2,13 @@
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title th:text="|#{page.update-item} - message|">UPDATE PRODUCT</title>
+  <title th:text="|#{page.update} - message|">UPDATE PRODUCT</title>
 </head>
 <body>
-<form method="post" th:action="|/message/items/update|" th:object="${item}">
+<form method="post" th:action="|/message/products/update|" th:object="${product}">
   <table>
     <tr>
-      <th th:text="#{label.item.id}">ID</th>
+      <th th:text="#{label.product.id}">ID</th>
       <td>
         <label>
           <input type="text" th:field="*{id}" readonly>
@@ -16,7 +16,7 @@
       </td>
     </tr>
     <tr>
-      <th th:text="#{label.item.name}">NAME</th>
+      <th th:text="#{label.product.name}">NAME</th>
       <td>
         <label>
           <input type="text" th:field="*{name}">
@@ -24,7 +24,7 @@
       </td>
     </tr>
     <tr>
-      <th th:text="#{label.item.price}">PRICE</th>
+      <th th:text="#{label.product.price}">PRICE</th>
       <td>
         <label>
           <input type="number" th:field="*{price}">
@@ -32,7 +32,7 @@
       </td>
     </tr>
     <tr>
-      <th th:text="#{label.item.quantity}">QUANTITY</th>
+      <th th:text="#{label.product.quantity}">QUANTITY</th>
       <td>
         <label>
           <input type="number" th:field="*{quantity}">
@@ -41,7 +41,7 @@
     </tr>
     <tr>
       <th><input type="submit" th:value="#{button.update}"></th>
-      <th><input type="button" th:value="#{button.cancel}" th:onclick="|location.href='/message/items/*{id}'|"></th>
+      <th><input type="button" th:value="#{button.cancel}" th:onclick="|location.href='/message/products/*{id}'|"></th>
     </tr>
   </table>
 </form>

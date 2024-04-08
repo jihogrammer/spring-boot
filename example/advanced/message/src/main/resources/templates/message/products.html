@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="|#{page.products} - message|">PRODUCT LIST</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th th:text="#{label.product.id}">ID</th>
+    <th th:text="#{label.product.name}">NAME</th>
+    <th th:text="#{label.product.price}">PRICE</th>
+    <th th:text="#{label.product.quantity}">QUANTITY</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="product : ${products}" th:object="${product}">
+    <td><a th:href="|/message/products/*{id}|" th:text="*{id}">ID</a></td>
+    <td th:text="*{name}">NAME</td>
+    <td th:text="*{price}">PRICE</td>
+    <td th:text="*{quantity}">QUANTITY</td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <input type="button" th:value="#{button.register}" onclick="location.href='/message/products/register'">
+</div>
+</body>
+</html>
