@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class InMemoryProductTypeAdaptor implements ProductTypePort {
+class InMemoryProductTypeAdaptor implements ProductTypePort {
 
     private final Map<String, ProductType> types = new ConcurrentHashMap<>();
 
