@@ -2,10 +2,8 @@ package dev.jihogrammer.fileitem.port.out;
 
 import dev.jihogrammer.fileitem.ItemFile;
 import dev.jihogrammer.fileitem.model.ItemFileType;
-import dev.jihogrammer.files.File;
 import dev.jihogrammer.files.model.FileId;
-import dev.jihogrammer.items.Item;
-import dev.jihogrammer.items.model.ItemId;
+import dev.jihogrammer.product.domain.model.ItemId;
 
 import java.util.Collection;
 

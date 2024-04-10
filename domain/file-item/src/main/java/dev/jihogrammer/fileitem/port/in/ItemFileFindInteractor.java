@@ -5,9 +5,9 @@ import dev.jihogrammer.fileitem.model.ItemFileType;
 import dev.jihogrammer.fileitem.port.out.ItemFiles;
 import dev.jihogrammer.files.File;
 import dev.jihogrammer.files.port.out.Files;
-import dev.jihogrammer.items.Item;
-import dev.jihogrammer.items.model.ItemId;
-import dev.jihogrammer.items.port.out.Items;
+import dev.jihogrammer.product.Item;
+import dev.jihogrammer.product.domain.model.ItemId;
+import dev.jihogrammer.product.port.out.Items;
 
 import java.util.Collection;
 

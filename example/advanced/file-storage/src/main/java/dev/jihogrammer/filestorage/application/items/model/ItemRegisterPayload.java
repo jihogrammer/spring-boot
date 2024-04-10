@@ -1,6 +1,6 @@
 package dev.jihogrammer.filestorage.application.items.model;
 
-import dev.jihogrammer.items.model.ItemRegisterCommand;
+import dev.jihogrammer.product.domain.model.ItemRegisterCommand;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 

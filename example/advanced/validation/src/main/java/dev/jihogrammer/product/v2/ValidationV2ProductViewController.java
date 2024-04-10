@@ -1,8 +1,8 @@
 package dev.jihogrammer.product.v2;
 
-import dev.jihogrammer.product.model.ProductId;
-import dev.jihogrammer.product.model.ProductViewModel;
-import dev.jihogrammer.product.port.out.Products;
+import dev.jihogrammer.product.domain.model.ProductId;
+import dev.jihogrammer.product.domain.model.ProductViewModel;
+import dev.jihogrammer.product.application.port.out.ProductPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class ValidationV2ProductViewController {
 
-    private final Products products;
+    private final ProductPort productPort;
 
     @ModelAttribute("version")
     public String version() {
@@ -25,7 +25,7 @@ public class ValidationV2ProductViewController {
 
     @GetMapping
     public String products(final Model model) {
-        var products = this.products.findAll();
+        var products = this.productPort.findAll();
         var productViewModels = ProductViewModel.of(products);
 
         model.addAttribute("products", productViewModels);
@@ -35,7 +35,7 @@ public class ValidationV2ProductViewController {
 
     @GetMapping("/{productId}")
     public String product(@PathVariable("productId") final Long productId, final Model model) {
-        var product = this.products.findById(new ProductId(productId)).orElseThrow();
+        var product = this.productPort.findById(new ProductId(productId)).orElseThrow();
         var productViewModel = ProductViewModel.of(product);
 
         model.addAttribute("product", productViewModel);

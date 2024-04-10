@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Product :: Product</title>
+</head>
+<body>
+<h1>Product</h1>
+
+<h4><a href="/">main</a></h4>
+
+<h4 th:if="${param.status}">Success</h4>
+
+<form action="" method="POST" th:object="${product}">
+  <table>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input name="id" th:value="*{id}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input id="name" th:field="*{name}" type="text" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input id="price" th:field="*{price}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input id="quantity" th:field="*{quantity}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>OPEN</th>
+      <td>
+        <label>
+          <input type="checkbox" th:field="*{open}" disabled> open
+          <!-- thymeleaf th:field 사용하지 않을 경우에는 체크박스를 히든 필드를 활용하여 처리한다. -->
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>REGION</th>
+      <td>
+        <label th:each="region : ${regions}">
+          <input type="checkbox" th:field="*{regions}" th:value="${region.key}" disabled>
+          <span th:text="${region.description}"></span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>TYPE</th>
+      <td>
+        <label th:each="type : ${types}">
+          <input type="radio" th:field="*{type}" th:value="${type.key}" disabled>
+          <span th:text="${type.description}"></span>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>DELIVERY</th>
+      <td>
+        <label>
+          <select th:field="*{deliveryType}" disabled>
+            <option value="" disabled>=== 배송 방식 선택 ===</option>
+            <option
+              th:each="deliveryType : ${deliveryTypes}"
+              th:value="${deliveryType.key}"
+              th:text="${deliveryType.description}">
+            </option>
+          </select>
+        </label>
+      </td>
+    </tr>
+  </table>
+</form>
+<button th:onclick="|location.href='/products/update/${product.id}'|">update</button>
+</body>
+</html>

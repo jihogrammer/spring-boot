@@ -1,11 +1,12 @@
 package dev.jihogrammer.product;
 
 import dev.jihogrammer.member.model.MemberId;
-import dev.jihogrammer.product.model.ProductRegisterPayload;
-import dev.jihogrammer.product.model.ProductUpdatePayload;
-import dev.jihogrammer.product.model.ProductViewModel;
-import dev.jihogrammer.product.model.ProductId;
-import dev.jihogrammer.product.model.ProductSaveCommand;
+import dev.jihogrammer.product.domain.Product;
+import dev.jihogrammer.product.domain.model.ProductRegisterPayload;
+import dev.jihogrammer.product.domain.model.ProductUpdatePayload;
+import dev.jihogrammer.product.domain.model.ProductViewModel;
+import dev.jihogrammer.product.domain.model.ProductId;
+import dev.jihogrammer.product.application.port.out.ProductSaveCommand;
 
 import java.util.Collection;
 

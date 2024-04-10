@@ -7,7 +7,7 @@ import dev.jihogrammer.files.port.in.FileReadInteractor;
 import dev.jihogrammer.files.port.in.FileReadUsage;
 import dev.jihogrammer.files.port.out.Files;
 import dev.jihogrammer.filestorage.application.items.FileStoreUsage;
-import dev.jihogrammer.items.port.out.Items;
+import dev.jihogrammer.product.port.out.Items;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

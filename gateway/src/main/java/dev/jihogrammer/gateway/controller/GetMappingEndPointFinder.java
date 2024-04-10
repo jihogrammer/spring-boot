@@ -72,7 +72,7 @@ public class GetMappingEndPointFinder {
                 })
                 .map(annotation -> {
                     try {
-                        var values = (String[]) mappingType.getMethod("value").invoke(annotation);
+                        var values = (String[]) mappingType.getMethod("key").invoke(annotation);
                         if (values.length == 0) {
                             return new String[] {""};
                         }

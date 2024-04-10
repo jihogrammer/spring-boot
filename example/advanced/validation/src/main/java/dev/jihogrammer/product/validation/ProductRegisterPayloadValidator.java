@@ -1,6 +1,6 @@
 package dev.jihogrammer.product.validation;
 
-import dev.jihogrammer.product.model.ProductRegisterPayload;
+import dev.jihogrammer.product.domain.model.ProductRegisterPayload;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

@@ -2,7 +2,7 @@
 <html lang="kr" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title th:text="|#{page.products} - message|">PRODUCT LIST</title>
+  <title th:text="|#{page.productPort} - message|">PRODUCT LIST</title>
 </head>
 <body>
 <table>
@@ -15,8 +15,8 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="product : ${products}" th:object="${product}">
-    <td><a th:href="|/message/products/*{id}|" th:text="*{id}">ID</a></td>
+  <tr th:each="product : ${productPort}" th:object="${product}">
+    <td><a th:href="|/message/productPort/*{id}|" th:text="*{id}">ID</a></td>
     <td th:text="*{name}">NAME</td>
     <td th:text="*{price}">PRICE</td>
     <td th:text="*{quantity}">QUANTITY</td>
@@ -24,7 +24,7 @@
   </tbody>
 </table>
 <div>
-  <input type="button" th:value="#{button.register}" onclick="location.href='/message/products/register'">
+  <input type="button" th:value="#{button.register}" onclick="location.href='/message/productPort/register'">
 </div>
 </body>
 </html>

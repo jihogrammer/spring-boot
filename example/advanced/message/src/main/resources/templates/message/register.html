@@ -5,7 +5,7 @@
   <title th:text="|#{page.register} - message|">REGISTER PRODUCT</title>
 </head>
 <body>
-<form method="post" th:action="|/message/products/register|" th:object="${product}">
+<form method="post" th:action="|/message/productPort/register|" th:object="${product}">
   <table>
     <tr>
       <th th:text="#{label.product.name}">NAME</th>
@@ -33,7 +33,7 @@
     </tr>
     <tr>
       <th><input type="submit" th:value="#{button.register}"></th>
-      <th><input type="button" th:value="#{button.cancel}" onclick="location.href='/message/products'"></th>
+      <th><input type="button" th:value="#{button.cancel}" onclick="location.href='/message/productPort'"></th>
     </tr>
   </table>
 </form>

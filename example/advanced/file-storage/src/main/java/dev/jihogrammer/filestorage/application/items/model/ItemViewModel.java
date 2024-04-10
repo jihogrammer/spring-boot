@@ -1,8 +1,8 @@
 package dev.jihogrammer.filestorage.application.items.model;
 
 import dev.jihogrammer.files.File;
-import dev.jihogrammer.items.Item;
-import dev.jihogrammer.items.model.ItemId;
+import dev.jihogrammer.product.Item;
+import dev.jihogrammer.product.domain.model.ItemId;
 
 import java.util.Collection;
 

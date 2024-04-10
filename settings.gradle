@@ -12,7 +12,7 @@ include(":web:core")
 
 include(":example:basic:http")
 include(":example:basic:thymeleaf")
-include(":example:basic:items")
+include(":example:basic:product")
 include(":example:basic:members")
 
 include(":example:web:1-servlet")

@@ -2,7 +2,7 @@ package dev.jihogrammer.filestorage.application.items;
 
 import dev.jihogrammer.fileitem.port.in.ItemFileFindUsage;
 import dev.jihogrammer.files.File;
-import dev.jihogrammer.items.model.ItemId;
+import dev.jihogrammer.product.domain.model.ItemId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

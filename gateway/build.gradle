@@ -32,7 +32,6 @@ dependencies {
 
     implementation(project(":example:basic:http"))
     implementation(project(":example:basic:thymeleaf"))
-    implementation(project(":example:basic:items"))
     implementation(project(":example:basic:members"))
 }
 

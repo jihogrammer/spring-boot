@@ -1,7 +1,7 @@
 package dev.jihogrammer.filestorage.application.items;
 
 import dev.jihogrammer.filestorage.application.items.model.ItemRegisterPayload;
-import dev.jihogrammer.items.model.ItemId;
+import dev.jihogrammer.product.domain.model.ItemId;
 import org.springframework.core.io.Resource;
 
 public interface FileStoreUsage {

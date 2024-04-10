@@ -17,8 +17,8 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="product : ${products}" th:object="${product}">
-    <td><a th:href="|/validation/${version}/products/*{id}|" th:text="*{id}">ID</a></td>
+  <tr th:each="product : ${productPort}" th:object="${product}">
+    <td><a th:href="|/validation/${version}/productPort/*{id}|" th:text="*{id}">ID</a></td>
     <td th:text="*{name}">NAME</td>
     <td th:text="*{price}">PRICE</td>
     <td th:text="*{quantity}">QUANTITY</td>
@@ -26,7 +26,7 @@
   </tbody>
 </table>
 <div>
-  <a th:href="|/validation/${version}/products/register|">
+  <a th:href="|/validation/${version}/productPort/register|">
     <button>register</button>
   </a>
 </div>

@@ -9,7 +9,7 @@ import dev.jihogrammer.files.port.in.FileReadUsage;
 import dev.jihogrammer.files.port.out.Files;
 import dev.jihogrammer.filestorage.application.items.FileStoreUsage;
 import dev.jihogrammer.filestorage.application.items.model.ItemRegisterPayload;
-import dev.jihogrammer.items.model.ItemId;
+import dev.jihogrammer.product.domain.model.ItemId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;

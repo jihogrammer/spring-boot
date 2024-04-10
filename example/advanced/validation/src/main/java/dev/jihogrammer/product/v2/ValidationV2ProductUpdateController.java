@@ -1,9 +1,8 @@
 package dev.jihogrammer.product.v2;
 
-import dev.jihogrammer.product.model.ProductId;
-import dev.jihogrammer.product.model.ProductUpdatePayload;
-import dev.jihogrammer.product.model.ProductViewModel;
-import dev.jihogrammer.product.port.out.Products;
+import dev.jihogrammer.product.application.port.out.ProductPort;
+import dev.jihogrammer.product.domain.model.ProductId;
+import dev.jihogrammer.product.domain.model.ProductUpdatePayload;
 import dev.jihogrammer.product.validation.ProductUpdatePayloadValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class ValidationV2ProductUpdateController {
 
-    private final Products products;
+    private final ProductPort productPort;
 
     private final ProductUpdatePayloadValidator productUpdatePayloadValidator;
 
@@ -35,7 +34,7 @@ public class ValidationV2ProductUpdateController {
 
     @GetMapping("/update/{productId}")
     public String update(@PathVariable("productId") final Long productId, final Model model) {
-        var product = this.products.findById(new ProductId(productId)).orElseThrow();
+        var product = this.productPort.findById(new ProductId(productId)).orElseThrow();
         var payload = ProductUpdatePayload.of(product);
 
         model.addAttribute("payload", payload);
@@ -52,7 +51,7 @@ public class ValidationV2ProductUpdateController {
         if (bindingResult.hasErrors()) {
             return "/validation/update";
         } else {
-            var product = this.products.save(payload.toCommand());
+            var product = this.productPort.save(payload.toCommand());
 
             redirectAttributes.addAttribute("productId", product.id().value());
 

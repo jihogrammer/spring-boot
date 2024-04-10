@@ -1,9 +1,9 @@
 package dev.jihogrammer.product;
 
-import dev.jihogrammer.product.model.ProductRegisterPayload;
-import dev.jihogrammer.product.model.ProductUpdatePayload;
-import dev.jihogrammer.product.model.ProductId;
-import dev.jihogrammer.product.port.out.Products;
+import dev.jihogrammer.product.application.port.out.ProductPort;
+import dev.jihogrammer.product.domain.model.ProductRegisterPayload;
+import dev.jihogrammer.product.domain.model.ProductUpdatePayload;
+import dev.jihogrammer.product.domain.model.ProductId;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -20,11 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Slf4j
 public class MessageProductController {
 
-    private final Products products;
+    private final ProductPort productPort;
 
     @GetMapping("/products")
     public String products(final Model model) {
-        var products = this.products.findAll();
+        var products = this.productPort.findAll();
         var productViewModels = ProductEntityMapper.map(products);
 
         model.addAttribute("products", productViewModels);
@@ -37,7 +37,7 @@ public class MessageProductController {
             @PathVariable("productId") final long productId,
             final Model model
     ) {
-        var product = this.products.findById(new ProductId(productId)).orElseThrow();
+        var product = this.productPort.findById(new ProductId(productId)).orElseThrow();
         var productViewModel = ProductEntityMapper.map(product);
 
         model.addAttribute("product", productViewModel);
@@ -60,7 +60,7 @@ public class MessageProductController {
             final RedirectAttributes redirectAttributes
     ) {
         var command = ProductEntityMapper.map(payload);
-        var product = this.products.save(command);
+        var product = this.productPort.save(command);
 
         redirectAttributes.addAttribute("productId", product.id().value());
 
@@ -72,7 +72,7 @@ public class MessageProductController {
             @PathVariable("productId") final long productId,
             final Model model
     ) {
-        var product = this.products.findById(new ProductId(productId)).orElseThrow();
+        var product = this.productPort.findById(new ProductId(productId)).orElseThrow();
         var productViewModel = ProductEntityMapper.map(product);
 
         model.addAttribute("product", productViewModel);
@@ -83,7 +83,7 @@ public class MessageProductController {
     @PostMapping("/products/update")
     public String update(final ProductUpdatePayload payload, final RedirectAttributes redirectAttributes) {
         var command = ProductEntityMapper.map(payload);
-        var product = this.products.save(command);
+        var product = this.productPort.save(command);
 
         redirectAttributes.addAttribute("productId", product.id().value());
 

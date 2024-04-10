@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products :: Product</title>
+</head>
+<body>
+<h1>Products</h1>
+
+<h4><a href="/">main</a></h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>PRICE</th>
+      <th>QUANTITY</th>
+      <th>OPEN</th>
+      <th>REGION</th>
+      <th>TYPE</th>
+      <th>DELIVERY</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="product : ${productPort}" th:object="${product}">
+      <td><a th:href="|/products/*{id}|" th:text="*{id}">ID</a></td>
+      <td th:text="*{name}">NAME</td>
+      <td th:text="*{price}">PRICE</td>
+      <td th:text="*{quantity}">QUANTITY</td>
+      <td th:text="*{open}">OPEN</td>
+      <td><span th:text="${#strings.listJoin(*{regions}, ', ')}">REGIONS</span></td>
+      <td th:text="*{type}">TYPE</td>
+      <td th:text="*{deliveryType}">DELIVERY</td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

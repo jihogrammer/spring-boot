@@ -5,7 +5,7 @@
   <title th:text="|#{page.update} - message|">UPDATE PRODUCT</title>
 </head>
 <body>
-<form method="post" th:action="|/message/products/update|" th:object="${product}">
+<form method="post" th:action="|/message/productPort/update|" th:object="${product}">
   <table>
     <tr>
       <th th:text="#{label.product.id}">ID</th>
@@ -41,7 +41,7 @@
     </tr>
     <tr>
       <th><input type="submit" th:value="#{button.update}"></th>
-      <th><input type="button" th:value="#{button.cancel}" th:onclick="|location.href='/message/products/*{id}'|"></th>
+      <th><input type="button" th:value="#{button.cancel}" th:onclick="|location.href='/message/productPort/*{id}'|"></th>
     </tr>
   </table>
 </form>

@@ -1,8 +1,8 @@
 package dev.jihogrammer.product.v2;
 
-import dev.jihogrammer.product.model.ProductRegisterPayload;
+import dev.jihogrammer.product.application.port.out.ProductPort;
+import dev.jihogrammer.product.domain.model.ProductRegisterPayload;
 import dev.jihogrammer.product.validation.ProductRegisterPayloadValidator;
-import dev.jihogrammer.product.port.out.Products;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class ValidationV2ProductRegisterController {
 
-    private final Products products;
+    private final ProductPort productPort;
 
     private final ProductRegisterPayloadValidator productRegisterPayloadValidator;
 
@@ -44,7 +44,7 @@ public class ValidationV2ProductRegisterController {
         if (bindingResult.hasErrors()) {
             return "/validation/register";
         } else {
-            var product = this.products.save(payload.toCommand());
+            var product = this.productPort.save(payload.toCommand());
 
             redirectAttributes.addAttribute("productId", product.id().value());
 
