@@ -44,20 +44,20 @@ class InMemoryProductAdaptor implements ProductPort {
         }
 
         var product = new Product(
-            productId,
-            command.producerId(),
-            command.name(),
-            command.price(),
-            command.quantity(),
-            command.open(),
-            command.descriptionFile(),
-            command.imageFiles(),
-            command.types(),
-            command.regions(),
-            command.deliveryTypes(),
-            createdAt,
-            updatedAt,
-            null);
+                productId,
+                command.producerId(),
+                command.name(),
+                command.price(),
+                command.quantity(),
+                command.open(),
+                command.descriptionFile(),
+                command.imageFiles(),
+                command.types(),
+                command.regions(),
+                command.deliveryTypes(),
+                createdAt,
+                updatedAt,
+                null);
 
         this.products.put(product.id(), product);
         log.trace("Product is saved. product=[{}];", product);
