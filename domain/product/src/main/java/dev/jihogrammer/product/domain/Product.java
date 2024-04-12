@@ -1,6 +1,6 @@
 package dev.jihogrammer.product.domain;
 
-import dev.jihogrammer.member.model.MemberId;
+import dev.jihogrammer.member.domain.model.MemberId;
 import dev.jihogrammer.product.domain.exception.ProductException;
 import dev.jihogrammer.product.domain.model.*;
 

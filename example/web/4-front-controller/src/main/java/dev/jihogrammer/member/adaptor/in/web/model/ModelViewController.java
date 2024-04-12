@@ -1,7 +1,6 @@
-package dev.jihogrammer.member.adaptor.in.web.controller;
+package dev.jihogrammer.member.adaptor.in.web.model;
 
-import dev.jihogrammer.member.adaptor.in.web.model.Controller;
-import dev.jihogrammer.member.adaptor.in.web.entity.ModelView;
+import dev.jihogrammer.member.adaptor.in.web.frontcontroller.ModelView;
 import jakarta.servlet.http.HttpServletRequest;
 
 public abstract class ModelViewController implements Controller {

@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 
 @Getter
 @Accessors(fluent = true)
-public class MemberView {
+public class FrontControllerMemberViewModel {
 
     private final Long id;
 
@@ -14,7 +14,7 @@ public class MemberView {
 
     private final int age;
 
-    public MemberView(final Member member) {
+    public FrontControllerMemberViewModel(final Member member) {
         this.id = member.id().value();
         this.name = member.name();
         this.age = member.age();

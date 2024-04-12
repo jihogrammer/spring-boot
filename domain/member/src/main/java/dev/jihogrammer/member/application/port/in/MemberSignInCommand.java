@@ -1,4 +1,4 @@
-package dev.jihogrammer.member.domain.model;
+package dev.jihogrammer.member.application.port.in;
 
 import dev.jihogrammer.member.domain.exception.MemberException;
 

@@ -1,6 +1,6 @@
 package dev.jihogrammer.product;
 
-import dev.jihogrammer.member.model.MemberId;
+import dev.jihogrammer.member.domain.model.MemberId;
 import dev.jihogrammer.product.domain.Product;
 import dev.jihogrammer.product.domain.model.ProductRegisterPayload;
 import dev.jihogrammer.product.domain.model.ProductUpdatePayload;

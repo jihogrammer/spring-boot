@@ -1,7 +1,6 @@
-package dev.jihogrammer.member.adaptor.in.web.adaptor;
+package dev.jihogrammer.member.adaptor.in.web.model;
 
-import dev.jihogrammer.member.adaptor.in.web.entity.ModelView;
-import dev.jihogrammer.member.adaptor.in.web.controller.Controller;
+import dev.jihogrammer.member.adaptor.in.web.frontcontroller.ModelView;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

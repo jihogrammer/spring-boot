@@ -1,4 +1,4 @@
-package dev.jihogrammer.member.adaptor.in.web.entity;
+package dev.jihogrammer.member.adaptor.in.web.frontcontroller;
 
 import java.util.Map;
 

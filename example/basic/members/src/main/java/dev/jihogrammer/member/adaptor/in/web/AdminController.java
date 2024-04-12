@@ -1,4 +1,4 @@
-package dev.jihogrammer.members.adaptor.in.web;
+package dev.jihogrammer.member.adaptor.in.web;
 
 import dev.jihogrammer.web.core.ConditionalController;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

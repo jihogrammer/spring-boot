@@ -1,4 +1,4 @@
-package dev.jihogrammer.members.adaptor.in.web.entity;
+package dev.jihogrammer.member.adaptor.in.web.entity;
 
 import dev.jihogrammer.member.domain.Member;
 import lombok.AllArgsConstructor;

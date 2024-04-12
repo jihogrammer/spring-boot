@@ -1,4 +1,4 @@
-package dev.jihogrammer.member.exception;
+package dev.jihogrammer.member.domain.exception;
 
 public class MemberException extends RuntimeException {
 

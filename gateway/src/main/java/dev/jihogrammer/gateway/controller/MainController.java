@@ -1,7 +1,7 @@
 package dev.jihogrammer.gateway.controller;
 
-import dev.jihogrammer.members.application.signin.SignIn;
-import dev.jihogrammer.members.application.signin.SignedInMember;
+import dev.jihogrammer.member.adaptor.in.web.session.SignIn;
+import dev.jihogrammer.member.adaptor.in.web.entity.SignedInMember;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

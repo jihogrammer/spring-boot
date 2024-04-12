@@ -1,6 +1,6 @@
-package dev.jihogrammer.members.adaptor.in.web.entity;
+package dev.jihogrammer.member.adaptor.in.web.entity;
 
-import dev.jihogrammer.member.domain.model.MemberSignUpCommand;
+import dev.jihogrammer.member.application.port.in.MemberSignUpCommand;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 

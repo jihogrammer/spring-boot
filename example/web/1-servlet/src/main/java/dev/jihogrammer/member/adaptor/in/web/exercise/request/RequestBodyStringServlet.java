@@ -1,4 +1,4 @@
-package dev.jihogrammer.web.servlet.exercise.request;
+package dev.jihogrammer.member.adaptor.in.web.exercise.request;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

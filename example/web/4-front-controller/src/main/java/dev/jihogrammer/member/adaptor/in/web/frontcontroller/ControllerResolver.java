@@ -1,5 +1,6 @@
-package dev.jihogrammer.member.adaptor.in.web.controller;
+package dev.jihogrammer.member.adaptor.in.web.frontcontroller;
 
+import dev.jihogrammer.member.adaptor.in.web.model.Controller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

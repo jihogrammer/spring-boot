@@ -1,8 +1,8 @@
-package dev.jihogrammer.members.adaptor.in.web;
+package dev.jihogrammer.member.adaptor.in.web;
 
-import dev.jihogrammer.members.adaptor.in.web.session.SignInArgumentResolver;
-import dev.jihogrammer.members.adaptor.in.web.interceptor.SignInCheckInterceptor;
-import dev.jihogrammer.members.adaptor.in.web.entity.SignedInMember;
+import dev.jihogrammer.member.adaptor.in.web.session.SignInArgumentResolver;
+import dev.jihogrammer.member.adaptor.in.web.interceptor.SignInCheckInterceptor;
+import dev.jihogrammer.member.adaptor.in.web.entity.SignedInMember;
 import dev.jihogrammer.web.core.session.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

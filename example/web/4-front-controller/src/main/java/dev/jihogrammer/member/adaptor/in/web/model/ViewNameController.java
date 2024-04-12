@@ -1,6 +1,4 @@
-package dev.jihogrammer.member.adaptor.in.web.controller;
-
-import dev.jihogrammer.member.adaptor.in.web.model.Controller;
+package dev.jihogrammer.member.adaptor.in.web.model;
 
 import java.util.Map;
 

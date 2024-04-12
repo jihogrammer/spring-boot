@@ -1,4 +1,4 @@
-package dev.jihogrammer.members;
+package dev.jihogrammer.member;
 
 import dev.jihogrammer.web.core.WebCoreApplication;
 import org.springframework.boot.SpringApplication;

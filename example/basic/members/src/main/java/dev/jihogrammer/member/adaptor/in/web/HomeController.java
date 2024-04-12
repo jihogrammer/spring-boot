@@ -1,7 +1,7 @@
-package dev.jihogrammer.members.adaptor.in.web;
+package dev.jihogrammer.member.adaptor.in.web;
 
 import dev.jihogrammer.member.domain.Member;
-import dev.jihogrammer.members.adaptor.in.web.session.SignIn;
+import dev.jihogrammer.member.adaptor.in.web.session.SignIn;
 import dev.jihogrammer.web.core.ConditionalController;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Controller;

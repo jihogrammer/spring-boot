@@ -1,6 +1,7 @@
-package dev.jihogrammer.member.adaptor.in.web.adaptor;
+package dev.jihogrammer.member.adaptor.in.web.frontcontroller;
 
-import dev.jihogrammer.member.adaptor.in.web.controller.Controller;
+import dev.jihogrammer.member.adaptor.in.web.model.Adapter;
+import dev.jihogrammer.member.adaptor.in.web.model.Controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

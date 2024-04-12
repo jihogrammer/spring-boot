@@ -1,8 +1,8 @@
-package dev.jihogrammer.members.adaptor.in.web;
+package dev.jihogrammer.member.adaptor.in.web;
 
 import dev.jihogrammer.member.domain.exception.MemberException;
-import dev.jihogrammer.member.application.port.in.MemberSignUpUsage;
-import dev.jihogrammer.members.adaptor.in.web.entity.SignUpPayload;
+import dev.jihogrammer.member.application.port.in.MemberSignUpUseCase;
+import dev.jihogrammer.member.adaptor.in.web.entity.SignUpPayload;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class SignUpController {
 
     private static final String SIGN_UP_MODEL_ATTR_NAME = "signUpPayload";
 
-    private final MemberSignUpUsage signUpUsage;
+    private final MemberSignUpUseCase signUpUsage;
 
     @GetMapping("/sign-up")
     public String signUp(@ModelAttribute(SIGN_UP_MODEL_ATTR_NAME) final SignUpPayload signUpPayload) {

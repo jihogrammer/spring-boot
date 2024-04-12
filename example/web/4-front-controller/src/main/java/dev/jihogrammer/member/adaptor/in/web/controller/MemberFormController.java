@@ -1,30 +1,28 @@
-package dev.jihogrammer.member.adaptor.in.web;
+package dev.jihogrammer.member.adaptor.in.web.controller;
 
-import dev.jihogrammer.web.frontcontroller.model.ViewNameController;
+import dev.jihogrammer.member.adaptor.in.web.model.ViewNameController;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
+import static dev.jihogrammer.member.adaptor.in.web.WebEnvironment.URI_PREFIX;
+
 @RequiredArgsConstructor
 public class MemberFormController extends ViewNameController {
 
-    private final String uri;
-
-    private final String viewName;
-
     @Override
     public String uri() {
-        return this.uri;
+        return URI_PREFIX + "/members/new-form";
     }
 
     @Override
     public String view() {
-        return this.viewName;
+        return "new-form";
     }
 
     @Override
     public String process(final Map<String, Object> model) {
-        return viewName;
+        return this.view();
     }
 
 }

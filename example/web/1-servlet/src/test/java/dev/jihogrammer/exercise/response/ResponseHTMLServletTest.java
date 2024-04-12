@@ -1,6 +1,6 @@
 package dev.jihogrammer.exercise.response;
 
-import dev.jihogrammer.web.servlet.exercise.response.ResponseHTMLServlet;
+import dev.jihogrammer.member.adaptor.in.web.exercise.response.ResponseHTMLServlet;
 import jakarta.servlet.ServletException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

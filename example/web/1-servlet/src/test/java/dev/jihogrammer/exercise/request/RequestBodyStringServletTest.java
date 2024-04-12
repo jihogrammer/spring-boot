@@ -1,6 +1,6 @@
 package dev.jihogrammer.exercise.request;
 
-import dev.jihogrammer.web.servlet.exercise.request.RequestBodyStringServlet;
+import dev.jihogrammer.member.adaptor.in.web.exercise.request.RequestBodyStringServlet;
 import jakarta.servlet.ServletException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

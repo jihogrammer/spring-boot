@@ -1,4 +1,4 @@
-package dev.jihogrammer.web.servlet.exercise.request;
+package dev.jihogrammer.member.adaptor.in.web.exercise.request;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

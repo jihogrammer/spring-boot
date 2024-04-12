@@ -10,7 +10,7 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MemberView {
+public class MemberViewModel {
 
     public Long id;
 
@@ -18,12 +18,12 @@ public class MemberView {
 
     public Integer age;
 
-    public static MemberView of(final Member member) {
-        return new MemberView(member.id().value(), member.name(), member.age());
+    public static MemberViewModel of(final Member member) {
+        return new MemberViewModel(member.id().value(), member.name(), member.age());
     }
 
-    public static Collection<MemberView> of(final Collection<Member> members) {
-        return members.stream().map(MemberView::of).toList();
+    public static Collection<MemberViewModel> of(final Collection<Member> members) {
+        return members.stream().map(MemberViewModel::of).toList();
     }
 
 }

@@ -3,14 +3,14 @@ package dev.jihogrammer.member.application.service;
 import dev.jihogrammer.member.application.port.out.MemberPort;
 import dev.jihogrammer.member.domain.Member;
 import dev.jihogrammer.member.domain.exception.MemberException;
-import dev.jihogrammer.member.domain.model.MemberSignInCommand;
+import dev.jihogrammer.member.application.port.in.MemberSignInCommand;
 import dev.jihogrammer.member.application.port.in.MemberSignInUseCase;
 
-public class MemberSignInInteractor implements MemberSignInUseCase {
+class MemberSignInService implements MemberSignInUseCase {
 
     private final MemberPort memberPort;
 
-    public MemberSignInInteractor(final MemberPort memberPort) {
+    public MemberSignInService(final MemberPort memberPort) {
         this.memberPort = memberPort;
     }
 

@@ -1,30 +1,20 @@
-package dev.jihogrammer.member.port.in;
+package dev.jihogrammer.member.application.service;
 
-import dev.jihogrammer.member.application.service.MemberSignUpService;
-import dev.jihogrammer.member.adaptor.out.persistence.InMemoryMemberAdaptor;
-import dev.jihogrammer.member.application.port.in.MemberSignUpUseCase;
+import dev.jihogrammer.member.adaptor.out.persistence.MemberPersistenceAdaptorFactory;
 import dev.jihogrammer.member.application.port.in.MemberSignUpCommand;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
+import dev.jihogrammer.member.application.port.in.MemberSignUpUseCase;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class MemberSignUpUseCaseTest {
 
-    static InMemoryMemberAdaptor members;
+    MemberSignUpUseCase memberSignUpUseCase;
 
-    static MemberSignUpUseCase signUpUsage;
-
-    @BeforeAll
-    static void setUpClass() {
-        members = new InMemoryMemberAdaptor();
-        signUpUsage = new MemberSignUpService(members);
-    }
-
-    @AfterEach
-    void tearDown() {
-        members.clear();
+    @BeforeEach
+    void setUp() {
+        this.memberSignUpUseCase = new MemberSignUpService(MemberPersistenceAdaptorFactory.createMemberPort());
     }
 
     @Test
@@ -37,7 +27,7 @@ class MemberSignUpUseCaseTest {
                 .build();
 
         // when
-        var member = signUpUsage.signUp(command);
+        var member = this.memberSignUpUseCase.signUp(command);
 
         // then
         assertThat(member.name()).isEqualTo(command.name());

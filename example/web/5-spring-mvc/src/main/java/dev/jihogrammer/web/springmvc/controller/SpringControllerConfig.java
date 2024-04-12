@@ -1,7 +1,7 @@
 package dev.jihogrammer.web.springmvc.controller;
 
-import dev.jihogrammer.member.model.MemberSaveCommand;
-import dev.jihogrammer.member.port.out.Members;
+import dev.jihogrammer.member.application.port.out.MemberPort;
+import dev.jihogrammer.member.application.port.out.MemberSaveCommand;
 import dev.jihogrammer.web.springmvc.model.MemberView;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +29,7 @@ public class SpringControllerConfig {
     @Controller
     public static class SpringMemberController {
 
-        private final Members members;
+        private final MemberPort memberPort;
 
         private final String signUpGetViewName;
 
@@ -38,12 +38,12 @@ public class SpringControllerConfig {
         private final String membersGetViewName;
 
         public SpringMemberController(
-            final Members members,
+            final MemberPort memberPort,
             @Value("${service.member.sign-up.get-view-username}") final String signUpGetViewName,
             @Value("${service.member.sign-up.post-view-username}") final String signUpPostViewName,
             @Value("${service.member.members.get-view-username}") final String membersGetViewName
         ) {
-            this.members = members;
+            this.memberPort = memberPort;
             this.signUpGetViewName = signUpGetViewName;
             this.signUpPostViewName = signUpPostViewName;
             this.membersGetViewName = membersGetViewName;
@@ -65,7 +65,7 @@ public class SpringControllerConfig {
             log.info("REQUEST SPRING SIGN-UP - username={}, age={}", name, age);
 
             var command = MemberSaveCommand.builder().name(name).age(age).build();
-            var registeredMember = this.members.save(command);
+            var registeredMember = this.memberPort.save(command);
             var newMember = new MemberView(registeredMember);
 
             model.addAttribute("newMember", newMember);
@@ -76,7 +76,7 @@ public class SpringControllerConfig {
         public String members(final Model model) {
             log.info("REQUEST SPRING MEMBERS");
 
-            var members = this.members.findAll();
+            var members = this.memberPort.findAll();
             var memberViews = members.stream().map(MemberView::new).toList();
 
             model.addAttribute("members", memberViews);

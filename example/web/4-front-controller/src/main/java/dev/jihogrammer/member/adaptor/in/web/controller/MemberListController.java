@@ -1,33 +1,36 @@
-package dev.jihogrammer.member.adaptor.in.web;
+package dev.jihogrammer.member.adaptor.in.web.controller;
 
-import dev.jihogrammer.web.frontcontroller.model.ViewNameController;
-import dev.jihogrammer.web.frontcontroller.service.MemberService;
+import dev.jihogrammer.member.adaptor.in.web.entity.FrontControllerMemberViewModel;
+import dev.jihogrammer.member.adaptor.in.web.model.ViewNameController;
+import dev.jihogrammer.member.application.port.in.MemberQuery;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Map;
 
+import static dev.jihogrammer.member.adaptor.in.web.WebEnvironment.URI_PREFIX;
+
 @RequiredArgsConstructor
 public class MemberListController extends ViewNameController {
 
-    private final String uri;
-
-    private final String viewName;
-
-    private final MemberService service;
+    private final MemberQuery memberQuery;
 
     @Override
     public String uri() {
-        return this.uri;
+        return URI_PREFIX + "/members";
     }
 
     @Override
     public String view() {
-        return this.viewName;
+        return "list";
     }
 
     @Override
     public String process(final Map<String, Object> model) {
-        this.service.fetchMembers(model);
-        return this.viewName;
+        final var memberViewModels = this.memberQuery.findAll().stream().map(FrontControllerMemberViewModel::new).toList();
+
+        model.put("members", memberViewModels);
+
+        return this.view();
     }
+
 }

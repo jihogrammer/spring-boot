@@ -1,5 +1,6 @@
-package dev.jihogrammer.member.domain.model;
+package dev.jihogrammer.member.application.port.out;
 
+import dev.jihogrammer.member.domain.model.MemberRole;
 import lombok.Builder;
 
 @Builder

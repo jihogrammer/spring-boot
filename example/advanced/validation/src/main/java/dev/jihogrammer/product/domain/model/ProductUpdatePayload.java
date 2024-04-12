@@ -1,6 +1,6 @@
 package dev.jihogrammer.product.domain.model;
 
-import dev.jihogrammer.member.model.MemberId;
+import dev.jihogrammer.member.domain.model.MemberId;
 import dev.jihogrammer.product.application.port.out.ProductSaveCommand;
 import dev.jihogrammer.product.domain.Product;
 import jakarta.validation.constraints.NotBlank;

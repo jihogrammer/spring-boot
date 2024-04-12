@@ -1,8 +1,8 @@
-package dev.jihogrammer.member;
+package dev.jihogrammer.member.domain;
 
-import dev.jihogrammer.member.exception.MemberException;
-import dev.jihogrammer.member.model.MemberId;
-import dev.jihogrammer.member.model.MemberRole;
+import dev.jihogrammer.member.domain.exception.MemberException;
+import dev.jihogrammer.member.domain.model.MemberId;
+import dev.jihogrammer.member.domain.model.MemberRole;
 
 import static java.util.Objects.isNull;
 

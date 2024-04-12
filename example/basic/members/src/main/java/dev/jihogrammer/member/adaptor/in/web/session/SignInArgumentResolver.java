@@ -1,6 +1,6 @@
-package dev.jihogrammer.members.adaptor.in.web.session;
+package dev.jihogrammer.member.adaptor.in.web.session;
 
-import dev.jihogrammer.members.adaptor.in.web.entity.SignedInMember;
+import dev.jihogrammer.member.adaptor.in.web.entity.SignedInMember;
 import dev.jihogrammer.web.core.session.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;

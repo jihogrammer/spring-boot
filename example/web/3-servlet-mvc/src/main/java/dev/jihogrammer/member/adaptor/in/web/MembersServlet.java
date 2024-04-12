@@ -1,9 +1,9 @@
-package dev.jihogrammer.web.servletmvc.controller;
+package dev.jihogrammer.member.adaptor.in.web;
 
 import dev.jihogrammer.member.application.port.out.MemberPort;
-import dev.jihogrammer.web.servletmvc.ServletMVCApplication;
-import dev.jihogrammer.web.servletmvc.model.web.response.MemberView;
-import dev.jihogrammer.web.servletmvc.view.ViewResolver;
+import dev.jihogrammer.member.adaptor.in.web.entity.MemberViewModel;
+import dev.jihogrammer.member.adaptor.in.web.viewresolver.ViewResolver;
+import dev.jihogrammer.member.domain.Member;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,8 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.Collection;
 
-@SuppressWarnings("unused")
 @Slf4j
 @RequiredArgsConstructor
 @WebServlet(urlPatterns = MembersServlet.URL)
@@ -22,26 +22,19 @@ public class MembersServlet extends HttpServlet {
 
     public static final String URL = "/members";
 
-    private static final String MEMBER_LIST_ATTRIBUTE_NAME = "members";
-
-    /**
-     * @see ServletMVCApplication#membersViewResolver
-     */
     private final ViewResolver membersViewResolver;
 
-    /**
-     * @see ServletMVCApplication#members
-     */
     private final MemberPort memberPort;
 
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         log.info("REQUEST {} {}", request.getMethod(), URL);
 
-        var foundMembers = MemberView.of(this.memberPort.findAll());
-        log.info("found members {}", foundMembers);
+        final var members = this.memberPort.findAll();
+        final var memberViewModels = MemberViewModel.of(members);
+        log.info("found members {}", memberViewModels);
 
-        request.setAttribute(MEMBER_LIST_ATTRIBUTE_NAME, foundMembers);
+        request.setAttribute("members", memberViewModels);
         request.getRequestDispatcher(this.membersViewResolver.resolveGetView()).forward(request, response);
     }
 

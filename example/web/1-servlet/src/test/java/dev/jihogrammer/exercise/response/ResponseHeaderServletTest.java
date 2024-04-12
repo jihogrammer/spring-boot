@@ -1,6 +1,6 @@
 package dev.jihogrammer.exercise.response;
 
-import dev.jihogrammer.web.servlet.exercise.response.ResponseHeaderServlet;
+import dev.jihogrammer.member.adaptor.in.web.exercise.response.ResponseHeaderServlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,7 +10,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import java.io.IOException;
 
-import static dev.jihogrammer.web.servlet.exercise.response.ResponseHeaderServlet.*;
 import static jakarta.servlet.http.HttpServletResponse.SC_FOUND;
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,6 +1,6 @@
-package dev.jihogrammer.members.adaptor.in.web.interceptor;
+package dev.jihogrammer.member.adaptor.in.web.interceptor;
 
-import dev.jihogrammer.members.adaptor.in.web.entity.SignedInMember;
+import dev.jihogrammer.member.adaptor.in.web.entity.SignedInMember;
 import dev.jihogrammer.web.core.session.Session;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

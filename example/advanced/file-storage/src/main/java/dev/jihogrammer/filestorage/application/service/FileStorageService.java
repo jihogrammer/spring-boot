@@ -3,7 +3,7 @@ package dev.jihogrammer.filestorage.application.service;
 import dev.jihogrammer.filestorage.application.port.in.FileStorageRegisterCommand;
 import dev.jihogrammer.filestorage.application.port.in.FileStorageUseCase;
 import dev.jihogrammer.filestorage.application.port.out.ProductFilePort;
-import dev.jihogrammer.member.model.MemberId;
+import dev.jihogrammer.member.domain.model.MemberId;
 import dev.jihogrammer.product.application.port.out.ProductPort;
 import dev.jihogrammer.product.application.port.out.ProductSaveCommand;
 import dev.jihogrammer.product.domain.Product;

@@ -1,4 +1,4 @@
-package dev.jihogrammer.web.servlet.member;
+package dev.jihogrammer.member.adaptor.in.web.member;
 
 import dev.jihogrammer.member.application.port.out.MemberPort;
 import jakarta.servlet.ServletException;
@@ -34,8 +34,9 @@ public class MemberListServlet extends HttpServlet {
 
     @Override
     protected void service(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        var sb = new StringBuilder();
-        for (var member : memberPort.findAll()) {
+        final var sb = new StringBuilder();
+
+        for (var member : this.memberPort.findAll()) {
             sb
                 .append("<tr>")
                     .append("<td>").append(member.id().value()).append("</td>")

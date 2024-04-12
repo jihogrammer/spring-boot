@@ -1,7 +1,5 @@
 package dev.jihogrammer.web.springmvc;
 
-import dev.jihogrammer.member.adpator.out.InMemoryMemberRepository;
-import dev.jihogrammer.member.port.out.Members;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,11 +27,6 @@ public class SpringMVCApplication {
         @Value("${spring.mvc.view.suffix}") final String suffix
     ) {
         return new InternalResourceViewResolver(prefix, suffix);
-    }
-
-    @Bean
-    public Members members() {
-        return new InMemoryMemberRepository();
     }
 
 }

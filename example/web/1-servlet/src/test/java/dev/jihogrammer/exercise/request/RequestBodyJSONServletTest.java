@@ -1,8 +1,8 @@
 package dev.jihogrammer.exercise.request;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.jihogrammer.web.servlet.exercise.HelloData;
-import dev.jihogrammer.web.servlet.exercise.request.RequestBodyJSONServlet;
+import dev.jihogrammer.member.adaptor.in.web.exercise.entity.HelloData;
+import dev.jihogrammer.member.adaptor.in.web.exercise.request.RequestBodyJSONServlet;
 import jakarta.servlet.ServletException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

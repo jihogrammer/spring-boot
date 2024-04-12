@@ -8,8 +8,8 @@
 <form action="save" method="post">
     <table>
         <tr>
-            <th>username</th>
-            <td><input type="text" name="username"></td>
+            <th>name</th>
+            <td><input type="text" name="name"></td>
         </tr>
         <tr>
             <th>age</th>

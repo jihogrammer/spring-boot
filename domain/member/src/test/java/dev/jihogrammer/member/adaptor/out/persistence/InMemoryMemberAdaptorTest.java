@@ -1,8 +1,7 @@
-package dev.jihogrammer.member.adpator.out;
+package dev.jihogrammer.member.adaptor.out.persistence;
 
-import dev.jihogrammer.member.adaptor.out.persistence.InMemoryMemberAdaptor;
-import dev.jihogrammer.member.domain.exception.MemberException;
 import dev.jihogrammer.member.application.port.out.MemberSaveCommand;
+import dev.jihogrammer.member.domain.exception.MemberException;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;

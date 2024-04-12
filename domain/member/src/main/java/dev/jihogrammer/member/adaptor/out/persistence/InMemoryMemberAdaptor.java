@@ -2,8 +2,8 @@ package dev.jihogrammer.member.adaptor.out.persistence;
 
 import dev.jihogrammer.member.domain.Member;
 import dev.jihogrammer.member.domain.model.MemberId;
-import dev.jihogrammer.member.domain.model.MemberSaveCommand;
-import dev.jihogrammer.member.application.port.out.Members;
+import dev.jihogrammer.member.application.port.out.MemberSaveCommand;
+import dev.jihogrammer.member.application.port.out.MemberPort;
 
 import java.util.Collection;
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class InMemoryMemberRepository implements Members {
+class InMemoryMemberAdaptor implements MemberPort {
 
     private final Map<MemberId, Member> members = new ConcurrentHashMap<>();
 

@@ -1,22 +1,13 @@
-package dev.jihogrammer.web.servlet;
+package dev.jihogrammer.member;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-@ServletComponentScan
-public class ServletApplication extends SpringBootServletInitializer {
+public class ServletApplication {
 
     public static void main(final String[] args) {
         SpringApplication.run(ServletApplication.class, args);
-    }
-
-    @Override
-    protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
-        return application.sources(ServletApplication.class);
     }
 
 }

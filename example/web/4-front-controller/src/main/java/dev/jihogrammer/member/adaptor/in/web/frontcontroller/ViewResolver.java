@@ -1,4 +1,4 @@
-package dev.jihogrammer.member.adaptor.in.web.viewresolver;
+package dev.jihogrammer.member.adaptor.in.web.frontcontroller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

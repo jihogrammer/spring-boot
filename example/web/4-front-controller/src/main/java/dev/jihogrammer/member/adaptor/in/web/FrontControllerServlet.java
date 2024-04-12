@@ -1,5 +1,8 @@
-package dev.jihogrammer.member.adaptor.in.web.frontcontroller;
+package dev.jihogrammer.member.adaptor.in.web;
 
+import dev.jihogrammer.member.adaptor.in.web.frontcontroller.AdapterMapper;
+import dev.jihogrammer.member.adaptor.in.web.frontcontroller.ControllerResolver;
+import dev.jihogrammer.member.adaptor.in.web.frontcontroller.ViewResolver;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
-import static dev.jihogrammer.member.adaptor.in.web.WebConfig.URI_PREFIX;
+import static dev.jihogrammer.member.adaptor.in.web.WebEnvironment.URI_PREFIX;
 
 @WebServlet(urlPatterns = URI_PREFIX + "/*")
 @Slf4j
@@ -33,9 +36,10 @@ public class FrontControllerServlet extends HttpServlet {
         var controller = this.controllerResolver.resolve(requestURI, response);
         var adapter = this.adapterMapper.map(controller);
         var modelView = adapter.handle(request, response, controller);
+        var view = this.viewResolver.resolve(modelView.viewName());
         log.info("modelView={}", modelView);
 
-        this.viewResolver.resolve(modelView.viewName()).render(modelView.model(), request, response);
+        view.render(modelView.model(), request, response);
     }
 
 }

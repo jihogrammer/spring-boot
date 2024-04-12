@@ -1,4 +1,4 @@
-package dev.jihogrammer.member.adaptor.in.web.controller;
+package dev.jihogrammer.member.adaptor.in.web.model;
 
 public interface Controller {
 

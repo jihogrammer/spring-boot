@@ -3,7 +3,7 @@
 <form action="" method="post">
     <table>
         <tr>
-            <th>username</th>
+            <th>name</th>
             <td><input type="text" name="name"></td>
         </tr>
         <tr>

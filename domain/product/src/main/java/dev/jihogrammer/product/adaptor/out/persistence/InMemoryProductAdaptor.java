@@ -1,6 +1,6 @@
 package dev.jihogrammer.product.adaptor.out.persistence;
 
-import dev.jihogrammer.member.model.MemberId;
+import dev.jihogrammer.member.domain.model.MemberId;
 import dev.jihogrammer.product.application.port.out.ProductPort;
 import dev.jihogrammer.product.domain.Product;
 import dev.jihogrammer.product.domain.model.ProductId;

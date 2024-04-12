@@ -1,4 +1,4 @@
-package dev.jihogrammer.member.adaptor.in.web.model;
+package dev.jihogrammer.member.adaptor.in.web.frontcontroller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ public class View {
         model.entrySet().stream()
                 .peek(entry -> log.debug("{}={}", entry.getKey(), entry.getValue()))
                 .forEach(entry -> request.setAttribute(entry.getKey(), entry.getValue()));
-        request.getRequestDispatcher(viewPath).forward(request, response);
+        request.getRequestDispatcher(this.viewPath).forward(request, response);
     }
 
 }

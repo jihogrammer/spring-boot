@@ -1,4 +1,4 @@
-package dev.jihogrammer.members.adaptor.in.web.session;
+package dev.jihogrammer.member.adaptor.in.web.session;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
