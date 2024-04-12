@@ -1,5 +1,6 @@
 package dev.jihogrammer.product.adaptor.in.web;
 
+import dev.jihogrammer.member.domain.model.MemberId;
 import dev.jihogrammer.product.domain.Product;
 import dev.jihogrammer.product.domain.model.ProductDeliveryType;
 import dev.jihogrammer.product.domain.model.ProductRegion;
@@ -47,6 +48,7 @@ public class ProductUpdatePayload {
     public ProductUpdateCommand toCommand() {
         return new ProductUpdateCommand(
                 this.id,
+                new MemberId(940614),
                 this.name,
                 this.price,
                 this.quantity,
@@ -55,4 +57,5 @@ public class ProductUpdatePayload {
                 this.type,
                 this.deliveryType);
     }
+
 }

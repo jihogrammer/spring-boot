@@ -1,5 +1,7 @@
 package dev.jihogrammer.spring.typeconverter.converter;
 
+import dev.jihogrammer.spring.typeconverter.adaptor.in.web.converter.IntegerFromStringConverter;
+import dev.jihogrammer.spring.typeconverter.adaptor.in.web.converter.IntegerToStringConverter;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

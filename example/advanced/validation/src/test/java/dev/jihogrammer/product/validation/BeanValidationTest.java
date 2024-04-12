@@ -1,6 +1,6 @@
 package dev.jihogrammer.product.validation;
 
-import dev.jihogrammer.product.domain.model.ProductRegisterPayload;
+import dev.jihogrammer.product.adaptor.in.web.entity.ProductRegisterPayload;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

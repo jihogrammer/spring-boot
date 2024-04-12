@@ -1,8 +1,9 @@
 package dev.jihogrammer.spring.typeconverter.formatter;
 
-import dev.jihogrammer.spring.typeconverter.converter.IPPortFromStringConverter;
-import dev.jihogrammer.spring.typeconverter.converter.IPPortToStringConverter;
-import dev.jihogrammer.spring.typeconverter.model.InternetProtocolAndPort;
+import dev.jihogrammer.spring.typeconverter.adaptor.in.web.converter.IPPortFromStringConverter;
+import dev.jihogrammer.spring.typeconverter.adaptor.in.web.converter.IPPortToStringConverter;
+import dev.jihogrammer.spring.typeconverter.adaptor.in.web.formatter.NumberFormatter;
+import dev.jihogrammer.spring.typeconverter.adaptor.in.web.entity.InternetProtocolAndPort;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.format.support.DefaultFormattingConversionService;

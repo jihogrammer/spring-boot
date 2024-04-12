@@ -1,6 +1,7 @@
 package dev.jihogrammer.spring.typeconverter.converter;
 
-import dev.jihogrammer.spring.typeconverter.model.InternetProtocolAndPort;
+import dev.jihogrammer.spring.typeconverter.adaptor.in.web.converter.IPPortFromStringConverter;
+import dev.jihogrammer.spring.typeconverter.adaptor.in.web.entity.InternetProtocolAndPort;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

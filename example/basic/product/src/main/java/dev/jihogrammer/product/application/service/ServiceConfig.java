@@ -1,6 +1,5 @@
 package dev.jihogrammer.product.application.service;
 
-import dev.jihogrammer.member.domain.model.MemberId;
 import dev.jihogrammer.product.application.port.in.ProductDetailQuery;
 import dev.jihogrammer.product.application.port.in.ProductQuery;
 import dev.jihogrammer.product.application.port.in.ProductRegisterUseCase;
@@ -14,11 +13,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ServiceConfig {
-
-    @Bean
-    public MemberId producerId() {
-        return new MemberId(940614);
-    }
 
     @Bean
     public ProductQuery productQuery(final ProductPort productPort) {
@@ -37,23 +31,21 @@ public class ServiceConfig {
     @Bean
     public ProductRegisterUseCase productRegisterUseCase(
         final ProductPort productPort,
-        final MemberId producerId,
         final ProductRegionPort productRegionPort,
         final ProductTypePort productTypePort,
         final ProductDeliveryTypePort productDeliveryTypePort
     ) {
-        return new ProductRegisterService(productPort, producerId, productRegionPort, productTypePort, productDeliveryTypePort);
+        return new ProductRegisterService(productPort, productRegionPort, productTypePort, productDeliveryTypePort);
     }
 
     @Bean
     public ProductUpdateUseCase productUpdateUseCase(
         final ProductPort productPort,
-        final MemberId producerId,
         final ProductRegionPort productRegionPort,
         final ProductTypePort productTypePort,
         final ProductDeliveryTypePort productDeliveryTypePort
     ) {
-        return new ProductUpdateService(productPort, producerId, productRegionPort, productTypePort, productDeliveryTypePort);
+        return new ProductUpdateService(productPort, productRegionPort, productTypePort, productDeliveryTypePort);
     }
 
 }
