@@ -27,7 +27,6 @@ dependencies {
 
     implementation(project(":domain:member"))
     implementation(project(":domain:product"))
-    implementation(project(":domain:items"))
 
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
