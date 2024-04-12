@@ -25,9 +25,8 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
 
-    implementation(project(":domain:items"))
-    implementation(project(":domain:files"))
-    implementation(project(":domain:file-item"))
+    implementation(project(":domain:member"))
+    implementation(project(":domain:product"))
     implementation(project(":web:core"))
 
     compileOnly('org.projectlombok:lombok')

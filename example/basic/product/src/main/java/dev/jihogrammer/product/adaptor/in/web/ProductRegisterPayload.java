@@ -23,14 +23,15 @@ public class ProductRegisterPayload {
     private String deliveryType;
 
     public ProductRegisterCommand toCommand() {
-        return new ProductRegisterCommand(
-                this.name,
-                this.price,
-                this.quantity,
-                this.open,
-                this.regions,
-                this.type,
-                this.deliveryType);
+        return ProductRegisterCommand.builder()
+                .name(this.name)
+                .price(this.price)
+                .quantity(this.quantity)
+                .open(this.open)
+                .regions(this.regions)
+                .type(this.type)
+                .deliveryType(this.deliveryType)
+                .build();
     }
 
 }

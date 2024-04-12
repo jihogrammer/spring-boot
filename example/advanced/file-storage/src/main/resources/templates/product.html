@@ -9,25 +9,25 @@
 <body>
 <h1>Item View</h1>
 
-<main th:object="${item}">
+<main th:object="${product}">
   <h2>#<span th:text="*{id}"></span> <span th:text="*{name}"></span></h2>
 
-  <div th:if="*{mainFile}">
-    <h3 th:text="*{mainFile.name}"></h3>
-    <a th:href="|/file-storage/items/files/*{id}|">download</a>
+  <div th:if="*{descriptionFile}">
+    <h3 th:text="*{descriptionFile.name}"></h3>
+    <a th:href="|/file-storage/products/files/*{id}|">download</a>
   </div>
 
-  <div th:if="*{subFiles}">
+  <div th:if="*{imageFiles}">
     <div>
       <a
-        th:each="imageFile : *{subFiles}"
-        th:href="|/file-storage/items/images/${imageFile.storedName}|"
+        th:each="imageFile : *{imageFiles}"
+        th:href="|/file-storage/products/images/${imageFile.storedName}|"
         target="_blank"
       >
         <img
           alt="a image file"
           src=""
-          th:src="|/file-storage/items/images/${imageFile.storedName}|"
+          th:src="|/file-storage/products/images/${imageFile.storedName}|"
           style="width: 90vw"
         >
       </a>

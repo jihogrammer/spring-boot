@@ -1,4 +1,4 @@
-package dev.jihogrammer.filestorage.application.basic;
+package dev.jihogrammer.filestorage.adaptor.in.web;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,25 +18,25 @@ import java.io.IOException;
 @Slf4j
 public class SpringUploadController {
 
-    private final String fileRootDir;
+    private final String root;
 
     @GetMapping("/upload")
-    public String view() {
-        return "/upload-view";
+    public String upload() {
+        return "/basic-upload";
     }
 
     @PostMapping("/upload")
     public String upload(
-        @RequestParam("itemName") final String itemName,
+        @RequestParam("name") final String name,
         @RequestParam("file") final MultipartFile file
     ) {
-        log.info("itemName = {}", itemName);
+        log.info("name = {}", name);
         log.info("file = {}", file);
 
         if (file.isEmpty()) {
             log.info("file is empty");
         } else {
-            String filePath = this.fileRootDir + file.getOriginalFilename();
+            String filePath = this.root + file.getOriginalFilename();
             log.info("filePath = {}", filePath);
 
             try {
@@ -46,7 +46,7 @@ public class SpringUploadController {
             }
         }
 
-        return "/upload-view";
+        return "/basic-upload";
     }
 
 }

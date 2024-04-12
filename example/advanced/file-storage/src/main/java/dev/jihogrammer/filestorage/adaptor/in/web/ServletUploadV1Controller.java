@@ -1,4 +1,4 @@
-package dev.jihogrammer.filestorage.application.basic;
+package dev.jihogrammer.filestorage.adaptor.in.web;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,19 +16,19 @@ import java.io.IOException;
 public class ServletUploadV1Controller {
 
     @GetMapping("/upload")
-    public String view() {
-        return "/upload-view";
+    public String upload() {
+        return "/basic-upload";
     }
 
     @PostMapping("/upload")
     public String upload(final HttpServletRequest request) throws ServletException, IOException {
         log.info("uploading. request: {}", request);
 
-        var itemName = request.getParameter("itemName");
+        var name = request.getParameter("name");
         var parts = request.getParts();
-        log.info("itemName: {}, parts: {}", itemName, parts);
+        log.info("name: {}, parts: {}", name, parts);
 
-        return "/upload-view";
+        return "/basic-upload";
     }
 
 }

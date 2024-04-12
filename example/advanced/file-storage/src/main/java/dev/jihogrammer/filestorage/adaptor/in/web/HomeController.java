@@ -1,4 +1,4 @@
-package dev.jihogrammer.filestorage.application;
+package dev.jihogrammer.filestorage.adaptor.in.web;
 
 import lombok.Getter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,7 +28,7 @@ public class HomeController {
 
         SPRING_UPLOAD("spring upload", "/file-storage/spring/upload"),
 
-        ITEM_UPLOAD("item register", "/file-storage/items/register");
+        ITEM_UPLOAD("item register", "/file-storage/products/register");
 
         private final String name;
 
