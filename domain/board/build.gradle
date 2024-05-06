@@ -1,0 +1,38 @@
+buildscript {
+    ext {
+        lombokVersion = "1.18.32"
+    }
+}
+
+plugins {
+    id 'java-library'
+}
+
+group = 'dev.jihogrammer'
+version = '0.0.1'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.slf4j:slf4j-api:2.0.12")
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    testImplementation("ch.qos.logback:logback-classic:1.5.5")
+    testImplementation("org.slf4j:slf4j-api:2.0.12")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+    testImplementation("org.assertj:assertj-core:3.24.2")
+}
+
+test {
+    useJUnitPlatform()
+}

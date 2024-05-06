@@ -5,6 +5,7 @@ include(":web:core")
 
 include(":domain:member")
 include(":domain:product")
+include(":domain:board")
 
 include(":example:basic:http")
 include(":example:basic:thymeleaf")

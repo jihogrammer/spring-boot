@@ -6,4 +6,6 @@ public enum MemberRole {
 
     CONSUMER,
 
+    Author,
+
 }
