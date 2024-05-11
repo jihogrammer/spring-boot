@@ -65,6 +65,29 @@ public class MemberJDBCAdaptor implements MemberPort {
         }
     }
 
+    @Override
+    public Member update(final Member member) {
+        final var sql = "UPDATE MEMBER SET MONEY = ? WHERE MEMBER_ID = ?";
+        final var connection = connectionUtils.getConnection();
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, member.money());
+            preparedStatement.setString(2, member.id().value());
+
+            preparedStatement.executeUpdate();
+
+            connection.commit();
+            return member;
+        } catch (SQLException e) {
+            log.error("Failed to save member.", e);
+            throw new MemberException(e);
+        } finally {
+            close(connection, preparedStatement, null);
+        }
+    }
+
     private void close(final Connection connection, final Statement statement, final ResultSet resultSet) {
         if (resultSet != null) {
             try {

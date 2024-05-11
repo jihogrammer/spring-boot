@@ -9,4 +9,6 @@ public interface MemberPort {
 
     Member findById(MemberId memberId);
 
+    Member update(Member member);
+
 }

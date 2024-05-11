@@ -2,7 +2,6 @@ package dev.jihogrammer.spring.jdbc.member.adaptor.persistence.out;
 
 import dev.jihogrammer.spring.jdbc.member.application.port.out.MemberPort;
 import dev.jihogrammer.spring.jdbc.member.domain.Member;
-import dev.jihogrammer.spring.jdbc.member.domain.MemberId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,6 +38,19 @@ class MemberJDBCAdaptorIntegrationTest {
 
         // then
         assertThat(foundMember).isEqualTo(savedMember);
+    }
+
+    @Test
+    void update() {
+        // given
+        var savedMember = memberPort.save(Member.of(UUID.randomUUID(), 0));
+        var expectedMember = new Member(savedMember.id(), 1000);
+
+        // when
+        var updatedMember = memberPort.update(expectedMember);
+
+        // then
+        assertThat(updatedMember).isEqualTo(expectedMember);
     }
 
 }
