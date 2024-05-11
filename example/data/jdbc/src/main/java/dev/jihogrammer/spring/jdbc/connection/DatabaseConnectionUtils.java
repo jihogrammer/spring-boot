@@ -28,7 +28,9 @@ public class DatabaseConnectionUtils {
 
     public Connection getConnection() {
         try {
-            return DriverManager.getConnection(this.url, this.username, this.password);
+            final var connection = DriverManager.getConnection(this.url, this.username, this.password);
+            connection.setAutoCommit(false);
+            return connection;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
