@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = MemberJDBCAdaptorTestConfig.class)
@@ -18,13 +20,25 @@ class MemberJDBCAdaptorIntegrationTest {
     @Test
     void save() {
         // given
-        var member = new Member(new MemberId("hello"), 0);
+        var member = Member.of(UUID.randomUUID(), 0);
 
         // when
         var savedMember = memberPort.save(member);
 
         // then
         assertThat(savedMember).isEqualTo(member);
+    }
+
+    @Test
+    void findById() {
+        // given
+        var savedMember = memberPort.save(Member.of(UUID.randomUUID(), 0));
+
+        // when
+        var foundMember = memberPort.findById(savedMember.id());
+
+        // then
+        assertThat(foundMember).isEqualTo(savedMember);
     }
 
 }
