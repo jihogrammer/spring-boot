@@ -53,4 +53,16 @@ class MemberJDBCAdaptorIntegrationTest {
         assertThat(updatedMember).isEqualTo(expectedMember);
     }
 
+    @Test
+    void delete() {
+        // given
+        var member = memberPort.save(Member.of(UUID.randomUUID(), 0));
+
+        // when
+        boolean isDeleted = memberPort.delete(member.id());
+
+        // then
+        assertThat(isDeleted).isTrue();
+    }
+
 }

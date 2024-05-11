@@ -11,4 +11,6 @@ public interface MemberPort {
 
     Member update(Member member);
 
+    boolean delete(MemberId memberId);
+
 }

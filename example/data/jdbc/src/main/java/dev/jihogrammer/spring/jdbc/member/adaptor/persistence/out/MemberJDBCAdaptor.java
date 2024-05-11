@@ -88,6 +88,30 @@ public class MemberJDBCAdaptor implements MemberPort {
         }
     }
 
+    @Override
+    public boolean delete(final MemberId memberId) {
+        final var sql = "DELETE FROM MEMBER WHERE MEMBER_ID = ?";
+        final var connection = connectionUtils.getConnection();
+        PreparedStatement preparedStatement = null;
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, memberId.value());
+
+            if (1 == preparedStatement.executeUpdate()) {
+                connection.commit();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            log.error("Failed to find member by {}.", memberId, e);
+            throw new MemberException(e);
+        } finally {
+            close(connection, preparedStatement, null);
+        }
+    }
+
     private void close(final Connection connection, final Statement statement, final ResultSet resultSet) {
         if (resultSet != null) {
             try {
