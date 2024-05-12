@@ -1,24 +1,33 @@
 package dev.jihogrammer.spring.jdbc.member.adaptor.persistence.out;
 
-import dev.jihogrammer.spring.jdbc.connection.DatabaseConnectionUtils;
 import dev.jihogrammer.spring.jdbc.member.application.port.out.MemberPort;
 import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.sql.DataSource;
 
 @Slf4j
 @TestConfiguration
-@RequiredArgsConstructor
-public class MemberJDBCAdaptorTestConfig {
+public class MemberDriverManagerDataSourceAdaptorTestConfig {
 
-    private final DatabaseConnectionUtils utils;
+    private final DataSource dataSource;
+
+    public MemberDriverManagerDataSourceAdaptorTestConfig(
+        @Value("${spring.datasource.url}") final String url,
+        @Value("${spring.datasource.username}") final String username,
+        @Value("${spring.datasource.password:}") final String password
+    ) {
+        this.dataSource = new DriverManagerDataSource(url, username, password);
+    }
 
     @PostConstruct
     void postConstruct() throws Throwable {
         try (
-            final var connection = this.utils.getConnection();
+            final var connection = this.dataSource.getConnection();
             final var statement = connection.createStatement();
         ) {
             statement.execute("""
@@ -36,7 +45,7 @@ public class MemberJDBCAdaptorTestConfig {
 
     @Bean
     public MemberPort memberPort() {
-        return new MemberJDBCAdaptor(this.utils);
+        return new MemberDataSourceAdaptor(this.dataSource);
     }
 
 }

@@ -7,4 +7,5 @@ spring:
 
 logging:
   level:
+    dev.jihogrammer.spring.jdbc: DEBUG
     com.zaxxer.hikari: DEBUG
