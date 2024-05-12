@@ -1,5 +1,6 @@
 package dev.jihogrammer.spring.jdbc.connection;
 
+import com.zaxxer.hikari.HikariDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,8 @@ class DatabaseConnectionStructureTest {
     @Test
     void testDriverManagerConnection() throws Throwable {
         // given
-        final Connection connection1;
-        final Connection connection2;
+        Connection connection1;
+        Connection connection2;
 
         // when
         connection1 = DriverManager.getConnection(config.url(), config.username(), config.password());
@@ -53,9 +54,9 @@ class DatabaseConnectionStructureTest {
     @Test
     void testDriverManagerDataSourceConnection() throws Throwable {
         // given
-        final var dataSource = new DriverManagerDataSource(config.url(), config.username(), config.password());
-        final Connection connection1;
-        final Connection connection2;
+        Connection connection1;
+        Connection connection2;
+        var dataSource = new DriverManagerDataSource(config.url(), config.username(), config.password());
 
         // when
         connection1 = dataSource.getConnection();
@@ -67,6 +68,34 @@ class DatabaseConnectionStructureTest {
         assertThat(connection1).isNotNull();
         assertThat(connection2).isNotNull();
         assertThat(connection1).isNotEqualTo(connection2);
+    }
+
+    @Test
+    void testHikariDataSourceConnection() throws Throwable {
+        // given
+        Connection connection1;
+        Connection connection2;
+        var dataSource = new HikariDataSource();
+        dataSource.setJdbcUrl(config.url());
+        dataSource.setUsername(config.username());
+        dataSource.setPassword(config.password());
+        dataSource.setMaximumPoolSize(10);
+        dataSource.setPoolName("TestPool");
+
+        // when
+        connection1 = dataSource.getConnection();
+        connection2 = dataSource.getConnection();
+        log.info("HikariDataSource#getConnection -> {}", connection1);
+        log.info("HikariDataSource#getConnection -> {}", connection2);
+        Thread.sleep(1000);
+
+        // then
+        assertThat(connection1).isNotNull();
+        assertThat(connection2).isNotNull();
+        assertThat(connection1).isNotEqualTo(connection2);
+
+        // post
+        dataSource.close();
     }
 
 }

@@ -4,3 +4,7 @@ spring:
     # https://h2database.com/html/features.html#in_memory_databases
     url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1
     username: sa
+
+logging:
+  level:
+    com.zaxxer.hikari: DEBUG
