@@ -116,7 +116,7 @@ public class MemberDataSourceAdaptor implements MemberPort {
     private Connection getConnection() {
         try {
             var connection = this.dataSource.getConnection();
-            log.debug("get connection => {}; {};", connection, connection.getClass());
+            log.trace("get connection => {}; {};", connection, connection.getClass());
             return connection;
         } catch (final SQLException e) {
             throw new MemberException(e);
