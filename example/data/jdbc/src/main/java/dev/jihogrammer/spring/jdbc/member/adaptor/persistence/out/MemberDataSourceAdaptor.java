@@ -13,7 +13,7 @@ import java.sql.*;
 
 @Slf4j
 @RequiredArgsConstructor
-public class MemberDataSourceAdaptor implements MemberPort {
+class MemberDataSourceAdaptor implements MemberPort {
 
     private final DataSource dataSource;
 

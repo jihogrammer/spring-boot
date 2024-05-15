@@ -5,6 +5,7 @@ import dev.jihogrammer.spring.jdbc.member.application.port.out.MemberPort;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.sql.DataSource;
@@ -15,13 +16,18 @@ import java.sql.SQLException;
 public abstract class MemberIntegrationTest {
 
     @Autowired
-    private DataSource dataSource;
+    protected DataSource dataSource;
 
     @Autowired
     protected MemberPort memberPort;
 
     @Autowired
-    protected SendMoneyPort sendMoneyPort;
+    @Qualifier("unstable-send-money-port")
+    protected SendMoneyPort unstableSendMoneyPort;
+
+    @Autowired
+    @Qualifier("transaction-handling-send-money-port")
+    protected SendMoneyPort transactionHandlingSendMoneyPort;
 
     @PostConstruct
     void createMemberTable() throws SQLException {

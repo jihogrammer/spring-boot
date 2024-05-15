@@ -12,7 +12,7 @@ import java.sql.*;
 
 @Slf4j
 @RequiredArgsConstructor
-public class MemberJDBCAdaptor implements MemberPort {
+class MemberJDBCAdaptor implements MemberPort {
 
     private final DatabaseConnectionUtils connectionUtils;
 

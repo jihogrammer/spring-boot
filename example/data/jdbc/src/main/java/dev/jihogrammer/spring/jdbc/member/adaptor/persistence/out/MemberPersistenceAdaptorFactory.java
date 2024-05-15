@@ -30,7 +30,7 @@ public class MemberPersistenceAdaptorFactory {
 
     @Bean
     public MemberPort memberPort(final DataSource dataSource) {
-        return new MemberDataSourceAdaptor(dataSource);
+        return new MemberDataSourceConnectionAdaptor(dataSource);
     }
 
 }
