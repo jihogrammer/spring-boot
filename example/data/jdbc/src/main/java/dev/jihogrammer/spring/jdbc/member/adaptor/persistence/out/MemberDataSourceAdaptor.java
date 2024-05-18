@@ -15,7 +15,7 @@ import java.sql.*;
 @RequiredArgsConstructor
 class MemberDataSourceAdaptor implements MemberPort {
 
-    private final DataSource dataSource;
+    protected final DataSource dataSource;
 
     @Override
     public Member save(final Member member) {
@@ -113,7 +113,7 @@ class MemberDataSourceAdaptor implements MemberPort {
         }
     }
 
-    private Connection getConnection() {
+    protected Connection getConnection() {
         try {
             var connection = this.dataSource.getConnection();
             log.trace("get connection => {}; {};", connection, connection.getClass());
@@ -123,7 +123,7 @@ class MemberDataSourceAdaptor implements MemberPort {
         }
     }
 
-    private void close(final ResultSet resultSet, final Statement statement, final Connection connection) {
+    protected void close(final ResultSet resultSet, final Statement statement, final Connection connection) {
         JdbcUtils.closeResultSet(resultSet);
         JdbcUtils.closeStatement(statement);
         JdbcUtils.closeConnection(connection);

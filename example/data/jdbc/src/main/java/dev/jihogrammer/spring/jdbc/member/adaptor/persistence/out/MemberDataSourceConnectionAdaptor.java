@@ -42,6 +42,7 @@ class MemberDataSourceConnectionAdaptor extends MemberDataSourceAdaptor {
         } finally {
             JdbcUtils.closeStatement(preparedStatement);
             JdbcUtils.closeResultSet(resultSet);
+            // Transaction 관리를 위해 Connection 객체를 닫지 않음
         }
     }
 
@@ -59,6 +60,7 @@ class MemberDataSourceConnectionAdaptor extends MemberDataSourceAdaptor {
             throw new MemberException(e);
         } finally {
             JdbcUtils.closeStatement(preparedStatement);
+            // Transaction 관리를 위해 Connection 객체를 닫지 않음
         }
 
         return member;

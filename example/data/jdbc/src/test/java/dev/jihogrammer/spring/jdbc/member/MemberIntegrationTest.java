@@ -22,11 +22,19 @@ public abstract class MemberIntegrationTest {
     protected MemberPort memberPort;
 
     @Autowired
+    @Qualifier("dataSourceMemberPort")
+    protected MemberPort dataSourceMemberPort;
+
+    @Autowired
     @Qualifier("jdbcMemberPort")
     protected MemberPort jdbcMemberPort;
 
     @Autowired
     protected SendMoneyPort sendMoneyPort;
+
+    @Autowired
+    @Qualifier("transactionHandlingSendMoneyPort")
+    protected SendMoneyPort transactionHandlingSendMoneyPort;
 
     @Autowired
     @Qualifier("unstableSendMoneyPort")

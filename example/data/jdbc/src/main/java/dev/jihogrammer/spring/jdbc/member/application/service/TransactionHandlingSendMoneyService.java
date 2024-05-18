@@ -18,9 +18,9 @@ import static java.util.Objects.nonNull;
 @RequiredArgsConstructor
 class TransactionHandlingSendMoneyService implements SendMoneyPort {
 
-    private final DataSource dataSource;
-
     private final MemberPort memberPort;
+
+    private final DataSource dataSource;
 
     @Override
     public void sendMoney(final SendMoneyCommand command) {

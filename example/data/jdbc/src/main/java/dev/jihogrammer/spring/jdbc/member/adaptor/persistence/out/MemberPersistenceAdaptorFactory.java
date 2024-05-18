@@ -33,6 +33,13 @@ public class MemberPersistenceAdaptorFactory {
 
     @Bean
     @Primary
+    @Qualifier("transactionManagerMemberPort")
+    public MemberPort transactionManagerMemberPort(final DataSource dataSource) {
+        return new MemberDataSourceTransactionManagerAdaptor(dataSource);
+    }
+
+
+    @Bean
     @Qualifier("dataSourceMemberPort")
     public MemberPort dataSourceMemberPort(final DataSource dataSource) {
         return new MemberDataSourceConnectionAdaptor(dataSource);

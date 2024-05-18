@@ -14,38 +14,38 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
-class TransactionHandlingSendMoneyPortTest extends MemberIntegrationTest {
+class TransactionManagerSendMoneyPortTest extends MemberIntegrationTest {
 
     @Test
     @DisplayName("정상 이체")
     void normalSending() {
         // given
-        var sender = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 3000));
-        var receiver = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 1000));
+        var sender = memberPort.save(Member.of(UUID.randomUUID(), 3000));
+        var receiver = memberPort.save(Member.of(UUID.randomUUID(), 1000));
         var money = 1400;
         var command = new SendMoneyCommand(sender.id(), receiver.id(), money);
 
         // when
-        transactionHandlingSendMoneyPort.sendMoney(command);
+        sendMoneyPort.sendMoney(command);
 
         // then
-        assertThat(dataSourceMemberPort.findById(sender.id()).money()).isEqualTo(sender.money() - money);
-        assertThat(dataSourceMemberPort.findById(receiver.id()).money()).isEqualTo(receiver.money() + money);
+        assertThat(memberPort.findById(sender.id()).money()).isEqualTo(sender.money() - money);
+        assertThat(memberPort.findById(receiver.id()).money()).isEqualTo(receiver.money() + money);
     }
 
     @Test
     @DisplayName("최악 이체")
     void theWorstSending() {
         // given
-        var sender = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 1000));
-        var receiver = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 900));
+        var sender = memberPort.save(Member.of(UUID.randomUUID(), 1000));
+        var receiver = memberPort.save(Member.of(UUID.randomUUID(), 900));
         var money = 1100;
         var command = new SendMoneyCommand(sender.id(), receiver.id(), money);
 
         // when
         ThrowingCallable when = () -> {
             try {
-                transactionHandlingSendMoneyPort.sendMoney(command);
+                sendMoneyPort.sendMoney(command);
             } catch (Throwable e) {
                 log.error("EXPECTED EXCEPTION", e);
                 throw e;
@@ -54,8 +54,8 @@ class TransactionHandlingSendMoneyPortTest extends MemberIntegrationTest {
 
         // then
         assertThatThrownBy(when).isInstanceOf(MemberException.class);
-        assertThat(dataSourceMemberPort.findById(sender.id()).money()).isEqualTo(sender.money());
-        assertThat(dataSourceMemberPort.findById(receiver.id()).money()).isEqualTo(receiver.money());
+        assertThat(memberPort.findById(sender.id()).money()).isEqualTo(sender.money());
+        assertThat(memberPort.findById(receiver.id()).money()).isEqualTo(receiver.money());
     }
 
 }
