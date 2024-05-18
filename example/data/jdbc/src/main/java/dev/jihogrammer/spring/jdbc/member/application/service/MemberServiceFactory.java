@@ -17,7 +17,19 @@ public class MemberServiceFactory {
 
     @Bean
     @Primary
-    public SendMoneyPort sendMoneyPort(final MemberPort memberPort, final DataSource dataSource) {
+    public SendMoneyPort sendMoneyPort(final MemberPort memberPort) {
+        final var service = new TransactionalSendMoneyService(memberPort);
+
+        log.info("Creating sendMoneyPort({}) with memberPort={}",
+            service,
+            memberPort);
+
+        return service;
+    }
+
+    @Bean
+    @Qualifier("transactionTemplateSendMoneyPort")
+    public SendMoneyPort transactionTemplateSendMoneyPort(final MemberPort memberPort, final DataSource dataSource) {
         final var transactionManager = new DataSourceTransactionManager(dataSource);
         final var service = new TransactionTemplateSendMoneyService(memberPort, transactionManager);
 

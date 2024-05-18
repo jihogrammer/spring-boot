@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.aop.support.AopUtils;
 
 import java.util.UUID;
 
@@ -14,7 +15,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
-class TransactionTemplateSendMoneyPortTest extends MemberIntegrationTest {
+class TransactionalSendMoneyPortTest extends MemberIntegrationTest {
+
+    @Test
+    void checkProxy() {
+        assertThat(AopUtils.isAopProxy(memberPort)).isFalse();
+        assertThat(AopUtils.isAopProxy(sendMoneyPort)).isTrue();
+    }
 
     @Test
     @DisplayName("정상 이체")
@@ -26,7 +33,7 @@ class TransactionTemplateSendMoneyPortTest extends MemberIntegrationTest {
         var command = new SendMoneyCommand(sender.id(), receiver.id(), money);
 
         // when
-        transactionTemplateSendMoneyPort.sendMoney(command);
+        sendMoneyPort.sendMoney(command);
 
         // then
         assertThat(memberPort.findById(sender.id()).money()).isEqualTo(sender.money() - money);
@@ -45,7 +52,7 @@ class TransactionTemplateSendMoneyPortTest extends MemberIntegrationTest {
         // when
         ThrowingCallable when = () -> {
             try {
-                transactionTemplateSendMoneyPort.sendMoney(command);
+                sendMoneyPort.sendMoney(command);
             } catch (Throwable e) {
                 log.error("EXPECTED EXCEPTION", e);
                 throw e;
