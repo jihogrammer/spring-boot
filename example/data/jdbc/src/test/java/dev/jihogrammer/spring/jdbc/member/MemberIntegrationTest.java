@@ -33,6 +33,10 @@ public abstract class MemberIntegrationTest {
     protected SendMoneyPort sendMoneyPort;
 
     @Autowired
+    @Qualifier("transactionManagerSendMoneyPort")
+    protected SendMoneyPort transactionManagerSendMoneyPort;
+
+    @Autowired
     @Qualifier("transactionHandlingSendMoneyPort")
     protected SendMoneyPort transactionHandlingSendMoneyPort;
 

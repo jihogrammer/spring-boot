@@ -19,9 +19,28 @@ public class MemberServiceFactory {
     @Primary
     public SendMoneyPort sendMoneyPort(final MemberPort memberPort, final DataSource dataSource) {
         final var transactionManager = new DataSourceTransactionManager(dataSource);
+        final var service = new TransactionTemplateSendMoneyService(memberPort, transactionManager);
 
-        log.info("Creating sendMoneyPort with memberPort={} and transactionManager={}", memberPort, transactionManager);
-        return new TransactionManagerSendMoneyService(memberPort, transactionManager);
+        log.info("Creating sendMoneyPort({}) with memberPort={} and transactionManager={}",
+            service,
+            memberPort,
+            transactionManager);
+
+        return service;
+    }
+
+    @Bean
+    @Qualifier("transactionManagerSendMoneyPort")
+    public SendMoneyPort transactionManagerSendMoneyPort(final MemberPort memberPort, final DataSource dataSource) {
+        final var transactionManager = new DataSourceTransactionManager(dataSource);
+        final var service = new TransactionManagerSendMoneyService(memberPort, transactionManager);
+
+        log.info("Creating sendMoneyPort({}) with memberPort={} and transactionManager={}",
+            service,
+            memberPort,
+            transactionManager);
+
+        return service;
     }
 
     @Bean
@@ -30,15 +49,24 @@ public class MemberServiceFactory {
         @Qualifier("dataSourceMemberPort") final MemberPort memberPort,
         final DataSource dataSource
     ) {
-        log.info("Creating sendMoneyPort with memberPort={} and dataSource={}", memberPort, dataSource);
-        return new TransactionHandlingSendMoneyService(memberPort, dataSource);
+        final var service = new TransactionHandlingSendMoneyService(memberPort, dataSource);
+
+        log.info("Creating sendMoneyPort({}) with memberPort={} and dataSource={}",
+            service,
+            memberPort,
+            dataSource);
+
+        return service;
     }
 
     @Bean
     @Qualifier("unstableSendMoneyPort")
     public SendMoneyPort unstableSendMoneyPort(final MemberPort memberPort) {
-        log.info("Creating sendMoneyPort with memberPort={}", memberPort);
-        return new UnstableSendMoneyService(memberPort);
+        final var service = new UnstableSendMoneyService(memberPort);
+
+        log.info("Creating sendMoneyPort({}) with memberPort={}", service, memberPort);
+
+        return service;
     }
 
 }

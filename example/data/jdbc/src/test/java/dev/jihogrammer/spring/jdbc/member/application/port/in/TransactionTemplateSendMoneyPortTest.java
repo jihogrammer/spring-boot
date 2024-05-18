@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Slf4j
-class TransactionManagerSendMoneyPortTest extends MemberIntegrationTest {
+class TransactionTemplateSendMoneyPortTest extends MemberIntegrationTest {
 
     @Test
     @DisplayName("정상 이체")
@@ -26,7 +26,7 @@ class TransactionManagerSendMoneyPortTest extends MemberIntegrationTest {
         var command = new SendMoneyCommand(sender.id(), receiver.id(), money);
 
         // when
-        transactionManagerSendMoneyPort.sendMoney(command);
+        sendMoneyPort.sendMoney(command);
 
         // then
         assertThat(memberPort.findById(sender.id()).money()).isEqualTo(sender.money() - money);
@@ -45,7 +45,7 @@ class TransactionManagerSendMoneyPortTest extends MemberIntegrationTest {
         // when
         ThrowingCallable when = () -> {
             try {
-                transactionManagerSendMoneyPort.sendMoney(command);
+                sendMoneyPort.sendMoney(command);
             } catch (Throwable e) {
                 log.error("EXPECTED EXCEPTION", e);
                 throw e;
