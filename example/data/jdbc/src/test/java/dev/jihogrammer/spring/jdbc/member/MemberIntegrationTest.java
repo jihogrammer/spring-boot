@@ -22,18 +22,21 @@ public abstract class MemberIntegrationTest {
     protected MemberPort memberPort;
 
     @Autowired
-    @Qualifier("unstable-send-money-port")
-    protected SendMoneyPort unstableSendMoneyPort;
+    @Qualifier("jdbcMemberPort")
+    protected MemberPort jdbcMemberPort;
 
     @Autowired
-    @Qualifier("transaction-handling-send-money-port")
-    protected SendMoneyPort transactionHandlingSendMoneyPort;
+    protected SendMoneyPort sendMoneyPort;
+
+    @Autowired
+    @Qualifier("unstableSendMoneyPort")
+    protected SendMoneyPort unstableSendMoneyPort;
 
     @PostConstruct
     void createMemberTable() throws SQLException {
         try (
             final var connection = this.dataSource.getConnection();
-            final var statement = connection.createStatement();
+            final var statement = connection.createStatement()
         ) {
             statement.execute("""
                     CREATE TABLE IF NOT EXISTS MEMBER (

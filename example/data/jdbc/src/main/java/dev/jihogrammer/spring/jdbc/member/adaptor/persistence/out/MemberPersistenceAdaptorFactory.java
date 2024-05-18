@@ -1,10 +1,13 @@
 package dev.jihogrammer.spring.jdbc.member.adaptor.persistence.out;
 
 import com.zaxxer.hikari.HikariDataSource;
+import dev.jihogrammer.spring.jdbc.connection.DatabaseConnectionUtils;
 import dev.jihogrammer.spring.jdbc.member.application.port.out.MemberPort;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
@@ -29,8 +32,16 @@ public class MemberPersistenceAdaptorFactory {
     }
 
     @Bean
-    public MemberPort memberPort(final DataSource dataSource) {
+    @Primary
+    @Qualifier("dataSourceMemberPort")
+    public MemberPort dataSourceMemberPort(final DataSource dataSource) {
         return new MemberDataSourceConnectionAdaptor(dataSource);
+    }
+
+    @Bean
+    @Qualifier("jdbcMemberPort")
+    public MemberPort jdbcMemberPort(final DatabaseConnectionUtils connectionUtils) {
+        return new MemberJDBCAdaptor(connectionUtils);
     }
 
 }

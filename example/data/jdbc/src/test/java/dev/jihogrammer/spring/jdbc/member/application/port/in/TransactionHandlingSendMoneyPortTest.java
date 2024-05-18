@@ -26,7 +26,7 @@ class TransactionHandlingSendMoneyPortTest extends MemberIntegrationTest {
         var command = new SendMoneyCommand(sender.id(), receiver.id(), money);
 
         // when
-        transactionHandlingSendMoneyPort.sendMoney(command);
+        sendMoneyPort.sendMoney(command);
 
         // then
         assertThat(memberPort.findById(sender.id()).money()).isEqualTo(sender.money() - money);
@@ -45,7 +45,7 @@ class TransactionHandlingSendMoneyPortTest extends MemberIntegrationTest {
         // when
         ThrowingCallable when = () -> {
             try {
-                transactionHandlingSendMoneyPort.sendMoney(command);
+                sendMoneyPort.sendMoney(command);
             } catch (Throwable e) {
                 log.error("EXPECTED EXCEPTION", e);
                 throw e;

@@ -1,20 +1,14 @@
 package dev.jihogrammer.spring.jdbc.member.adaptor.persistence.out;
 
-import dev.jihogrammer.spring.jdbc.member.application.port.out.MemberPort;
+import dev.jihogrammer.spring.jdbc.member.MemberIntegrationTest;
 import dev.jihogrammer.spring.jdbc.member.domain.Member;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = MemberDriverManagerDataSourceAdaptorTestConfig.class)
-class MemberDriverManagerDataSourceAdaptorIntegrationTest {
-
-    @Autowired
-    MemberPort memberPort;
+class MemberDriverManagerDataSourceAdaptorIntegrationTest extends MemberIntegrationTest {
 
     @Test
     void save() {

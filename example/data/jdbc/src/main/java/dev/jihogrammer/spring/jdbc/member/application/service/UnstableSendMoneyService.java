@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-class SendMoneyService implements SendMoneyPort {
+class UnstableSendMoneyService implements SendMoneyPort {
 
     private final MemberPort memberPort;
 

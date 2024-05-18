@@ -13,13 +13,14 @@ import javax.sql.DataSource;
 public class MemberServiceFactory {
 
     @Bean
-    @Qualifier("unstable-send-money-port")
+    @Qualifier("unstableSendMoneyPort")
     public SendMoneyPort unstableSendMoneyPort(final MemberPort memberPort) {
-        return new SendMoneyService(memberPort);
+        return new UnstableSendMoneyService(memberPort);
     }
 
     @Bean
-    @Qualifier("transaction-handling-send-money-port")
+    @Primary
+    @Qualifier("transactionHandlingSendMoneyPort")
     public SendMoneyPort transactionHandlingSendMoneyPort(final DataSource dataSource, final MemberPort memberPort) {
         return new TransactionHandlingSendMoneyService(dataSource, memberPort);
     }
