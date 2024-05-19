@@ -16,7 +16,7 @@ class MemberHikariDataSourceAdaptorIntegrationTest extends MemberIntegrationTest
         var member = Member.of(UUID.randomUUID(), 0);
 
         // when
-        var savedMember = memberPort.save(member);
+        var savedMember = dataSourceMemberPort.save(member);
 
         // then
         assertThat(savedMember).isEqualTo(member);
@@ -25,10 +25,10 @@ class MemberHikariDataSourceAdaptorIntegrationTest extends MemberIntegrationTest
     @Test
     void findById() {
         // given
-        var savedMember = memberPort.save(Member.of(UUID.randomUUID(), 0));
+        var savedMember = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 0));
 
         // when
-        var foundMember = memberPort.findById(savedMember.id());
+        var foundMember = dataSourceMemberPort.findById(savedMember.id());
 
         // then
         assertThat(foundMember).isEqualTo(savedMember);
@@ -37,11 +37,11 @@ class MemberHikariDataSourceAdaptorIntegrationTest extends MemberIntegrationTest
     @Test
     void update() {
         // given
-        var savedMember = memberPort.save(Member.of(UUID.randomUUID(), 0));
+        var savedMember = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 0));
         var expectedMember = new Member(savedMember.id(), 1000);
 
         // when
-        var updatedMember = memberPort.update(expectedMember);
+        var updatedMember = dataSourceMemberPort.update(expectedMember);
 
         // then
         assertThat(updatedMember).isEqualTo(expectedMember);
@@ -50,10 +50,10 @@ class MemberHikariDataSourceAdaptorIntegrationTest extends MemberIntegrationTest
     @Test
     void delete() {
         // given
-        var member = memberPort.save(Member.of(UUID.randomUUID(), 0));
+        var member = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 0));
 
         // when
-        boolean isDeleted = memberPort.delete(member.id());
+        boolean isDeleted = dataSourceMemberPort.delete(member.id());
 
         // then
         assertThat(isDeleted).isTrue();

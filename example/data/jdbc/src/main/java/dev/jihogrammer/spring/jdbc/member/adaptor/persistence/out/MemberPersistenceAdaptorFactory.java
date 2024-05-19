@@ -34,6 +34,12 @@ public class MemberPersistenceAdaptorFactory {
 
     @Bean
     @Primary
+    @Qualifier("jdbcTemplateMemberPort")
+    public MemberPort jdbcTemplateMemberPort(final DataSource dataSource) {
+        return new MemberJDBCTemplateAdaptor(dataSource);
+    }
+
+    @Bean
     @Qualifier("exceptionTranslatedMemberPort")
     public MemberPort exceptionTranslatedMemberPort(final DataSource dataSource) {
         return new StableDataSourceMemberAdaptor(dataSource);

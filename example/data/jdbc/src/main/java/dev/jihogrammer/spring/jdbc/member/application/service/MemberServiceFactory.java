@@ -17,6 +17,18 @@ public class MemberServiceFactory {
 
     @Bean
     @Primary
+    @Qualifier("jdbcTemplateSendMoneyPort")
+    public SendMoneyPort jdbcTemplateSendMoneyPort(@Qualifier("jdbcTemplateMemberPort") final MemberPort memberPort) {
+        final var service = new TransactionalSendMoneyService(memberPort);
+
+        log.info("Creating sendMoneyPort({}) with memberPort={}",
+            service,
+            memberPort);
+
+        return service;
+    }
+
+    @Bean
     @Qualifier("exceptionTranslatedSendMoneyPort")
     public SendMoneyPort exceptionTranslatedSendMoneyPort(@Qualifier("exceptionTranslatedMemberPort") final MemberPort memberPort) {
         final var service = new TransactionalSendMoneyService(memberPort);
@@ -30,7 +42,7 @@ public class MemberServiceFactory {
 
     @Bean
     @Qualifier("transactionalSendMoneyPort")
-    public SendMoneyPort transactionalSendMoneyPort(final MemberPort memberPort) {
+    public SendMoneyPort transactionalSendMoneyPort(@Qualifier("transactionManagerMemberPort") final MemberPort memberPort) {
         final var service = new TransactionalSendMoneyService(memberPort);
 
         log.info("Creating sendMoneyPort({}) with memberPort={}",
@@ -42,7 +54,10 @@ public class MemberServiceFactory {
 
     @Bean
     @Qualifier("transactionTemplateSendMoneyPort")
-    public SendMoneyPort transactionTemplateSendMoneyPort(final MemberPort memberPort, final DataSource dataSource) {
+    public SendMoneyPort transactionTemplateSendMoneyPort(
+        @Qualifier("transactionManagerMemberPort") final MemberPort memberPort,
+        final DataSource dataSource
+    ) {
         final var transactionManager = new DataSourceTransactionManager(dataSource);
         final var service = new TransactionTemplateSendMoneyService(memberPort, transactionManager);
 
@@ -56,7 +71,10 @@ public class MemberServiceFactory {
 
     @Bean
     @Qualifier("transactionManagerSendMoneyPort")
-    public SendMoneyPort transactionManagerSendMoneyPort(final MemberPort memberPort, final DataSource dataSource) {
+    public SendMoneyPort transactionManagerSendMoneyPort(
+        @Qualifier("transactionManagerMemberPort") final MemberPort memberPort,
+        final DataSource dataSource
+    ) {
         final var transactionManager = new DataSourceTransactionManager(dataSource);
         final var service = new TransactionManagerSendMoneyService(memberPort, transactionManager);
 
@@ -86,7 +104,7 @@ public class MemberServiceFactory {
 
     @Bean
     @Qualifier("unstableSendMoneyPort")
-    public SendMoneyPort unstableSendMoneyPort(final MemberPort memberPort) {
+    public SendMoneyPort unstableSendMoneyPort(@Qualifier("dataSourceMemberPort") final MemberPort memberPort) {
         final var service = new UnstableSendMoneyService(memberPort);
 
         log.info("Creating sendMoneyPort({}) with memberPort={}", service, memberPort);

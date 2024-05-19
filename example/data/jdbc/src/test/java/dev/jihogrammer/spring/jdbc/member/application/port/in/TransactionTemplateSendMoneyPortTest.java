@@ -20,8 +20,8 @@ class TransactionTemplateSendMoneyPortTest extends MemberIntegrationTest {
     @DisplayName("정상 이체")
     void normalSending() {
         // given
-        var sender = memberPort.save(Member.of(UUID.randomUUID(), 3000));
-        var receiver = memberPort.save(Member.of(UUID.randomUUID(), 1000));
+        var sender = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 3000));
+        var receiver = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 1000));
         var money = 1400;
         var command = new SendMoneyCommand(sender.id(), receiver.id(), money);
 
@@ -29,16 +29,16 @@ class TransactionTemplateSendMoneyPortTest extends MemberIntegrationTest {
         transactionTemplateSendMoneyPort.sendMoney(command);
 
         // then
-        assertThat(memberPort.findById(sender.id()).money()).isEqualTo(sender.money() - money);
-        assertThat(memberPort.findById(receiver.id()).money()).isEqualTo(receiver.money() + money);
+        assertThat(dataSourceMemberPort.findById(sender.id()).money()).isEqualTo(sender.money() - money);
+        assertThat(dataSourceMemberPort.findById(receiver.id()).money()).isEqualTo(receiver.money() + money);
     }
 
     @Test
     @DisplayName("최악 이체")
     void theWorstSending() {
         // given
-        var sender = memberPort.save(Member.of(UUID.randomUUID(), 1000));
-        var receiver = memberPort.save(Member.of(UUID.randomUUID(), 900));
+        var sender = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 1000));
+        var receiver = dataSourceMemberPort.save(Member.of(UUID.randomUUID(), 900));
         var money = 1100;
         var command = new SendMoneyCommand(sender.id(), receiver.id(), money);
 
@@ -54,8 +54,8 @@ class TransactionTemplateSendMoneyPortTest extends MemberIntegrationTest {
 
         // then
         assertThatThrownBy(when).isInstanceOf(MemberException.class);
-        assertThat(memberPort.findById(sender.id()).money()).isEqualTo(sender.money());
-        assertThat(memberPort.findById(receiver.id()).money()).isEqualTo(receiver.money());
+        assertThat(dataSourceMemberPort.findById(sender.id()).money()).isEqualTo(sender.money());
+        assertThat(dataSourceMemberPort.findById(receiver.id()).money()).isEqualTo(receiver.money());
     }
 
 }
