@@ -17,7 +17,20 @@ public class MemberServiceFactory {
 
     @Bean
     @Primary
-    public SendMoneyPort sendMoneyPort(final MemberPort memberPort) {
+    @Qualifier("exceptionTranslatedSendMoneyPort")
+    public SendMoneyPort exceptionTranslatedSendMoneyPort(@Qualifier("exceptionTranslatedMemberPort") final MemberPort memberPort) {
+        final var service = new TransactionalSendMoneyService(memberPort);
+
+        log.info("Creating sendMoneyPort({}) with memberPort={}",
+            service,
+            memberPort);
+
+        return service;
+    }
+
+    @Bean
+    @Qualifier("transactionalSendMoneyPort")
+    public SendMoneyPort transactionalSendMoneyPort(final MemberPort memberPort) {
         final var service = new TransactionalSendMoneyService(memberPort);
 
         log.info("Creating sendMoneyPort({}) with memberPort={}",

@@ -22,6 +22,10 @@ public abstract class MemberIntegrationTest {
     protected MemberPort memberPort;
 
     @Autowired
+    @Qualifier("exceptionTranslatedMemberPort")
+    protected MemberPort exceptionTranslatedMemberPort;
+
+    @Autowired
     @Qualifier("dataSourceMemberPort")
     protected MemberPort dataSourceMemberPort;
 
@@ -30,7 +34,12 @@ public abstract class MemberIntegrationTest {
     protected MemberPort jdbcMemberPort;
 
     @Autowired
-    protected SendMoneyPort sendMoneyPort;
+    @Qualifier("exceptionTranslatedSendMoneyPort")
+    protected SendMoneyPort exceptionTranslatedSendMoneyPort;
+
+    @Autowired
+    @Qualifier("transactionalSendMoneyPort")
+    protected SendMoneyPort transactionalSendMoneyPort;
 
     @Autowired
     @Qualifier("transactionTemplateSendMoneyPort")

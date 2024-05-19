@@ -20,7 +20,7 @@ class TransactionalSendMoneyPortTest extends MemberIntegrationTest {
     @Test
     void checkProxy() {
         assertThat(AopUtils.isAopProxy(memberPort)).isFalse();
-        assertThat(AopUtils.isAopProxy(sendMoneyPort)).isTrue();
+        assertThat(AopUtils.isAopProxy(transactionalSendMoneyPort)).isTrue();
     }
 
     @Test
@@ -33,7 +33,7 @@ class TransactionalSendMoneyPortTest extends MemberIntegrationTest {
         var command = new SendMoneyCommand(sender.id(), receiver.id(), money);
 
         // when
-        sendMoneyPort.sendMoney(command);
+        transactionalSendMoneyPort.sendMoney(command);
 
         // then
         assertThat(memberPort.findById(sender.id()).money()).isEqualTo(sender.money() - money);
@@ -52,7 +52,7 @@ class TransactionalSendMoneyPortTest extends MemberIntegrationTest {
         // when
         ThrowingCallable when = () -> {
             try {
-                sendMoneyPort.sendMoney(command);
+                transactionalSendMoneyPort.sendMoney(command);
             } catch (Throwable e) {
                 log.error("EXPECTED EXCEPTION", e);
                 throw e;
