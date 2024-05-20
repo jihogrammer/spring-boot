@@ -44,7 +44,7 @@ class ItemQueryServiceTest {
     @Test
     void searchByName() {
         // given
-        this.itemUpdatePort.register(new ItemSaveCommand(null, "tomato", 10, 100));
+        var tomato = this.itemUpdatePort.register(new ItemSaveCommand(null, "tomato", 10, 100));
         var apple = this.itemUpdatePort.register(new ItemSaveCommand(null, "apple", 20, 100));
         var pineapple = this.itemUpdatePort.register(new ItemSaveCommand(null, "pineapple", 30, 100));
 
@@ -55,6 +55,7 @@ class ItemQueryServiceTest {
 
         // then
         assertThat(foundItems).contains(apple, pineapple);
+        assertThat(foundItems).doesNotContain(tomato);
     }
 
     @Test
@@ -62,7 +63,7 @@ class ItemQueryServiceTest {
         // given
         var tomato = this.itemUpdatePort.register(new ItemSaveCommand(null, "tomato", 10, 100));
         var apple = this.itemUpdatePort.register(new ItemSaveCommand(null, "apple", 20, 100));
-        this.itemUpdatePort.register(new ItemSaveCommand(null, "pineapple", 30, 100));
+        var pineapple = this.itemUpdatePort.register(new ItemSaveCommand(null, "pineapple", 30, 100));
 
         var command = new ItemSearchCommand(null, tomato.price(), apple.price());
 
@@ -71,6 +72,7 @@ class ItemQueryServiceTest {
 
         // then
         assertThat(foundItems).contains(tomato, apple);
+        assertThat(foundItems).doesNotContain(pineapple);
     }
 
 }
