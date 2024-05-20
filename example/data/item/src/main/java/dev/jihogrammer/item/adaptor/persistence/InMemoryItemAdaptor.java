@@ -19,7 +19,7 @@ class InMemoryItemAdaptor implements Items {
 
     @Override
     public Item save(final ItemSaveCommand command) {
-        final Item item = new Item(
+        final var item = new Item(
                 new ItemId(command.id() == null ? UUID.randomUUID().toString() : command.id()),
                 command.name(),
                 command.price(),
@@ -37,13 +37,13 @@ class InMemoryItemAdaptor implements Items {
 
     @Override
     public Collection<Item> search(final ItemSearchCommand command) {
+        final var input = command.input();
+        final var minPrice = command.minPrice();
+        final var maxPrice = command.maxPrice();
+
         return this.items.values().stream()
-                .filter(item -> {
-                    final var input = command.input();
-                    return input == null || input.isBlank() || item.name().toLowerCase().contains(input);
-                })
-                .filter(item -> command.minPrice() <= item.price())
-                .filter(item -> command.maxPrice() >= item.price())
+                .filter(item -> input == null || input.isBlank() || item.name().toLowerCase().contains(input))
+                .filter(item -> minPrice <= item.price() && item.price() <= maxPrice)
                 .toList();
     }
 
