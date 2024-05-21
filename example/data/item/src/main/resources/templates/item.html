@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Item</title>
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    nav {
+      width: 60vw;
+      display: flex;
+      justify-content: space-between;
+    }
+    table {
+      width: 60vw;
+      border-collapse: collapse;
+    }
+    table > tbody > tr > th {
+      background-color: lightgray;
+    }
+    table > tbody > tr > th,
+    table > tbody > tr > td {
+      padding: 0.5rem;
+      text-align: center;
+    }
+    table > tbody > tr > td > label > input {
+      width: 100%;
+      font-size: 1rem;
+      line-height: 2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Item [<span th:text="${item.name}">NAME</span>]</h1>
+
+  <nav>
+    <button th:onclick="|location.href = '/items/update/@{${item.id.value}}'|">update item</button>
+  </nav>
+
+  <table th:object="${item}">
+    <tbody>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input th:field="*{id.value}" type="text" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input th:field="*{name}" type="text" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input th:field="*{price}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input th:field="*{quantity}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Item</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    nav {
+      width: 60vw;
+      display: flex;
+      justify-content: flex-end;
+    }
+    nav > button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      vertical-align: center;
+    }
+    table {
+      width: 60vw;
+      border-collapse: collapse;
+    }
+    table > tbody > tr > th {
+      background-color: lightgray;
+    }
+    table > tbody > tr > th,
+    table > tbody > tr > td {
+      padding: 0.5rem 0;
+      text-align: center;
+    }
+    table > tbody > tr > td > label > input {
+      width: 100%;
+      font-size: 1rem;
+      height: 2rem;
+      border: 0;
+      border-bottom: 1px solid black;
+      padding: 0.3rem;
+    }
+    table > tbody > tr > td > label > input[type="text"],
+    table > tbody > tr > td > label > input[type="number"] {
+      line-height: 2rem;
+    }
+    table > tbody > tr > td > label > input[type="submit"] {
+      border: 0;
+    }
+    table > tbody > tr > td > label > input[type="submit"]:hover {
+      background-color: gray;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Register item</h1>
+
+  <nav>
+    <button onclick="location.href = '/items'">cancel</button>
+  </nav>
+
+  <form method="post" th:object="${payload}">
+    <table>
+      <tbody>
+      <tr>
+        <th>NAME</th>
+        <td>
+          <label>
+            <input th:field="*{name}" type="text">
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <th>PRICE</th>
+        <td>
+          <label>
+            <input th:field="*{price}" type="number">
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <th>QUANTITY</th>
+        <td>
+          <label>
+            <input th:field="*{quantity}" type="number">
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <label>
+            <input type="submit">
+          </label>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</body>
+
+</html>

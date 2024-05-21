@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Items</title>
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    nav {
+      width: 60vw;
+      display: flex;
+      justify-content: space-between;
+    }
+    table {
+      width: 80vw;
+      border-collapse: collapse;
+    }
+    table > thead > tr {
+      background-color: lightgray;
+    }
+    table > thead > tr > th,
+    table > tbody > tr > td {
+      padding: 0.5rem;
+      text-align: center;
+    }
+    .id-data:hover {
+      cursor: pointer;
+      background-color: #DDD;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Items</h1>
+
+  <nav>
+    <form method="get" th:object="${payload}">
+      <label>
+        <input type="text" th:field="*{input}" placeholder="name">
+      </label>
+      <label>
+        <input type="number" th:field="*{minPrice}" placeholder="min price">
+      </label>
+      <label>
+        <input type="number" th:field="*{maxPrice}" placeholder="max price">
+      </label>
+      <input type="submit">
+    </form>
+    <button onclick="location.href = '/items/register'">register item</button>
+  </nav>
+
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>PRICE</th>
+      <th>QUANTITY</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}" th:object="${item}">
+      <td
+        th:text="*{id.value}"
+        th:onclick="|location.href = '/items/@{*{id.value}}'|"
+        class="id-data"
+      >
+        ID
+      </td>
+      <td th:text="*{name}">NAME</td>
+      <td th:text="*{price}">PRICE</td>
+      <td th:text="*{quantity}">QUANTITY</td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
