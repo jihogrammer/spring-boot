@@ -4,36 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Items</title>
-
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-    nav {
-      width: 60vw;
-      display: flex;
-      justify-content: space-between;
-    }
-    table {
-      width: 80vw;
-      border-collapse: collapse;
-    }
-    table > thead > tr {
-      background-color: lightgray;
-    }
-    table > thead > tr > th,
-    table > tbody > tr > td {
-      padding: 0.5rem;
-      text-align: center;
-    }
-    .id-data:hover {
-      cursor: pointer;
-      background-color: #DDD;
-    }
-  </style>
+  <link rel="stylesheet" th:href="@{/main.css}">
 </head>
 
 <body>
