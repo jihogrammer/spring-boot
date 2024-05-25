@@ -22,14 +22,18 @@ nav {
 nav > form {
   display: flex;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
   gap: 0.5rem;
+}
+
+nav > form > label > input {
+  padding: 0.5rem;
+  width: 100%;
 }
 
 nav > button {
   padding: 0.5rem;
   font-size: 1rem;
-  vertical-align: center;
 }
 
 table {
