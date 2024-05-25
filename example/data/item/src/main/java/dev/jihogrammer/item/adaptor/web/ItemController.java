@@ -5,19 +5,13 @@ import dev.jihogrammer.item.adaptor.web.entity.SearchPayload;
 import dev.jihogrammer.item.adaptor.web.entity.UpdatePayload;
 import dev.jihogrammer.item.application.port.in.ItemQuery;
 import dev.jihogrammer.item.application.port.in.ItemUpdatePort;
-import dev.jihogrammer.item.application.port.out.ItemSaveCommand;
-import dev.jihogrammer.item.domain.Item;
 import dev.jihogrammer.item.domain.ItemId;
 import dev.jihogrammer.item.domain.exception.ItemException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/items")
@@ -30,8 +24,8 @@ public class ItemController {
 
     @GetMapping
     public String items(
-            final Model model,
-            @ModelAttribute("payload") final SearchPayload payload
+            @ModelAttribute("payload") final SearchPayload payload,
+            final Model model
     ) {
         final var command = payload == null ? null : payload.toCommand();
         final var items = this.itemQuery.search(command);
@@ -42,7 +36,10 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public String item(@PathVariable("id") final String id, final Model model) {
+    public String item(
+            @PathVariable("id") final String id,
+            final Model model
+    ) {
         final var optionalItem = this.itemQuery.findById(new ItemId(id));
 
         if (optionalItem.isEmpty()) {
@@ -75,7 +72,10 @@ public class ItemController {
     }
 
     @GetMapping("/update/{id}")
-    public String update(@PathVariable("id") final String id, final Model model) {
+    public String update(
+            @PathVariable("id") final String id,
+            final Model model
+    ) {
         final var optionalItem = this.itemQuery.findById(new ItemId(id));
 
         if (optionalItem.isEmpty()) {
@@ -100,13 +100,6 @@ public class ItemController {
         redirectAttributes.addAttribute("id", item.id().value());
 
         return "redirect:/items/{id}";
-    }
-
-    @EventListener(ApplicationReadyEvent.class)
-    void createMockItems() {
-        this.itemUpdatePort.register(new ItemSaveCommand(null, "test-item-1", 1000, 10));
-        this.itemUpdatePort.register(new ItemSaveCommand(null, "test-item-2", 2000, 20));
-        this.itemUpdatePort.register(new ItemSaveCommand(null, "test-item-3", 3000, 30));
     }
 
 }
