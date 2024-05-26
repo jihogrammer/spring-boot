@@ -37,7 +37,7 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public String item(
-            @PathVariable("id") final String id,
+            @PathVariable("id") final Long id,
             final Model model
     ) {
         final var optionalItem = this.itemQuery.findById(new ItemId(id));
@@ -73,7 +73,7 @@ public class ItemController {
 
     @GetMapping("/update/{id}")
     public String update(
-            @PathVariable("id") final String id,
+            @PathVariable("id") final Long id,
             final Model model
     ) {
         final var optionalItem = this.itemQuery.findById(new ItemId(id));

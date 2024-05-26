@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class UpdatePayload {
 
-    private String id;
+    private Long id;
 
     private String name;
 

@@ -6,11 +6,10 @@ import dev.jihogrammer.item.application.port.out.Items;
 import dev.jihogrammer.item.domain.Item;
 import dev.jihogrammer.item.domain.ItemId;
 import lombok.RequiredArgsConstructor;
+import org.springframework.util.IdGenerator;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 @RequiredArgsConstructor
 class InMemoryItemAdaptor implements Items {
@@ -20,7 +19,7 @@ class InMemoryItemAdaptor implements Items {
     @Override
     public Item save(final ItemSaveCommand command) {
         final var item = new Item(
-                new ItemId(command.id() == null ? UUID.randomUUID().toString() : command.id()),
+                new ItemId(command.id() == null ? IdGenerator.next() : command.id()),
                 command.name(),
                 command.price(),
                 command.quantity());
@@ -45,6 +44,16 @@ class InMemoryItemAdaptor implements Items {
                 .filter(item -> input == null || input.isBlank() || item.name().toLowerCase().contains(input))
                 .filter(item -> minPrice <= item.price() && item.price() <= maxPrice)
                 .toList();
+    }
+
+    private static class IdGenerator {
+
+        private static final AtomicLong SEQUENCE = new AtomicLong(1);
+
+        private static long next() {
+            return SEQUENCE.getAndIncrement();
+        }
+
     }
 
 }

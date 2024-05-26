@@ -11,7 +11,9 @@ public record ItemSearchCommand(
     public static final ItemSearchCommand DEFAULT_COMMAND = new ItemSearchCommand(null, 0, Integer.MAX_VALUE);
 
     public ItemSearchCommand {
-        if (input != null) {
+        if (input == null) {
+            input = "";
+        } else {
             input = input.trim().toLowerCase();
         }
         if (minPrice == null) {

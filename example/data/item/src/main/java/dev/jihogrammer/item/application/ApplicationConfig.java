@@ -12,13 +12,16 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import javax.sql.DataSource;
+
 @Configuration
 @ComponentScan(basePackageClasses = HomeController.class)
 public class ApplicationConfig {
 
     @Bean
-    public Items items() {
-        return new ItemPersistenceAdaptorFactory().inMemoryItemAdaptor();
+    public Items items(final DataSource dataSource) {
+//        return new ItemPersistenceAdaptorFactory().inMemoryItemAdaptor();
+        return new ItemPersistenceAdaptorFactory().jdbcTemplateItemAdaptor(dataSource);
     }
 
     @Bean
