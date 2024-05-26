@@ -1,31 +1,22 @@
 package dev.jihogrammer.item.application.service;
 
-import dev.jihogrammer.item.adaptor.persistence.ItemPersistenceAdaptorFactory;
+import dev.jihogrammer.item.IntegrationTest;
 import dev.jihogrammer.item.application.port.in.ItemQuery;
 import dev.jihogrammer.item.application.port.in.ItemUpdatePort;
 import dev.jihogrammer.item.application.port.out.ItemSaveCommand;
 import dev.jihogrammer.item.application.port.out.ItemSearchCommand;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ItemQueryServiceTest {
+class ItemQueryServiceTest extends IntegrationTest {
 
+    @Autowired
     ItemQuery itemQuery;
 
+    @Autowired
     ItemUpdatePort itemUpdatePort;
-
-    @BeforeEach
-    void setUp() {
-        var adaptorFactory = new ItemPersistenceAdaptorFactory();
-        var serviceFactory = new ItemServiceFactory();
-
-        var items = adaptorFactory.inMemoryItemAdaptor();
-
-        this.itemQuery = serviceFactory.itemQuery(items);
-        this.itemUpdatePort = serviceFactory.itemUpdatePort(items);
-    }
 
     @Test
     void findById() {
