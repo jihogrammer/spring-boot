@@ -5,15 +5,12 @@ import dev.jihogrammer.item.application.port.out.ItemSearchCommand;
 import dev.jihogrammer.item.application.port.out.Items;
 import dev.jihogrammer.item.domain.Item;
 import dev.jihogrammer.item.domain.ItemId;
-import dev.jihogrammer.item.domain.exception.ItemException;
-import lombok.Data;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import javax.sql.DataSource;
 import java.util.Collection;
@@ -21,8 +18,6 @@ import java.util.Map;
 import java.util.Optional;
 
 class NamedParameterJdbcTemplateItemAdaptor implements Items {
-
-    String INSERT_SQL = "INSERT INTO ITEMS (NAME, PRICE, QUANTITY) VALUES (:name, :price, :quantity)";
 
     String UPDATE_SQL = "UPDATE ITEMS SET NAME = :name, PRICE = :price, QUANTITY = :quantity WHERE ITEM_ID = :id";
 
@@ -32,23 +27,23 @@ class NamedParameterJdbcTemplateItemAdaptor implements Items {
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
+    private final SimpleJdbcInsert simpleJdbcInsert;
+
     NamedParameterJdbcTemplateItemAdaptor(final DataSource dataSource) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("item")
+                .usingGeneratedKeyColumns("item_id");
     }
 
     @Override
     public Item save(final ItemSaveCommand command) {
         if (command.id() == null) {
-            final var keyHolder = new GeneratedKeyHolder();
             final var params = new BeanPropertySqlParameterSource(command);
-            this.jdbcTemplate.update(INSERT_SQL, params, keyHolder);
-
-            if (keyHolder.getKey() == null) {
-                throw new ItemException("KeyHolder is null.");
-            }
+            final var key = this.simpleJdbcInsert.executeAndReturnKey(params);
 
             return new Item(
-                    new ItemId(keyHolder.getKey().longValue()),
+                    new ItemId(key.longValue()),
                     command.name(),
                     command.price(),
                     command.quantity());
