@@ -1,6 +1,5 @@
 package dev.jihogrammer.item.application.config;
 
-import dev.jihogrammer.item.adaptor.local.LocalDataInitializer;
 import dev.jihogrammer.item.adaptor.persistence.ItemPersistenceAdaptorFactory;
 import dev.jihogrammer.item.application.port.in.ItemQuery;
 import dev.jihogrammer.item.application.port.in.ItemUpdatePort;
@@ -8,7 +7,6 @@ import dev.jihogrammer.item.application.port.out.Items;
 import dev.jihogrammer.item.application.service.ItemServiceFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 
 @Configuration
 public class ImMemoryAppConfig {
@@ -26,12 +24,6 @@ public class ImMemoryAppConfig {
     @Bean
     public ItemUpdatePort itemUpdatePort(final Items items) {
         return new ItemServiceFactory().itemUpdatePort(items);
-    }
-
-    @Bean
-    @Profile("local")
-    public LocalDataInitializer localDataInitializer(final ItemUpdatePort itemUpdatePort) {
-        return new LocalDataInitializer(itemUpdatePort);
     }
 
 }
