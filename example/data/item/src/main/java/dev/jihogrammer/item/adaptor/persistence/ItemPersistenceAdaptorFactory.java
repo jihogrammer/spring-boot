@@ -15,4 +15,8 @@ public class ItemPersistenceAdaptorFactory {
         return new JdbcTemplateItemAdaptor(dataSource);
     }
 
+    public Items namedParameterJdbcTemplateItemAdaptor(final DataSource dataSource) {
+        return new NamedParameterJdbcTemplateItemAdaptor(dataSource);
+    }
+
 }

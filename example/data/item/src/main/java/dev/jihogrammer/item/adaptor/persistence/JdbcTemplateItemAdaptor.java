@@ -8,6 +8,7 @@ import dev.jihogrammer.item.domain.ItemId;
 import dev.jihogrammer.item.domain.exception.ItemException;
 import lombok.Data;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -17,6 +18,14 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 class JdbcTemplateItemAdaptor implements Items {
+
+    String INSERT_SQL = "INSERT INTO ITEMS (NAME, PRICE, QUANTITY) VALUES (?, ?, ?)";
+
+    String UPDATE_SQL = "UPDATE ITEMS SET NAME = ?, PRICE = ?, QUANTITY = ? WHERE ITEM_ID = ?";
+
+    String FIND_BY_ID_SQL = "SELECT ITEM_ID, NAME, PRICE, QUANTITY FROM ITEMS WHERE ITEM_ID = ?";
+
+    String SEARCH_SQL = "SELECT ITEM_ID, NAME, PRICE, QUANTITY FROM ITEMS WHERE NAME LIKE CONCAT('%', ?, '%') AND PRICE BETWEEN ? AND ?";
 
     private final JdbcTemplate jdbcTemplate;
 
@@ -62,11 +71,16 @@ class JdbcTemplateItemAdaptor implements Items {
     @Override
     public Optional<Item> findById(final ItemId id) {
         try {
-            final var item = this.jdbcTemplate.queryForObject(
+            final var itemJdbcEntity = this.jdbcTemplate.queryForObject(
                     FIND_BY_ID_SQL,
                     this.itemRowMapper(),
                     id.value());
-            return Optional.ofNullable(item);
+
+            if (itemJdbcEntity == null) {
+                throw new EmptyResultDataAccessException("ItemJdbcEntity is null.", 0);
+            }
+
+            return Optional.of(itemJdbcEntity.toEntity());
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
         }
@@ -74,20 +88,17 @@ class JdbcTemplateItemAdaptor implements Items {
 
     @Override
     public Collection<Item> search(final ItemSearchCommand command) {
-        return this.jdbcTemplate.query(
+        final var result = this.jdbcTemplate.query(
                 SEARCH_SQL,
                 this.itemRowMapper(),
                 command.input(),
                 command.minPrice(),
                 command.maxPrice());
+        return result.stream().map(ItemJdbcEntity::toEntity).toList();
     }
 
-    private RowMapper<Item> itemRowMapper() {
-        return (rs, rowNum) -> new Item(
-                new ItemId(rs.getLong("ITEM_ID")),
-                rs.getString("NAME"),
-                rs.getInt("PRICE"),
-                rs.getInt("QUANTITY"));
+    private RowMapper<ItemJdbcEntity> itemRowMapper() {
+        return BeanPropertyRowMapper.newInstance(ItemJdbcEntity.class);
     }
 
     @Data
