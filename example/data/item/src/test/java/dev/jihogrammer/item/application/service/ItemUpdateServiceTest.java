@@ -1,17 +1,12 @@
 package dev.jihogrammer.item.application.service;
 
 import dev.jihogrammer.item.IntegrationTest;
-import dev.jihogrammer.item.application.port.in.ItemUpdatePort;
 import dev.jihogrammer.item.application.port.out.ItemSaveCommand;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ItemUpdateServiceTest extends IntegrationTest {
-
-    @Autowired
-    ItemUpdatePort itemUpdatePort;
 
     @Test
     void register() {
