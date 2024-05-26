@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface Items {
 
+    String TABLE_NAME = "ITEMS";
+
     Item save(ItemSaveCommand command);
 
     Optional<Item> findById(ItemId id);

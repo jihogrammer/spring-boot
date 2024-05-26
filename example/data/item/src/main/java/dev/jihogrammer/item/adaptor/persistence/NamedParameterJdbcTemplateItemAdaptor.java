@@ -19,11 +19,23 @@ import java.util.Optional;
 
 class NamedParameterJdbcTemplateItemAdaptor implements Items {
 
-    String UPDATE_SQL = "UPDATE ITEMS SET NAME = :name, PRICE = :price, QUANTITY = :quantity WHERE ITEM_ID = :id";
+    private static final String UPDATE_SQL = """
+            UPDATE %s SET NAME = :name, PRICE = :price, QUANTITY = :quantity
+             WHERE ITEM_ID = :id;
+            """.formatted(TABLE_NAME);
 
-    String FIND_BY_ID_SQL = "SELECT ITEM_ID, NAME, PRICE, QUANTITY FROM ITEMS WHERE ITEM_ID = :id";
+    private static final String FIND_BY_ID_SQL = """
+            SELECT ITEM_ID, NAME, PRICE, QUANTITY
+              FROM %s
+             WHERE ITEM_ID = :id
+            """.formatted(TABLE_NAME);
 
-    String SEARCH_SQL = "SELECT ITEM_ID, NAME, PRICE, QUANTITY FROM ITEMS WHERE NAME LIKE CONCAT('%', :input, '%') AND PRICE BETWEEN :minPrice AND :maxPrice";
+    private static final String SEARCH_SQL = """
+            SELECT ITEM_ID, NAME, PRICE, QUANTITY
+              FROM %s
+             WHERE NAME LIKE CONCAT('%c', :input, '%c')
+               AND PRICE BETWEEN :minPrice AND :maxPrice
+            """.formatted(TABLE_NAME, '%', '%');
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -32,8 +44,8 @@ class NamedParameterJdbcTemplateItemAdaptor implements Items {
     NamedParameterJdbcTemplateItemAdaptor(final DataSource dataSource) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
-                .withTableName("item")
-                .usingGeneratedKeyColumns("item_id");
+                .withTableName(TABLE_NAME)
+                .usingGeneratedKeyColumns("ITEM_ID");
     }
 
     @Override
