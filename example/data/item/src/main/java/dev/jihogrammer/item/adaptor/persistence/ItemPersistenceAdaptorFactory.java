@@ -1,5 +1,6 @@
 package dev.jihogrammer.item.adaptor.persistence;
 
+import dev.jihogrammer.item.adaptor.mybatis.ItemMapper;
 import dev.jihogrammer.item.application.port.out.Items;
 
 import javax.sql.DataSource;
@@ -17,6 +18,10 @@ public class ItemPersistenceAdaptorFactory {
 
     public Items namedParameterJdbcTemplateItemAdaptor(final DataSource dataSource) {
         return new NamedParameterJdbcTemplateItemAdaptor(dataSource);
+    }
+
+    public Items mybatisItemAdaptor(final ItemMapper itemMapper) {
+        return new MybatisItemAdaptor(itemMapper);
     }
 
 }

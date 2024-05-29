@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev.jihogrammer.item.adaptor.mybatis.ItemMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="itemId">
+        INSERT INTO ITEMS (NAME, PRICE, QUANTITY)
+        VALUES (#{name}, #{price}, #{quantity})
+    </insert>
+
+    <update id="update">
+        UPDATE ITEMS
+           SET NAME = #{name},
+               PRICE = #{price},
+               QUANTITY = #{quantity}
+         WHERE ITEM_ID = #{itemId}
+    </update>
+
+    <select id="findAll" resultType="ItemMapDto">
+        SELECT ITEM_ID, NAME, PRICE, QUANTITY
+          FROM ITEMS
+        <where>
+            <if test="input != null and !input.isBlank()">
+                AND NAME LIKE CONCAT('%', #{input}, '%')
+            </if>
+            AND PRICE BETWEEN #{minPrice} AND #{maxPrice}
+        </where>
+    </select>
+
+    <select id="findById" resultType="ItemMapDto">
+        SELECT ITEM_ID, NAME, PRICE, QUANTITY
+          FROM ITEMS
+         WHERE ITEM_ID = #{id}
+    </select>
+
+</mapper>
