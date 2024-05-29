@@ -6,7 +6,7 @@ import dev.jihogrammer.item.domain.ItemId;
 import lombok.Data;
 
 @Data
-class ItemSaveCommandMybatisEntity {
+class MybatisItemSaveCommand {
 
     private Long itemId;
 
@@ -16,8 +16,8 @@ class ItemSaveCommandMybatisEntity {
 
     private Integer quantity;
 
-    public static ItemSaveCommandMybatisEntity of(final ItemSaveCommand command) {
-        final var dto = new ItemSaveCommandMybatisEntity();
+    public static MybatisItemSaveCommand of(final ItemSaveCommand command) {
+        final var dto = new MybatisItemSaveCommand();
 
         dto.itemId = command.id();
         dto.name = command.name();

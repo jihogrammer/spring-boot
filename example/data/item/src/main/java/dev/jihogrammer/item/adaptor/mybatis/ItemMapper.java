@@ -10,12 +10,12 @@ import java.util.Optional;
 @SuppressWarnings("all") // @see javac --help-lint
 public interface ItemMapper {
 
-    void save(ItemSaveCommandMybatisEntity command);
+    void save(MybatisItemSaveCommand command);
 
-    void update(ItemSaveCommandMybatisEntity command);
+    void update(MybatisItemSaveCommand command);
 
-    Collection<ItemMybatisEntity> findAll(ItemSearchCommand command);
+    Collection<MybatisItem> findAll(ItemSearchCommand command);
 
-    Optional<ItemMybatisEntity> findById(Long id);
+    Optional<MybatisItem> findById(Long id);
 
 }

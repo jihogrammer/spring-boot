@@ -16,7 +16,7 @@
          WHERE ITEM_ID = #{itemId}
     </update>
 
-    <select id="findAll" resultType="ItemMybatisEntity">
+    <select id="findAll" resultType="MybatisItem">
         SELECT ITEM_ID, NAME, PRICE, QUANTITY
           FROM ITEMS
         <where>
@@ -27,7 +27,7 @@
         </where>
     </select>
 
-    <select id="findById" resultType="ItemMybatisEntity">
+    <select id="findById" resultType="MybatisItem">
         SELECT ITEM_ID, NAME, PRICE, QUANTITY
           FROM ITEMS
          WHERE ITEM_ID = #{id}

@@ -19,7 +19,7 @@ class MybatisItemAdaptor implements Items {
 
     @Override
     public Item save(final ItemSaveCommand command) {
-        final var entity = ItemSaveCommandMybatisEntity.of(command);
+        final var entity = MybatisItemSaveCommand.of(command);
 
         if (command.id() == null) {
             this.itemMapper.save(entity);
@@ -32,12 +32,12 @@ class MybatisItemAdaptor implements Items {
 
     @Override
     public Optional<Item> findById(final ItemId id) {
-        return this.itemMapper.findById(id.value()).map(ItemMybatisEntity::toDomain);
+        return this.itemMapper.findById(id.value()).map(MybatisItem::toDomain);
     }
 
     @Override
     public Collection<Item> search(final ItemSearchCommand command) {
-        return this.itemMapper.findAll(command).stream().map(ItemMybatisEntity::toDomain).toList();
+        return this.itemMapper.findAll(command).stream().map(MybatisItem::toDomain).toList();
     }
 
 }

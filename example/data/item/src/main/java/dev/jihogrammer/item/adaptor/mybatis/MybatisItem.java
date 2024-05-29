@@ -5,7 +5,7 @@ import dev.jihogrammer.item.domain.ItemId;
 import lombok.Data;
 
 @Data
-class ItemMybatisEntity {
+class MybatisItem {
 
     private Long itemId;
 
