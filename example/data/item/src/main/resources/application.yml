@@ -15,7 +15,7 @@ spring:
       path: /h2-console
 
 mybatis:
-  type-aliases-package: dev.jihogrammer.item.adaptor
+  type-aliases-package: dev.jihogrammer.item.adaptor.mybatis
   configuration:
     map-underscore-to-camel-case: true
 
