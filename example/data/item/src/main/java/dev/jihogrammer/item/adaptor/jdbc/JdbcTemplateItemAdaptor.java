@@ -1,4 +1,4 @@
-package dev.jihogrammer.item.adaptor.persistence;
+package dev.jihogrammer.item.adaptor.jdbc;
 
 import dev.jihogrammer.item.application.port.out.ItemSaveCommand;
 import dev.jihogrammer.item.application.port.out.ItemSearchCommand;
@@ -15,7 +15,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import javax.sql.DataSource;
 import java.util.*;
-import java.util.stream.Collectors;
 
 class JdbcTemplateItemAdaptor implements Items {
 

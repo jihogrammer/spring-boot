@@ -1,4 +1,4 @@
-package dev.jihogrammer.item.adaptor.persistence;
+package dev.jihogrammer.item.adaptor.jdbc;
 
 import dev.jihogrammer.item.application.port.out.ItemSaveCommand;
 import dev.jihogrammer.item.application.port.out.ItemSearchCommand;

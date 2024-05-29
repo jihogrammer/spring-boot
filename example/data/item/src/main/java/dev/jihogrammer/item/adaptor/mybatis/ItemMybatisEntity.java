@@ -5,7 +5,7 @@ import dev.jihogrammer.item.domain.ItemId;
 import lombok.Data;
 
 @Data
-public class ItemMapDto {
+class ItemMybatisEntity {
 
     private Long itemId;
 
@@ -15,7 +15,7 @@ public class ItemMapDto {
 
     private Integer quantity;
 
-    public Item toEntity() {
+    public Item toDomain() {
         return new Item(
                 new ItemId(this.itemId),
                 this.name,

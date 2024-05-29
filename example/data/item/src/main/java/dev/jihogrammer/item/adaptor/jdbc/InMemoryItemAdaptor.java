@@ -1,4 +1,4 @@
-package dev.jihogrammer.item.adaptor.persistence;
+package dev.jihogrammer.item.adaptor.jdbc;
 
 import dev.jihogrammer.item.application.port.out.ItemSaveCommand;
 import dev.jihogrammer.item.application.port.out.ItemSearchCommand;
@@ -6,7 +6,6 @@ import dev.jihogrammer.item.application.port.out.Items;
 import dev.jihogrammer.item.domain.Item;
 import dev.jihogrammer.item.domain.ItemId;
 import lombok.RequiredArgsConstructor;
-import org.springframework.util.IdGenerator;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;

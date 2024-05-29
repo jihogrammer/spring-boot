@@ -1,8 +1,5 @@
-package dev.jihogrammer.item.adaptor.persistence;
+package dev.jihogrammer.item.adaptor.mybatis;
 
-import dev.jihogrammer.item.adaptor.mybatis.ItemMapDto;
-import dev.jihogrammer.item.adaptor.mybatis.ItemMapper;
-import dev.jihogrammer.item.adaptor.mybatis.ItemSaveCommandDto;
 import dev.jihogrammer.item.application.port.out.ItemSaveCommand;
 import dev.jihogrammer.item.application.port.out.ItemSearchCommand;
 import dev.jihogrammer.item.application.port.out.Items;
@@ -22,25 +19,25 @@ class MybatisItemAdaptor implements Items {
 
     @Override
     public Item save(final ItemSaveCommand command) {
-        final var dto = ItemSaveCommandDto.of(command);
+        final var entity = ItemSaveCommandMybatisEntity.of(command);
 
         if (command.id() == null) {
-            this.itemMapper.save(dto);
+            this.itemMapper.save(entity);
         } else {
-            this.itemMapper.update(dto);
+            this.itemMapper.update(entity);
         }
 
-        return new Item(new ItemId(dto.getItemId()), dto.getName(), dto.getPrice(), dto.getQuantity());
+        return entity.toDomain();
     }
 
     @Override
     public Optional<Item> findById(final ItemId id) {
-        return this.itemMapper.findById(id.value()).map(ItemMapDto::toEntity);
+        return this.itemMapper.findById(id.value()).map(ItemMybatisEntity::toDomain);
     }
 
     @Override
     public Collection<Item> search(final ItemSearchCommand command) {
-        return this.itemMapper.findAll(command).stream().map(ItemMapDto::toEntity).toList();
+        return this.itemMapper.findAll(command).stream().map(ItemMybatisEntity::toDomain).toList();
     }
 
 }

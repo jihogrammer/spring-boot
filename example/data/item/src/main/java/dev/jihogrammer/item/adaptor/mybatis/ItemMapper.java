@@ -1,21 +1,21 @@
 package dev.jihogrammer.item.adaptor.mybatis;
 
 import dev.jihogrammer.item.application.port.out.ItemSearchCommand;
-import dev.jihogrammer.item.domain.Item;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Collection;
 import java.util.Optional;
 
 @Mapper
+@SuppressWarnings("all") // @see javac --help-lint
 public interface ItemMapper {
 
-    void save(ItemSaveCommandDto command);
+    void save(ItemSaveCommandMybatisEntity command);
 
-    void update(ItemSaveCommandDto command);
+    void update(ItemSaveCommandMybatisEntity command);
 
-    Collection<ItemMapDto> findAll(ItemSearchCommand command);
+    Collection<ItemMybatisEntity> findAll(ItemSearchCommand command);
 
-    Optional<ItemMapDto> findById(Long id);
+    Optional<ItemMybatisEntity> findById(Long id);
 
 }

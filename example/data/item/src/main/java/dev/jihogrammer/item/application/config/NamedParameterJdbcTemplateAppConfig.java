@@ -1,6 +1,6 @@
 package dev.jihogrammer.item.application.config;
 
-import dev.jihogrammer.item.adaptor.persistence.ItemPersistenceAdaptorFactory;
+import dev.jihogrammer.item.adaptor.jdbc.ItemPersistenceAdaptorFactory;
 import dev.jihogrammer.item.application.port.in.ItemQuery;
 import dev.jihogrammer.item.application.port.in.ItemUpdatePort;
 import dev.jihogrammer.item.application.port.out.Items;
