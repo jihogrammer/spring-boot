@@ -22,3 +22,5 @@ mybatis:
 logging:
   level:
     dev.jihogrammer.item.adaptor.mybatis: TRACE
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
