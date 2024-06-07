@@ -25,3 +25,4 @@ include(":example:advanced:validation")
 include(":example:advanced:type-converter")
 
 include(":example:data:jdbc")
+include(":example:data:item")

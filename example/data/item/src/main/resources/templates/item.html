@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Item</title>
+  <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+
+<body>
+  <h1>Item [<span th:text="${item.name}">NAME</span>]</h1>
+
+  <nav>
+    <button th:onclick="|location.href = '/items'|">home</button>
+    <button th:onclick="|location.href = '/items/update/@{${item.id.value}}'|">update item</button>
+  </nav>
+
+  <table th:object="${item}">
+    <tbody>
+    <tr>
+      <th>ID</th>
+      <td>
+        <label>
+          <input th:field="*{id.value}" type="text" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>NAME</th>
+      <td>
+        <label>
+          <input th:field="*{name}" type="text" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>PRICE</th>
+      <td>
+        <label>
+          <input th:field="*{price}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    <tr>
+      <th>QUANTITY</th>
+      <td>
+        <label>
+          <input th:field="*{quantity}" type="number" readonly>
+        </label>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>
