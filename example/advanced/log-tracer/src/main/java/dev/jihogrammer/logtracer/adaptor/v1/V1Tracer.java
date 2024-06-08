@@ -1,12 +1,14 @@
-package dev.jihogrammer.logtracer.application.service.trace;
+package dev.jihogrammer.logtracer.adaptor.v1;
 
 import dev.jihogrammer.logtracer.application.port.in.Tracer;
 import dev.jihogrammer.logtracer.domain.TraceId;
 import dev.jihogrammer.logtracer.domain.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
-class V1TraceService implements Tracer {
+@Component
+class V1Tracer implements Tracer {
 
     private static final String START_PREFIX = "-->";
 

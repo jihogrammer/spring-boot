@@ -1,4 +1,4 @@
-package dev.jihogrammer.logtracer.adaptor.persistence.v0;
+package dev.jihogrammer.logtracer.adaptor.v0;
 
 import dev.jihogrammer.logtracer.application.port.out.Orders;
 import dev.jihogrammer.logtracer.domain.ItemId;
@@ -17,7 +17,7 @@ class V0OrderAdaptor implements Orders {
             throw new OrderException(new IllegalStateException("ItemId is the ExceptionItemId."));
         }
 
-        this.sleep(1_000);
+        this.sleep((long) (Math.random() * 1000));
     }
 
     private void sleep(final long ms) {
