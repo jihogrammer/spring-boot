@@ -6,7 +6,7 @@ import dev.jihogrammer.logtracer.domain.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class FieldTracer implements Tracer {
+class ThreadLocalTracer implements Tracer {
 
     private static final String START_PREFIX = "-->";
 
@@ -15,9 +15,9 @@ class FieldTracer implements Tracer {
     private static final String EXCEPTION_PREFIX = "<X-";
 
     /**
-     * NOT Thread safety TraceIdHolder.
+     * Thread safety TraceIdHolder.
      */
-    private TraceId traceIdHolder;
+    private final ThreadLocal<TraceId> traceIdHolder = ThreadLocal.withInitial(() -> null);
 
     @Override
     public TraceStatus start(final String message) {
@@ -40,12 +40,15 @@ class FieldTracer implements Tracer {
     }
 
     private TraceId syncTraceId() {
-        if (this.traceIdHolder == null) {
-            this.traceIdHolder = new TraceId();
+        final var traceId = this.traceIdHolder.get();
+
+        if (traceId == null) {
+            this.traceIdHolder.set(new TraceId());
         } else {
-            this.traceIdHolder = this.traceIdHolder.next();
+            this.traceIdHolder.set(traceId.next());
         }
-        return this.traceIdHolder;
+
+        return this.traceIdHolder.get();
     }
 
     private void complete(final TraceStatus status, final Exception cause) {
@@ -65,10 +68,12 @@ class FieldTracer implements Tracer {
     }
 
     private void releaseTraceId() {
-        if (this.traceIdHolder.isFirstLevel()) {
-            this.traceIdHolder = null;
+        final var traceId = this.traceIdHolder.get();
+
+        if (traceId.isFirstLevel()) {
+            this.traceIdHolder.remove();
         } else {
-            this.traceIdHolder = this.traceIdHolder.prev();
+            this.traceIdHolder.set(traceId.prev());
         }
     }
 
