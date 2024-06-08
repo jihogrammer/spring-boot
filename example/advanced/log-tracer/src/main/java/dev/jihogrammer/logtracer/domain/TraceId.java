@@ -1,7 +1,10 @@
 package dev.jihogrammer.logtracer.domain;
 
+import lombok.ToString;
+
 import java.util.UUID;
 
+@ToString
 public final class TraceId {
 
     private final String value;
