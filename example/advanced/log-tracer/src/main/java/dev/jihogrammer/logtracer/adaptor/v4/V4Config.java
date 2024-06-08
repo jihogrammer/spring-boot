@@ -1,21 +1,14 @@
-package dev.jihogrammer.logtracer.adaptor.v3;
+package dev.jihogrammer.logtracer.adaptor.v4;
 
 import dev.jihogrammer.logtracer.application.port.in.Tracer;
 import dev.jihogrammer.logtracer.application.service.TracerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 @Configuration
-class V3Config {
+class V4Config {
 
     @Bean
-    Tracer fieldTracer() {
-        return new FieldTracer();
-    }
-
-    @Bean
-    @Primary
     Tracer threadLocalTracer() {
         return new TracerFactory().tracer();
     }

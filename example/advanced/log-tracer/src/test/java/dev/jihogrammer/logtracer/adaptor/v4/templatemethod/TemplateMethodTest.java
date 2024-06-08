@@ -45,4 +45,23 @@ class TemplateMethodTest {
         template2.execute();
     }
 
+    @Test
+    void v2() {
+        var template1 = new AbstractTemplate() {
+            @Override
+            void call() {
+                log.info("logic1() do something...");
+            }
+        };
+        var template2 = new AbstractTemplate() {
+            @Override
+            void call() {
+                log.info("logic2() do something...");
+            }
+        };
+
+        template1.execute();
+        template2.execute();
+    }
+
 }

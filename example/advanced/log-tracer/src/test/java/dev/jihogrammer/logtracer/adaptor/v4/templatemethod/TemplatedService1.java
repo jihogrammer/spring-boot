@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 class TemplatedService1 extends AbstractTemplate {
 
     @Override
-    protected void call() {
+    void call() {
         log.info("logic1() do something...");
     }
 

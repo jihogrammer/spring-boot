@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 abstract class AbstractTemplate {
 
-    protected abstract void call();
+    abstract void call();
 
-    public void execute() {
+    void execute() {
         var s = System.currentTimeMillis();
 
         businessLogic:
