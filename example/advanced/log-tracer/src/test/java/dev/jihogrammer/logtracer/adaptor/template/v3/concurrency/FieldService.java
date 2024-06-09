@@ -2,6 +2,8 @@ package dev.jihogrammer.logtracer.adaptor.template.v3.concurrency;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static dev.jihogrammer.logtracer.application.utils.SleepUtils.sleep;
+
 @Slf4j
 class FieldService {
 
@@ -15,14 +17,6 @@ class FieldService {
 
         log.info("saved name. store=[{}]", this.store);
         return this.store;
-    }
-
-    private void sleep() {
-        try {
-            Thread.sleep((long) (Math.random() * 800) + 200);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
 }

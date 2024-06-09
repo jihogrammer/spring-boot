@@ -3,6 +3,7 @@ package dev.jihogrammer.logtracer.adaptor.template.v3.concurrency;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import static dev.jihogrammer.logtracer.application.utils.SleepUtils.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -49,7 +50,7 @@ class FieldServiceConcurrencyTest {
         // when
         log.info("when");
         a.start();
-        sleep(10);
+        sleep(10L);
         b.start();
 
         // then
@@ -58,14 +59,6 @@ class FieldServiceConcurrencyTest {
         assertThat(resultA.toString()).isNotEqualTo(nameA);
         assertThat(resultB.toString()).isEqualTo(nameB);
         log.info("completed");
-    }
-
-    private void sleep(long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void await(Thread... threads) {

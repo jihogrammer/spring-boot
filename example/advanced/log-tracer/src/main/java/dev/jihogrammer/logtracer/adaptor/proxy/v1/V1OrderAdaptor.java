@@ -6,6 +6,8 @@ import dev.jihogrammer.logtracer.application.port.out.Orders;
 import dev.jihogrammer.logtracer.domain.ItemId;
 import dev.jihogrammer.logtracer.domain.exception.OrderException;
 
+import static dev.jihogrammer.logtracer.application.utils.SleepUtils.sleep;
+
 class V1OrderAdaptor implements Orders {
 
     private final TraceTemplate traceTemplate;
@@ -24,18 +26,10 @@ class V1OrderAdaptor implements Orders {
                 throw new OrderException(new IllegalStateException("ItemId is the ExceptionItemId."));
             }
 
-            sleep((long) (Math.random() * 1000));
+            sleep();
 
             return null;
         });
-    }
-
-    private void sleep(final long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            throw new OrderException(e);
-        }
     }
 
 }

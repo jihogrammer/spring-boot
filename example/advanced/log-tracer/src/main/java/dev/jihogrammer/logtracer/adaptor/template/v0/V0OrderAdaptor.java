@@ -5,6 +5,8 @@ import dev.jihogrammer.logtracer.domain.ItemId;
 import dev.jihogrammer.logtracer.domain.exception.OrderException;
 import org.springframework.stereotype.Repository;
 
+import static dev.jihogrammer.logtracer.application.utils.SleepUtils.sleep;
+
 @Repository
 class V0OrderAdaptor implements Orders {
 
@@ -17,15 +19,7 @@ class V0OrderAdaptor implements Orders {
             throw new OrderException(new IllegalStateException("ItemId is the ExceptionItemId."));
         }
 
-        this.sleep((long) (Math.random() * 1000));
-    }
-
-    private void sleep(final long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            throw new OrderException(e);
-        }
+        sleep();
     }
 
 }

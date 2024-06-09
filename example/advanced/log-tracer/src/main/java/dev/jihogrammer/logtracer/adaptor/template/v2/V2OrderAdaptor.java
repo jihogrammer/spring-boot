@@ -1,14 +1,14 @@
 package dev.jihogrammer.logtracer.adaptor.template.v2;
 
 import dev.jihogrammer.logtracer.application.port.in.SyncTracer;
-import dev.jihogrammer.logtracer.application.port.in.Tracer;
-import dev.jihogrammer.logtracer.application.port.out.Orders;
 import dev.jihogrammer.logtracer.application.port.out.SyncOrders;
 import dev.jihogrammer.logtracer.domain.ItemId;
 import dev.jihogrammer.logtracer.domain.TraceId;
 import dev.jihogrammer.logtracer.domain.exception.OrderException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+
+import static dev.jihogrammer.logtracer.application.utils.SleepUtils.sleep;
 
 @Repository
 @RequiredArgsConstructor
@@ -25,7 +25,7 @@ class V2OrderAdaptor implements SyncOrders {
             throw new OrderException(new IllegalStateException("ItemId is the ExceptionItemId."));
         }
 
-        this.sleep((long) (Math.random() * 1000));
+        sleep();
     }
 
     @Override
@@ -38,14 +38,6 @@ class V2OrderAdaptor implements SyncOrders {
         } catch (Exception e) {
             this.tracer.fail(status, e);
             throw e;
-        }
-    }
-
-    private void sleep(final long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            throw new OrderException(e);
         }
     }
 

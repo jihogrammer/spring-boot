@@ -6,6 +6,10 @@ public final class SleepUtils {
         sleep(200 + (long) (Math.random() * 800));
     }
 
+    public static void sleep(final Integer ms) {
+        sleep((long) ms);
+    }
+
     public static void sleep(final Long ms) {
         if (ms == null) {
             sleep();

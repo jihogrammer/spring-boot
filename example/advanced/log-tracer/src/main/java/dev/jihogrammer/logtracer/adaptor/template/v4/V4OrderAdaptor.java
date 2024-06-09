@@ -8,6 +8,8 @@ import dev.jihogrammer.logtracer.domain.exception.OrderException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import static dev.jihogrammer.logtracer.application.utils.SleepUtils.sleep;
+
 @Repository
 @RequiredArgsConstructor
 class V4OrderAdaptor implements Orders {
@@ -26,19 +28,12 @@ class V4OrderAdaptor implements Orders {
                     throw new OrderException(new IllegalStateException("ItemId is the ExceptionItemId."));
                 }
 
-                sleep((long) (Math.random() * 1000));
+                sleep();
+
                 return null;
             }
         };
         template.execute("Orders.save(" + itemId + ")");
-    }
-
-    private void sleep(final long ms) {
-        try {
-            Thread.sleep(ms);
-        } catch (InterruptedException e) {
-            throw new OrderException(e);
-        }
     }
 
 }
