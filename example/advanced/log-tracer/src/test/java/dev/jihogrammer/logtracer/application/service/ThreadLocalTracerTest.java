@@ -1,7 +1,6 @@
-package dev.jihogrammer.logtracer.adaptor.v3;
+package dev.jihogrammer.logtracer.application.service;
 
 import dev.jihogrammer.logtracer.application.port.in.Tracer;
-import dev.jihogrammer.logtracer.application.service.ThreadLocalTracer;
 import org.junit.jupiter.api.Test;
 
 class ThreadLocalTracerTest {
