@@ -1,4 +1,4 @@
-package dev.jihogrammer.logtracer.adaptor.proxy.subject;
+package dev.jihogrammer.logtracer.adaptor.proxy.proxy;
 
 import org.junit.jupiter.api.Test;
 
