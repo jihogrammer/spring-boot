@@ -1,5 +1,6 @@
 package dev.jihogrammer.logtracer.adaptor.proxy.v7;
 
+import dev.jihogrammer.logtracer.adaptor.aop.LoggingAdvice;
 import dev.jihogrammer.logtracer.application.port.in.OrderPort;
 import dev.jihogrammer.logtracer.application.port.in.Tracer;
 import dev.jihogrammer.logtracer.application.port.out.Orders;

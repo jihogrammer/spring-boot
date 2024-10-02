@@ -1,4 +1,4 @@
-package dev.jihogrammer.logtracer.adaptor.proxy.v7;
+package dev.jihogrammer.logtracer.adaptor.aop;
 
 import dev.jihogrammer.logtracer.application.port.in.Tracer;
 import dev.jihogrammer.logtracer.domain.TraceStatus;
@@ -10,7 +10,7 @@ import org.springframework.lang.NonNull;
 import java.util.Arrays;
 
 @RequiredArgsConstructor
-class LoggingAdvice implements MethodInterceptor {
+public class LoggingAdvice implements MethodInterceptor {
 
     private final Tracer tracer;
 
