@@ -12,9 +12,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     public void orderItem(final String itemId) {
-        log.info("{}#orderItem({})", this.getClass().getSimpleName(), itemId);
         var result = this.orderRepository.save(itemId);
-        log.info("{}#orderItem({}) -> {}", this.getClass().getSimpleName(), itemId, result);
+        log.info("orderItem result={};", result);
     }
 
 }
