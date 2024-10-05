@@ -11,9 +11,10 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    public void orderItem(final String itemId) {
+    public String orderItem(final String itemId) {
         var result = this.orderRepository.save(itemId);
         log.info("orderItem result={};", result);
+        return result;
     }
 
 }
