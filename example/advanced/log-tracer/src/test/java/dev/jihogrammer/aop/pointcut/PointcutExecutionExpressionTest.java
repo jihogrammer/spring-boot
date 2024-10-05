@@ -11,16 +11,17 @@ import java.lang.reflect.Method;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-class PointcutExecutionTest {
+class PointcutExecutionExpressionTest {
 
     // modifier-pattern? return-type-pattern declaring-type-pattern.?name-pattern(param-pattern) throws-pattern?
     // 접근제한자? 반환타입 선언타입?메서드이름(파라미터) 예외?
-    AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
+    AspectJExpressionPointcut pointcut;
 
     Method helloMethod;
 
     @BeforeEach
     void setUp() throws NoSuchMethodException {
+        this.pointcut = new AspectJExpressionPointcut();
         this.helloMethod = MemberService.class.getMethod("hello", String.class);
     }
 
