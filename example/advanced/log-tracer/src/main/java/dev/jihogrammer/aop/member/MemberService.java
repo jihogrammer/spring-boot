@@ -1,10 +1,11 @@
 package dev.jihogrammer.aop.member;
 
+import dev.jihogrammer.aop.member.annotation.ClassAop;
 import dev.jihogrammer.aop.member.annotation.MethodAop;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@ClassAop
 public class MemberService implements MemberGreeting {
 
     @MethodAop("a test value")
