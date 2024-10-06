@@ -1,6 +1,8 @@
 package dev.jihogrammer.aop.pointcut;
 
 import dev.jihogrammer.aop.member.MemberService;
+import dev.jihogrammer.aop.member.annotation.ClassAop;
+import dev.jihogrammer.aop.member.annotation.MethodAop;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -40,6 +42,25 @@ class PointcutThisAndTargetExpressionTest {
         void targetExpression(final MemberService memberService) {
             log.info("[targetExpression] memberService={}", memberService.getClass());
             assertThat(AopUtils.isAopProxy(memberService)).isFalse();
+        }
+
+        @Before("runningMembers() && @target(annotation)")
+        void atTargetExpression(final ClassAop annotation) {
+            log.info("[atTargetExpression] annotation={}", annotation.getClass());
+            assertThat(annotation).isInstanceOf(ClassAop.class);
+        }
+
+        @Before("runningMembers() && @within(annotation)")
+        void atWithinExpression(final ClassAop annotation) {
+            log.info("[atWithinExpression] annotation={}", annotation.getClass());
+            assertThat(annotation).isInstanceOf(ClassAop.class);
+        }
+
+        @Before("runningMembers() && @annotation(annotation)")
+        void atAnnotationExpression(final MethodAop annotation) {
+            log.info("[atAnnotationExpression] annotation={}; value={};", annotation.getClass(), annotation.value());
+            assertThat(annotation).isInstanceOf(MethodAop.class);
+            assertThat(annotation.value()).isNotEmpty();
         }
     }
 
