@@ -23,6 +23,7 @@ include(":example:advanced:exception")
 include(":example:advanced:file-storage")
 include(":example:advanced:validation")
 include(":example:advanced:type-converter")
+include(":example:advanced:log-tracer")
 
 include(":example:data:jdbc")
 include(":example:data:item")
