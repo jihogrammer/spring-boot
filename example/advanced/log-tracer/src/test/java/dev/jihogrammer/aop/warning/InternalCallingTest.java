@@ -1,4 +1,4 @@
-package dev.jihogrammer.aop.warning.internal;
+package dev.jihogrammer.aop.warning;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
