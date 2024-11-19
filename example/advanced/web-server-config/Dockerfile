@@ -1,7 +1,5 @@
 FROM alpine:latest
 
-ARG APP_NAME=web-server-config-0.0.1-SNAPSHOT
-
 # install curl, jdk11, and tar
 RUN apk add --no-cache curl tar openjdk17-jre-headless && rm -rf /var/cache/apk/*
 
@@ -13,6 +11,7 @@ RUN tar xvzf /temp/apache-tomcat.tar.gz --strip-components=1 --directory /opt/to
 RUN rm -rf /temp
 
 # registry webapp
+ARG APP_NAME=web-server-config-0.1.0
 RUN rm -rf /opt/tomcat/webapps/*
 COPY ./build/libs/${APP_NAME}.war /opt/tomcat/webapps/ROOT.war
 
