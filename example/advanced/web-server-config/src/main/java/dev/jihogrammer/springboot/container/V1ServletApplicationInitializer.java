@@ -3,10 +3,10 @@ package dev.jihogrammer.springboot.container;
 import dev.jihogrammer.springboot.servlet.HelloServlet;
 import jakarta.servlet.ServletContext;
 
-public class V1ApplicationInitializer implements ApplicationInitializer {
+public class V1ServletApplicationInitializer implements ApplicationInitializer {
 
     @Override
-    public void onStartUp(ServletContext servletContext) {
+    public void onStartup(ServletContext servletContext) {
         System.out.println("V1ApplicationInitializer.onStartUp");
 
         servletContext

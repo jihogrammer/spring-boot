@@ -11,9 +11,9 @@ RUN tar xvzf /temp/apache-tomcat.tar.gz --strip-components=1 --directory /opt/to
 RUN rm -rf /temp
 
 # registry webapp
-ARG APP_NAME=web-server-config-0.1.0
+ARG APP_VERSION=0.2.0
 RUN rm -rf /opt/tomcat/webapps/*
-COPY ./build/libs/${APP_NAME}.war /opt/tomcat/webapps/ROOT.war
+COPY ./build/libs/web-server-config-${APP_VERSION}.war /opt/tomcat/webapps/ROOT.war
 
 # env
 ENV TZ Asia/Seoul

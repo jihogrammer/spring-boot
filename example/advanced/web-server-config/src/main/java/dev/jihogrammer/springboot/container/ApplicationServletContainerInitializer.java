@@ -3,7 +3,6 @@ package dev.jihogrammer.springboot.container;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.annotation.HandlesTypes;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 @HandlesTypes(ApplicationInitializer.class)
@@ -17,7 +16,7 @@ public class ApplicationServletContainerInitializer implements jakarta.servlet.S
 
         for (Class<?> aClass : c) {
             try {
-                ((ApplicationInitializer) aClass.getDeclaredConstructor().newInstance()).onStartUp(ctx);
+                ((ApplicationInitializer) aClass.getDeclaredConstructor().newInstance()).onStartup(ctx);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

@@ -4,6 +4,6 @@ import jakarta.servlet.ServletContext;
 
 interface ApplicationInitializer {
 
-    void onStartUp(ServletContext servletContext);
+    void onStartup(ServletContext servletContext);
 
 }
