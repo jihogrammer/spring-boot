@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'dev.jihogrammer.spring-boot'
-version = '0.2.0'
+version = '0.3.1'
 
 java {
 	toolchain {
@@ -38,3 +38,20 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+tasks.register('docker') {
+    doLast {
+        exec {
+            workingDir projectDir
+            executable 'docker'
+            args "build --build-arg APP_VERSION=${version} -t jihogrammer/web-server-config:${version} .".split(" ")
+        }
+        exec {
+            workingDir projectDir
+            executable 'docker'
+            args "build --build-arg APP_VERSION=${version} -t jihogrammer/web-server-config:lastest .".split(" ")
+        }
+    }
+}
+
+docker.dependsOn("build")
