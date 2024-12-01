@@ -7,7 +7,7 @@ version = '0.0.1'
 
 java {
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
+		languageVersion = JavaLanguageVersion.of(21)
 	}
 }
 
@@ -22,14 +22,15 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework:spring-webmvc:6.0.23'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.5'
+	implementation 'org.springframework:spring-webmvc:6.1.14'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.33'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
+// 전통적인 jar 빌드 방식에서는 라이브러리 클래스들이 포함되지 않는다.
 tasks.register('buildJar', Jar) {
     manifest {
         attributes 'Main-Class': 'dev.jihogrammer.springboot.embed.EmbedTomcatApplication'
@@ -41,10 +42,11 @@ tasks.register('buildFatJar', Jar) {
     manifest {
         attributes 'Main-Class': 'dev.jihogrammer.springboot.embed.EmbedTomcatApplication'
     }
+    // FatJar 방식은 파일명 중복을 해결할 수 없는 치명적인 단점이 존재한다.
     duplicatesStrategy = DuplicatesStrategy.WARN
     from {
-        configurations.runtimeClassPath.collect {
-            it.isDirectory() ? it : zipTree('')
+        configurations.runtimeClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
         }
     }
     with jar
