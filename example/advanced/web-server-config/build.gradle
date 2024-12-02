@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'war'
+//	id 'org.springframework.boot' version '3.3.4'
+//	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'dev.jihogrammer.spring-boot'
+version = '0.3.2'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
+	implementation 'org.springframework:spring-webmvc:6.0.4'
+
+//	implementation 'org.springframework.boot:spring-boot-starter'
+//	compileOnly 'org.projectlombok:lombok'
+//	annotationProcessor 'org.projectlombok:lombok'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.register('docker') {
+    doLast {
+        exec {
+            workingDir projectDir
+            executable 'docker'
+            args "build --build-arg APP_VERSION=${version} -t jihogrammer/web-server-config:${version} .".split(" ")
+        }
+        exec {
+            workingDir projectDir
+            executable 'docker'
+            args "build --build-arg APP_VERSION=${version} -t jihogrammer/web-server-config:lastest .".split(" ")
+        }
+    }
+}
+
+tasks.named('build').get().finalizedBy('docker')
