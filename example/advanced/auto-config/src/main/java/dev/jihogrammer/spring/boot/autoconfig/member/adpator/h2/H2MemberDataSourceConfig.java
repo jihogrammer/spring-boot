@@ -9,7 +9,8 @@ import org.springframework.transaction.TransactionManager;
 
 import javax.sql.DataSource;
 
-@Configuration
+// Spring Auto Configuration 동작으로 사실 이 설정 파일은 굳이 정의하지 않아도 된다.
+//@Configuration
 class H2MemberDataSourceConfig {
 
     @Bean
