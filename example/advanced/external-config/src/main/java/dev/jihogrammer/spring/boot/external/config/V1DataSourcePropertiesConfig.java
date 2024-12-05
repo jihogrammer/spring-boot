@@ -2,11 +2,10 @@ package dev.jihogrammer.spring.boot.external.config;
 
 import dev.jihogrammer.spring.boot.external.datasource.CustomDataSource;
 import dev.jihogrammer.spring.boot.external.datasource.V1CustomDataSourceProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 //@EnableConfigurationProperties(V1CustomDataSourceProperties.class)
-public class DataSourceV1PropertiesConfig {
+public class V1DataSourcePropertiesConfig {
 
     @Bean
     CustomDataSource dataSource(final V1CustomDataSourceProperties properties) {

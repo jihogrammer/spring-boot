@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 @EnableConfigurationProperties(V2CustomDataSourceProperties.class)
-public class DataSourceV2PropertiesConfig {
+public class V2DataSourcePropertiesConfig {
 
     @Bean
     CustomDataSource dataSource(final V2CustomDataSourceProperties properties) {
