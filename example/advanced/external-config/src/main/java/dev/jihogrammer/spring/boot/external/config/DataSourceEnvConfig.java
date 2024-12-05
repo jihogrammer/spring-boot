@@ -9,11 +9,11 @@ import java.time.Duration;
 import java.util.List;
 
 @Configuration
-public class DataSourceConfig {
+public class DataSourceEnvConfig {
 
     @Bean
     @SuppressWarnings("unchecked")
-    CustomDataSource customDataSource(final Environment env) {
+    CustomDataSource dataSource(final Environment env) {
         return new CustomDataSource(
                 env.getProperty("app.datasource.url"),
                 env.getProperty("app.datasource.username"),
