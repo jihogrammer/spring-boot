@@ -5,7 +5,7 @@ import dev.jihogrammer.spring.boot.external.datasource.V1CustomDataSourcePropert
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-@EnableConfigurationProperties(V1CustomDataSourceProperties.class)
+//@EnableConfigurationProperties(V1CustomDataSourceProperties.class)
 public class DataSourceV1PropertiesConfig {
 
     @Bean
