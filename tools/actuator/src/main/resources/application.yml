@@ -1,0 +1,10 @@
+management:
+  # 기본적으로 활성화되지 않는 기능
+  # curl -X POST localhost:8080/actuator/shutdown
+  endpoint.shutdown.enabled: true
+
+  # actuator 기능을 사용하려면 활성화, 노출 모두 해야 가능하다.
+  endpoints:
+    web:
+      exposure:
+        include: "*"
