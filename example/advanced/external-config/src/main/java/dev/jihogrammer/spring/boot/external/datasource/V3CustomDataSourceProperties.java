@@ -3,51 +3,41 @@ package dev.jihogrammer.spring.boot.external.datasource;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.Accessors;
 import org.hibernate.validator.constraints.time.DurationMax;
 import org.hibernate.validator.constraints.time.DurationMin;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.Duration;
 import java.util.List;
 
 /**
- * 동일하게 gradle 빌드로 진행해야 하고, java record 사용하면 제대로 동작하지 않는다.
+ * 레코드로 변환 후에도 제대로 동작하는 것이 확인됨.
+ * 다만, 하위 레코드에도 {@code @ConfigurationProperties, @Validated} 어노테이션을 붙여주어야 기대한 동작을 수행한다.
  */
 @ConfigurationProperties("app.datasource")
-@RequiredArgsConstructor
-@Getter
-@Accessors(fluent = true)
-public class V3CustomDataSourceProperties {
+@Validated
+public record V3CustomDataSourceProperties(
+        @NotBlank
+        String url,
+        @NotBlank
+        String username,
+        @NotBlank
+        String password,
+        Config config
+) {
 
-    @NotBlank
-    private final String url;
-
-    @NotBlank
-    private final String username;
-
-    @NotBlank
-    private final String password;
-
-    private final Config config;
-
-    @RequiredArgsConstructor
-    @Getter
-    @Accessors(fluent = true)
-    public static class Config {
-
-        @Min(1)
-        @Max(999)
-        private final int maxConnection;
-
-        @DurationMin(seconds = 1)
-        @DurationMax(seconds = 60)
-        private final Duration timeout;
-
-        private final List<String> options;
-
+    @ConfigurationProperties("app.datasource.config")
+    @Validated
+    public record Config(
+            @Min(1)
+            @Max(999)
+            int maxConnection,
+            @DurationMin(seconds = 1)
+            @DurationMax(seconds = 60)
+            Duration timeout,
+            List<String> options
+    ) {
     }
 
 }

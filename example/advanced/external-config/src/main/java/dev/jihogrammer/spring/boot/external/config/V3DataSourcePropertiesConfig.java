@@ -5,7 +5,10 @@ import dev.jihogrammer.spring.boot.external.datasource.V3CustomDataSourcePropert
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-@EnableConfigurationProperties(V3CustomDataSourceProperties.class)
+/**
+ * 하위 레코드에도 검증을 수행하기 위해 {@code @EnableConfigurationProperties} 인자로 하위 레코드도 넣어주어야 기대하는 동작을 수행한다.
+ */
+@EnableConfigurationProperties({V3CustomDataSourceProperties.class, V3CustomDataSourceProperties.Config.class})
 public class V3DataSourcePropertiesConfig {
 
     @Bean
