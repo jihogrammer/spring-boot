@@ -1,0 +1,40 @@
+app:
+  username: local_username
+  password: local_password
+  common:
+    user: jihogrammer
+    hello: 절대 읽히지 않는 설정
+  datasource:
+    url: local.database.com
+    username: jihogrammer
+    password: password
+    config:
+      max-connection: 1
+      timeout: 3500ms
+      options: CACHE, ADMIN
+
+---
+
+spring.config.activate.on-profile: dev
+app:
+  username: dev_username
+  password: dev_password
+  common:
+    hello: 에베베 에베베
+
+---
+
+spring.config.activate.on-profile: prd
+app:
+  username: prd_username
+  password: prd_password
+  common:
+    hello: 로또 당첨되면 좋겠다.
+
+---
+
+spring.config.activate.on-profile: test
+
+---
+
+app.common.hello: world
