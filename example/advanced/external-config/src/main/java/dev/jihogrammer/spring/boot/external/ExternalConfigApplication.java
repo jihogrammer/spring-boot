@@ -6,7 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Import;
 
-@SpringBootApplication(scanBasePackages = "dev.jihogrammer.spring.boot.external.datasource")
+@SpringBootApplication(scanBasePackages = """
+        dev.jihogrammer.spring.boot.external.datasource
+        dev.jihogrammer.spring.boot.external.pay
+        """)
 //@Import(DataSourceEnvConfig.class)
 //@Import(DataSourceValueConfig.class)
 //@Import(V1DataSourcePropertiesConfig.class) @ConfigurationPropertiesScan
