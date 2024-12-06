@@ -29,5 +29,7 @@ include(":example:advanced:embed-tomcat")
 include(":example:advanced:auto-config")
 include(":example:advanced:external-config")
 
+include(":tools:actuator")
+
 include(":example:data:jdbc")
 include(":example:data:item")
