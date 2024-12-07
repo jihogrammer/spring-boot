@@ -1,4 +1,15 @@
+info:
+  app:
+    name: actuator
+    version: 0.0.1
+
 management:
+  # 왜 이렇게 이상하게 설정할까?
+  # info 정보는 management 바로 하위에 구성한다.
+  info:
+    java.enabled: true
+    os.enabled: true
+    env.enabled: true
   # 기본적으로 활성화되지 않는 기능
   # curl -X POST localhost:8080/actuator/shutdown
   endpoint:

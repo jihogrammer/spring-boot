@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.0'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'com.gorylenko.gradle-git-properties' version '2.4.1'
 }
 
 group = 'dev.jihogrammer.spring.boot'
@@ -39,4 +40,11 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// /actuator/info API 목록에 빌드 정보 추가
+// gradle bootRun 명령어로 수행할 때 동작한다. IntelliJ 자체적으로 하는 방법이 있을 것 같은데 쉽지 않다.
+// Settings > Build, Execution, Deployment > Build Tools > Gradle > Build and Run > gradle 선택
+springBoot {
+    buildInfo()
 }
