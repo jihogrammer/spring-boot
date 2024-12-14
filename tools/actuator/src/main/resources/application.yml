@@ -3,11 +3,18 @@ info:
     name: actuator
     version: 0.0.1
 
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
+      # http://localhost:8080/actuator/metrics/tomcat.threads.busy
+      # http://localhost:8080/actuator/metrics/tomcat.threads.config.max
+
 management:
   server:
     # 보안을 위해 spring 앱과 다른 서버로 구성이 가능하다.
     # 어쩔 수 없이 외부망에서 접근이 필요한 경우 서블릿필터, 인터셉터, 그리고 시큐리티 등을 통해 보안에 신경써야 한다.
-    port: 8008
+    port: 8080
   # 왜 이렇게 이상하게 설정할까?
   # info 정보는 management 바로 하위에 구성한다.
   info:
