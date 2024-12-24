@@ -48,3 +48,15 @@ tasks.named('test') {
 springBoot {
     buildInfo()
 }
+
+tasks.named('build').get().finalizedBy('build-docker-image')
+tasks.register('build-docker-image', Exec) {
+    workingDir projectDir
+    executable "/usr/local/bin/docker"
+    args "build",
+            "--build-arg", "APP_NAME=actuator",
+            "--build-arg", "APP_VERSION=${version}",
+            "-t", "jihogrammer/actuator:${version}",
+            "-t", "jihogrammer/actuator:latest",
+            "."
+}
