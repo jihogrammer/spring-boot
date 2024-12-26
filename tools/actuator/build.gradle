@@ -28,6 +28,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
     runtimeOnly 'com.h2database:h2'
 
     compileOnly 'org.projectlombok:lombok'
@@ -47,4 +50,16 @@ tasks.named('test') {
 // Settings > Build, Execution, Deployment > Build Tools > Gradle > Build and Run > gradle 선택
 springBoot {
     buildInfo()
+}
+
+tasks.named('build').get().finalizedBy('build-docker-image')
+tasks.register('build-docker-image', Exec) {
+    workingDir projectDir
+    executable "/usr/local/bin/docker"
+    args "build",
+            "--build-arg", "APP_NAME=actuator",
+            "--build-arg", "APP_VERSION=${version}",
+            "-t", "jihogrammer/actuator:${version}",
+            "-t", "jihogrammer/actuator:latest",
+            "."
 }
