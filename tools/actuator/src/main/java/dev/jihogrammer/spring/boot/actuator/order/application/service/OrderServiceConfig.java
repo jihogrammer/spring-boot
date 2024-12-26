@@ -4,13 +4,13 @@ import dev.jihogrammer.spring.boot.actuator.order.application.port.in.OrderCoord
 import io.micrometer.core.aop.TimedAspect;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
+import io.micrometer.core.instrument.binder.MeterBinder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@Slf4j
 class OrderServiceConfig {
 
     @Bean
@@ -24,26 +24,11 @@ class OrderServiceConfig {
     }
 
     @Bean
-    GaugeMetric gaugeMetric(final OrderCoordinator orderCoordinator, final MeterRegistry registry) {
-        return new GaugeMetric(orderCoordinator, registry);
-    }
-
-    @Slf4j
-    @RequiredArgsConstructor
-    static class GaugeMetric {
-
-        private final OrderCoordinator orderCoordinator;
-
-        private final MeterRegistry registry;
-
-        @PostConstruct
-        void init() {
-            Gauge.builder("my.stock", this.orderCoordinator, (service) -> {
-                log.info("[STOCK]");
-                return service.getStock().get();
-            }).register(this.registry);
-        }
-
+    MeterBinder gaugeMetric(final OrderCoordinator orderCoordinator) {
+        return registry -> Gauge.builder("my.stock", orderCoordinator, (service) -> {
+            log.info("[STOCK]");
+            return service.getStock().get();
+        }).register(registry);
     }
 
 }
