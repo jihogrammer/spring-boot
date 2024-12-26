@@ -1,6 +1,7 @@
 package dev.jihogrammer.spring.boot.actuator.order.application.service;
 
 import dev.jihogrammer.spring.boot.actuator.order.application.port.in.OrderCoordinator;
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,8 +9,9 @@ import org.springframework.context.annotation.Configuration;
 class OrderServiceConfig {
 
     @Bean
-    OrderCoordinator orderCoordinator() {
-        return new V0OrderService();
+    OrderCoordinator orderCoordinator(final MeterRegistry meterRegistry) {
+//        return new V0OrderService();
+        return new V1OrderService(meterRegistry);
     }
 
 }
